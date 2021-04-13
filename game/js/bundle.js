@@ -1142,7 +1142,9 @@
                 this.setLocalData();
                 this.checkShowHint();
                 if (dataGame) {
-                    if (LoadingManager.progress3d < 1) {
+                    if (LoadingManager.progress3d < 1 &&
+                        data.roomStatus != "GAME_READY" &&
+                        data.roomStatus != "IN_ADVANCE") {
                         Laya.Scene.open("scene/SceneLoading.scene", false, {
                             showPrg3d: true
                         });
@@ -8805,7 +8807,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GamaCluDetail.scene";
+    GameConfig.startScene = "modal/AdStartGame.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
