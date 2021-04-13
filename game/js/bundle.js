@@ -1143,8 +1143,8 @@
                 this.checkShowHint();
                 if (dataGame) {
                     if (LoadingManager.progress3d < 1 &&
-                        data.roomStatus != "GAME_READY" &&
-                        data.roomStatus != "IN_ADVANCE") {
+                        dataGame.roomStatus != "GAME_READY" &&
+                        dataGame.roomStatus != "IN_ADVANCE") {
                         Laya.Scene.open("scene/SceneLoading.scene", false, {
                             showPrg3d: true
                         });
