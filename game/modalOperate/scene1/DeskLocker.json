@@ -1,0 +1,1 @@
+{"type":"Dialog","props":{"width":1000,"runtime":"SceneComponents/scene1/ui/SafeBox.ts","isShowEffect":false,"isModal":true,"height":700},"compId":2,"child":[{"type":"Image","props":{"width":1000,"skin":"book1/AR004.jpg","height":562,"centerY":0,"centerX":0},"compId":21}],"loadList":["book1/AR004.jpg"],"loadList3D":[]}

@@ -1,0 +1,1 @@
+{"type":"Dialog","props":{"zOrder":9999,"y":0,"x":0,"width":1980,"runtime":"modal/ModalPic.ts","height":1080},"compId":2,"child":[{"type":"Image","props":{"y":10,"x":0,"width":1980,"var":"img","name":"img","height":1060},"compId":3}],"loadList":[],"loadList3D":[]}
