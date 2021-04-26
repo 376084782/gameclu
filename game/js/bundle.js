@@ -782,9 +782,9 @@
                         break;
                     }
                     case "REQUEST_ENTER_ANALYSE": {
-                        EventManager.pub("game/showResult");
                         GameManager.step = "ANALYSE";
                         GameManager.timeTitle = "复盘";
+                        UIManager.openModal("modal/ModalResult.scene");
                         break;
                     }
                     case "END_SCENE": {
@@ -917,7 +917,7 @@
         static loadSingle(url) {
             return new Promise(rsv => {
                 Laya.loader.load(url, Laya.Handler.create(null, scene => {
-                    rsv();
+                    rsv(null);
                 }));
             });
         }
@@ -928,7 +928,7 @@
                         this.wrap3d = new Laya.Scene3D();
                     }
                     this.wrap3d.addChild(scene);
-                    rsv();
+                    rsv(null);
                 }));
             });
         }
@@ -950,6 +950,7 @@
         }
         static loadScene3d() {
             return __awaiter(this, void 0, void 0, function* () {
+                return;
                 let urlList = [];
                 for (let i = 0; i < this.sceneList.length; i++) {
                     urlList.push({
@@ -967,22 +968,334 @@
                 return new Promise((rsv, rej) => {
                     if (this.list.length > 0) {
                         Laya.loader.load(this.list, Laya.Handler.create(this, () => {
-                            rsv();
+                            rsv(null);
                         }), Laya.Handler.create(null, e => {
                             this.progress = e;
                         }, null, false));
                     }
                     else {
-                        rsv();
+                        rsv(null);
                     }
                 });
             });
         }
     }
     LoadingManager.moduleList = ["test", "ui", "game"];
-    LoadingManager._list = ["scene/SceneGame.json"];
+    LoadingManager._list = ["scene/SceneGame.json", "v2/font/FZZYJW.ttf"];
     LoadingManager.progress = 0;
-    LoadingManager.progress3d = 0;
+    LoadingManager.progress3d = 1;
+
+    class DataLang {
+        static set lang(lang) {
+            this._lang = lang == "en-US" ? "en" : "ch";
+        }
+        static get lang() {
+            return this._lang;
+        }
+        static changeLang() {
+            EventManager.pub("changeLang");
+        }
+        static getImgByType(type = "") {
+            let conf = this.imgConfig[type];
+            if (!conf) {
+                console.log(type, "遗漏语言包配置");
+            }
+            return conf ? conf[this.lang] : "";
+        }
+        static getTxtByType(type = "", params = {}) {
+            let conf = this.txt[type] || {};
+            let str = conf[this.lang] || "";
+            for (let key in params) {
+                str = str.replaceAll(`{${key}}`, params[key]);
+            }
+            return str;
+        }
+    }
+    DataLang._lang = "ch";
+    DataLang.imgConfig = {
+        voted: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        },
+        wuzheng: {
+            ch: "v2/ch/img_wuzheng.png",
+            en: "v2/en/img_wuzheng.png"
+        },
+        btnAny: {
+            ch: "v2/ch/img_any.png",
+            en: "v2/en/img_any.png"
+        },
+        btnConfirm: {
+            ch: "v2/ch/img_confirm.png",
+            en: "v2/en/img_confirm.png"
+        },
+        titleAdd: {
+            ch: "v2/ch/img_add_timeline.png",
+            en: "v2/en/img_add_timeline.png"
+        },
+        btnAdd: {
+            ch: "v2/ch/img_btn_add.png",
+            en: "v2/en/img_btn_add.png"
+        },
+        fengmian1: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        isPublic: {
+            ch: "v2/ch/img_public1.png",
+            en: "v2/en/img_public1.png"
+        },
+        notPublic: {
+            ch: "v2/ch/img_public0.png",
+            en: "v2/en/img_public0.png"
+        },
+        txtTip: {
+            ch: "v2/ch/img_wxts.png",
+            en: "v2/en/img_wxts.png"
+        },
+        btnTuichu: {
+            ch: "v2/ch/img_tuichu.png",
+            en: "v2/en/img_btn_switch.png"
+        },
+        btnSwitch: {
+            ch: "v2/ch/img_btn_switch.png",
+            en: "v2/en/img_btn_switch.png"
+        },
+        btnSend: {
+            ch: "v2/ch/img_send.png",
+            en: "v2/en/img_send.png"
+        },
+        btnShare: {
+            ch: "v2/ch/img_share.png",
+            en: "v2/en/img_share.png"
+        },
+        fengmian: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        btnStart: {
+            ch: "v2/ch/img_kaishi1.png",
+            en: "v2/en/img_kaishi1.png"
+        },
+        btnDismiss: {
+            ch: "v2/ch/img_jiesan.png",
+            en: "v2/en/img_jiesan.png"
+        },
+        btnBack: {
+            ch: "v2/ch/img_back.png",
+            en: "v2/en/img_back.png"
+        },
+        btnNext: {
+            ch: "v2/ch/img_next.png",
+            en: "v2/en/img_next.png"
+        },
+        btnReady: {
+            ch: "v2/ch/img_btn_ready.png",
+            en: "v2/en/img_btn_ready.png"
+        },
+        xiongshou: {
+            ch: "v2/ch/img_xiongshou.png",
+            en: "v2/en/img_xiongshou.png"
+        },
+        result: {
+            ch: "v2/ch/img_result.png",
+            en: "v2/en/img_result.png"
+        },
+        btnVoted: {
+            ch: "v2/ch/img_voted.png",
+            en: "v2/en/img_voted.png"
+        },
+        btnBook: {
+            ch: "v2/ch/img_book.png",
+            en: "v2/en/img_book.png"
+        },
+        btnSure1: {
+            ch: "v2/ch/img_queding_small.png",
+            en: "v2/en/img_queding_small.png"
+        },
+        btnCancel1: {
+            ch: "v2/ch/img_cancel_small.png",
+            en: "v2/en/img_cancel_small.png"
+        },
+        btnCancel: {
+            ch: "v2/ch/img_quxiao.png",
+            en: "v2/en/img_quxiao.png"
+        },
+        btnCopy: {
+            ch: "v2/ch/img_copy.png",
+            en: "v2/en/img_copy.png"
+        },
+        btnCancelReady: {
+            ch: "v2/ch/img_btn_ready0.png",
+            en: "v2/en/img_btn_ready0.png"
+        },
+        btnCreate: {
+            ch: "v2/ch/img_create.png",
+            en: "v2/en/img_create.png"
+        },
+        txtLTS: {
+            ch: "v2/ch/img_lts.png",
+            en: "v2/en/img_lts.png"
+        },
+        testYY: {
+            ch: "v2/ch/img_yycs.png",
+            en: "v2/en/img_yycs.png"
+        },
+        tagReady: {
+            ch: "v2/ch/img_ready.png",
+            en: "v2/en/img_ready.png"
+        },
+        btnEnd: {
+            ch: "v2/ch/img_btn_end.png",
+            en: "v2/en/img_btn_end.png"
+        },
+        btnTCYX: {
+            ch: "v2/ch/img_btn_tcyx.png",
+            en: "v2/en/img_btn_tcyx.png"
+        },
+        img_ytp: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        }
+    };
+    DataLang.txt = {
+        CLUE_FIND: {
+            en: "Find",
+            ch: "搜证"
+        },
+        TALKING: {
+            en: "Talking",
+            ch: "发言"
+        },
+        PRE_TALKING: {
+            en: "PRE_TALKING",
+            ch: "自我介绍"
+        },
+        FREE_TALKING: {
+            en: "FREE_TALKING",
+            ch: "自由发言"
+        },
+        CONCLUSION: {
+            en: "CONCLUSION",
+            ch: "总结发言"
+        },
+        VOTE: {
+            en: "VOTE",
+            ch: "投票"
+        },
+        ANALYSE: {
+            en: "ANALYSE",
+            ch: "复盘"
+        },
+        progress: {
+            en: "Game Progress",
+            ch: "破案进度"
+        },
+        power: {
+            en: "{num}",
+            ch: "{num}票"
+        },
+        murderWin: {
+            en: "凶手逃脱了法律的制裁",
+            ch: "凶手逃脱了法律的制裁"
+        },
+        murderWinBut: {
+            en: "但是\n凶手逃脱了法律的制裁",
+            ch: "但是\n凶手逃脱了法律的制裁"
+        },
+        murderLoseBut: {
+            en: "但是在大家的齐心协力下\n凶手受到了制裁",
+            ch: "但是在大家的齐心协力下\n凶手受到了制裁"
+        },
+        murderLose: {
+            en: "在大家的齐心协力下\n凶手受到了制裁",
+            ch: "在大家的齐心协力下\n凶手受到了制裁"
+        },
+        selfTrue: {
+            en: "恭喜你选对了凶手",
+            ch: "Voted correct!"
+        },
+        selfFalse: {
+            en: "遗憾你选错了凶手",
+            ch: "Voted wrong!"
+        },
+        txtResultMaxVoted: {
+            ch: "{username}得票最高",
+            en: "The most gamer voted {username}"
+        },
+        talkingPeople: {
+            ch: "{username}发言中...",
+            en: "{username} speaking..."
+        },
+        setting: {
+            ch: "设置",
+            en: "Setting"
+        },
+        role1: {
+            ch: "选择",
+            en: "Choose a"
+        },
+        role2: {
+            ch: "角色",
+            en: "Character"
+        },
+        notFullButStart: {
+            ch: "人数未满，房主发起提前开始游戏，\n是否同意？",
+            en: "Not full,But the host want to start,\nDo you agree?"
+        },
+        roomNumberHtml: {
+            ch: `<span>房间号:<span style="color:#ff6f48;">{roomNum}</span></span>`,
+            en: `<span>Room Number:<span style="color:#ff6f48;">{roomNum}</span></span>`
+        },
+        roomNumber1: {
+            ch: "房间号:{roomNum}",
+            en: "Room Number:{roomNum}"
+        },
+        roomNumber: {
+            ch: "房间号:",
+            en: "Room Number:"
+        },
+        readyedPeople: {
+            ch: "已准备玩家",
+            en: "Ready"
+        },
+        SSSC: {
+            ch: "属性/时长",
+            en: "Attrbute/Duration"
+        },
+        timeSZ: {
+            ch: "搜证时间",
+            en: "Time Find"
+        },
+        timeFY: {
+            ch: "发言时间",
+            en: "Time Chat"
+        },
+        timeTP: {
+            ch: "投票时间",
+            en: "Time Vote"
+        },
+        QJ: {
+            ch: "前进",
+            en: "Forward"
+        },
+        HT: {
+            ch: "后退",
+            en: "Back"
+        },
+        ZY: {
+            ch: "左移",
+            en: "Left"
+        },
+        YY: {
+            ch: "右移",
+            en: "Right"
+        },
+        XD: {
+            ch: "下蹲",
+            en: "Down"
+        }
+    };
 
     const colorList = [
         "#feb853",
@@ -1052,6 +1365,13 @@
             let selfUserId = GameManager.userInfo.userId;
             return this.chatList.filter(item => (item.toUserId == userId && item.fromUserId == selfUserId) ||
                 (item.fromUserId == userId && item.toUserId == selfUserId));
+        }
+        static set step(step) {
+            this._step = step;
+            EventManager.pub('step/changeStep');
+        }
+        static get step() {
+            return this._step;
         }
         static getVotedListByTargetRoleId(roleId) {
             let list = [];
@@ -1128,6 +1448,7 @@
                     UIManager.goHall();
                     return;
                 }
+                DataLang.lang = Utils.getQueryVariable("lang") || "zh-CN";
                 let dataGame = data.game;
                 let dataRoom = data.room;
                 GameManager.roomUserList = dataGame.userList;
@@ -1157,7 +1478,6 @@
                     GameManager.talkingUserId = dataGame.talkingUserId;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
-                            yield NetController.reqJoinRoom(dataRoom.room.id);
                             UIManager.goScene("scene/SceneBeforeStart.scene");
                             break;
                         }
@@ -1452,14 +1772,14 @@
     GameManager.round = 0;
     GameManager.hintedMap = {};
     GameManager.ditectiveRoleId = 6;
-    GameManager.iconChatNotRead = false;
+    GameManager.iconChatNotRead = 0;
     GameManager.chatBoxOpened = true;
     GameManager.murderRoleId = 1;
     GameManager.chatList = [];
     GameManager.sceneMap = {};
     GameManager.listAnswered = {};
     GameManager.timeTitle = "";
-    GameManager.step = "";
+    GameManager._step = "";
     GameManager.flagCanMove = true;
     GameManager.globalUserNum = 0;
     GameManager.dataTimeline = [];
@@ -3709,17 +4029,17 @@
             detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
             id: 1,
             img: "book1/img_role2.png",
-            content: `你和考古学家<span style="color:#ff2700">Annie</span>从研究生就跟着教授<span style="color:#ff2700">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff2700">Jane</span>，一个历史学家。<span style="color:#ff2700">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
-      <span style="color:#ff2700">3月</span><br/>
-      3月开始的非常顺利，在<span style="color:#ff2700">Leo</span>和<span style="color:#ff2700">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff2700">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
-      <span style="color:#ff2700">4月1日</span><br/>
-      3月30日，你和<span style="color:#ff2700">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff2700">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff2700">Annie</span>以教授的心愿为借口拒绝。<br/>
-      <span style="color:#ff2700">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff2700">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
-      <span style="color:#ff2700">5月1日</span><br/>
-      虽然Jane一直在怀疑你和<span style="color:#ff2700">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff2700">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff2700">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff2700">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
-      <span style="color:#ff2700">5月3日</span> <br/>
-      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff2700">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff2700">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff2700">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff2700">Wilson</span>的建议下，大家为教授<span style="color:#ff2700">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff2700">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff2700">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff2700">Helen</span>的尸体！`
+            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
+      <span style="color:#ff3232">5月3日</span> <br/>
+      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
         },
         {
             roleName: "Jane",
@@ -3730,17 +4050,17 @@
             detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
             id: 2,
             img: "book1/img_role3.png",
-            content: `你在丈夫<span style="color:#ff2700">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff2700">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
-      <span style="color:#ff2700">3月</span><br/>
-      终于，有一天<span style="color:#ff2700">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff2700">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff2700">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff2700">Annie</span>和<span style="color:#ff2700">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff2700">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
-      <span style="color:#ff2700">4月1日</span><br/>
-      <span style="color:#ff2700">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff2700">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff2700">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff2700">Joe</span>和<span style="color:#ff2700">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
-      <span style="color:#ff2700">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff2700">Joe</span>不要参加，<span style="color:#ff2700">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff2700">Joe</span>和<span style="color:#ff2700">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
-      <span style="color:#ff2700">5月1日</span><br/>
-      今天的跟<span style="color:#ff2700">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff2700">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
-      <span style="color:#ff2700">5月3日</span><br/>
-      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff2700">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff2700">Wilson</span>的建议下，大家为教授<span style="color:#ff2700">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff2700">Annie</span>的尸体！`
+            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
         },
         {
             roleName: "Harris",
@@ -3751,13 +4071,13 @@
             detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
             id: 3,
             img: "book1/img_role1.png",
-            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff2700">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
-      <span style="color:#ff2700">3月</span><br/>
-      你知道<span style="color:#ff2700">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
-      <span style="color:#ff2700">4月3日</span><br/>
-      教授的学生<span style="color:#ff2700">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff2700">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff2700">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
-      <span style="color:#ff2700">5月3日</span><br/>
-      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff2700">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff2700">Joe</span>和他的妻子历史学家<span style="color:#ff2700">Jane</span>，天才科学家<span style="color:#ff2700">Leo</span>和项目投资人<span style="color:#ff2700">Wilson</span>. party准时开始，在投资人<span style="color:#ff2700">Wilson</span>的建议下，大家为教授<span style="color:#ff2700">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff2700">Annie</span>的尸体！`
+            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
+      <span style="color:#ff3232">4月3日</span><br/>
+      教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
         },
         {
             roleName: "Leo",
@@ -3769,16 +4089,16 @@
             id: 4,
             img: "book1/img_role4.png",
             content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
-      <span style="color:#ff2700">3月</span><br/>
+      <span style="color:#ff3232">3月</span><br/>
       “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
-      <span style="color:#ff2700">4月1日</span><br/>
+      <span style="color:#ff3232">4月1日</span><br/>
       实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
-      <span style="color:#ff2700">4月30日</span><br/>
+      <span style="color:#ff3232">4月30日</span><br/>
       火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
-      <span style="color:#ff2700">5月1日</span><br/>
+      <span style="color:#ff3232">5月1日</span><br/>
       这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
-      <span style="color:#ff2700">5月3日</span><br/>
-      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff2700">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff2700">Annie</span>的尸体！
+      <span style="color:#ff3232">5月3日</span><br/>
+      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
       `
         },
         {
@@ -3791,17 +4111,17 @@
             id: 5,
             img: "book1/img_role5.png",
             content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
-      <span style="color:#ff2700">3月</span><br/>
+      <span style="color:#ff3232">3月</span><br/>
       “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
-      <span style="color:#ff2700">4月1日</span><br/>
+      <span style="color:#ff3232">4月1日</span><br/>
       不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
-      <span style="color:#ff2700">4月30日</span><br/>
+      <span style="color:#ff3232">4月30日</span><br/>
       30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
-      <span style="color:#ff2700">5月3日</span><br/>
-      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff2700">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
       信件<br/>
-      <span style="color:#ff2700">短信</span><br/>
-      你联系她的学生们<span style="color:#ff2700">窃取研究资料</span><br/>
+      <span style="color:#ff3232">短信</span><br/>
+      你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
       你赶忙邀请考古团队的其他成员继续挖掘项目
       `
         },
@@ -4363,7 +4683,7 @@
                     nodeName: "model 1"
                 }
             }
-        },
+        }
     ];
 
     var View = Laya.View;
@@ -4523,15 +4843,6 @@
             }
             modal.ModalAskChangeRoleUI = ModalAskChangeRoleUI;
             REG("ui.modal.ModalAskChangeRoleUI", ModalAskChangeRoleUI);
-            class ModalBookUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalBook");
-                }
-            }
-            modal.ModalBookUI = ModalBookUI;
-            REG("ui.modal.ModalBookUI", ModalBookUI);
             class ModalConfirmUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4541,24 +4852,6 @@
             }
             modal.ModalConfirmUI = ModalConfirmUI;
             REG("ui.modal.ModalConfirmUI", ModalConfirmUI);
-            class ModalCostAPUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalCostAP");
-                }
-            }
-            modal.ModalCostAPUI = ModalCostAPUI;
-            REG("ui.modal.ModalCostAPUI", ModalCostAPUI);
-            class ModalCreateRoomUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalCreateRoom");
-                }
-            }
-            modal.ModalCreateRoomUI = ModalCreateRoomUI;
-            REG("ui.modal.ModalCreateRoomUI", ModalCreateRoomUI);
             class ModalDetailUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4577,15 +4870,6 @@
             }
             modal.ModalDetailListUI = ModalDetailListUI;
             REG("ui.modal.ModalDetailListUI", ModalDetailListUI);
-            class ModalGameSettingUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalGameSetting");
-                }
-            }
-            modal.ModalGameSettingUI = ModalGameSettingUI;
-            REG("ui.modal.ModalGameSettingUI", ModalGameSettingUI);
             class ModalJoinRoomUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4604,15 +4888,6 @@
             }
             modal.ModalMessageUI = ModalMessageUI;
             REG("ui.modal.ModalMessageUI", ModalMessageUI);
-            class ModalNameUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalName");
-                }
-            }
-            modal.ModalNameUI = ModalNameUI;
-            REG("ui.modal.ModalNameUI", ModalNameUI);
             class ModalPicUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4622,6 +4897,24 @@
             }
             modal.ModalPicUI = ModalPicUI;
             REG("ui.modal.ModalPicUI", ModalPicUI);
+            class ModalResetEndUI extends Dialog {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("modal/ModalResetEnd");
+                }
+            }
+            modal.ModalResetEndUI = ModalResetEndUI;
+            REG("ui.modal.ModalResetEndUI", ModalResetEndUI);
+            class ModalResultUI extends Dialog {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("modal/ModalResult");
+                }
+            }
+            modal.ModalResultUI = ModalResultUI;
+            REG("ui.modal.ModalResultUI", ModalResultUI);
             class ModalRoleInfoUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4649,15 +4942,6 @@
             }
             modal.ModalShareCluUI = ModalShareCluUI;
             REG("ui.modal.ModalShareCluUI", ModalShareCluUI);
-            class ModalSignInUI extends Dialog {
-                constructor() { super(); }
-                createChildren() {
-                    super.createChildren();
-                    this.loadScene("modal/ModalSignIn");
-                }
-            }
-            modal.ModalSignInUI = ModalSignInUI;
-            REG("ui.modal.ModalSignInUI", ModalSignInUI);
             class Scene1ComputerUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -4946,6 +5230,15 @@
             }
             scene.SceneWaitingUI = SceneWaitingUI;
             REG("ui.scene.SceneWaitingUI", SceneWaitingUI);
+            class testOpenUI extends View {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("scene/testOpen");
+                }
+            }
+            scene.testOpenUI = testOpenUI;
+            REG("ui.scene.testOpenUI", testOpenUI);
         })(scene = ui.scene || (ui.scene = {}));
     })(ui || (ui = {}));
     (function (ui) {
@@ -4979,15 +5272,15 @@
         }
         init() {
             this.listTag.array = [
-                { label: "All", type1: 1, type2: 1 },
-                { label: "Marked", type1: 1, type2: 2 },
-                { label: "Private", type1: 1, type2: 3 },
-                { label: "Note", type1: 2 }
+                { label: "All", type1: 1, type2: 1, img: "all" },
+                { label: "Marked", type1: 1, type2: 2, img: "tag" },
+                { label: "Private", type1: 1, type2: 3, img: "private" },
+                { label: "Note", type1: 2, img: "note" }
             ];
             this.listTag.renderHandler = new Laya.Handler(this, (cell, idx) => {
                 let data = cell.dataSource;
-                let label = cell.getChildByName("label");
-                label.color = idx == this.listTag.selectedIndex ? "#ffd600" : "#fff";
+                let img = cell.getChildByName("img1");
+                img.skin = `v2/${DataLang.lang}/img_btn_${data.img}${this.listTag.selectedIndex == idx ? 1 : 0}.png`;
             });
             this.listTag.selectHandler = new Laya.Handler(this, idx => {
                 let data = this.listTag.array[idx];
@@ -5179,9 +5472,11 @@
                 labelFrom.visible = false;
                 return;
             }
-            this.star.skin = `ui/img_pin_${selDetailData.order ? "on" : "off"}.png`;
+            let bgSign = btnSign.getChildByName("img");
+            bgSign.skin = `v2/${DataLang.lang}/img_btn_tag${selDetailData.order ? 1 : 0}.png`;
+            let flagSelfShared = selDetailData.fromUserId == GameManager.userInfo.userId;
+            this.star.skin = `v2/${DataLang.lang}/img_btn_show${flagSelfShared ? 0 : 1}.png`;
             img.visible = true;
-            btnSign.visible = true;
             btnShare.visible = false;
             labelFrom.visible = !!selDetailData.fromUserIdList.find(ii => ii.fromUserId != GameManager.userInfo.userId);
             let nameList = [];
@@ -5296,52 +5591,15 @@
                 let data = cell.dataSource || {};
                 let roleId = GameManager.getSelectedRoleIdByUserId(data.userId);
                 let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
-                let imgRole = cell.getChildByName("imgRole");
+                let imgRole = cell.getChildByName("img");
                 let roleName = cell.getChildByName("roleName");
                 roleName.text = roleData.roleName;
                 imgRole.skin = roleData.img;
-                let imgCircle = cell.getChildByName("imgCircle");
-                let imgCircle2 = cell.getChildByName("imgCircle2");
-                let showMicro = Agora.listTalking.indexOf(data.userId) > -1;
-                if (this.isFreeTalking) {
-                    if (showMicro) {
-                        imgCircle2.visible = true;
-                    }
-                    else {
-                        imgCircle2.visible = false;
-                    }
-                }
-                else {
-                    imgCircle2.visible = false;
-                }
-                if (data.userId == GameManager.talkingUserId) {
-                    imgCircle.visible = true;
-                    this.currentCircle = imgCircle;
-                }
-                else {
-                    imgCircle.visible = false;
-                }
                 let detailBox = cell.getChildByName("detailBox");
                 detailBox.setData(this.getDetailList(data.userId));
             });
             this.timer.loop(500, this, e => {
                 Agora.checkVolumn();
-                this.listUserTalking.refresh();
-            });
-            Laya.timer.frameLoop(1, this, e => {
-                if (!this.currentCircle) {
-                    return;
-                }
-                let totalTime = this.totalTime;
-                let timeNow = new Date().getTime();
-                let timeLeft = GameManager.endTime - timeNow;
-                let percent = timeLeft / totalTime;
-                if (!this.currentCircle.mask) {
-                    this.currentCircle.mask = new Laya.Sprite();
-                }
-                this.currentCircle.mask.graphics.clear();
-                let r = this.currentCircle.width / 2;
-                this.currentCircle.mask.graphics.drawPie(r, r, r, 0, 360 * percent, "#fff");
             });
             this.listUserTalking.array = GameManager.roomUserList;
             this.listUserTalking.width =
@@ -5355,7 +5613,6 @@
                 this.totalTime =
                     GameManager.step == "CONCLUSION" ? 2 * 60 * 1000 : 5 * 60 * 1000;
             });
-            this.pressToTalking.on(Laya.Event.MOUSE_DOWN, this, e => { });
             this.btnEndSelfTalking.on(Laya.Event.CLICK, this, e => {
                 if (GameManager.step == "CONCLUSION") {
                     this.totalTime = 2 * 60 * 1000;
@@ -5395,27 +5652,30 @@
             Laya.timer.clearAll(this);
         }
         toggleMicro(flag) {
-            let txt = this.pressToTalking.getChildByName("txt");
-            txt.text = flag ? "发言中..." : "按住“V”发言";
             Agora.toggleMicro(flag);
         }
         changeCurrent({ talkingUserId }) {
             let isSelf = talkingUserId == GameManager.userInfo.userId;
-            console.log(talkingUserId, GameManager.userInfo.userId, "changeCurrentchangeCurrent");
+            let talkingData = GameManager.getRoomUserById(talkingUserId);
+            if (!isSelf) {
+                if (talkingData.username) {
+                    this.txtSpeaking.visible = true;
+                    this.txtSpeaking.text = DataLang.getTxtByType("talkingPeople", {
+                        username: talkingData.username
+                    });
+                }
+            }
             this.toggleMicro(isSelf);
             this.btnEndSelfTalking.visible = isSelf;
-            this.pressToTalking.visible = isSelf;
             this.btnTalkingNext.visible = false;
             this.listUserTalking.refresh();
         }
         changeFree() {
             this.toggleMicro(true);
             this.isFreeTalking = true;
-            this.pressToTalking.visible = true;
             this.btnEndSelfTalking.visible = false;
             this.btnTalkingNext.visible = true;
             this.listUserTalking.refresh();
-            this.currentCircle = null;
         }
     }
 
@@ -5457,6 +5717,16 @@
         }
     }
 
+    class LangImg extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.type = "";
+        }
+        onEnable() {
+            this.owner.skin = DataLang.getImgByType(this.type);
+        }
+    }
+
     class GameTalkingDetailBox extends Laya.Box {
         constructor() {
             super();
@@ -5488,6 +5758,9 @@
         }
         setData(list) {
             this.list = list;
+            this.list.forEach((item, idx) => {
+                item.num = idx + 1;
+            });
             this.updateList();
         }
         updateList() {
@@ -5530,7 +5803,7 @@
             this.wrapTree.height =
                 GameManager.dataTimeline.length * 98 +
                     (GameManager.dataTimeline.length - 1) * 8;
-            this.line.height = (GameManager.dataTimeline.length - 1) * 98;
+            this.line.height = (GameManager.dataTimeline.length - 1) * 108;
         }
     }
 
@@ -5540,34 +5813,37 @@
             this.page = 0;
             this.list = [];
         }
-        toggleReadIcon(flag) {
-            GameManager.iconChatNotRead = flag;
-            this.iconInfo.visible = flag;
+        toggleReadIcon(num) {
+            GameManager.iconChatNotRead = num;
+            this.iconInfo.visible = num > 0;
+            this.num.text = "" + GameManager.iconChatNotRead;
         }
         onEnable() {
             this.wrap.visible = GameManager.chatBoxOpened;
-            this.iconInfo.visible = GameManager.iconChatNotRead;
+            this.toggleReadIcon(GameManager.iconChatNotRead);
             this.btn.on(Laya.Event.CLICK, this, e => {
                 GameManager.toggleChatBox();
                 this.wrap.visible = GameManager.chatBoxOpened;
                 if (!GameManager.chatBoxOpened) {
-                    this.toggleReadIcon(false);
+                    this.toggleReadIcon(0);
                 }
                 e.stopPropagation();
             });
             this.btnClose.on(Laya.Event.CLICK, this, e => {
                 GameManager.chatBoxOpened = false;
                 this.wrap.visible = GameManager.chatBoxOpened;
-                this.toggleReadIcon(false);
+                this.toggleReadIcon(0);
             });
             this.areaInput.on(Laya.Event.KEY_PRESS, this, e => {
                 if (e.keyCode == 13) {
                     this.sendMsg();
                 }
             });
+            this.btnSend.on(Laya.Event.CLICK, this, this.sendMsg);
             EventManager.sub("game/updateChat", this, this.updateChat);
             EventManager.sub("game/showChatNotSee", this, e => {
-                this.toggleReadIcon(true);
+                GameManager.iconChatNotRead++;
+                this.toggleReadIcon(GameManager.iconChatNotRead);
             });
             this.updateChat();
         }
@@ -5582,15 +5858,15 @@
             dataList.forEach((chatData, idx) => {
                 let sp = new Laya.Sprite();
                 let txtName = new Laya.Label();
-                txtName.fontSize = 16;
+                txtName.fontSize = 20;
                 txtName.text = Utils.subString(chatData.fromUserName, 14) + ":";
                 txtName.color = GameManager.getColorBySeat(idx % 2);
                 sp.addChild(txtName);
                 let txtCnt = new Laya.Label();
-                txtCnt.x = 130;
-                txtCnt.width = 240;
+                txtCnt.x = 110;
+                txtCnt.width = 220;
                 txtCnt.wordWrap = true;
-                txtCnt.fontSize = 16;
+                txtCnt.fontSize = 20;
                 txtCnt.color = "#fff";
                 sp.addChild(txtCnt);
                 txtCnt.text = chatData.text;
@@ -5792,8 +6068,9 @@
                 this.sceneList.renderHandler = new Laya.Handler(this, (cell, idx) => {
                     let spLabel = cell.getChildByName("label");
                     spLabel.color =
-                        idx == this.sceneList.selectedIndex ? "#feb853" : "#ffffff";
+                        idx == this.sceneList.selectedIndex ? "#ffffff" : "#b3b0a6";
                     let selected = cell.getChildByName("selected");
+                    selected.skin = `v2/common/img_tag${this.sceneList.selectedIndex == idx ? 1 : 0}.png`;
                 });
                 this.prefabAvatar = (yield Utils.createPrefab("prefab/MapAvatar.json"));
                 this.sceneList.array = Scene3dConfig.sceneList;
@@ -5857,7 +6134,7 @@
                         this.selectIdx = idx;
                         this.updateRender();
                     });
-                    cell.height = title.height + 28;
+                    cell.height = title.height + 48;
                     cell.y = startY;
                     this.wrapQues.addChild(cell);
                     startY += cell.height + 10;
@@ -5876,8 +6153,8 @@
                 let num = cell.getChildByName("num");
                 let title = cell.getChildByName("title");
                 select.visible = idx == this.selectIdx;
-                num.color = flagAnswered ? "#feb853" : "#fff";
-                title.color = flagAnswered ? "#feb853" : "#fff";
+                let bg = cell.getChildByName("bg");
+                bg.skin = `v2/common/img_${flagAnswered ? "ques1" : "ques_di"}.png`;
             });
         }
         onEnable() {
@@ -5947,23 +6224,23 @@
         onEnable() {
             this.array = [
                 {
-                    keyName: "前进",
+                    keyName: DataLang.getTxtByType("QJ"),
                     keyValue: "W"
                 },
                 {
-                    keyName: "后退",
+                    keyName: DataLang.getTxtByType("HT"),
                     keyValue: "S"
                 },
                 {
-                    keyName: "左移",
+                    keyName: DataLang.getTxtByType("ZY"),
                     keyValue: "A"
                 },
                 {
-                    keyName: "右移",
+                    keyName: DataLang.getTxtByType("YY"),
                     keyValue: "D"
                 },
                 {
-                    keyName: "下蹲",
+                    keyName: DataLang.getTxtByType("XD"),
                     keyValue: "V"
                 }
             ];
@@ -5973,6 +6250,17 @@
                     console.log(data);
                 }
             });
+        }
+    }
+
+    class LangLabel extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.type = "";
+        }
+        onEnable() {
+            this.owner.font = "FZZYJW";
+            this.owner.text = DataLang.getTxtByType(this.type);
         }
     }
 
@@ -5989,30 +6277,40 @@
             this.listVote.renderHandler = new Laya.Handler(this, (cell, idx) => {
                 let data = cell.dataSource || {};
                 let roleId = data.id;
-                let wrapBtn = cell.getChildByName("wrapBtn");
-                let btnTrue = wrapBtn.getChildByName("btnTrue");
+                let selfSelect = cell.getChildByName("selfSelect");
+                selfSelect.visible = GameManager.selfSelectRoleId == roleId;
+                let roleName = cell.getChildByName("roleName");
+                let playerName = cell.getChildByName("playerName");
+                let btnTrue = cell.getChildByName("btnTrue");
+                let selfVoted = cell.getChildByName("selfVoted");
                 btnTrue.offAll(Laya.Event.CLICK);
                 btnTrue.on(Laya.Event.CLICK, this, e => {
                     this.doVote(roleId);
                 });
-                let btnFalse = wrapBtn.getChildByName("btnFalse");
+                let btnFalse = cell.getChildByName("btnFalse");
                 btnFalse.offAll(Laya.Event.CLICK);
                 btnFalse.on(Laya.Event.CLICK, this, e => {
-                    wrapBtn.visible = false;
+                    btnTrue.visible = false;
+                    btnFalse.visible = false;
                 });
-                let roleName = cell.getChildByName("roleName");
-                let txtVoted = cell.getChildByName("txtVoted");
-                let listVoted = cell.getChildByName("listVoted");
                 let img = cell.getChildByName("img");
                 let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
                 roleName.text = roleData.roleName;
                 img.skin = roleData.img;
+                let selectedUserId = GameManager.selectRoleMapRoleToUser[data.id];
+                if (selectedUserId) {
+                    let userData = GameManager.getRoomUserById(selectedUserId);
+                    playerName.text = `${userData.username}`;
+                }
+                else {
+                    playerName.text = "";
+                }
                 let userId = GameManager.selectRoleMapRoleToUser[roleId];
-                let selfVoted = !!GameManager.voteMap[GameManager.userInfo.userId];
-                txtVoted.visible = !!GameManager.voteMap[userId];
+                let flagSelfVoted = !!GameManager.voteMap[GameManager.userInfo.userId];
+                selfVoted.visible = flagSelfVoted;
                 if (this.flagShowVoted) {
-                    listVoted.visible = true;
-                    wrapBtn.visible = false;
+                    btnTrue.visible = false;
+                    btnFalse.visible = false;
                     let list = GameManager.getVotedListByTargetRoleId(roleId);
                     let listRoleList = [];
                     list.forEach(item => {
@@ -6022,14 +6320,24 @@
                             avatar: roleData2.img
                         });
                     });
-                    listVoted.array = listRoleList;
                 }
                 else {
-                    listVoted.visible = false;
-                    wrapBtn.visible = idx == this.listVote.selectedIndex && !selfVoted;
+                    let flagShowBtn = idx == this.listVote.selectedIndex && !flagSelfVoted;
+                    btnTrue.visible = flagShowBtn;
+                    btnFalse.visible = flagShowBtn;
                 }
             });
             EventManager.sub("game/updateVoted", this, e => {
+                let listVoted = [];
+                for (let uid in GameManager.voteMap) {
+                    let userInfo = GameManager.getRoomUserById(uid);
+                    let roleId = GameManager.getSelectedRoleIdByUserId(userInfo.userId);
+                    let roleConf = Scene3dConfig.getRoleInfoByRoleId(roleId);
+                    listVoted.push({
+                        img: roleConf.img
+                    });
+                }
+                this.listVoted.array = listVoted;
                 this.listVote.refresh();
             });
             this.btnSure.on(Laya.Event.CLICK, this, e => {
@@ -6197,11 +6505,13 @@
             this.updateModalBook();
         }
         updateModalBook() {
-            this.modalBookTagList.array = [{ label: "目标" }, { label: "规则" }];
+            this.modalBookTagList.array = [
+                { label: "目标", type: "rule" },
+                { label: "规则", type: "obj" }
+            ];
             this.modalBookTagList.renderHandler = new Laya.Handler(this, (cell, idx) => {
-                let spLabel = cell.getChildByName("label");
-                spLabel.color =
-                    this.modalBookTagList.selectedIndex == idx ? "#ff6600" : "#ffffff";
+                let img = cell.getChildByName("img");
+                img.skin = `v2/${DataLang.lang == "en" ? "en" : "ch"}/img_${cell.dataSource.type}${this.modalBookTagList.selectedIndex == idx ? 1 : 0}.png`;
             });
             this.modalBookTagList.selectHandler = new Laya.Handler(this, this.updateModalBookContent);
             this.updateModalBookContent();
@@ -6349,7 +6659,6 @@
             this.selectPlayer.setOption(roleList, "roleName");
             this.selectHour.setOption(this.optionHour, "label");
             this.selectMin.setOption(this.optionMin, "label");
-            this.title.text = data.username ? "修改时间点" : "新增时间点";
             if (data.username) {
                 this.selectPlayer.value = data.username;
             }
@@ -6481,21 +6790,7 @@
                     this.close();
                     return;
                 }
-                this.prg.width = (1 - percent) * this.width;
-            });
-        }
-    }
-
-    class ModalRoleInfo extends ui.modal.ModalBookUI {
-        constructor() {
-            super();
-        }
-        onEnable() { }
-        onOpened(data) {
-            this.content.text = Scene3dConfig.bookContent;
-            this.bookName.text = Scene3dConfig.bookName;
-            this.btnSure.on(Laya.Event.CLICK, this, e => {
-                this.close();
+                this.prg.width = (1 - percent) * 695;
             });
         }
     }
@@ -6522,53 +6817,6 @@
         }
     }
 
-    class ModalCostAP extends ui.modal.ModalCostAPUI {
-        constructor() {
-            super();
-        }
-        onEnable() { }
-        onOpened(data) {
-            this.content.text = `您将消耗1点AP进入${data.label}。`;
-            this.txtLeft.text = `(剩余AP:${GameManager.userInfo.AP}点)`;
-            this.btnCancel.on(Laya.Event.CLICK, this, e => {
-                data.onCancel && data.onCancel();
-                this.close();
-            });
-            this.btnSure.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                yield NetController.goScene(data.sceneId);
-                EventManager.pub("game/changeScene", data.sceneName);
-                this.close();
-            }));
-        }
-    }
-
-    class ModalCloser extends Laya.Button {
-        constructor() {
-            super();
-        }
-        onEnable() {
-            this.on(Laya.Event.CLICK, this, e => {
-                this.parent.close();
-            });
-        }
-    }
-
-    class ModalCreateRoom extends ui.modal.ModalCreateRoomUI {
-        constructor() {
-            super();
-        }
-        onEnable() {
-            this.btnCreate.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                this.close();
-                yield NetController.createRoom();
-                GameManager.goCreateGame();
-            }));
-            this.btnCancel.on(Laya.Event.CLICK, this, e => {
-                this.close();
-            });
-        }
-    }
-
     class ModalDetail extends ui.modal.ModalDetailUI {
         constructor() {
             super();
@@ -6588,9 +6836,6 @@
             }
         }
         onEnable() {
-            this.btnDetail.on(Laya.Event.CLICK, this, e => {
-                this.wrapDetail.visible = !this.wrapDetail.visible;
-            });
             this.btnClose.on(Laya.Event.CLICK, this, e => {
                 this.close();
             });
@@ -6642,18 +6887,19 @@
         onOpened({ data, withBtns }) {
             this.data = data;
             this.withBtns = withBtns;
+            this.imgBigger.skin = `v2/${DataLang.lang}/img_bigger${this.showBigger ? 0 : 1}.png`;
             this.btnBigger.on(Laya.Event.CLICK, this, e => {
                 this.showBigger = !this.showBigger;
                 if (!this.showBigger) {
                     this.bigger.visible = false;
                 }
-                this.txtBigger.text = this.showBigger ? "取消放大" : "放大查看";
+                this.imgBigger.skin = `v2/${DataLang.lang}/img_bigger${this.showBigger ? 0 : 1}.png`;
             });
             if (!this.withBtns) {
                 this.btnSign.visible = false;
             }
             this.wrapDetail.visible = false;
-            this.btnDetail.visible = data.reportDetail;
+            this.wrapDetail.visible = !!data.reportDetail;
             this.txtDetail.text = data.reportDetail;
             this.addedOnOpen = !!GameManager.getEvidentById(data.id);
             GameManager.addEvident(this.data);
@@ -6712,23 +6958,14 @@
         }
     }
 
-    class ModalGameSetting extends ui.modal.ModalGameSettingUI {
+    class ModalCloser extends Laya.Button {
+        constructor() {
+            super();
+        }
         onEnable() {
-            this.checkRotate.on(Laya.Event.CHANGE, this, e => {
-                GameManager.modeAd = this.checkRotate.selected ? 2 : 1;
-                this.updateRender();
+            this.on(Laya.Event.CLICK, this, e => {
+                this.parent.close();
             });
-            this.checkMove.on(Laya.Event.CHANGE, this, e => {
-                GameManager.modeAd = this.checkMove.selected ? 1 : 2;
-                this.updateRender();
-            });
-        }
-        onOpened() {
-            this.updateRender();
-        }
-        updateRender() {
-            this.checkRotate.selected = GameManager.modeAd == 2;
-            this.checkMove.selected = GameManager.modeAd == 1;
         }
     }
 
@@ -6774,18 +7011,6 @@
         }
     }
 
-    class ModalName extends ui.modal.ModalNameUI {
-        constructor() {
-            super();
-        }
-        onEnable() {
-            this.btnSure.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                this.close();
-                yield UIManager.goScene("scene/SceneRole.scene");
-            }));
-        }
-    }
-
     class ModalPic extends ui.modal.ModalPicUI {
         constructor() {
             super();
@@ -6811,12 +7036,114 @@
         }
     }
 
-    class ModalRoleInfo$1 extends ui.modal.ModalRoleInfoUI {
+    class ModalResetEnd extends ui.modal.ModalResetEndUI {
+        onOpened() {
+            this.btnSure.on(Laya.Event.CLICK, this, e => {
+                this.close();
+            });
+            let votedRoleId = GameManager.voteMap[GameManager.userInfo.userId];
+            let selfIsRight = votedRoleId == GameManager.murderRoleId;
+            let { maxPowerRoleList, flag } = GameManager.checkMurderOut();
+            this.title.text = DataLang.getTxtByType(selfIsRight ? "selfTrue" : "selfFalse");
+            if (flag == 2) {
+                this.imgLose.visible = false;
+                this.imgWin.visible = true;
+                if (selfIsRight) {
+                    this.content.text = DataLang.getTxtByType("murderLose");
+                }
+                else {
+                    this.content.text = DataLang.getTxtByType("murderLoseBut");
+                }
+            }
+            else {
+                this.imgLose.visible = false;
+                this.imgWin.visible = true;
+                if (selfIsRight) {
+                    this.content.text = DataLang.getTxtByType("murderWinBut");
+                }
+                else {
+                    this.content.text = DataLang.getTxtByType("murderWin");
+                }
+            }
+        }
+    }
+
+    class ModalResult extends ui.modal.ModalResultUI {
+        constructor() {
+            super(...arguments);
+            this.flagCanClose = false;
+        }
+        onOpened() {
+            let { maxPowerRoleList, flag } = GameManager.checkMurderOut();
+            this.btnSure.on(Laya.Event.CLICK, this, e => {
+                UIManager.goScene("scene/SceneTruth.scene");
+            });
+            this.btnSure.visible = false;
+            this.imgMurder.alpha = 0;
+            this.imgMurder.y = 562 + 30;
+            let nameList = [];
+            let imgList = [];
+            maxPowerRoleList.forEach(roleId => {
+                let roleConfig = Scene3dConfig.getRoleInfoByRoleId(roleId);
+                nameList.push(roleConfig.roleName);
+                imgList.push({
+                    img: roleConfig.img
+                });
+            });
+            this.title.text = DataLang.getTxtByType("txtResultMaxVoted", {
+                username: nameList.join(",")
+            });
+            this.listMost.array = imgList;
+            this.listMost.width = (303 - 170) * imgList.length;
+            this.listMost.x = (this.width - this.listMost.width) / 2;
+            let murderRoleId = GameManager.murderRoleId;
+            let murderRoleConfig = Scene3dConfig.getRoleInfoByRoleId(murderRoleId);
+            this.imgMurder.skin = murderRoleConfig.img;
+            let votedList = [];
+            for (let uid in GameManager.voteMap) {
+                let roleId = GameManager.getSelectedRoleIdByUserId(uid);
+                let votedRoleId = GameManager.voteMap[uid];
+                let votedRoleConf = Scene3dConfig.getRoleInfoByRoleId(votedRoleId);
+                let power = roleId == GameManager.ditectiveRoleId ? 1.5 : 1;
+                let votedTarget = votedList.find(e => e.roleId == votedRoleId);
+                if (!votedTarget) {
+                    votedTarget = {
+                        roleName: votedRoleConf.roleName,
+                        roleId: votedRoleId,
+                        power,
+                        avatar: votedRoleConf.img
+                    };
+                }
+                else {
+                    votedTarget.power += power;
+                }
+            }
+            votedList.forEach(item => {
+                item.powerTxt = DataLang.getTxtByType("power", { num: item.power });
+            });
+            this.list.array = votedList;
+            this.showAnimate();
+        }
+        showAnimate() {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield Utils.asyncByTime(2000);
+                yield Utils.asyncTween(this.imgMurder, { alpha: 1, y: 562 }, 800);
+                yield Utils.asyncByTime(1000);
+                UIManager.openModal("modal/ModalResetEnd.scene", false);
+                this.btnSure.visible = true;
+            });
+        }
+    }
+
+    class ModalRoleInfo extends ui.modal.ModalRoleInfoUI {
         constructor() {
             super();
             this.data = {};
         }
         onEnable() {
+            this.btnClose.on(Laya.Event.CLICK, this, e => {
+                this.close();
+            });
             this.btnCancel.on(Laya.Event.CLICK, this, e => {
                 this.close();
             });
@@ -6829,6 +7156,7 @@
         }
         setRoleInfo(wrap, roleId) {
             let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
+            this.img.skin = roleData.img;
             let roleName = wrap.getChildByName("roleName");
             let detail = wrap.getChildByName("detail");
             let job = wrap.getChildByName("job");
@@ -6846,11 +7174,11 @@
             let selfRoleId = GameManager.getSelectedRoleIdByUserId(GameManager.userInfo.userId);
             if (selfRoleId == data.id) {
                 this.btnSure.visible = false;
-                this.btnCancel.centerX = 0;
+                this.btnCancel.x = 200;
             }
             else {
                 this.btnSure.visible = true;
-                this.btnCancel.centerX = 125;
+                this.btnCancel.x = 125;
             }
         }
     }
@@ -6861,7 +7189,9 @@
         }
         onEnable() { }
         onOpened(data) {
-            this.content.text = `房间号:${data.roomNum}`;
+            this.content.text = DataLang.getTxtByType("roomNumber1", {
+                roomNum: data.roomNum
+            });
             this.btnClose.on(Laya.Event.CLICK, this, e => {
                 this.close();
             });
@@ -7406,31 +7736,29 @@
             let self = this;
             this.userList.renderHandler = new Laya.Handler(this, (cell) => {
                 let data = cell.dataSource;
-                let icon = cell.getChildByName("icon");
                 let bg = cell.getChildByName("bg");
                 let ready = cell.getChildByName("ready");
+                let host = cell.getChildByName("host");
+                let audioTested = cell.getChildByName("audioTested");
+                let avatar = cell.getChildByName("avatar");
+                avatar.skin = data.avatar;
                 let username = cell.getChildByName("username");
                 username.visible = !data.isBlank;
                 let isHost = data.userId == GameManager.roomInfo.masterUserId;
                 let isSelf = data.userId == GameManager.userInfo.userId;
                 let isReady = GameManager.roomReadyList.indexOf(data.userId) > -1;
                 ready.visible = isReady;
+                host.visible = isHost;
+                audioTested.visible = false;
                 if (data.isBlank) {
-                    bg.skin = `ui/img_border0.png`;
-                    icon.skin = `ui/img_user0.png`;
-                    icon.alpha = 0.5;
                     username.text = "";
+                    avatar.skin = "v2/common/img_8.png";
                 }
                 else {
-                    bg.skin = `ui/img_border${isReady ? 1 : 0}.png`;
-                    icon.skin = `ui/img_user${isSelf ? 1 : 0}.png`;
                     username.color = isSelf ? "#feb853" : "#fff";
-                    username.text = `${data.username}${isHost ? "(host)" : ""}`;
-                    icon.alpha = 1;
+                    username.text = `${data.username}`;
+                    avatar.skin = data.avatar;
                 }
-            });
-            this.btnSetting.on(Laya.Event.CLICK, this, e => {
-                this.wrapSetting.visible = !this.wrapSetting.visible;
             });
             this.btnDismiss.on(Laya.Event.CLICK, this, e => {
                 UIManager.showConfirm({
@@ -7451,18 +7779,6 @@
                 yield NetController.reqExitRoom(GameManager.roomInfo.roomId);
                 UIManager.goHall();
             }));
-            this.btnCreate.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                GameManager.roomInfo.publicFlag = this.checkPublic.selected ? 1 : 0;
-                GameManager.roomInfo.roomName = this.roomName.text;
-                if (this.inputPwd.visible) {
-                    GameManager.roomInfo.roomPwd = this.inputPwd.text;
-                }
-                else {
-                    GameManager.roomInfo.roomPwd = "";
-                }
-                yield NetController.createRoom();
-                this.updateRoomInfo();
-            }));
             this.btnStart.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
                 yield NetController.reqStartGame();
             }));
@@ -7478,48 +7794,29 @@
             EventManager.sub("room/updateRoomInfo", this, this.updateRoomInfo);
             this.checkPublic.on(Laya.Event.CHANGE, this, this.updatePwdHide);
         }
-        onOpened({ isCreate }) {
+        onOpened({}) {
             LoadingManager.loadScene3d();
-            this.btnCreate.visible = false;
             this.btnStart.visible = false;
             this.btnNext.visible = false;
-            if (isCreate) {
-                this.btnCreate.visible = true;
-            }
-            this.roomName.text = GameManager.roomInfo.roomName;
-            this.updateRoomInfo(isCreate);
+            this.updateRoomInfo();
         }
         updatePwdHide() {
         }
-        updateRoomInfo(isCreate = false) {
+        updateRoomInfo() {
             this.btnStart.visible = false;
             this.btnNext.visible = false;
             this.updateToggleBtn();
-            this.chatBox.visible = !isCreate;
-            if (isCreate) {
-                this.btnCreate.visible = true;
-                this.wrapUserList.visible = false;
-                GameManager.roomInfo.roomName = GameManager.userInfo.username + "的房间";
-                this.countInRoom.visible = false;
-                this.roomName.text = GameManager.roomInfo.roomName;
-                this.checkPublic.selected = true;
-                return;
-            }
             this.checkPublic.mouseEnabled = false;
-            this.roomName.mouseEnabled = false;
             this.checkPublic.selected = GameManager.roomInfo.publicFlag == 1;
-            this.roomName.text = GameManager.roomInfo.roomName;
-            this.txtRoomName.text = Utils.subString(GameManager.roomInfo.roomName, 16);
-            this.countInRoom.visible = true;
-            this.countInRoom.text = `${GameManager.roomUserList.length}`;
+            this.txtRoomId.text = "" + GameManager.roomInfo.roomNum;
+            this.txtTitle.refresh();
             this.wrapUserList.visible = true;
-            this.btnCreate.visible = false;
             let readyList = GameManager.roomUserList.filter(item => GameManager.roomReadyList.indexOf(item.userId) > -1 ||
                 item.userId == GameManager.roomInfo.masterUserId);
             let isAllReady = readyList.length >= 3;
             let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
             let flagSelfReady = this.getSelfIsReady();
-            this.btnNextLabel.text = !flagSelfReady ? "准备" : "取消准备";
+            this.btnNextImg.skin = DataLang.getImgByType(!flagSelfReady ? "btnReady" : "btnCancelReady");
             this.btnNext.visible = !isHost;
             this.btnStart.visible = isHost;
             this.btnStart.disabled = !isAllReady;
@@ -7537,7 +7834,30 @@
         }
     }
 
-    class CheckBox extends Laya.Box {
+    class TxtGroupCenter extends Laya.Sprite {
+        refresh() {
+            let _children = this["_children"];
+            let total = 0;
+            for (let i = 0; i < _children.length; i++) {
+                let itemPre = _children[i - 1];
+                let item = _children[i];
+                if (itemPre) {
+                    item.x = itemPre.x + itemPre.width + 4;
+                }
+                else {
+                    item.x = 0;
+                }
+                total += item.width + 4;
+            }
+            this.width = total;
+            let parent = this.parent;
+            if (parent) {
+                this.x = (parent.width - this.width) / 2;
+            }
+        }
+    }
+
+    class CheckBoxInStart extends Laya.Box {
         constructor() {
             super();
             this._selected = false;
@@ -7546,14 +7866,15 @@
             return this._selected;
         }
         set selected(val) {
-            this.inner = this.getChildByName("inner");
-            this.inner.visible = val;
+            let inner = this.getChildByName("inner");
+            if (inner) {
+                inner.skin = DataLang.getImgByType(val ? "isPublic" : "notPublic");
+            }
             this._selected = val;
         }
         onEnable() {
             this.on(Laya.Event.CLICK, this, e => {
                 this.selected = !this.selected;
-                console.log(234343);
             });
         }
     }
@@ -7609,18 +7930,18 @@
             }
             this.btnMute.on(Laya.Event.CLICK, this, e => {
                 SoundManager.togglePB();
-                this.btnMute.alpha = SoundManager.flagPlayPB ? 1 : 0.6;
+                let bg = this.btnMute.getChildByName("img");
+                bg.skin = `v2/common/img_sound${SoundManager.flagPlayPB ? 1 : 0}.png`;
             });
             this.wrapReady.readyHandler = new Laya.Handler(this, (e) => __awaiter(this, void 0, void 0, function* () {
                 yield NetController.reqLoadingSceneEnd();
             }));
-            this.htmlText.innerHTML = `<div style="font-size:30px;color:#6a5f50;width:${this
+            this.htmlText.innerHTML = `<div style="font-size:30px;color:#554841;width:${this
             .wrapScroll.width - 30}px;line-height:45px;">${roleData.content}</div>`;
             let countEachW = this.wrapScroll.width / 20;
             let stringLen = Utils.getTxtByteLen(roleData.content);
             let txtH = Math.ceil(stringLen / countEachW) * 45;
             this.inner.height = txtH + 70;
-            this.roleName.text = roleData.roleName;
         }
     }
 
@@ -7784,19 +8105,16 @@
         updateRender() {
             if (GameManager.currentScene) {
                 this.sceneChanger.visible = false;
-                this.listTag.visible = false;
+                this.wrapTag.visible = false;
                 this.btnExit.visible = true;
-                this.btnQuit.visible = false;
                 this.wrap3d.visible = true;
             }
             else {
                 this.sceneChanger.visible = true;
                 this.btnExit.visible = false;
-                this.btnQuit.visible = true;
                 this.wrap3d.visible = false;
-                this.listTag.visible = true;
+                this.wrapTag.visible = true;
             }
-            this.countAlive.text = `${GameManager.roomUserList.length}`;
         }
         changeMainWrap(type) {
             [
@@ -8006,17 +8324,82 @@
             let wrapScroll = this.getChildByName("wrapScroll");
             let inner = wrapScroll.getChildByName("inner");
             let htmlText = inner.getChildByName("htmlText");
-            let roleName = this.getChildByName("roleName");
             let selfRoleId = GameManager.getSelectedRoleIdByUserId(GameManager.userInfo.userId);
             let roleData = Scene3dConfig.roleList.find(item => item.id == selfRoleId);
             if (roleData) {
                 let w = wrapScroll.width - 20;
-                htmlText.innerHTML = `<div style="font-size:30px;color:#6a5f50;width:${w}px;line-height:45px;">${roleData.content}</div>`;
+                htmlText.innerHTML = `<div style="font-size:30px;color:#554841;width:${w}px;line-height:45px;">${roleData.content}</div>`;
                 let countEachW = w / 20;
                 let stringLen = Utils.getTxtByteLen(roleData.content);
                 let txtH = Math.ceil(stringLen / countEachW) * 45;
                 inner.height = txtH + 70;
-                roleName.text = roleData.roleName;
+            }
+        }
+    }
+
+    class GameSteper extends Laya.Box {
+        constructor() {
+            super(...arguments);
+            this.currentIdx = -1;
+        }
+        onEnable() {
+            this.list = this.getChildByName("list");
+            this.list.renderHandler = new Laya.Handler(this, (cell, idx) => {
+                let data = cell.dataSource;
+                let point = cell.getChildByName("point");
+                let current = cell.getChildByName("current");
+                current.visible = idx == this.currentIdx;
+                let wrapHover = cell.getChildByName("wrapHover");
+                let label = wrapHover.getChildByName("label");
+                wrapHover.visible = this.list.selectedIndex == idx;
+                label.text = DataLang.getTxtByType(data.type);
+            });
+            this.list.mouseHandler = new Laya.Handler(this, (e, idx) => {
+                if (e.type == "mouseover") {
+                    this.list.selectedIndex = idx;
+                }
+                else if (e.type == "mouseout") {
+                    this.list.selectedIndex = -1;
+                }
+            });
+            this.list.array = [
+                {
+                    type: "PRE_TALKING"
+                },
+                {
+                    type: "CLUE_FIND"
+                },
+                {
+                    type: "TALKING"
+                },
+                {
+                    type: "CLUE_FIND"
+                },
+                {
+                    type: "TALKING"
+                },
+                {
+                    type: "FREE_TALKING"
+                },
+                {
+                    type: "CONCLUSION"
+                },
+                {
+                    type: "VOTE"
+                },
+                {
+                    type: "ANALYSE"
+                }
+            ];
+            EventManager.sub("step/changeStep", this, this.updateData);
+            this.updateData();
+        }
+        updateData() {
+            let stepConf = this.list.array.find(conf => conf.type == GameManager.step);
+            if (stepConf) {
+                let idx = this.list.array.indexOf(stepConf);
+                this.currentIdx = idx;
+                this.list.refresh();
             }
         }
     }
@@ -8297,21 +8680,36 @@
             super();
         }
         onEnable() {
+            this.title.refresh();
+            this.frameOnce(1, this, e => {
+                this.title.refresh();
+            });
             this.list.renderHandler = new Laya.Handler(this, (cell, idx) => {
                 let data = cell.dataSource;
                 let selectedUserId = GameManager.selectRoleMapRoleToUser[data.id];
                 let selfSelect = cell.getChildByName("selfSelect");
-                selfSelect.visible = false;
+                let roleShape = cell.getChildByName("roleShape");
                 let playerName = cell.getChildByName("playerName");
+                let roleName = cell.getChildByName("roleName");
+                let img = cell.getChildByName("img");
+                roleShape.mask.skin = data.img;
+                img.skin = data.img;
+                roleName.text = data.name;
+                console.log(data, "roledata");
+                selfSelect.visible = false;
                 playerName.text = "";
-                if (GameManager.selfSelectRoleId == data.id) {
-                    selfSelect.visible = true;
-                }
-                else if (selectedUserId) {
-                }
                 if (selectedUserId) {
+                    img.visible = true;
+                    roleShape.visible = false;
                     let userData = GameManager.getRoomUserById(selectedUserId);
                     playerName.text = `${userData.username}`;
+                    if (GameManager.selfSelectRoleId == data.id) {
+                        selfSelect.visible = true;
+                    }
+                }
+                else {
+                    roleShape.visible = true;
+                    img.visible = false;
                 }
             });
             this.list.mouseHandler = new Laya.Handler(this, (e, idx) => {
@@ -8334,44 +8732,23 @@
         }
         updateAll() {
             this.list.refresh();
-            this.txtCount.text = `${GameManager.roomUserList.length}`;
         }
     }
 
     class SceneTalking extends ui.scene.SceneTalkingUI {
         onEnable() {
-            let currentCircle;
             this.listUserTalking.renderHandler = new Laya.Handler(this, (cell) => {
                 let data = cell.dataSource || {};
                 let roleId = GameManager.getSelectedRoleIdByUserId(data.userId);
                 let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
-                let imgRole = cell.getChildByName("imgRole");
+                let playerName = cell.getChildByName("playerName");
+                let selfSelect = cell.getChildByName("selfSelect");
+                let img = cell.getChildByName("img");
+                img.skin = data.img;
                 let roleName = cell.getChildByName("roleName");
                 roleName.text = roleData.roleName;
-                imgRole.skin = roleData.img;
-                let imgCircle = cell.getChildByName("imgCircle");
-                if (data.userId == GameManager.talkingUserId) {
-                    imgCircle.visible = true;
-                    currentCircle = imgCircle;
-                }
-                else {
-                    imgCircle.visible = false;
-                }
-            });
-            Laya.timer.frameLoop(1, this, e => {
-                if (!currentCircle) {
-                    return;
-                }
-                let totalTime = 60 * 2 * 1000;
-                let timeNow = new Date().getTime();
-                let timeLeft = GameManager.endTime - timeNow;
-                let percent = timeLeft / totalTime;
-                if (!currentCircle.mask) {
-                    currentCircle.mask = new Laya.Sprite();
-                }
-                currentCircle.mask.graphics.clear();
-                let r = currentCircle.width / 2;
-                currentCircle.mask.graphics.drawPie(r, r, r, 0, 360 * percent, "#fff");
+                playerName.text = `${data.username}`;
+                selfSelect.visible = data.userId == GameManager.userInfo.userId;
             });
             this.btnNext.on(Laya.Event.CLICK, this, e => {
                 NetController.reqEndTalkingBeforeGame();
@@ -8380,8 +8757,6 @@
             this.listUserTalking.width =
                 this.listUserTalking.array.length * (238 + 50) - 50;
             EventManager.sub("talking/changeCurrent", this, this.changeCurrent);
-            this.pressToTalking.on(Laya.Event.MOUSE_DOWN, this, e => {
-            });
             Laya.stage.on(Laya.Event.KEY_DOWN, this, this.onKeyDown);
             Laya.stage.on(Laya.Event.KEY_UP, this, this.onKeyUp);
             this.changeCurrent({
@@ -8402,15 +8777,22 @@
             Laya.stage.off(Laya.Event.KEY_UP, this, this.onKeyUp);
         }
         toggleMicro(flag) {
-            let txt = this.pressToTalking.getChildByName("txt");
-            txt.text = flag ? "发言中..." : "按住“V”发言";
             Agora.toggleMicro(flag);
         }
         changeCurrent({ talkingUserId }) {
             let isSelf = talkingUserId == GameManager.userInfo.userId;
+            let talkingData = GameManager.getRoomUserById(talkingUserId);
+            this.txtSpeaking.visible = false;
+            if (!isSelf) {
+                if (talkingData.username) {
+                    this.txtSpeaking.visible = true;
+                    this.txtSpeaking.text = DataLang.getTxtByType("talkingPeople", {
+                        username: talkingData.username
+                    });
+                }
+            }
             this.listUserTalking.refresh();
             this.btnNext.visible = isSelf;
-            this.pressToTalking.visible = isSelf;
             this.toggleMicro(isSelf);
         }
         onOpened() { }
@@ -8726,6 +9108,27 @@
         }
     }
 
+    class CheckBox extends Laya.Box {
+        constructor() {
+            super();
+            this._selected = false;
+        }
+        get selected() {
+            return this._selected;
+        }
+        set selected(val) {
+            this.inner = this.getChildByName("inner");
+            this.inner.visible = val;
+            this._selected = val;
+        }
+        onEnable() {
+            this.on(Laya.Event.CLICK, this, e => {
+                this.selected = !this.selected;
+                console.log(234343);
+            });
+        }
+    }
+
     class GameConfig {
         constructor() {
         }
@@ -8737,6 +9140,7 @@
             reg("comp/GameTalking.ts", GameTalking);
             reg("comp/GameExiter.ts", GameExiter);
             reg("comp/WrapReady.ts", WrapReady);
+            reg("common/LangImg.ts", LangImg);
             reg("comp/GameTalkingDetailBox.ts", GameTalkingDetailBox);
             reg("comp/GameTimeline.ts", GameTimeline);
             reg("comp/GameChatBox.ts", GameChatBox);
@@ -8746,6 +9150,7 @@
             reg("comp/GameNPC.ts", GameNPC);
             reg("comp/GameSetting.ts", GameSetting);
             reg("comp/ListKey.ts", ListKey);
+            reg("common/LangLabel.ts", LangLabel);
             reg("comp/GameVote.ts", GameVote);
             reg("comp/GameWrapBook.ts", GameWrapBook);
             reg("comp/GameWrapMine.ts", GameWrapMine);
@@ -8754,19 +9159,16 @@
             reg("modal/ModalAddTimeline.ts", ModalAddTimeline);
             reg("comp/InputSelect.ts", InputSelect);
             reg("modal/ModalAskChangeRole.ts", ModalAskChangeRole);
-            reg("modal/ModalBook.ts", ModalRoleInfo);
             reg("modal/ModalConfirm.ts", ModalConfirm);
-            reg("modal/ModalCostAP.ts", ModalCostAP);
-            reg("common/ModalCloser.ts", ModalCloser);
-            reg("modal/ModalCreateRoom.ts", ModalCreateRoom);
             reg("modal/ModalDetail.ts", ModalDetail);
             reg("modal/ModalDetailList.ts", ModalDetailList);
-            reg("modal/ModalGameSetting.ts", ModalGameSetting);
+            reg("common/ModalCloser.ts", ModalCloser);
             reg("modal/ModalJoinRoom.ts", ModalJoinRoom);
             reg("modal/ModalMessage.ts", ModalMessage);
-            reg("modal/ModalName.ts", ModalName);
             reg("modal/ModalPic.ts", ModalPic);
-            reg("modal/ModalRoleInfo.ts", ModalRoleInfo$1);
+            reg("modal/ModalResetEnd.ts", ModalResetEnd);
+            reg("modal/ModalResult.ts", ModalResult);
+            reg("modal/ModalRoleInfo.ts", ModalRoleInfo);
             reg("modal/ModalShare.ts", ModalShare);
             reg("modal/ModalShareClu.ts", ModalShareClu);
             reg("SceneComponents/scene1/ui/SafeBox.ts", SafeBox);
@@ -8783,13 +9185,15 @@
             reg("SceneComponents/scene1/joe/ComputerJoe.ts", ComputerCommon$1);
             reg("SceneComponents/scene1/wilson/pmt.ts", pmt);
             reg("scene/SceneBeforeStart.ts", SceneBeforeStart);
-            reg("common/CheckBox.ts", CheckBox);
+            reg("comp/TxtGroupCenter.ts", TxtGroupCenter);
+            reg("common/CheckBoxInStart.ts", CheckBoxInStart);
             reg("scene/SceneBook.ts", SceneBook);
             reg("modal/SceneDrag.ts", SceneDrag);
             reg("scene/SceneEndTalk.ts", SceneEndTalk);
             reg("comp/TimeTitle.ts", TimeTitle);
             reg("scene/SceneGame.ts", SceneGame);
             reg("comp/GameBook.ts", GameBook);
+            reg("comp/GameSteper.ts", GameSteper);
             reg("scene/SceneHall.ts", SceneHall);
             reg("common/ImageAutoResizeMax.ts", ImageAutoResizeMax);
             reg("scene/SceneLoading.ts", SceneLoading);
@@ -8799,6 +9203,7 @@
             reg("scene/SceneTruth.ts", SceneResult$1);
             reg("scene/SceneVideo.ts", SceneVideo);
             reg("script/GameUI.ts", GameUI);
+            reg("common/CheckBox.ts", CheckBox);
         }
     }
     GameConfig.width = 1920;
@@ -8807,7 +9212,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "modal/AdStartGame.scene";
+    GameConfig.startScene = "scene/SceneBeforeStart.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
