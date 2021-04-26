@@ -219,6 +219,784 @@
     }
     LogManager.logLev = 0;
 
+    class DataLang {
+        static set lang(lang) {
+            this._lang = lang == "en-US" ? "en" : "ch";
+        }
+        static get lang() {
+            return this._lang;
+        }
+        static changeLang() {
+            EventManager.pub("changeLang");
+        }
+        static getImgByType(type = "") {
+            let conf = this.imgConfig[type];
+            if (!conf) {
+                console.log(type, "遗漏语言包配置");
+            }
+            return conf ? conf[this.lang] : "";
+        }
+        static getTxtByType(type = "", params = {}) {
+            let conf = this.txt[type] || {};
+            let str = conf[this.lang] || "";
+            for (let key in params) {
+                if (str.replaceAll) {
+                    str = str.replaceAll(`{${key}}`, params[key]);
+                }
+            }
+            return str;
+        }
+    }
+    DataLang._lang = "ch";
+    DataLang.imgConfig = {
+        voted: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        },
+        wuzheng: {
+            ch: "v2/ch/img_wuzheng.png",
+            en: "v2/en/img_wuzheng.png"
+        },
+        btnAny: {
+            ch: "v2/ch/img_any.png",
+            en: "v2/en/img_any.png"
+        },
+        btnConfirm: {
+            ch: "v2/ch/img_confirm.png",
+            en: "v2/en/img_confirm.png"
+        },
+        titleAdd: {
+            ch: "v2/ch/img_add_timeline.png",
+            en: "v2/en/img_add_timeline.png"
+        },
+        btnAdd: {
+            ch: "v2/ch/img_btn_add.png",
+            en: "v2/en/img_btn_add.png"
+        },
+        fengmian1: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        isPublic: {
+            ch: "v2/ch/img_public1.png",
+            en: "v2/en/img_public1.png"
+        },
+        notPublic: {
+            ch: "v2/ch/img_public0.png",
+            en: "v2/en/img_public0.png"
+        },
+        txtTip: {
+            ch: "v2/ch/img_wxts.png",
+            en: "v2/en/img_wxts.png"
+        },
+        btnTuichu: {
+            ch: "v2/ch/img_tuichu.png",
+            en: "v2/en/img_btn_switch.png"
+        },
+        btnSwitch: {
+            ch: "v2/ch/img_btn_switch.png",
+            en: "v2/en/img_btn_switch.png"
+        },
+        btnSend: {
+            ch: "v2/ch/img_send.png",
+            en: "v2/en/img_send.png"
+        },
+        btnShare: {
+            ch: "v2/ch/img_share.png",
+            en: "v2/en/img_share.png"
+        },
+        fengmian: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        btnStart: {
+            ch: "v2/ch/img_kaishi1.png",
+            en: "v2/en/img_kaishi1.png"
+        },
+        btnDismiss: {
+            ch: "v2/ch/img_jiesan.png",
+            en: "v2/en/img_jiesan.png"
+        },
+        btnBack: {
+            ch: "v2/ch/img_back.png",
+            en: "v2/en/img_back.png"
+        },
+        btnNext: {
+            ch: "v2/ch/img_next.png",
+            en: "v2/en/img_next.png"
+        },
+        btnReady: {
+            ch: "v2/ch/img_btn_ready.png",
+            en: "v2/en/img_btn_ready.png"
+        },
+        xiongshou: {
+            ch: "v2/ch/img_xiongshou.png",
+            en: "v2/en/img_xiongshou.png"
+        },
+        result: {
+            ch: "v2/ch/img_result.png",
+            en: "v2/en/img_result.png"
+        },
+        btnVoted: {
+            ch: "v2/ch/img_voted.png",
+            en: "v2/en/img_voted.png"
+        },
+        btnBook: {
+            ch: "v2/ch/img_book.png",
+            en: "v2/en/img_book.png"
+        },
+        btnSure1: {
+            ch: "v2/ch/img_queding_small.png",
+            en: "v2/en/img_queding_small.png"
+        },
+        btnCancel1: {
+            ch: "v2/ch/img_cancel_small.png",
+            en: "v2/en/img_cancel_small.png"
+        },
+        btnCancel: {
+            ch: "v2/ch/img_quxiao.png",
+            en: "v2/en/img_quxiao.png"
+        },
+        btnCopy: {
+            ch: "v2/ch/img_copy.png",
+            en: "v2/en/img_copy.png"
+        },
+        btnCancelReady: {
+            ch: "v2/ch/img_btn_ready0.png",
+            en: "v2/en/img_btn_ready0.png"
+        },
+        btnCreate: {
+            ch: "v2/ch/img_create.png",
+            en: "v2/en/img_create.png"
+        },
+        txtLTS: {
+            ch: "v2/ch/img_lts.png",
+            en: "v2/en/img_lts.png"
+        },
+        testYY: {
+            ch: "v2/ch/img_yycs.png",
+            en: "v2/en/img_yycs.png"
+        },
+        tagReady: {
+            ch: "v2/ch/img_ready.png",
+            en: "v2/en/img_ready.png"
+        },
+        btnEnd: {
+            ch: "v2/ch/img_btn_end.png",
+            en: "v2/en/img_btn_end.png"
+        },
+        btnTCYX: {
+            ch: "v2/ch/img_btn_tcyx.png",
+            en: "v2/en/img_btn_tcyx.png"
+        },
+        img_ytp: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        }
+    };
+    DataLang.txt = {
+        Searching: {
+            ch: "搜证中",
+            en: "Searching"
+        },
+        Talking: {
+            ch: "发言",
+            en: "Talking"
+        },
+        Vote: {
+            ch: "投票",
+            en: "Vote"
+        },
+        NPC: {
+            ch: "证人",
+            en: "NPC"
+        },
+        Timeline: {
+            ch: "时间线",
+            en: "Timeline"
+        },
+        Scene: {
+            ch: "场景",
+            en: "Scene"
+        },
+        Book: {
+            ch: "剧本",
+            en: "Book"
+        },
+        pressToSpeak: {
+            ch: "按住V发言",
+            en: "Press 'V' to speak"
+        },
+        askChange: {
+            ch: "{username}请求交换",
+            en: "{username} ask change"
+        },
+        sex: {
+            ch: "性别",
+            en: "sex"
+        },
+        age: {
+            ch: "年龄",
+            en: "age"
+        },
+        job: {
+            ch: "职业",
+            en: "job"
+        },
+        bookName: {
+            ch: "剧本一",
+            en: "book1"
+        },
+        jump: {
+            ch: "是否跳过新手引导？",
+            en: "Skip novice guidance?"
+        },
+        CLUE_FIND: {
+            en: "Find",
+            ch: "搜证"
+        },
+        TALKING: {
+            en: "Talking",
+            ch: "发言"
+        },
+        PRE_TALKING: {
+            en: "PRE_TALKING",
+            ch: "自我介绍"
+        },
+        FREE_TALKING: {
+            en: "FREE_TALKING",
+            ch: "自由发言"
+        },
+        CONCLUSION: {
+            en: "CONCLUSION",
+            ch: "总结发言"
+        },
+        VOTE: {
+            en: "VOTE",
+            ch: "投票"
+        },
+        ANALYSE: {
+            en: "ANALYSE",
+            ch: "复盘"
+        },
+        progress: {
+            en: "Game Progress",
+            ch: "破案进度"
+        },
+        power: {
+            en: "{num}",
+            ch: "{num}票"
+        },
+        murderWin: {
+            en: "The murderer escaped the law",
+            ch: "凶手逃脱了法律的制裁"
+        },
+        murderWinBut: {
+            en: "But,\nThe murderer escaped the law",
+            ch: "但是\n凶手逃脱了法律的制裁"
+        },
+        murderLoseBut: {
+            en: "But with the concerted efforts of all of us,\nThe murderer was punished",
+            ch: "但是在大家的齐心协力下\n凶手受到了制裁"
+        },
+        murderLose: {
+            en: "With the concerted efforts of all of us,\nThe murderer was punished",
+            ch: "在大家的齐心协力下\n凶手受到了制裁"
+        },
+        selfTrue: {
+            ch: "恭喜你选对了凶手",
+            en: "Voted correct!"
+        },
+        selfFalse: {
+            ch: "遗憾你选错了凶手",
+            en: "Voted wrong!"
+        },
+        txtResultMaxVoted: {
+            ch: "{username}得票最高",
+            en: "The most gamer voted {username}"
+        },
+        talkingPeople: {
+            ch: "{username}发言中...",
+            en: "{username} speaking..."
+        },
+        setting: {
+            ch: "设置",
+            en: "Setting"
+        },
+        role1: {
+            ch: "选择",
+            en: "Choose a"
+        },
+        role2: {
+            ch: "角色",
+            en: "Character"
+        },
+        notFullButStart: {
+            ch: "人数未满，房主发起提前开始游戏，\n是否同意？",
+            en: "Not full,But the host want to start,\nDo you agree?"
+        },
+        roomNumberHtml: {
+            ch: `<span>房间号:<span style="color:#ff6f48;">{roomNum}</span></span>`,
+            en: `<span>Room Number:<span style="color:#ff6f48;">{roomNum}</span></span>`
+        },
+        roomNumber1: {
+            ch: "房间号:{roomNum}",
+            en: "Room Number:{roomNum}"
+        },
+        roomNumber: {
+            ch: "房间号:",
+            en: "Room Number:"
+        },
+        readyedPeople: {
+            ch: "已准备玩家",
+            en: "Ready"
+        },
+        SSSC: {
+            ch: "属性/时长",
+            en: "Attrbute/Duration"
+        },
+        timeSZ: {
+            ch: "搜证时间",
+            en: "Time Find"
+        },
+        timeFY: {
+            ch: "发言时间",
+            en: "Time Chat"
+        },
+        timeTP: {
+            ch: "投票时间",
+            en: "Time Vote"
+        },
+        QJ: {
+            ch: "前进",
+            en: "Forward"
+        },
+        HT: {
+            ch: "后退",
+            en: "Back"
+        },
+        ZY: {
+            ch: "左移",
+            en: "Left"
+        },
+        YY: {
+            ch: "右移",
+            en: "Right"
+        },
+        XD: {
+            ch: "下蹲",
+            en: "Down"
+        }
+    };
+    DataLang.content = {
+        ch: "剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容",
+        en: "bookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbook"
+    };
+    DataLang.roleList_en = [
+        {
+            roleName: "Joe",
+            job: "chemist",
+            sex: "Male",
+            age: "30",
+            relation: "",
+            pangbaiUrl: "sound/Joe.mp3",
+            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
+    <span style="color:#ff3232">3月</span><br/>
+    3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
+    <span style="color:#ff3232">4月1日</span><br/>
+    3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
+    <span style="color:#ff3232">4月30日</span><br/>
+    火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
+    <span style="color:#ff3232">5月1日</span><br/>
+    虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
+    <span style="color:#ff3232">5月3日</span> <br/>
+    你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
+        },
+        {
+            roleName: "Jane",
+            job: "Historian",
+            pangbaiUrl: "sound/Jane.mp3",
+            age: "28",
+            sex: "Female",
+            relation: "",
+            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
+    <span style="color:#ff3232">3月</span><br/>
+    终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
+    <span style="color:#ff3232">4月1日</span><br/>
+    <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
+    <span style="color:#ff3232">4月30日</span><br/>
+    火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
+    <span style="color:#ff3232">5月1日</span><br/>
+    今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
+    <span style="color:#ff3232">5月3日</span><br/>
+    你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Harris",
+            job: "大英博物馆副馆长",
+            pangbaiUrl: "sound/Harris.mp3",
+            age: "27",
+            sex: "男性",
+            relation: "",
+            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
+    <span style="color:#ff3232">3月</span><br/>
+    你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
+    <span style="color:#ff3232">4月3日</span><br/>
+    教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
+    <span style="color:#ff3232">5月3日</span><br/>
+    你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Leo",
+            pangbaiUrl: "sound/Leo.mp3",
+            job: "科学家",
+            sex: "男性",
+            age: "28",
+            relation: "",
+            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
+    <span style="color:#ff3232">3月</span><br/>
+    “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
+    <span style="color:#ff3232">4月1日</span><br/>
+    实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
+    <span style="color:#ff3232">4月30日</span><br/>
+    火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
+    <span style="color:#ff3232">5月1日</span><br/>
+    这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
+    <span style="color:#ff3232">5月3日</span><br/>
+    你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
+    `
+        },
+        {
+            roleName: "Wilson",
+            pangbaiUrl: "sound/Wilson.mp3",
+            job: "项目投资人",
+            sex: "男性",
+            age: "40",
+            relation: "",
+            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
+    <span style="color:#ff3232">3月</span><br/>
+    “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
+    <span style="color:#ff3232">4月1日</span><br/>
+    不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
+    <span style="color:#ff3232">4月30日</span><br/>
+    30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
+    <span style="color:#ff3232">5月3日</span><br/>
+    你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
+    信件<br/>
+    <span style="color:#ff3232">短信</span><br/>
+    你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
+    你赶忙邀请考古团队的其他成员继续挖掘项目
+    `
+        },
+        {
+            roleName: "Stanly",
+            job: "Detective",
+            age: "37",
+            sex: "Male",
+            detail: "37 years old, has worked as the detective for 15 years.",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: "你是一个侦探，接到报警前来查案"
+        }
+    ];
+    DataLang.roleList_ch = [
+        {
+            roleName: "Joe",
+            job: "化学家",
+            age: "30",
+            sex: "男性",
+            relation: "",
+            pangbaiUrl: "sound/Joe.mp3",
+            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
+      <span style="color:#ff3232">5月3日</span> <br/>
+      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
+        },
+        {
+            roleName: "Jane",
+            job: "Historian",
+            pangbaiUrl: "sound/Jane.mp3",
+            sex: "Female",
+            age: "28",
+            relation: "",
+            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Harris",
+            job: "大英博物馆副馆长",
+            pangbaiUrl: "sound/Harris.mp3",
+            age: "27",
+            sex: "男性",
+            relation: "",
+            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
+      <span style="color:#ff3232">4月3日</span><br/>
+      教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Leo",
+            pangbaiUrl: "sound/Leo.mp3",
+            age: "28",
+            job: "科学家",
+            sex: "男性",
+            relation: "",
+            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
+      `
+        },
+        {
+            roleName: "Wilson",
+            pangbaiUrl: "sound/Wilson.mp3",
+            job: "项目投资人",
+            age: "40",
+            sex: "男性",
+            relation: "",
+            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
+      信件<br/>
+      <span style="color:#ff3232">短信</span><br/>
+      你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
+      你赶忙邀请考古团队的其他成员继续挖掘项目
+      `
+        },
+        {
+            roleName: "Stanly",
+            job: "Detective",
+            sex: "Male",
+            age: "37",
+            detail: "37 years old, has worked as the detective for 15 years.",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: "你是一个侦探，接到报警前来查案"
+        }
+    ];
+    DataLang.quesConfig_ch = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "你做这份工作多久了？",
+                    content: "也就不到一年吧？我之前在罗姆尼老大手下看场子的，后来犯事儿，是Wilson老大给我了个机会，来这儿做保安。他希望我帮他看着这帮“聪明鬼”，不要浪费他的投资。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "案发时，案发现场的摄像头有拍到任何什么特别的事情吗？",
+                    content: "今天我已经下班了，一楼的监控一直是坏掉的，我上个礼拜就群发email和大家说明过了，但是很奇怪，似乎没人有对此感兴趣。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "在研究所整修期间，有人回来过吗？",
+                    content: "火灾后，这里就只有我和Annie每天都还有来上班，另外Wilson偶尔会过来看看。我记得Joe5月1号过来了，我以为他来找Annie呢，当时Annie不在，奇怪的是他没等Annie回来就走了。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "今天Annie有和各位嫌疑人有过互动吗？",
+                    content: "我刚刚仔细看了监控，Leo在5:00pm去找了Annie。后来Harris在7:45pm的时候去见了Annie。",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "今天有陌生人进出过现场吗？",
+                    content: "今天一天都没有陌生人来过，连个送信的都没有。哦！对了，我看见Annie6:50pm出了研究所，但很快就回来了，我当时都有在做记录，大约是7:10pm吧",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "你对这把凶器餐刀有印象吗？",
+                    content: "啊！我下班之前看到Jane在找餐刀，还问我要不要一起吃个蛋糕再走，虽然我想吃蛋糕，但是老婆在家做了我最爱吃的晚饭，我就拒绝了。",
+                    answer: "5"
+                },
+                {
+                    id: 7,
+                    title: "今天的监视设备有什么异常吗？",
+                    content: "二楼走道的监视器被不知道被什么人在6:30pm的时候挡住了，我怀疑一定是有人故意这么做的，因为他一定是熟悉监控的位置的内部人员。",
+                    answer: "5"
+                },
+                {
+                    id: 8,
+                    title: "这块带血的手帕你有印象吗？",
+                    content: "哦，这不就是那新来的人西装里的手帕吗？我今天见到他就觉得很奇怪，穿着套装，装什么大尾巴狼！",
+                    answer: "5"
+                },
+                {
+                    id: 9,
+                    title: "你觉得教授的死和今天的凶案有关系吗？",
+                    content: "啊？这我可不敢乱说话，老大会打死我的！反正他们几个天天吵来吵去的，要说这聪明人也会杀人，以前我是不信的，现在嘛！啧啧。",
+                    answer: "5"
+                },
+                {
+                    id: 10,
+                    title: "教授的意外细节你知道多少？",
+                    content: "当天的研究所只有Annie，Leo，Helen和我在，当时我在午休，突然二楼的实验室发生爆炸，很快就烧起来了，我赶忙叫了消防队，但是很遗憾，当时Helen教授自己在做实验，她没能跑出来。",
+                    answer: "5"
+                },
+                {
+                    id: 11,
+                    title: "你觉得研究所里大家的关系怎么样？",
+                    content: "怎么说呢？天天听他们吵架，我要是说他们关系好你也不信是吧？偷偷告诉你，这里男女关系也挺混乱的，听说这Joe以前还和死者好过，现在还能带着老婆和她在一个公司工作，心也真的是大。不过我也都是道听途说。",
+                    answer: "5"
+                },
+                {
+                    id: 12,
+                    title: "今天你有一直都关注监控里发生的事情吗？",
+                    content: "啊，我当然不会一直坐在监控室里了。今天Wilson老大过来然我去做了几次小区内的巡查，虽然他平时很少这么做。后来我们就在监控室里喝酒聊天，快7：00pm他才离开。",
+                    answer: "5"
+                }
+            ]
+        }
+    ];
+    DataLang.quesConfig_en = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "How long have you been in this job?",
+                    content: `Less than a year, right? I used to watch the show under boss Romney, but later I did something wrong. Boss Wilson gave me a chance to be a security guard here. He wants me to help him watch these "smart guys" and not waste his investment.`,
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: `Did the camera at the scene of the crime catch anything special at the time of the crime?`,
+                    content: "Today, I'm off work. The monitor on the first floor is broken all the time. I sent a group of emails last week to explain it to you, but it's strange that no one seems to be interested in it.",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "Did anyone come back during the renovation of the Institute?",
+                    content: "After the fire, Annie and I were the only ones who came to work every day, and Wilson occasionally came to have a look. I remember Joe came here on May 1st. I thought he came to find Annie. Annie was not there at that time. It was strange that he left without waiting for Annie to come back.",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "Did Annie interact with the suspects today?",
+                    content: "I just looked at the surveillance. Leo went to see Annie at 5:00pm. Then Harris went to see Annie at 7:45pm.",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "Did any strangers come in and out of the scene today?",
+                    content: "No stranger has been here all day, not even a messenger. oh By the way, I saw Annie leave the Research Institute at 6:50pm, but she came back soon. I was making records at that time, about 7:10pm",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "Do you have any impression of this knife?",
+                    content: "Ah! Before I got off work, I saw Jane looking for a knife and asked me if I wanted to have a cake before I left. Although I wanted to have a cake, my wife made my favorite dinner at home, so I refused.",
+                    answer: "5"
+                },
+                {
+                    id: 7,
+                    title: "Is there anything wrong with today's surveillance equipment?",
+                    content: "The monitor in the aisle on the second floor was blocked at 6:30pm by someone I don't know. I suspect someone must have done it on purpose, because he must be an insider familiar with the location of the monitor.",
+                    answer: "5"
+                },
+                {
+                    id: 8,
+                    title: "Do you remember this bloody handkerchief?",
+                    content: "Oh, isn't this the handkerchief in the new comer's suit? I think it's very strange when I see him today. He's wearing a suit and a big tail wolf!",
+                    answer: "5"
+                },
+                {
+                    id: 9,
+                    title: "Do you think the professor's death has anything to do with today's murder?",
+                    content: "Ah? I dare not talk about it. The boss will kill me! Anyway, they quarrel every day. If you want to say that this smart man can kill people, I didn't believe it before, but now! Tut tut.",
+                    answer: "5"
+                },
+                {
+                    id: 10,
+                    title: "What do you know about the details of the professor's accident?",
+                    content: "On that day, only Annie, Leo, Helen and I were in the Research Institute. At that time, I was on a lunch break. Suddenly, an explosion occurred in the laboratory on the second floor, which soon burned up. I called the fire brigade. Unfortunately, Professor Helen was doing the experiment herself, and she couldn't run out.",
+                    answer: "5"
+                },
+                {
+                    id: 11,
+                    title: "What do you think of the relationship in the Institute?",
+                    content: "How to put it? I hear them quarrel every day. If I say they have a good relationship, you don't believe it, do you? I'll tell you secretly that the relationship between men and women here is also very chaotic. It's said that Joe used to have a good time with the dead, but now he can still work with his wife in the same company with her, and his heart is really big. But it's all hearsay.",
+                    answer: "5"
+                },
+                {
+                    id: 12,
+                    title: "Have you been paying attention to what's going on in the surveillance today?",
+                    content: "Ah, of course I won't be sitting in the monitoring room all the time. Today, boss Wilson came over, but I went to inspect the community several times, although he seldom did so. Later, we drank and chatted in the monitoring room, and he didn't leave until 7:00pm.",
+                    answer: "5"
+                }
+            ]
+        }
+    ];
+
     class UIManager {
         static playVideo(url = "video/result_book1.mp4") {
             let video = new Laya.Video(Laya.stage.width, Laya.stage.height);
@@ -327,7 +1105,7 @@
             }
             else if (GameManager.jumpHint == undefined) {
                 UIManager.showConfirm({
-                    content: "是否跳过新手引导？",
+                    content: DataLang.getTxtByType("jump"),
                     onCancel() {
                         GameManager.jumpHint = false;
                     },
@@ -738,7 +1516,7 @@
                     }
                     case "REQUEST_ENTER_SCENE": {
                         GameManager.step = "CLUE_FIND";
-                        GameManager.timeTitle = "Searching...";
+                        GameManager.timeTitle = DataLang.getTxtByType("Searching");
                         GameManager.goSceneGame().then(e => {
                             UIManager.showHint("REQUEST_ENTER_SCENE", [
                                 "您可以随时回到这里来查看您的剧本",
@@ -985,318 +1763,6 @@
     LoadingManager.progress = 0;
     LoadingManager.progress3d = 1;
 
-    class DataLang {
-        static set lang(lang) {
-            this._lang = lang == "en-US" ? "en" : "ch";
-        }
-        static get lang() {
-            return this._lang;
-        }
-        static changeLang() {
-            EventManager.pub("changeLang");
-        }
-        static getImgByType(type = "") {
-            let conf = this.imgConfig[type];
-            if (!conf) {
-                console.log(type, "遗漏语言包配置");
-            }
-            return conf ? conf[this.lang] : "";
-        }
-        static getTxtByType(type = "", params = {}) {
-            let conf = this.txt[type] || {};
-            let str = conf[this.lang] || "";
-            for (let key in params) {
-                str = str.replaceAll(`{${key}}`, params[key]);
-            }
-            return str;
-        }
-    }
-    DataLang._lang = "ch";
-    DataLang.imgConfig = {
-        voted: {
-            ch: "v2/ch/img_ytp.png",
-            en: "v2/en/img_ytp.png"
-        },
-        wuzheng: {
-            ch: "v2/ch/img_wuzheng.png",
-            en: "v2/en/img_wuzheng.png"
-        },
-        btnAny: {
-            ch: "v2/ch/img_any.png",
-            en: "v2/en/img_any.png"
-        },
-        btnConfirm: {
-            ch: "v2/ch/img_confirm.png",
-            en: "v2/en/img_confirm.png"
-        },
-        titleAdd: {
-            ch: "v2/ch/img_add_timeline.png",
-            en: "v2/en/img_add_timeline.png"
-        },
-        btnAdd: {
-            ch: "v2/ch/img_btn_add.png",
-            en: "v2/en/img_btn_add.png"
-        },
-        fengmian1: {
-            ch: "v2/ch/img_fengmian.png",
-            en: "v2/en/img_fengmian.png"
-        },
-        isPublic: {
-            ch: "v2/ch/img_public1.png",
-            en: "v2/en/img_public1.png"
-        },
-        notPublic: {
-            ch: "v2/ch/img_public0.png",
-            en: "v2/en/img_public0.png"
-        },
-        txtTip: {
-            ch: "v2/ch/img_wxts.png",
-            en: "v2/en/img_wxts.png"
-        },
-        btnTuichu: {
-            ch: "v2/ch/img_tuichu.png",
-            en: "v2/en/img_btn_switch.png"
-        },
-        btnSwitch: {
-            ch: "v2/ch/img_btn_switch.png",
-            en: "v2/en/img_btn_switch.png"
-        },
-        btnSend: {
-            ch: "v2/ch/img_send.png",
-            en: "v2/en/img_send.png"
-        },
-        btnShare: {
-            ch: "v2/ch/img_share.png",
-            en: "v2/en/img_share.png"
-        },
-        fengmian: {
-            ch: "v2/ch/img_fengmian.png",
-            en: "v2/en/img_fengmian.png"
-        },
-        btnStart: {
-            ch: "v2/ch/img_kaishi1.png",
-            en: "v2/en/img_kaishi1.png"
-        },
-        btnDismiss: {
-            ch: "v2/ch/img_jiesan.png",
-            en: "v2/en/img_jiesan.png"
-        },
-        btnBack: {
-            ch: "v2/ch/img_back.png",
-            en: "v2/en/img_back.png"
-        },
-        btnNext: {
-            ch: "v2/ch/img_next.png",
-            en: "v2/en/img_next.png"
-        },
-        btnReady: {
-            ch: "v2/ch/img_btn_ready.png",
-            en: "v2/en/img_btn_ready.png"
-        },
-        xiongshou: {
-            ch: "v2/ch/img_xiongshou.png",
-            en: "v2/en/img_xiongshou.png"
-        },
-        result: {
-            ch: "v2/ch/img_result.png",
-            en: "v2/en/img_result.png"
-        },
-        btnVoted: {
-            ch: "v2/ch/img_voted.png",
-            en: "v2/en/img_voted.png"
-        },
-        btnBook: {
-            ch: "v2/ch/img_book.png",
-            en: "v2/en/img_book.png"
-        },
-        btnSure1: {
-            ch: "v2/ch/img_queding_small.png",
-            en: "v2/en/img_queding_small.png"
-        },
-        btnCancel1: {
-            ch: "v2/ch/img_cancel_small.png",
-            en: "v2/en/img_cancel_small.png"
-        },
-        btnCancel: {
-            ch: "v2/ch/img_quxiao.png",
-            en: "v2/en/img_quxiao.png"
-        },
-        btnCopy: {
-            ch: "v2/ch/img_copy.png",
-            en: "v2/en/img_copy.png"
-        },
-        btnCancelReady: {
-            ch: "v2/ch/img_btn_ready0.png",
-            en: "v2/en/img_btn_ready0.png"
-        },
-        btnCreate: {
-            ch: "v2/ch/img_create.png",
-            en: "v2/en/img_create.png"
-        },
-        txtLTS: {
-            ch: "v2/ch/img_lts.png",
-            en: "v2/en/img_lts.png"
-        },
-        testYY: {
-            ch: "v2/ch/img_yycs.png",
-            en: "v2/en/img_yycs.png"
-        },
-        tagReady: {
-            ch: "v2/ch/img_ready.png",
-            en: "v2/en/img_ready.png"
-        },
-        btnEnd: {
-            ch: "v2/ch/img_btn_end.png",
-            en: "v2/en/img_btn_end.png"
-        },
-        btnTCYX: {
-            ch: "v2/ch/img_btn_tcyx.png",
-            en: "v2/en/img_btn_tcyx.png"
-        },
-        img_ytp: {
-            ch: "v2/ch/img_ytp.png",
-            en: "v2/en/img_ytp.png"
-        }
-    };
-    DataLang.txt = {
-        CLUE_FIND: {
-            en: "Find",
-            ch: "搜证"
-        },
-        TALKING: {
-            en: "Talking",
-            ch: "发言"
-        },
-        PRE_TALKING: {
-            en: "PRE_TALKING",
-            ch: "自我介绍"
-        },
-        FREE_TALKING: {
-            en: "FREE_TALKING",
-            ch: "自由发言"
-        },
-        CONCLUSION: {
-            en: "CONCLUSION",
-            ch: "总结发言"
-        },
-        VOTE: {
-            en: "VOTE",
-            ch: "投票"
-        },
-        ANALYSE: {
-            en: "ANALYSE",
-            ch: "复盘"
-        },
-        progress: {
-            en: "Game Progress",
-            ch: "破案进度"
-        },
-        power: {
-            en: "{num}",
-            ch: "{num}票"
-        },
-        murderWin: {
-            en: "凶手逃脱了法律的制裁",
-            ch: "凶手逃脱了法律的制裁"
-        },
-        murderWinBut: {
-            en: "但是\n凶手逃脱了法律的制裁",
-            ch: "但是\n凶手逃脱了法律的制裁"
-        },
-        murderLoseBut: {
-            en: "但是在大家的齐心协力下\n凶手受到了制裁",
-            ch: "但是在大家的齐心协力下\n凶手受到了制裁"
-        },
-        murderLose: {
-            en: "在大家的齐心协力下\n凶手受到了制裁",
-            ch: "在大家的齐心协力下\n凶手受到了制裁"
-        },
-        selfTrue: {
-            en: "恭喜你选对了凶手",
-            ch: "Voted correct!"
-        },
-        selfFalse: {
-            en: "遗憾你选错了凶手",
-            ch: "Voted wrong!"
-        },
-        txtResultMaxVoted: {
-            ch: "{username}得票最高",
-            en: "The most gamer voted {username}"
-        },
-        talkingPeople: {
-            ch: "{username}发言中...",
-            en: "{username} speaking..."
-        },
-        setting: {
-            ch: "设置",
-            en: "Setting"
-        },
-        role1: {
-            ch: "选择",
-            en: "Choose a"
-        },
-        role2: {
-            ch: "角色",
-            en: "Character"
-        },
-        notFullButStart: {
-            ch: "人数未满，房主发起提前开始游戏，\n是否同意？",
-            en: "Not full,But the host want to start,\nDo you agree?"
-        },
-        roomNumberHtml: {
-            ch: `<span>房间号:<span style="color:#ff6f48;">{roomNum}</span></span>`,
-            en: `<span>Room Number:<span style="color:#ff6f48;">{roomNum}</span></span>`
-        },
-        roomNumber1: {
-            ch: "房间号:{roomNum}",
-            en: "Room Number:{roomNum}"
-        },
-        roomNumber: {
-            ch: "房间号:",
-            en: "Room Number:"
-        },
-        readyedPeople: {
-            ch: "已准备玩家",
-            en: "Ready"
-        },
-        SSSC: {
-            ch: "属性/时长",
-            en: "Attrbute/Duration"
-        },
-        timeSZ: {
-            ch: "搜证时间",
-            en: "Time Find"
-        },
-        timeFY: {
-            ch: "发言时间",
-            en: "Time Chat"
-        },
-        timeTP: {
-            ch: "投票时间",
-            en: "Time Vote"
-        },
-        QJ: {
-            ch: "前进",
-            en: "Forward"
-        },
-        HT: {
-            ch: "后退",
-            en: "Back"
-        },
-        ZY: {
-            ch: "左移",
-            en: "Left"
-        },
-        YY: {
-            ch: "右移",
-            en: "Right"
-        },
-        XD: {
-            ch: "下蹲",
-            en: "Down"
-        }
-    };
-
     const colorList = [
         "#feb853",
         "#2ee9ff"
@@ -1368,7 +1834,7 @@
         }
         static set step(step) {
             this._step = step;
-            EventManager.pub('step/changeStep');
+            EventManager.pub("step/changeStep");
         }
         static get step() {
             return this._step;
@@ -1504,10 +1970,9 @@
                             break;
                         }
                         case "CLUE_FIND": {
-                            GameManager.timeTitle = "Searching...";
+                            GameManager.timeTitle = DataLang.getTxtByType("Searching");
                             GameManager.goSceneGame();
                             EventManager.pub("game/updateCluList");
-                            console.log(222);
                             break;
                         }
                         case "CLUE_SHARE": {
@@ -3931,6 +4396,20 @@
             let roleData = Scene3dConfig.roleList.find(item => item.id == roleId) || {};
             return roleData;
         }
+        static get quesConfig() {
+            return DataLang.lang == "en"
+                ? DataLang.quesConfig_en
+                : DataLang.quesConfig_ch;
+        }
+        static get bookName() {
+            return DataLang.getTxtByType("bookName");
+        }
+        static get bookContent() {
+            return DataLang.content[DataLang.lang];
+        }
+        static get roleList() {
+            return DataLang.lang == "en" ? DataLang.roleList_en : DataLang.roleList_ch;
+        }
         static getNodeNameBySceneAndType(sceneName, itemName) {
             let sceneItem = Scene3dConfig.sceneList.find(item => item.sceneName == sceneName);
             return sceneItem.events[itemName].nodeName;
@@ -3938,204 +4417,6 @@
     }
     Scene3dConfig.maxAnswerTime = 3;
     Scene3dConfig.roleChangeCountDownSec = 30;
-    Scene3dConfig.quesConfig = [
-        {
-            roleId: 6,
-            quesList: [
-                {
-                    id: 1,
-                    title: "你做这份工作多久了？",
-                    content: "也就不到一年吧？我之前在罗姆尼老大手下看场子的，后来犯事儿，是Wilson老大给我了个机会，来这儿做保安。他希望我帮他看着这帮“聪明鬼”，不要浪费他的投资。",
-                    answer: "1"
-                },
-                {
-                    id: 2,
-                    title: "案发时，案发现场的摄像头有拍到任何什么特别的事情吗？",
-                    content: "今天我已经下班了，一楼的监控一直是坏掉的，我上个礼拜就群发email和大家说明过了，但是很奇怪，似乎没人有对此感兴趣。",
-                    answer: "2"
-                },
-                {
-                    id: 3,
-                    title: "在研究所整修期间，有人回来过吗？",
-                    content: "火灾后，这里就只有我和Annie每天都还有来上班，另外Wilson偶尔会过来看看。我记得Joe5月1号过来了，我以为他来找Annie呢，当时Annie不在，奇怪的是他没等Annie回来就走了。",
-                    answer: "3"
-                },
-                {
-                    id: 4,
-                    title: "今天Annie有和各位嫌疑人有过互动吗？",
-                    content: "我刚刚仔细看了监控，Leo在5:00pm去找了Annie。后来Harris在7:45pm的时候去见了Annie。",
-                    answer: "4"
-                },
-                {
-                    id: 5,
-                    title: "今天有陌生人进出过现场吗？",
-                    content: "今天一天都没有陌生人来过，连个送信的都没有。哦！对了，我看见Annie6:50pm出了研究所，但很快就回来了，我当时都有在做记录，大约是7:10pm吧",
-                    answer: "5"
-                },
-                {
-                    id: 6,
-                    title: "你对这把凶器餐刀有印象吗？",
-                    content: "啊！我下班之前看到Jane在找餐刀，还问我要不要一起吃个蛋糕再走，虽然我想吃蛋糕，但是老婆在家做了我最爱吃的晚饭，我就拒绝了。",
-                    answer: "5"
-                },
-                {
-                    id: 7,
-                    title: "今天的监视设备有什么异常吗？",
-                    content: "二楼走道的监视器被不知道被什么人在6:30pm的时候挡住了，我怀疑一定是有人故意这么做的，因为他一定是熟悉监控的位置的内部人员。",
-                    answer: "5"
-                },
-                {
-                    id: 8,
-                    title: "这块带血的手帕你有印象吗？",
-                    content: "哦，这不就是那新来的人西装里的手帕吗？我今天见到他就觉得很奇怪，穿着套装，装什么大尾巴狼！",
-                    answer: "5"
-                },
-                {
-                    id: 9,
-                    title: "你觉得教授的死和今天的凶案有关系吗？",
-                    content: "啊？这我可不敢乱说话，老大会打死我的！反正他们几个天天吵来吵去的，要说这聪明人也会杀人，以前我是不信的，现在嘛！啧啧。",
-                    answer: "5"
-                },
-                {
-                    id: 10,
-                    title: "教授的意外细节你知道多少？",
-                    content: "当天的研究所只有Annie，Leo，Helen和我在，当时我在午休，突然二楼的实验室发生爆炸，很快就烧起来了，我赶忙叫了消防队，但是很遗憾，当时Helen教授自己在做实验，她没能跑出来。",
-                    answer: "5"
-                },
-                {
-                    id: 11,
-                    title: "你觉得研究所里大家的关系怎么样？",
-                    content: "怎么说呢？天天听他们吵架，我要是说他们关系好你也不信是吧？偷偷告诉你，这里男女关系也挺混乱的，听说这Joe以前还和死者好过，现在还能带着老婆和她在一个公司工作，心也真的是大。不过我也都是道听途说。",
-                    answer: "5"
-                },
-                {
-                    id: 12,
-                    title: "今天你有一直都关注监控里发生的事情吗？",
-                    content: "啊，我当然不会一直坐在监控室里了。今天Wilson老大过来然我去做了几次小区内的巡查，虽然他平时很少这么做。后来我们就在监控室里喝酒聊天，快7：00pm他才离开。",
-                    answer: "5"
-                }
-            ]
-        }
-    ];
-    Scene3dConfig.bookName = "剧本一";
-    Scene3dConfig.bookContent = "剧本内容blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla";
-    Scene3dConfig.roleList = [
-        {
-            roleName: "Joe",
-            job: "化学家",
-            sex: "男性",
-            relation: "",
-            pangbaiUrl: "sound/Joe.mp3",
-            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
-            id: 1,
-            img: "book1/img_role2.png",
-            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
-      <span style="color:#ff3232">5月3日</span> <br/>
-      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
-        },
-        {
-            roleName: "Jane",
-            job: "Historian",
-            pangbaiUrl: "sound/Jane.mp3",
-            sex: "Female",
-            relation: "",
-            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
-            id: 2,
-            img: "book1/img_role3.png",
-            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
-        },
-        {
-            roleName: "Harris",
-            job: "大英博物馆副馆长",
-            pangbaiUrl: "sound/Harris.mp3",
-            sex: "男性",
-            relation: "",
-            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
-            id: 3,
-            img: "book1/img_role1.png",
-            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
-      <span style="color:#ff3232">4月3日</span><br/>
-      教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
-        },
-        {
-            roleName: "Leo",
-            pangbaiUrl: "sound/Leo.mp3",
-            job: "科学家",
-            sex: "男性",
-            relation: "",
-            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
-            id: 4,
-            img: "book1/img_role4.png",
-            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
-      `
-        },
-        {
-            roleName: "Wilson",
-            pangbaiUrl: "sound/Wilson.mp3",
-            job: "项目投资人",
-            sex: "男性",
-            relation: "",
-            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
-            id: 5,
-            img: "book1/img_role5.png",
-            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
-      信件<br/>
-      <span style="color:#ff3232">短信</span><br/>
-      你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
-      你赶忙邀请考古团队的其他成员继续挖掘项目
-      `
-        },
-        {
-            roleName: "Stanly",
-            job: "Detective",
-            sex: "Male",
-            detail: "37 years old, has worked as the detective for 15 years.",
-            relation: "",
-            id: 6,
-            img: "book1/img_role7.png",
-            content: "你是一个侦探，接到报警前来查案"
-        }
-    ];
     Scene3dConfig.sceneList = [
         {
             sceneName: "RoomKill",
@@ -5593,8 +5874,12 @@
                 let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
                 let imgRole = cell.getChildByName("img");
                 let roleName = cell.getChildByName("roleName");
+                let selfSelect = cell.getChildByName("selfSelect");
+                let playerName = cell.getChildByName("playerName");
                 roleName.text = roleData.roleName;
                 imgRole.skin = roleData.img;
+                playerName.text = data.username;
+                selfSelect.visible = GameManager.talkingUserId == data.userId;
                 let detailBox = cell.getChildByName("detailBox");
                 detailBox.setData(this.getDetailList(data.userId));
             });
@@ -6289,9 +6574,11 @@
                 });
                 let btnFalse = cell.getChildByName("btnFalse");
                 btnFalse.offAll(Laya.Event.CLICK);
-                btnFalse.on(Laya.Event.CLICK, this, e => {
-                    btnTrue.visible = false;
+                btnFalse.on(Laya.Event.CLICK, this, (e) => {
                     btnFalse.visible = false;
+                    btnTrue.visible = false;
+                    this.listVote.selectedIndex = -1;
+                    e.stopPropagation();
                 });
                 let img = cell.getChildByName("img");
                 let roleData = Scene3dConfig.getRoleInfoByRoleId(roleId);
@@ -6340,6 +6627,7 @@
                 this.listVoted.array = listVoted;
                 this.listVote.refresh();
             });
+            EventManager.pub("game/updateVoted");
             this.btnSure.on(Laya.Event.CLICK, this, e => {
                 UIManager.goScene("scene/SceneTruth.scene");
             });
@@ -6761,19 +7049,21 @@
             let roleName = wrap.getChildByName("roleName");
             let detail = wrap.getChildByName("detail");
             let job = wrap.getChildByName("job");
-            let relation = wrap.getChildByName("relation");
+            let age = wrap.getChildByName("age");
             let sex = wrap.getChildByName("sex");
             roleName.text = roleData.roleName;
             detail.text = roleData.detail;
             sex.text = roleData.sex;
             job.text = roleData.job;
-            relation.text = roleData.relation;
+            age.text = roleData.age;
         }
         onOpened(data) {
             this.openTime = Laya.systemTimer.currTimer;
             this.setRoleInfo(this.wrapInfo, data.reqRoleId);
             let reqUserInfo = GameManager.getRoomUserById(data.reqUserId);
-            this.title.text = `${reqUserInfo.username}请求交换`;
+            this.title.text = DataLang.getTxtByType("askChange", {
+                username: reqUserInfo.username
+            });
             this.btnCancel.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
                 yield NetController.reqChangeRole(data.exchangeRoleId, data.reqRoleId, data.reqUserId, 0);
                 this.close();
@@ -7160,13 +7450,13 @@
             let roleName = wrap.getChildByName("roleName");
             let detail = wrap.getChildByName("detail");
             let job = wrap.getChildByName("job");
-            let relation = wrap.getChildByName("relation");
+            let age = wrap.getChildByName("age");
             let sex = wrap.getChildByName("sex");
             roleName.text = roleData.roleName;
             detail.text = roleData.detail;
             sex.text = roleData.sex;
             job.text = roleData.job;
-            relation.text = roleData.relation;
+            age.text = roleData.age;
         }
         onOpened(data) {
             this.data = data;
@@ -8137,19 +8427,19 @@
             if (step == "CLUE_FIND") {
                 this.listTag.array = [
                     {
-                        label: "剧本",
+                        label: DataLang.getTxtByType("Book"),
                         type: 7
                     },
                     {
-                        label: "场景",
+                        label: DataLang.getTxtByType("Scene"),
                         type: 1
                     },
                     {
-                        label: "证人",
+                        label: DataLang.getTxtByType("NPC"),
                         type: 6
                     },
                     {
-                        label: "时间线",
+                        label: DataLang.getTxtByType("Timeline"),
                         type: 2
                     }
                 ];
@@ -8159,23 +8449,23 @@
             else if (step == "TALKING" || step == "FREE_TALKING") {
                 this.listTag.array = [
                     {
-                        label: "剧本",
+                        label: DataLang.getTxtByType("Book"),
                         type: 7
                     },
                     {
-                        label: "场景",
+                        label: DataLang.getTxtByType("Scene"),
                         type: 4
                     },
                     {
-                        label: "时间线",
+                        label: DataLang.getTxtByType("Timeline"),
                         type: 2
                     },
                     {
-                        label: "证人",
+                        label: DataLang.getTxtByType("NPC"),
                         type: 6
                     },
                     {
-                        label: "发言",
+                        label: DataLang.getTxtByType('Talking'),
                         type: 3
                     }
                 ];
@@ -8185,23 +8475,23 @@
             else if (step == "VOTE") {
                 this.listTag.array = [
                     {
-                        label: "剧本",
+                        label: DataLang.getTxtByType("Book"),
                         type: 7
                     },
                     {
-                        label: "场景",
+                        label: DataLang.getTxtByType("Scene"),
                         type: 4
                     },
                     {
-                        label: "时间线",
+                        label: DataLang.getTxtByType("Timeline"),
                         type: 2
                     },
                     {
-                        label: "证人",
+                        label: DataLang.getTxtByType("NPC"),
                         type: 6
                     },
                     {
-                        label: "投票",
+                        label: DataLang.getTxtByType("Vote"),
                         type: 5
                     }
                 ];
@@ -8600,6 +8890,7 @@
     class SceneResult extends ui.scene.SceneResultUI {
         onEnable() {
             this.btnSure.on(Laya.Event.CLICK, this, e => {
+                this.close();
                 UIManager.goScene("scene/SceneTruth.scene");
             });
         }
@@ -8694,8 +8985,7 @@
                 let img = cell.getChildByName("img");
                 roleShape.mask.skin = data.img;
                 img.skin = data.img;
-                roleName.text = data.name;
-                console.log(data, "roledata");
+                roleName.text = data.roleName;
                 selfSelect.visible = false;
                 playerName.text = "";
                 if (selectedUserId) {
@@ -8744,11 +9034,11 @@
                 let playerName = cell.getChildByName("playerName");
                 let selfSelect = cell.getChildByName("selfSelect");
                 let img = cell.getChildByName("img");
-                img.skin = data.img;
+                img.skin = roleData.img;
                 let roleName = cell.getChildByName("roleName");
                 roleName.text = roleData.roleName;
                 playerName.text = `${data.username}`;
-                selfSelect.visible = data.userId == GameManager.userInfo.userId;
+                selfSelect.visible = GameManager.talkingUserId == data.userId;
             });
             this.btnNext.on(Laya.Event.CLICK, this, e => {
                 NetController.reqEndTalkingBeforeGame();
@@ -9212,7 +9502,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBeforeStart.scene";
+    GameConfig.startScene = "component/GameVote.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
