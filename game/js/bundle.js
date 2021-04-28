@@ -423,6 +423,14 @@
             ch: "剧本",
             en: "Book"
         },
+        talking: {
+            ch: "发言中",
+            en: "Talking"
+        },
+        freeTalking: {
+            ch: "自由发言中",
+            en: "Free Talking"
+        },
         pressToSpeak: {
             ch: "按住V发言",
             en: "Press 'V' to speak"
@@ -1514,6 +1522,15 @@
                         EventManager.pub("game/updateReadyBtn");
                         break;
                     }
+                    case "REQUEST_ENTER_FREE_TALKING": {
+                        GameManager.talkingUserId = 0;
+                        GameManager.timeTitle = DataLang.getTxtByType("freeTalking");
+                        GameManager.step = "FREE_TALKING";
+                        EventManager.pub("talking/changeFree");
+                        EventManager.pub("game/updateCluList");
+                        EventManager.pub("game/updateStepRender");
+                        break;
+                    }
                     case "REQUEST_ENTER_SCENE": {
                         GameManager.step = "CLUE_FIND";
                         GameManager.timeTitle = DataLang.getTxtByType("Searching");
@@ -1527,15 +1544,6 @@
                         });
                         GameManager.resetInStep();
                         Agora.quitRoom();
-                        EventManager.pub("game/updateStepRender");
-                        break;
-                    }
-                    case "REQUEST_ENTER_FREE_TALKING": {
-                        GameManager.talkingUserId = 0;
-                        GameManager.timeTitle = "自由发言中...";
-                        GameManager.step = "FREE_TALKING";
-                        EventManager.pub("talking/changeFree");
-                        EventManager.pub("game/updateCluList");
                         EventManager.pub("game/updateStepRender");
                         break;
                     }
@@ -1587,7 +1595,6 @@
                         break;
                     }
                     case "VOTE": {
-                        console.log(data);
                         GameManager.voteMap[data.requestUserId] = data.votedRoleId;
                         EventManager.pub("game/updateVoted");
                         break;
@@ -1600,7 +1607,7 @@
                         GameManager.step = "TALKING";
                         Agora.joinRoom();
                         GameManager.resetInStep();
-                        GameManager.timeTitle = "发言中...";
+                        GameManager.timeTitle = DataLang.getTxtByType("talking");
                         UIManager.closeModal("modal/ModalShareClu.scene");
                         EventManager.pub("game/ChangeToTalking");
                         EventManager.pub("game/updateCluList");
@@ -1942,6 +1949,10 @@
                     }
                     this.step = dataGame.roomStatus;
                     GameManager.talkingUserId = dataGame.talkingUserId;
+                    GameManager.selectRoleMapRoleToUser = { 1: GameManager.userInfo.userId };
+                    GameManager.step = "TALKING";
+                    UIManager.goScene("scene/SceneGame.scene");
+                    return;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
                             UIManager.goScene("scene/SceneBeforeStart.scene");
@@ -1982,7 +1993,7 @@
                         }
                         case "TALKING": {
                             Agora.joinRoom();
-                            GameManager.timeTitle = "发言中...";
+                            GameManager.timeTitle = DataLang.getTxtByType("talking");
                             yield GameManager.goSceneGame();
                             EventManager.pub("talking/changeCurrent", {
                                 talkingUserId: dataGame.talkingUserId
@@ -1991,7 +2002,7 @@
                         }
                         case "FREE_TALKING": {
                             Agora.joinRoom();
-                            GameManager.timeTitle = "自由发言中...";
+                            GameManager.timeTitle = DataLang.getTxtByType("freeTalking");
                             yield GameManager.goSceneGame();
                             EventManager.pub("talking/changeCurrent", {
                                 talkingUserId: dataGame.talkingUserId
@@ -5580,6 +5591,7 @@
                 let data = cell.dataSource;
                 let selected = cell.getChildByName("selected");
                 selected.visible = this.detailList.selectedIndex == idx;
+                console.log(data.img, "img");
                 let txtNew = cell.getChildByName("txtNew");
                 txtNew.visible = !data.flagRead;
             });
@@ -5755,9 +5767,8 @@
             }
             let bgSign = btnSign.getChildByName("img");
             bgSign.skin = `v2/${DataLang.lang}/img_btn_tag${selDetailData.order ? 1 : 0}.png`;
-            let flagSelfShared = selDetailData.fromUserId == GameManager.userInfo.userId;
-            this.star.skin = `v2/${DataLang.lang}/img_btn_show${flagSelfShared ? 0 : 1}.png`;
             img.visible = true;
+            btnSign.visible = true;
             btnShare.visible = false;
             labelFrom.visible = !!selDetailData.fromUserIdList.find(ii => ii.fromUserId != GameManager.userInfo.userId);
             let nameList = [];
@@ -5768,8 +5779,8 @@
             });
             labelFrom.text = `分享自:${nameList.join(",")}`;
             img.skin = selDetailData.img;
-            let txtShare = btnShare.getChildByName("txt");
-            txtShare.text = selDetailData.serverId ? "取消展示" : "展示";
+            let imgShare = btnShare.getChildByName("img");
+            imgShare.skin = `v2/${DataLang.lang}/btn_show${selDetailData.serverId ? 0 : 1}.png`;
             let flagFromSelf = selDetailData.fromUserId == GameManager.userInfo.userId;
             let flagInCorrectStep = GameManager.step == "FREE_TALKING" || GameManager.step == "TALKING";
             btnShare.visible =
@@ -8890,8 +8901,8 @@
     class SceneResult extends ui.scene.SceneResultUI {
         onEnable() {
             this.btnSure.on(Laya.Event.CLICK, this, e => {
-                this.close();
                 UIManager.goScene("scene/SceneTruth.scene");
+                UIManager.closeModal("modal/ModalResult.scene");
             });
         }
         onOpened() {
@@ -9502,7 +9513,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GameVote.scene";
+    GameConfig.startScene = "scene/SceneBook.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
