@@ -1949,10 +1949,6 @@
                     }
                     this.step = dataGame.roomStatus;
                     GameManager.talkingUserId = dataGame.talkingUserId;
-                    GameManager.selectRoleMapRoleToUser = { 1: GameManager.userInfo.userId };
-                    GameManager.step = "TALKING";
-                    UIManager.goScene("scene/SceneGame.scene");
-                    return;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
                             UIManager.goScene("scene/SceneBeforeStart.scene");
@@ -9513,7 +9509,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBook.scene";
+    GameConfig.startScene = "component/GamaCluDetail.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
