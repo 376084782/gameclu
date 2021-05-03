@@ -1551,6 +1551,38 @@
                         EventManager.pub("game/updateStepRender");
                         break;
                     }
+                    case "SECOND_REQUEST_ENTER_SCENE": {
+                        GameManager.step = "CLUE_FIND";
+                        GameManager.timeTitle = DataLang.getTxtByType("Searching");
+                        GameManager.goSceneGame().then(e => {
+                            UIManager.showHint("REQUEST_ENTER_SCENE", [
+                                "您可以随时回到这里来查看您的剧本",
+                                "您将有30分钟在所有场景中进行证据搜索，并通过使用或者查看报告特定证据获得更多线索",
+                                "您可以通过选择提问证人获取更多线索，请注意证人的证言有时候并非真相哦",
+                                "您可以在这里记录下你认为重要的线索或者重要的时间线，在游戏的过程中随时复习"
+                            ], ["这是最后一轮搜证了, 你还剩30分钟，开始行动吧!"]);
+                        });
+                        GameManager.resetInStep();
+                        Agora.quitRoom();
+                        EventManager.pub("game/updateStepRender");
+                        break;
+                    }
+                    case "FIRST_REQUEST_ENTER_SCENE": {
+                        GameManager.step = "CLUE_FIND";
+                        GameManager.timeTitle = DataLang.getTxtByType("Searching");
+                        GameManager.goSceneGame().then(e => {
+                            UIManager.showHint("REQUEST_ENTER_SCENE", [
+                                "您可以随时回到这里来查看您的剧本",
+                                "您将有30分钟在所有场景中进行证据搜索，并通过使用或者查看报告特定证据获得更多线索",
+                                "您可以通过选择提问证人获取更多线索，请注意证人的证言有时候并非真相哦",
+                                "您可以在这里记录下你认为重要的线索或者重要的时间线，在游戏的过程中随时复习"
+                            ], ["这是最后一轮搜证了, 你还剩30分钟，开始行动吧!"]);
+                        });
+                        GameManager.resetInStep();
+                        Agora.quitRoom();
+                        EventManager.pub("game/updateStepRender");
+                        break;
+                    }
                     case "TALKING": {
                         GameManager.talkingUserId = data.talkingUserId;
                         EventManager.pub("talking/changeCurrent", data);
@@ -1604,6 +1636,38 @@
                     }
                     case "END_SHARE_CLUE": {
                         WSManager.updateCluList(data);
+                        break;
+                    }
+                    case "FIRST_REQUEST_ENTER_TALKING": {
+                        GameManager.step = "TALKING";
+                        Agora.joinRoom();
+                        GameManager.resetInStep();
+                        GameManager.timeTitle = DataLang.getTxtByType("talking");
+                        UIManager.closeModal("modal/ModalShareClu.scene");
+                        EventManager.pub("game/ChangeToTalking");
+                        EventManager.pub("game/updateCluList");
+                        EventManager.pub("game/updateStepRender");
+                        UIManager.showHint("REQUEST_ENTER_TALKING", [
+                            "您有5分钟分享你的发现，并提出你的观点。点击证据图标，选择并分享你的证据，这样大家就能浏览到你的分享\n然后你们有30分钟的自由讨论时间，用这些时间交流案情吧！找到藏在你们中间的凶手，本环节也可以在所有人选择 “下一步” 后提前结束，进入下一环节"
+                        ], [
+                            "在30分钟的组队讨论前，你还有5分钟分享你的发现和想法\n没有时间可以浪费了，记住，好的交流是成功的一半！"
+                        ]);
+                        break;
+                    }
+                    case "SECOND_REQUEST_ENTER_TALKING": {
+                        GameManager.step = "TALKING";
+                        Agora.joinRoom();
+                        GameManager.resetInStep();
+                        GameManager.timeTitle = DataLang.getTxtByType("talking");
+                        UIManager.closeModal("modal/ModalShareClu.scene");
+                        EventManager.pub("game/ChangeToTalking");
+                        EventManager.pub("game/updateCluList");
+                        EventManager.pub("game/updateStepRender");
+                        UIManager.showHint("REQUEST_ENTER_TALKING", [
+                            "您有5分钟分享你的发现，并提出你的观点。点击证据图标，选择并分享你的证据，这样大家就能浏览到你的分享\n然后你们有30分钟的自由讨论时间，用这些时间交流案情吧！找到藏在你们中间的凶手，本环节也可以在所有人选择 “下一步” 后提前结束，进入下一环节"
+                        ], [
+                            "在30分钟的组队讨论前，你还有5分钟分享你的发现和想法\n没有时间可以浪费了，记住，好的交流是成功的一半！"
+                        ]);
                         break;
                     }
                     case "REQUEST_ENTER_TALKING": {
