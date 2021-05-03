@@ -9584,7 +9584,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneTruth.scene";
+    GameConfig.startScene = "scene/SceneTalking.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
