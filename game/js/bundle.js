@@ -1010,7 +1010,7 @@
     ];
 
     class UIManager {
-        static playVideo(url = "video/result_book1.mp4") {
+        static playVideo(url = `video/result_book1_${DataLang.lang}.mp4`) {
             let video = new Laya.Video(Laya.stage.width, Laya.stage.height);
             video.load(url);
             Laya.stage.addChild(video);
@@ -7165,7 +7165,6 @@
             this.on(Laya.Event.MOUSE_MOVE, this, e => {
                 let pos = new Laya.Point(e.stageX, e.stageY);
                 let posLocal = this.globalToLocal(pos, true);
-                console.log(pos.x);
                 if (Math.abs(posLocal.x - this.img.x) < this.img.width / 2 &&
                     Math.abs(posLocal.y - this.img.y) < this.img.height / 2 &&
                     this.showBigger) {
@@ -9186,7 +9185,7 @@
                 this.video = new Laya.Video(654 * ratio, 368 * ratio);
                 this.video.x = (this.width - this.video.width) / 2;
                 this.video.y = (this.height - this.video.height) / 2;
-                this.video.load("video/result_book1.mp4");
+                this.video.load(`video/result_book1_${DataLang.lang}.mp4`);
                 this.addChildAt(this.video, 0);
                 this.video.play();
                 this.btnSure.visible = true;
@@ -9215,7 +9214,7 @@
             return __awaiter(this, void 0, void 0, function* () {
                 this.btnNext.disabled = true;
                 this.video = new Laya.Video(this.wrapVideo.width, this.wrapVideo.height);
-                this.video.load("video/video1.mp4");
+                this.video.load(`video/video1_${DataLang.lang}.mp4`);
                 this.wrapVideo.addChild(this.video);
                 this.video.play();
                 this.timer.once(10000, this, e => {
