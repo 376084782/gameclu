@@ -1952,9 +1952,6 @@
                     }
                     this.step = dataGame.roomStatus;
                     GameManager.talkingUserId = dataGame.talkingUserId;
-                    GameManager.step = "CLUE_FIND";
-                    UIManager.goScene("scene/SceneGame.scene");
-                    return;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
                             UIManager.goScene("scene/SceneBeforeStart.scene");
