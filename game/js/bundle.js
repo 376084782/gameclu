@@ -395,6 +395,10 @@
         }
     };
     DataLang.txt = {
+        Note: {
+            ch: "笔记",
+            en: "Note"
+        },
         Searching: {
             ch: "搜证中",
             en: "Searching"
@@ -409,11 +413,11 @@
         },
         NPC: {
             ch: "证人",
-            en: "NPC"
+            en: "Witness"
         },
         Timeline: {
             ch: "时间线",
-            en: "Timeline"
+            en: "Time Line"
         },
         Scene: {
             ch: "场景",
@@ -421,7 +425,7 @@
         },
         Book: {
             ch: "剧本",
-            en: "Book"
+            en: "Script"
         },
         talking: {
             ch: "发言中",
@@ -432,8 +436,8 @@
             en: "Free Talking"
         },
         pressToSpeak: {
-            ch: "按住V发言",
-            en: "Press 'V' to speak"
+            ch: "你的发言中...",
+            en: "Your time to speak..."
         },
         askChange: {
             ch: "{username}请求交换",
@@ -1551,7 +1555,6 @@
                         GameManager.talkingUserId = data.talkingUserId;
                         EventManager.pub("talking/changeCurrent", data);
                         if (data.talkingUserId == GameManager.userInfo.userId) {
-                            UIManager.showToast("It’s your turn to speak");
                         }
                         break;
                     }
@@ -1949,6 +1952,9 @@
                     }
                     this.step = dataGame.roomStatus;
                     GameManager.talkingUserId = dataGame.talkingUserId;
+                    GameManager.step = "CLUE_FIND";
+                    UIManager.goScene("scene/SceneGame.scene");
+                    return;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
                             UIManager.goScene("scene/SceneBeforeStart.scene");
@@ -2911,6 +2917,9 @@
                     if (e.code == 0) {
                         console.log("请求结束", e);
                         rsv(e.data);
+                    }
+                    else if (!e.code || e.code == 1) {
+                        rej(e);
                     }
                     else {
                         UIManager.showMessage(e.msg);
@@ -5455,6 +5464,15 @@
             }
             scene.SceneLoadingUI = SceneLoadingUI;
             REG("ui.scene.SceneLoadingUI", SceneLoadingUI);
+            class SceneNoteUI extends View {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("scene/SceneNote");
+                }
+            }
+            scene.SceneNoteUI = SceneNoteUI;
+            REG("ui.scene.SceneNoteUI", SceneNoteUI);
             class SceneResultUI extends View {
                 constructor() { super(); }
                 createChildren() {
@@ -5562,8 +5580,7 @@
             this.listTag.array = [
                 { label: "All", type1: 1, type2: 1, img: "all" },
                 { label: "Marked", type1: 1, type2: 2, img: "tag" },
-                { label: "Private", type1: 1, type2: 3, img: "private" },
-                { label: "Note", type1: 2, img: "note" }
+                { label: "Private", type1: 1, type2: 3, img: "private" }
             ];
             this.listTag.renderHandler = new Laya.Handler(this, (cell, idx) => {
                 let data = cell.dataSource;
@@ -6151,7 +6168,7 @@
                 let sp = new Laya.Sprite();
                 let txtName = new Laya.Label();
                 txtName.fontSize = 20;
-                txtName.text = Utils.subString(chatData.fromUserName, 14) + ":";
+                txtName.text = Utils.subString(chatData.fromUserName, 6) + ":";
                 txtName.color = GameManager.getColorBySeat(idx % 2);
                 sp.addChild(txtName);
                 let txtCnt = new Laya.Label();
@@ -6426,7 +6443,7 @@
                         this.selectIdx = idx;
                         this.updateRender();
                     });
-                    cell.height = title.height + 48;
+                    cell.height = title.height + 28;
                     cell.y = startY;
                     this.wrapQues.addChild(cell);
                     startY += cell.height + 10;
@@ -7373,6 +7390,7 @@
         onOpened() {
             let { maxPowerRoleList, flag } = GameManager.checkMurderOut();
             this.btnSure.on(Laya.Event.CLICK, this, e => {
+                this.close();
                 UIManager.goScene("scene/SceneTruth.scene");
             });
             this.btnSure.visible = false;
@@ -7425,7 +7443,7 @@
             return __awaiter(this, void 0, void 0, function* () {
                 yield Utils.asyncByTime(2000);
                 yield Utils.asyncTween(this.imgMurder, { alpha: 1, y: 562 }, 800);
-                yield Utils.asyncByTime(1000);
+                yield Utils.asyncByTime(3000);
                 UIManager.openModal("modal/ModalResetEnd.scene", false);
                 this.btnSure.visible = true;
             });
@@ -8350,6 +8368,18 @@
         }
     }
 
+    var ConfigGameTag;
+    (function (ConfigGameTag) {
+        ConfigGameTag[ConfigGameTag["RoomPicker"] = 1] = "RoomPicker";
+        ConfigGameTag[ConfigGameTag["Timeline"] = 2] = "Timeline";
+        ConfigGameTag[ConfigGameTag["Talking"] = 3] = "Talking";
+        ConfigGameTag[ConfigGameTag["Scene"] = 4] = "Scene";
+        ConfigGameTag[ConfigGameTag["Vote"] = 5] = "Vote";
+        ConfigGameTag[ConfigGameTag["NPC"] = 6] = "NPC";
+        ConfigGameTag[ConfigGameTag["Book"] = 7] = "Book";
+        ConfigGameTag[ConfigGameTag["Note"] = 10] = "Note";
+    })(ConfigGameTag || (ConfigGameTag = {}));
+
     class SceneGame extends ui.scene.SceneGameUI {
         constructor() {
             super();
@@ -8421,7 +8451,8 @@
                 "wrapSuoLue",
                 "wrapVote",
                 "wrapNPC",
-                "wrapBook"
+                "wrapBook",
+                "sceneNote"
             ].forEach(type1 => {
                 let wrap = this.getChildByName(type1);
                 wrap.visible = type1 == type;
@@ -8435,19 +8466,23 @@
                 this.listTag.array = [
                     {
                         label: DataLang.getTxtByType("Book"),
-                        type: 7
+                        type: ConfigGameTag.Book
                     },
                     {
                         label: DataLang.getTxtByType("Scene"),
-                        type: 1
+                        type: ConfigGameTag.RoomPicker
                     },
                     {
                         label: DataLang.getTxtByType("NPC"),
-                        type: 6
+                        type: ConfigGameTag.NPC
                     },
                     {
                         label: DataLang.getTxtByType("Timeline"),
-                        type: 2
+                        type: ConfigGameTag.Timeline
+                    },
+                    {
+                        label: DataLang.getTxtByType("Note"),
+                        type: ConfigGameTag.Note
                     }
                 ];
                 this.listTag.selectedIndex = 1;
@@ -8457,23 +8492,27 @@
                 this.listTag.array = [
                     {
                         label: DataLang.getTxtByType("Book"),
-                        type: 7
+                        type: ConfigGameTag.Book
                     },
                     {
                         label: DataLang.getTxtByType("Scene"),
-                        type: 4
+                        type: ConfigGameTag.Scene
                     },
                     {
                         label: DataLang.getTxtByType("Timeline"),
-                        type: 2
+                        type: ConfigGameTag.Timeline
                     },
                     {
                         label: DataLang.getTxtByType("NPC"),
-                        type: 6
+                        type: ConfigGameTag.NPC
                     },
                     {
-                        label: DataLang.getTxtByType('Talking'),
-                        type: 3
+                        label: DataLang.getTxtByType("Talking"),
+                        type: ConfigGameTag.Talking
+                    },
+                    {
+                        label: DataLang.getTxtByType("Note"),
+                        type: ConfigGameTag.Note
                     }
                 ];
                 this.listTag.selectedIndex = 4;
@@ -8483,23 +8522,27 @@
                 this.listTag.array = [
                     {
                         label: DataLang.getTxtByType("Book"),
-                        type: 7
+                        type: ConfigGameTag.Book
                     },
                     {
                         label: DataLang.getTxtByType("Scene"),
-                        type: 4
+                        type: ConfigGameTag.Scene
                     },
                     {
                         label: DataLang.getTxtByType("Timeline"),
-                        type: 2
+                        type: ConfigGameTag.Timeline
                     },
                     {
                         label: DataLang.getTxtByType("NPC"),
-                        type: 6
+                        type: ConfigGameTag.NPC
                     },
                     {
                         label: DataLang.getTxtByType("Vote"),
-                        type: 5
+                        type: ConfigGameTag.Vote
+                    },
+                    {
+                        label: DataLang.getTxtByType("Note"),
+                        type: ConfigGameTag.Note
                     }
                 ];
                 this.listTag.selectedIndex = 4;
@@ -8550,33 +8593,38 @@
                 return;
             }
             let data = this.listTag.array[idx] || {};
+            console.log(data.type);
             switch (data.type) {
-                case 1: {
+                case ConfigGameTag.RoomPicker: {
                     this.changeMainWrap("sceneChanger");
                     break;
                 }
-                case 2: {
+                case ConfigGameTag.Timeline: {
                     this.changeMainWrap("wrapTimeline");
                     break;
                 }
-                case 3: {
+                case ConfigGameTag.Talking: {
                     this.changeMainWrap("wrapTalking");
                     break;
                 }
-                case 4: {
+                case ConfigGameTag.Scene: {
                     this.changeMainWrap("wrapSuoLue");
                     break;
                 }
-                case 5: {
+                case ConfigGameTag.Vote: {
                     this.changeMainWrap("wrapVote");
                     break;
                 }
-                case 6: {
+                case ConfigGameTag.NPC: {
                     this.changeMainWrap("wrapNPC");
                     break;
                 }
-                case 7: {
+                case ConfigGameTag.Book: {
                     this.changeMainWrap("wrapBook");
+                    break;
+                }
+                case ConfigGameTag.Note: {
+                    this.changeMainWrap("sceneNote");
                     break;
                 }
             }
@@ -8610,6 +8658,37 @@
             });
             let wrapDetail = this.getChildByName("wrapDetail");
             GameManager.flagCanMove = !wrapDetail.visible;
+        }
+    }
+
+    class SceneNote extends ui.scene.SceneNoteUI {
+        onEnable() {
+            this.listNote.renderHandler = new Laya.Handler(this, (cell, idx) => {
+                let data = cell.dataSource;
+                let content = cell.getChildByName("content");
+                content.off(Laya.Event.BLUR, this, this.saveNote);
+                content.on(Laya.Event.BLUR, this, this.saveNote);
+            });
+            this.initNote();
+        }
+        initNote() {
+            this.listNote.array = GameManager.listNote.concat({ content: "" });
+        }
+        saveNote() {
+            let listData = [];
+            this.listNote.cells.forEach((cell) => {
+                if (cell.visible) {
+                    let content = cell.getChildByName("content");
+                    if (content.text) {
+                        listData.push({
+                            content: content.text
+                        });
+                    }
+                }
+            });
+            GameManager.listNote = listData;
+            GameManager.saveLocalData();
+            this.initNote();
         }
     }
 
@@ -8898,7 +8977,6 @@
         onEnable() {
             this.btnSure.on(Laya.Event.CLICK, this, e => {
                 UIManager.goScene("scene/SceneTruth.scene");
-                UIManager.closeModal("modal/ModalResult.scene");
             });
         }
         onOpened() {
@@ -9489,6 +9567,7 @@
             reg("scene/SceneEndTalk.ts", SceneEndTalk);
             reg("comp/TimeTitle.ts", TimeTitle);
             reg("scene/SceneGame.ts", SceneGame);
+            reg("scene/SceneNote.ts", SceneNote);
             reg("comp/GameBook.ts", GameBook);
             reg("comp/GameSteper.ts", GameSteper);
             reg("scene/SceneHall.ts", SceneHall);
@@ -9509,7 +9588,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GamaCluDetail.scene";
+    GameConfig.startScene = "scene/SceneTruth.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
