@@ -19,10 +19,10 @@
     "./v2/en/img_fengmian.png",
     "./v2/en/img_result.png",
     "./v2/font/FZZYJW.ttf",
-    "./atlas/v2/res/ch.atlas",
-    "./atlas/v2/res/ch.png",
-    "./atlas/v2/res/common.atlas",
-    "./atlas/v2/res/common.png",
-    "./atlas/v2/res/en.atlas",
-    "./atlas/v2/res/en.png"
+    "./res/atlas/v2/ch.atlas",
+    "./res/atlas/v2/ch.png",
+    "./res/atlas/v2/common.atlas",
+    "./res/atlas/v2/common.png",
+    "./res/atlas/v2/en.atlas",
+    "./res/atlas/v2/en.png"
 ]
