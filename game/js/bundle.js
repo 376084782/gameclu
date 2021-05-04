@@ -249,6 +249,18 @@
     }
     DataLang._lang = "ch";
     DataLang.imgConfig = {
+        btnAddFriend: {
+            ch: "v2/ch/btn_add_friend.png",
+            en: "v2/en/btn_add_friend.png"
+        },
+        btnKick: {
+            ch: "v2/ch/btn_kick.png",
+            en: "v2/en/btn_kick.png"
+        },
+        btnRefuse: {
+            ch: "v2/ch/img_btnRefuse.png",
+            en: "v2/en/img_btnRefuse.png"
+        },
         voted: {
             ch: "v2/ch/img_ytp.png",
             en: "v2/en/img_ytp.png"
@@ -395,6 +407,34 @@
         }
     };
     DataLang.txt = {
+        playerKicked: {
+            ch: "玩家已踢出",
+            en: "Player kicked"
+        },
+        txtCanceled: {
+            ch: "临时取消的局数:{count}",
+            en: "temporary cancellations:{count}"
+        },
+        txtLose: {
+            ch: "输的局数:{count}",
+            en: "Lose:{count}"
+        },
+        txtNoShow: {
+            ch: "没有出现的局数:{count}",
+            en: "Not shown:{count}"
+        },
+        txtTotal: {
+            ch: "总局数:{count}",
+            en: "Total:{count}"
+        },
+        txtWin: {
+            ch: "赢的局数:{count}",
+            en: "Win:{count}"
+        },
+        requestSend: {
+            ch: "请求已发送",
+            en: "request send"
+        },
         Note: {
             ch: "笔记",
             en: "Note"
@@ -1299,11 +1339,11 @@
                             .getUserMedia({ audio: true })
                             .then(e => {
                             console.log(e, "success");
-                            rsv();
+                            rsv(null);
                         })
                             .catch(e => {
                             console.log("fail", e);
-                            rej();
+                            rej(null);
                         });
                     }
                 });
@@ -1330,8 +1370,28 @@
                         this.uid = e;
                         this.initLocalStream().then(e => {
                             this.flagInRoom = true;
-                            rsv();
+                            rsv(null);
                         });
+                    });
+                }));
+            });
+        }
+        static testAudio(uid) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return new Promise((rsv, rej) => __awaiter(this, void 0, void 0, function* () {
+                    console.log("1111");
+                    let devices = yield AgoraRTC.getDevices();
+                    let mics = yield AgoraRTC.getMicrophones();
+                    console.log(mics, "mics");
+                    const audioTrack = yield AgoraRTC.createMicrophoneAudioTrack({});
+                    console.log(audioTrack, "audioTrack");
+                    AgoraRTC.checkAudioTrackIsActive(audioTrack)
+                        .then(result => {
+                        console.log(`microphoneLabel is ${result ? "available" : "unavailable"}`);
+                        rsv(!!result);
+                    })
+                        .catch(e => {
+                        console.log("check audio track error!", e);
                     });
                 }));
             });
@@ -1341,12 +1401,12 @@
                 this.instance().leave(uid => {
                     console.log("client leaves channel");
                     this.flagInRoom = false;
-                    rsv();
+                    rsv(null);
                 }, function (err) {
                     console.log("client leave failed ", err);
-                    rej();
+                    rej(null);
                 });
-                rsv();
+                rsv(null);
             });
         }
     }
@@ -1552,6 +1612,7 @@
                         break;
                     }
                     case "SECOND_REQUEST_ENTER_SCENE": {
+                        GameManager.gameRound = 2;
                         GameManager.step = "CLUE_FIND";
                         GameManager.timeTitle = DataLang.getTxtByType("Searching");
                         GameManager.goSceneGame().then(e => {
@@ -1568,6 +1629,7 @@
                         break;
                     }
                     case "FIRST_REQUEST_ENTER_SCENE": {
+                        GameManager.gameRound = 1;
                         GameManager.step = "CLUE_FIND";
                         GameManager.timeTitle = DataLang.getTxtByType("Searching");
                         GameManager.goSceneGame().then(e => {
@@ -1596,6 +1658,11 @@
                         GameManager.timeTitle = "投票中...";
                         "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会是作为嫌疑犯被逮捕";
                         EventManager.pub("game/updateStepRender");
+                        break;
+                    }
+                    case "SIGNAL_VALID": {
+                        GameManager.audioChecked.push(data);
+                        EventManager.pub("room/updateRoomInfo");
                         break;
                     }
                     case "GAME_END": {
@@ -1639,6 +1706,7 @@
                         break;
                     }
                     case "FIRST_REQUEST_ENTER_TALKING": {
+                        GameManager.gameRound = 1;
                         GameManager.step = "TALKING";
                         Agora.joinRoom();
                         GameManager.resetInStep();
@@ -1655,6 +1723,7 @@
                         break;
                     }
                     case "SECOND_REQUEST_ENTER_TALKING": {
+                        GameManager.gameRound = 2;
                         GameManager.step = "TALKING";
                         Agora.joinRoom();
                         GameManager.resetInStep();
@@ -1929,12 +1998,14 @@
         static resetRoomData() {
             this.hintedMap = {};
             this.chatList = [];
+            this.gameRound = 1;
             this.listAnswered = [];
             this.talkingUserId = null;
             this.step = "";
             this.flagCanMove = true;
             this.voteMap = [];
             this.roomUserList = [];
+            this.audioChecked = [];
             this.roomReadyList = [];
             this.evidentListGot = [];
             this.listNote = [];
@@ -2016,6 +2087,18 @@
                     }
                     this.step = dataGame.roomStatus;
                     GameManager.talkingUserId = dataGame.talkingUserId;
+                    let signalMap = dataGame.signalMap || {};
+                    let listAudioCheck = [];
+                    for (let uid in signalMap) {
+                        if (signalMap[uid] != null) {
+                            listAudioCheck.push({
+                                userId: uid,
+                                valid: signalMap[uid]
+                            });
+                        }
+                    }
+                    GameManager.audioChecked = listAudioCheck;
+                    GameManager.gameRound = dataGame.cycle || 1;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
                             UIManager.goScene("scene/SceneBeforeStart.scene");
@@ -2075,6 +2158,13 @@
                         case "VOTE": {
                             yield GameManager.goSceneGame();
                             EventManager.pub("game/updateStepRender");
+                            break;
+                        }
+                        case "ANALYSE": {
+                            yield GameManager.goSceneGame();
+                            GameManager.step = "ANALYSE";
+                            GameManager.timeTitle = "复盘";
+                            UIManager.openModal("modal/ModalResult.scene");
                             break;
                         }
                     }
@@ -2319,10 +2409,12 @@
     GameManager.listAnswered = {};
     GameManager.timeTitle = "";
     GameManager._step = "";
+    GameManager.gameRound = 1;
     GameManager.flagCanMove = true;
     GameManager.globalUserNum = 0;
     GameManager.dataTimeline = [];
     GameManager.listNote = [];
+    GameManager.audioChecked = [];
     GameManager.roomUserList = [];
     GameManager.roomUserList1 = [];
     GameManager.roomReadyList = [];
@@ -2358,6 +2450,48 @@
     };
 
     class NetController {
+        static getInfo(toUserId) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let data = yield Utils.doAjax({
+                    url: `/api/user/${toUserId}`,
+                    method: "get",
+                    data: {}
+                });
+                return data;
+            });
+        }
+        static addFriend(toUserId) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let data = yield Utils.doAjax({
+                    url: `/api/friend/${toUserId}`,
+                    method: "put",
+                    data: {}
+                });
+                return data;
+            });
+        }
+        static changeRoomPwd(isPublic) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let data = yield Utils.doAjax({
+                    url: "/api/room/change_pwd",
+                    method: "post",
+                    data: { roomId: GameManager.roomInfo.roomId, isPublic: isPublic ? 1 : 0, password: '1111' }
+                });
+                return data;
+            });
+        }
+        static reqChechAudio(flag = false) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let data = yield Utils.doAjax({
+                    url: "/api/user/check/signal",
+                    method: "get",
+                    data: {
+                        valid: flag
+                    }
+                });
+                return data;
+            });
+        }
         static getAgoraToken(channelName) {
             return __awaiter(this, void 0, void 0, function* () {
                 let data = yield Utils.doAjax({
@@ -5228,6 +5362,15 @@
             }
             modal.ModalDetailListUI = ModalDetailListUI;
             REG("ui.modal.ModalDetailListUI", ModalDetailListUI);
+            class ModalInfoUI extends Dialog {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("modal/ModalInfo");
+                }
+            }
+            modal.ModalInfoUI = ModalInfoUI;
+            REG("ui.modal.ModalInfoUI", ModalInfoUI);
             class ModalJoinRoomUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -6029,19 +6172,23 @@
             let talkingData = GameManager.getRoomUserById(talkingUserId);
             if (!isSelf) {
                 if (talkingData.username) {
-                    this.txtSpeaking.visible = true;
                     this.txtSpeaking.text = DataLang.getTxtByType("talkingPeople", {
                         username: talkingData.username
                     });
                 }
+                else {
+                    this.txtSpeaking.text = "";
+                }
             }
             this.toggleMicro(isSelf);
+            this.txtSpeaking.visible = !isSelf;
             this.btnEndSelfTalking.visible = isSelf;
             this.btnTalkingNext.visible = false;
             this.listUserTalking.refresh();
         }
         changeFree() {
             this.toggleMicro(true);
+            this.txtSpeaking.visible = false;
             this.isFreeTalking = true;
             this.btnEndSelfTalking.visible = false;
             this.btnTalkingNext.visible = true;
@@ -6652,7 +6799,6 @@
                 let roleName = cell.getChildByName("roleName");
                 let playerName = cell.getChildByName("playerName");
                 let btnTrue = cell.getChildByName("btnTrue");
-                let selfVoted = cell.getChildByName("selfVoted");
                 btnTrue.offAll(Laya.Event.CLICK);
                 btnTrue.on(Laya.Event.CLICK, this, e => {
                     this.doVote(roleId);
@@ -6679,7 +6825,6 @@
                 }
                 let userId = GameManager.selectRoleMapRoleToUser[roleId];
                 let flagSelfVoted = !!GameManager.voteMap[GameManager.userInfo.userId];
-                selfVoted.visible = flagSelfVoted;
                 if (this.flagShowVoted) {
                     btnTrue.visible = false;
                     btnFalse.visible = false;
@@ -7343,6 +7488,56 @@
         }
     }
 
+    class ModalInfo extends ui.modal.ModalInfoUI {
+        onOpened(userInfo) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let userId = userInfo.userId;
+                let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
+                if (isHost) {
+                    this.btnKick.visible = true;
+                    this.btnAdd.x = 217;
+                    this.btnKick.x = 410;
+                }
+                else {
+                    this.btnKick.visible = false;
+                    this.btnAdd.x = 300;
+                }
+                this.btnClose.on(Laya.Event.CLICK, this, e => {
+                    this.close();
+                });
+                this.btnKick.on(Laya.Event.CLICK, this, e => {
+                    UIManager.showMessage(DataLang.getTxtByType("playerKicked"));
+                });
+                this.btnAdd.on(Laya.Event.CLICK, this, e => {
+                    NetController.addFriend(userId).then(e => {
+                        UIManager.showMessage(DataLang.getTxtByType("requestSend"));
+                    });
+                });
+                let info = yield NetController.getInfo(userId);
+                this.setInfo(info);
+            });
+        }
+        setInfo(info) {
+            let statistics = info.statistics;
+            this.nickname.text = info.username;
+            this.avatar.skin = info.avatar;
+            this.userId.text = `ID:${info.id}`;
+            this.win.text = DataLang.getTxtByType("txtWin", { count: statistics.won });
+            this.lose.text = DataLang.getTxtByType("txtLose", {
+                count: statistics.lost
+            });
+            this.total.text = DataLang.getTxtByType("txtTotal", {
+                count: statistics.played
+            });
+            this.noShow.text = DataLang.getTxtByType("txtNoShow", {
+                count: statistics.noShows
+            });
+            this.canceled.text = DataLang.getTxtByType("txtCanceled", {
+                count: statistics.cancelled
+            });
+        }
+    }
+
     class ModalJoinRoom extends ui.modal.ModalJoinRoomUI {
         constructor() {
             super();
@@ -7475,27 +7670,19 @@
             let murderRoleConfig = Scene3dConfig.getRoleInfoByRoleId(murderRoleId);
             this.imgMurder.skin = murderRoleConfig.img;
             let votedList = [];
-            for (let uid in GameManager.voteMap) {
-                let roleId = GameManager.getSelectedRoleIdByUserId(uid);
-                let votedRoleId = GameManager.voteMap[uid];
-                let votedRoleConf = Scene3dConfig.getRoleInfoByRoleId(votedRoleId);
-                let power = roleId == GameManager.ditectiveRoleId ? 1.5 : 1;
-                let votedTarget = votedList.find(e => e.roleId == votedRoleId);
-                if (!votedTarget) {
-                    votedTarget = {
-                        roleName: votedRoleConf.roleName,
-                        roleId: votedRoleId,
-                        power,
-                        avatar: votedRoleConf.img
-                    };
+            for (let i = 0; i < Scene3dConfig.roleList.length; i++) {
+                let roleConfig = Object.assign({ list: [] }, Scene3dConfig.roleList[i]);
+                for (let uid in GameManager.voteMap) {
+                    let votedRoleId = GameManager.voteMap[uid];
+                    if (votedRoleId == roleConfig.id) {
+                        let selfRoleId = GameManager.getSelectedRoleIdByUserId(uid);
+                        let selfRoleConfig = Scene3dConfig.getRoleInfoByRoleId(selfRoleId);
+                        roleConfig.list.push(selfRoleConfig);
+                    }
                 }
-                else {
-                    votedTarget.power += power;
-                }
+                votedList.push(roleConfig);
             }
-            votedList.forEach(item => {
-                item.powerTxt = DataLang.getTxtByType("power", { num: item.power });
-            });
+            console.log(votedList, "复盘的votedList");
             this.list.array = votedList;
             this.showAnimate();
         }
@@ -8109,6 +8296,17 @@
         }
         onEnable() {
             let self = this;
+            this.btnTestAudio.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
+                let flag = (yield Agora.testAudio(GameManager.userInfo.userId));
+                NetController.reqChechAudio(flag);
+                console.log("音频测试结果", flag);
+            }));
+            this.userList.mouseHandler = new Laya.Handler(this, (e, idx) => {
+                let data = this.userList.array[idx];
+                if (e.type == "click") {
+                    UIManager.openModal("modal/ModalInfo.scene", false, data);
+                }
+            });
             this.userList.renderHandler = new Laya.Handler(this, (cell) => {
                 let data = cell.dataSource;
                 let bg = cell.getChildByName("bg");
@@ -8124,7 +8322,14 @@
                 let isReady = GameManager.roomReadyList.indexOf(data.userId) > -1;
                 ready.visible = isReady;
                 host.visible = isHost;
-                audioTested.visible = false;
+                let audioConf = GameManager.audioChecked.find(item => item.userId == data.userId);
+                if (audioConf) {
+                    audioTested.visible = true;
+                    audioTested.skin = `v2/${DataLang.lang}/img_test${audioConf.valid ? 1 : 0}.png`;
+                }
+                else {
+                    audioTested.visible = false;
+                }
                 if (data.isBlank) {
                     username.text = "";
                     avatar.skin = "v2/common/img_8.png";
@@ -8167,7 +8372,7 @@
                 }
             });
             EventManager.sub("room/updateRoomInfo", this, this.updateRoomInfo);
-            this.checkPublic.on(Laya.Event.CHANGE, this, this.updatePwdHide);
+            this.checkPublic.on("selectedChange", this, this.updatePwdHide);
         }
         onOpened({}) {
             LoadingManager.loadScene3d();
@@ -8175,13 +8380,27 @@
             this.btnNext.visible = false;
             this.updateRoomInfo();
         }
-        updatePwdHide() {
+        updatePwdHide(flag) {
+            NetController.changeRoomPwd(flag).then(e => {
+                this.checkPublic.selected = flag;
+            });
         }
         updateRoomInfo() {
+            let selfAudioTestedConf = GameManager.audioChecked.find(item => item.userId == GameManager.userInfo.userId);
+            if (selfAudioTestedConf) {
+                this.btnTestAudio.visible = false;
+                this.tagAudioTested.visible = true;
+                this.tagAudioTested.skin = `v2/${DataLang.lang}/img_test${selfAudioTestedConf.valid ? 1 : 0}.png`;
+            }
+            else {
+                this.btnTestAudio.visible = true;
+                this.tagAudioTested.visible = false;
+            }
+            let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
             this.btnStart.visible = false;
             this.btnNext.visible = false;
             this.updateToggleBtn();
-            this.checkPublic.mouseEnabled = false;
+            this.checkPublic.mouseEnabled = isHost;
             this.checkPublic.selected = GameManager.roomInfo.publicFlag == 1;
             this.txtRoomId.text = "" + GameManager.roomInfo.roomNum;
             this.txtTitle.refresh();
@@ -8189,7 +8408,6 @@
             let readyList = GameManager.roomUserList.filter(item => GameManager.roomReadyList.indexOf(item.userId) > -1 ||
                 item.userId == GameManager.roomInfo.masterUserId);
             let isAllReady = readyList.length >= 3;
-            let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
             let flagSelfReady = this.getSelfIsReady();
             this.btnNextImg.skin = DataLang.getImgByType(!flagSelfReady ? "btnReady" : "btnCancelReady");
             this.btnNext.visible = !isHost;
@@ -8249,7 +8467,7 @@
         }
         onEnable() {
             this.on(Laya.Event.CLICK, this, e => {
-                this.selected = !this.selected;
+                this.event("selectedChange", !this.selected);
             });
         }
     }
@@ -8788,7 +9006,7 @@
                 let wrapHover = cell.getChildByName("wrapHover");
                 let label = wrapHover.getChildByName("label");
                 wrapHover.visible = this.list.selectedIndex == idx;
-                label.text = DataLang.getTxtByType(data.type);
+                label.text = data[DataLang.lang];
             });
             this.list.mouseHandler = new Laya.Handler(this, (e, idx) => {
                 if (e.type == "mouseover") {
@@ -8800,38 +9018,52 @@
             });
             this.list.array = [
                 {
-                    type: "PRE_TALKING"
+                    en: "Searching 30 min",
+                    ch: "搜证 30 min",
+                    type: "CLUE_FIND1"
                 },
                 {
-                    type: "CLUE_FIND"
+                    en: "Self Talk 5 min",
+                    ch: "个人发言 5 min",
+                    type: "TALKING1"
                 },
                 {
-                    type: "TALKING"
+                    en: "Group Talk 10 min",
+                    ch: "群组讨论 10 min",
+                    type: "FREE_TALKING1"
                 },
                 {
-                    type: "CLUE_FIND"
+                    en: "Searching 30 min",
+                    ch: "搜证 30 min",
+                    type: "CLUE_FIND2"
                 },
                 {
-                    type: "TALKING"
+                    en: "Self Talk 5 min",
+                    ch: "个人发言 5 min",
+                    type: "TALKING2"
                 },
                 {
-                    type: "FREE_TALKING"
+                    en: "Group Talk 10 min",
+                    ch: "群组讨论 10 min",
+                    type: "FREE_TALKING2"
                 },
                 {
+                    en: "Conclusion Talk 2min",
+                    ch: "总结发言 Talk 2min",
                     type: "CONCLUSION"
                 },
                 {
+                    en: "Vote 2 min",
+                    ch: "投票 2 min",
                     type: "VOTE"
-                },
-                {
-                    type: "ANALYSE"
                 }
             ];
             EventManager.sub("step/changeStep", this, this.updateData);
             this.updateData();
         }
         updateData() {
-            let stepConf = this.list.array.find(conf => conf.type == GameManager.step);
+            let stepConf = this.list.array.find(conf => conf.type == GameManager.step ||
+                conf.type == GameManager.step + GameManager.gameRound);
             if (stepConf) {
                 let idx = this.list.array.indexOf(stepConf);
                 this.currentIdx = idx;
@@ -9598,6 +9830,7 @@
             reg("modal/ModalDetail.ts", ModalDetail);
             reg("modal/ModalDetailList.ts", ModalDetailList);
             reg("common/ModalCloser.ts", ModalCloser);
+            reg("modal/ModalInfo.ts", ModalInfo);
             reg("modal/ModalJoinRoom.ts", ModalJoinRoom);
             reg("modal/ModalMessage.ts", ModalMessage);
             reg("modal/ModalPic.ts", ModalPic);
@@ -9648,7 +9881,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneTalking.scene";
+    GameConfig.startScene = "scene/SceneBeforeStart.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
