@@ -1156,6 +1156,20 @@
         static hideWaiting() {
             Laya.Scene.close("scene/SceneWaiting.scene");
         }
+        static checkFirstHint() {
+            let isMaster = GameManager.roomInfo.masterUserId == GameManager.userInfo.userId;
+            GameManager.checkShowHint();
+            if (isMaster) {
+                UIManager.showHint("ENTER_ROOM", [
+                    "请在准备好后点击准备按钮，当所有玩家准备好后房主就可以开始开启游戏啦！"
+                ]);
+            }
+            else {
+                UIManager.showHint("ENTER_ROOM", [
+                    "在所有玩家完成准备后，开始按钮会提醒你可以开始游戏"
+                ]);
+            }
+        }
         static showHint(type, data, data2) {
             if (!GameManager.showHint) {
                 return;
@@ -1513,18 +1527,6 @@
                         GameManager.roomReadyList = data.game.nextReadyUserIdList || [];
                         NetController.updateRoomInfo(data);
                         yield UIManager.goScene("scene/SceneBeforeStart.scene");
-                        let isMaster = GameManager.roomInfo.masterUserId == GameManager.userInfo.userId;
-                        GameManager.checkShowHint();
-                        if (isMaster) {
-                            UIManager.showHint("ENTER_ROOM", [
-                                "请在准备好后点击准备按钮，当所有玩家准备好后房主就可以开始开启游戏啦！"
-                            ]);
-                        }
-                        else {
-                            UIManager.showHint("ENTER_ROOM", [
-                                "在所有玩家完成准备后，开始按钮会提醒你可以开始游戏"
-                            ]);
-                        }
                         break;
                     }
                     case "IN_ADVANCE_START_GAME": {
@@ -1865,7 +1867,7 @@
         static loadSingle(url) {
             return new Promise(rsv => {
                 Laya.loader.load(url, Laya.Handler.create(null, scene => {
-                    rsv(null);
+                    rsv(scene);
                 }));
             });
         }
@@ -1890,36 +1892,21 @@
             bitmapFont.setSpaceWidth(20);
             Laya.Text.registerBitmapFont(name, bitmapFont);
         }
-        static updateList() {
-            this.moduleList.forEach(moduleName => {
-                this._list.push(`res/atlas/${moduleName}.atlas`);
-                this._list.push(`res/atlas/${moduleName}.png`);
-            });
-        }
         static loadScene3d() {
             return __awaiter(this, void 0, void 0, function* () {
                 return;
-                let urlList = [];
-                for (let i = 0; i < this.sceneList.length; i++) {
-                    urlList.push({
-                        url: this.sceneList[i]
-                    });
-                }
-                Laya.loader.create(urlList, Laya.Handler.create(this, e => { }), new Laya.Handler(this, e => {
+                return this.loadByMap("./map3d.json", e => {
                     this.progress3d = e;
-                }));
+                });
             });
         }
         static startLoad() {
             return __awaiter(this, void 0, void 0, function* () {
-                this.updateList();
                 return new Promise((rsv, rej) => {
                     if (this.list.length > 0) {
-                        Laya.loader.load(this.list, Laya.Handler.create(this, () => {
-                            rsv(null);
-                        }), Laya.Handler.create(null, e => {
+                        return this.loadByMap("./mainfest.json", e => {
                             this.progress = e;
-                        }, null, false));
+                        });
                     }
                     else {
                         rsv(null);
@@ -1927,8 +1914,17 @@
                 });
             });
         }
+        static loadByMap(mapUrl, onProgress) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return new Promise((rsv, rej) => __awaiter(this, void 0, void 0, function* () {
+                    let list = (yield this.loadSingle(mapUrl));
+                    Laya.loader.load(list, Laya.Handler.create(this, () => {
+                        rsv(null);
+                    }), Laya.Handler.create(null, onProgress, null, false));
+                }));
+            });
+        }
     }
-    LoadingManager.moduleList = ["test", "ui", "game"];
     LoadingManager._list = ["scene/SceneGame.json", "v2/font/FZZYJW.ttf"];
     LoadingManager.progress = 0;
     LoadingManager.progress3d = 1;
@@ -2128,6 +2124,7 @@
                     GameManager.gameRound = dataGame.cycle || 1;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
+                            UIManager.checkFirstHint();
                             UIManager.goScene("scene/SceneBeforeStart.scene");
                             break;
                         }
@@ -9930,7 +9927,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneVideo.scene";
+    GameConfig.startScene = "scene/SceneLoading.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
