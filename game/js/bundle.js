@@ -407,6 +407,14 @@
         }
     };
     DataLang.txt = {
+        someonekicked: {
+            ch: "{username}已被踢出",
+            en: "{username} have been kicked"
+        },
+        kicked: {
+            ch: "您已被踢出",
+            en: "You have been kicked"
+        },
         playerKicked: {
             ch: "玩家已踢出",
             en: "Player kicked"
@@ -1448,6 +1456,25 @@
                     console.log("收到ws消息", type, data);
                 }
                 switch (type) {
+                    case "KICK_OUT_ROOM": {
+                        if (data.userId == GameManager.userInfo.userId) {
+                            UIManager.showConfirm({
+                                content: DataLang.getTxtByType("kicked"),
+                                onSure() {
+                                    UIManager.goHall();
+                                },
+                                onCancel() {
+                                    UIManager.goHall();
+                                }
+                            });
+                        }
+                        else {
+                            UIManager.showMessage(DataLang.getTxtByType("someonekicked", {
+                                username: data.username
+                            }));
+                        }
+                        break;
+                    }
                     case "ROOM_AWARD": {
                         UIManager.showMessage(data.context);
                         break;
@@ -2450,6 +2477,16 @@
     };
 
     class NetController {
+        static kickPlayer(toUserId) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let data = yield Utils.doAjax({
+                    url: `/api/game/flow/${toUserId}/${GameManager.roomInfo.roomId}/room/kick_out`,
+                    method: "post",
+                    data: {}
+                });
+                return data;
+            });
+        }
         static getInfo(toUserId) {
             return __awaiter(this, void 0, void 0, function* () {
                 let data = yield Utils.doAjax({
@@ -2475,7 +2512,11 @@
                 let data = yield Utils.doAjax({
                     url: "/api/room/change_pwd",
                     method: "post",
-                    data: { roomId: GameManager.roomInfo.roomId, isPublic: isPublic ? 1 : 0, password: '1111' }
+                    data: {
+                        roomId: GameManager.roomInfo.roomId,
+                        isPublic: isPublic ? 1 : 0,
+                        password: "1111"
+                    }
                 });
                 return data;
             });
@@ -7493,20 +7534,28 @@
             return __awaiter(this, void 0, void 0, function* () {
                 let userId = userInfo.userId;
                 let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
-                if (isHost) {
-                    this.btnKick.visible = true;
-                    this.btnAdd.x = 217;
-                    this.btnKick.x = 410;
+                if (userId == GameManager.userInfo.userId) {
+                    this.btnKick.visible = false;
+                    this.btnAdd.visible = false;
                 }
                 else {
-                    this.btnKick.visible = false;
-                    this.btnAdd.x = 300;
+                    if (isHost) {
+                        this.btnKick.visible = true;
+                        this.btnAdd.x = 217;
+                        this.btnKick.x = 410;
+                    }
+                    else {
+                        this.btnKick.visible = false;
+                        this.btnAdd.x = 300;
+                    }
                 }
                 this.btnClose.on(Laya.Event.CLICK, this, e => {
                     this.close();
                 });
                 this.btnKick.on(Laya.Event.CLICK, this, e => {
-                    UIManager.showMessage(DataLang.getTxtByType("playerKicked"));
+                    NetController.kickPlayer(userId).then(e => {
+                        UIManager.showMessage(DataLang.getTxtByType("playerKicked"));
+                    });
                 });
                 this.btnAdd.on(Laya.Event.CLICK, this, e => {
                     NetController.addFriend(userId).then(e => {
@@ -9881,7 +9930,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBeforeStart.scene";
+    GameConfig.startScene = "scene/SceneVideo.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
