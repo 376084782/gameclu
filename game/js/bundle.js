@@ -7435,7 +7435,7 @@
                     this.close();
                 }));
                 this.btnCancel.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                    yield NetController.reqChechAudio(true);
+                    yield NetController.reqChechAudio(false);
                     this.close();
                 }));
                 this.btnClose.on(Laya.Event.CLICK, this, e => {
