@@ -240,7 +240,7 @@
             let conf = this.txt[type] || {};
             let str = conf[this.lang] || "";
             for (let key in params) {
-                str = str.replace(new RegExp(key, "gm"), params[key]);
+                str = str.replace(new RegExp(`{${key}}`, "gm"), params[key]);
             }
             return str;
         }
