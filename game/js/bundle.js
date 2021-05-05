@@ -240,15 +240,29 @@
             let conf = this.txt[type] || {};
             let str = conf[this.lang] || "";
             for (let key in params) {
-                if (str.replaceAll) {
-                    str = str.replaceAll(`{${key}}`, params[key]);
-                }
+                str = str.replace(new RegExp(key, "gm"), params[key]);
             }
             return str;
         }
     }
     DataLang._lang = "ch";
     DataLang.imgConfig = {
+        btnSuccess: {
+            ch: "v2/ch/img_btn_success.png",
+            en: "v2/en/img_btn_success.png"
+        },
+        btnFail: {
+            ch: "v2/ch/img_btn_fail.png",
+            en: "v2/en/img_btn_fail.png"
+        },
+        btn_voice: {
+            ch: "v2/ch/img_btn_voice.png",
+            en: "v2/en/img_btn_voice.png"
+        },
+        testAudio: {
+            ch: "v2/ch/img_test_audio.png",
+            en: "v2/en/img_test_audio.png"
+        },
         btnAddFriend: {
             ch: "v2/ch/btn_add_friend.png",
             en: "v2/en/btn_add_friend.png"
@@ -407,6 +421,118 @@
         }
     };
     DataLang.txt = {
+        hintVote: {
+            ch: "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会作为嫌疑犯被逮捕。",
+            en: `Please think carefully in 2 minutes and throw your killer in your mind. Click the avatar of the character and confirm. Once you click confirm, the vote will not be changed, and the player with the highest vote will be arrested as a suspect.`
+        },
+        hintFreeTalking: {
+            ch: "因为投票环节中探员的投票算1.5票，所以博得探员的信任是很重要的哦。Good luck!",
+            en: `Because the vote of the agent is 1.5 in the voting, it is important to win the trust of the agent. Good luck!`
+        },
+        hintConclusion: {
+            ch: "最后的总结，告诉大家你为什么不是凶手，并告诉大家你会投出的凶手是谁，原因是什么。",
+            en: `The final conclusion is to tell you why you are not the murderer, who you will throw the murderer and why.`
+        },
+        hintFind2: {
+            ch: "这是最后一轮搜证，分享，讨论，开始行动吧！",
+            en: `This is the last round of evidence search, sharing, discussion and action!`
+        },
+        hintTalkingEnd: {
+            ch: "30分钟后环节自动结束，或者所有人在完成讨论后，点击“结束发言”",
+            en: `After 30 minutes, the session will end automatically, or after everyone finishes the discussion, click "end speech"`
+        },
+        hintTalking: {
+            ch: "第一轮自由讨论时间，尽情交流案情，找到藏在你们中间的关键人物。",
+            en: `The first round of free discussion time, enjoy the exchange of the case, find the key people hidden in the middle of you.`
+        },
+        hintTalkingNext: {
+            ch: "5分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
+            en: `After 5 minutes, the session will end automatically, or after finishing speaking, click "end speaking"`
+        },
+        hintDetailInTalking: {
+            ch: "告诉大家你的发现，你可以通过分享让他们看到你搜集的证据",
+            en: `Tell people what you found, and you can share with them the evidence you've collected`
+        },
+        hintSearch: {
+            ch: "可收集的证据会有高亮提示。",
+            en: `The evidence that can be collected will be highlighted.`
+        },
+        hintStep: {
+            ch: "点击此处查看游戏进度。",
+            en: `Click here to see the progress of the game.`
+        },
+        hintDetail: {
+            ch: "点击证据列表，可以查看你找到证据，并可以在讨论环节中分享给大家。",
+            en: `Click the evidence list to view the evidence you found and share it with you in the discussion session.`
+        },
+        hintTimeline: {
+            ch: "点击记录线索或者角色时间线，在游戏的过程中随时编辑和复习。",
+            en: `Click record clues or character timeline to edit and review at any time during the game.`
+        },
+        hintBookBack: {
+            ch: "点击复习剧本。",
+            en: `Click review script.`
+        },
+        hintNPC: {
+            ch: "点击提问证人获取更多线索，请注意证言有时候并非全部真相",
+            en: `Click question witness for more clues. Please note that sometimes testimony is not the whole truth`
+        },
+        hintSelectRoom: {
+            ch: "双击点击“场景名”或“场景图标”进入搜证场景。",
+            en: `Double click "Scene name" or "Scene icon" to enter the search scene.`
+        },
+        hintCluEnd: {
+            ch: "第一轮搜证环节，30分钟后环节自动结束，或者所有玩家在点击下一步后，提前进入下一环节",
+            en: "The first round of certificate search will automatically end in 30 minutes, or all players will enter the next link ahead of time after clicking next"
+        },
+        hintSelfTalkingEnd: {
+            ch: "2分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
+            en: "Click to view the operation method"
+        },
+        hintSetting: {
+            ch: "点击查看操作方法",
+            en: "Click to view the operation method"
+        },
+        hintRule: {
+            ch: "点击此处查看胜利条件",
+            en: "Click here to see the winning conditions"
+        },
+        hintMine: {
+            ch: "点击此处查看任务简介",
+            en: "Click here to view the mission profile"
+        },
+        hintPreTalking: {
+            ch: "告诉大家你的角色背景，以及与案情有关的信息，或者提出你的想法。",
+            en: "Tell everyone about your role background and information about the case, or put forward your ideas."
+        },
+        hintBookNext: {
+            ch: "点击下一步。或者计时完毕后自动进入下一环节。",
+            en: "Click next. Or automatically enter the next link after timing."
+        },
+        hintBookVoice: {
+            ch: "点击静音关闭旁白。",
+            en: "Click mute to turn off the narration."
+        },
+        hintBook: {
+            ch: "你有5分钟阅读你的剧本。",
+            en: "You have 5 min to read your script."
+        },
+        hintRoleNext: {
+            ch: "选定角色后，点击下一步",
+            en: "After selecting the role, click next"
+        },
+        hintRole: {
+            ch: "点击任意角色可以获取人物信息",
+            en: "Click any character to get character information"
+        },
+        hintShare: {
+            ch: "你可以通过分享链接，邀请你的好友加入本局游戏",
+            en: "You can invite your friends to join the game by sharing links"
+        },
+        hintTestAudio: {
+            ch: "请在全员准备后点击语音按钮,全员准备完毕后即可由房主开启游戏",
+            en: "Please click the voice button after all the members are ready. After all the members are ready, the owner can start the game"
+        },
         someonekicked: {
             ch: "{username}已被踢出",
             en: "{username} have been kicked"
@@ -659,7 +785,7 @@
             sex: "Male",
             age: "30",
             relation: "",
-            pangbaiUrl: "sound/Joe.mp3",
+            pangbaiUrl: "sound/Joe_en_en.mp3",
             detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
             id: 1,
             img: "book1/img_role2.png",
@@ -678,7 +804,7 @@
         {
             roleName: "Jane",
             job: "Historian",
-            pangbaiUrl: "sound/Jane.mp3",
+            pangbaiUrl: "sound/Jane_en.mp3",
             age: "28",
             sex: "Female",
             relation: "",
@@ -700,7 +826,7 @@
         {
             roleName: "Harris",
             job: "大英博物馆副馆长",
-            pangbaiUrl: "sound/Harris.mp3",
+            pangbaiUrl: "sound/Harris_en.mp3",
             age: "27",
             sex: "男性",
             relation: "",
@@ -717,7 +843,7 @@
         },
         {
             roleName: "Leo",
-            pangbaiUrl: "sound/Leo.mp3",
+            pangbaiUrl: "sound/Leo_en.mp3",
             job: "科学家",
             sex: "男性",
             age: "28",
@@ -740,7 +866,7 @@
         },
         {
             roleName: "Wilson",
-            pangbaiUrl: "sound/Wilson.mp3",
+            pangbaiUrl: "sound/Wilson_en.mp3",
             job: "项目投资人",
             sex: "男性",
             age: "40",
@@ -782,7 +908,7 @@
             age: "30",
             sex: "男性",
             relation: "",
-            pangbaiUrl: "sound/Joe.mp3",
+            pangbaiUrl: "sound/Joe_ch.mp3",
             detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
             id: 1,
             img: "book1/img_role2.png",
@@ -801,7 +927,7 @@
         {
             roleName: "Jane",
             job: "Historian",
-            pangbaiUrl: "sound/Jane.mp3",
+            pangbaiUrl: "sound/Jane_ch.mp3",
             sex: "Female",
             age: "28",
             relation: "",
@@ -823,7 +949,7 @@
         {
             roleName: "Harris",
             job: "大英博物馆副馆长",
-            pangbaiUrl: "sound/Harris.mp3",
+            pangbaiUrl: "sound/Harris_ch.mp3",
             age: "27",
             sex: "男性",
             relation: "",
@@ -840,7 +966,7 @@
         },
         {
             roleName: "Leo",
-            pangbaiUrl: "sound/Leo.mp3",
+            pangbaiUrl: "sound/Leo_ch.mp3",
             age: "28",
             job: "科学家",
             sex: "男性",
@@ -863,7 +989,7 @@
         },
         {
             roleName: "Wilson",
-            pangbaiUrl: "sound/Wilson.mp3",
+            pangbaiUrl: "sound/Wilson_ch.mp3",
             job: "项目投资人",
             age: "40",
             sex: "男性",
@@ -1158,48 +1284,32 @@
         }
         static checkFirstHint() {
             let isMaster = GameManager.roomInfo.masterUserId == GameManager.userInfo.userId;
-            GameManager.checkShowHint();
-            if (isMaster) {
-                UIManager.showHint("ENTER_ROOM", [
-                    "请在准备好后点击准备按钮，当所有玩家准备好后房主就可以开始开启游戏啦！"
-                ]);
-            }
-            else {
-                UIManager.showHint("ENTER_ROOM", [
-                    "在所有玩家完成准备后，开始按钮会提醒你可以开始游戏"
-                ]);
-            }
+            UIManager.showHint(["hintTestAudio", "hintShare"]);
         }
-        static showHint(type, data, data2) {
-            if (!GameManager.showHint) {
+        static showHint(typeList) {
+            let jumpHint = Laya.LocalStorage.getItem("jumpHint") || GameManager.jumpHint;
+            if (jumpHint) {
                 return;
             }
-            if (GameManager.jumpHint) {
-                return;
-            }
-            else if (GameManager.jumpHint == undefined) {
+            else if (jumpHint == undefined) {
                 UIManager.showConfirm({
                     content: DataLang.getTxtByType("jump"),
                     onCancel() {
                         GameManager.jumpHint = false;
                     },
                     onSure() {
+                        Laya.LocalStorage.setItem("jumpHint", "1");
                         GameManager.jumpHint = true;
                         EventManager.pub("game/closeHint");
                     }
                 });
             }
-            let list = data;
-            if (GameManager.hintedMap[type]) {
-                if (data2) {
-                    list = data2;
-                }
+            let strType = typeList.join(",");
+            if (GameManager.hintedList.indexOf(strType) > -1) {
+                return;
             }
-            if (type == "REQUEST_ENTER_CONCLUSION") {
-                GameManager.saveHintedRoomId();
-            }
-            GameManager.hintedMap[type] = 1;
-            UIManager.goScene("component/WrapTip.scene", false, list);
+            GameManager.hintedList.push(strType);
+            UIManager.goScene("component/WrapTip.scene", false, typeList);
         }
         static goHall() {
             console.log("返回大厅");
@@ -1401,12 +1511,9 @@
         static testAudio(uid) {
             return __awaiter(this, void 0, void 0, function* () {
                 return new Promise((rsv, rej) => __awaiter(this, void 0, void 0, function* () {
-                    console.log("1111");
                     let devices = yield AgoraRTC.getDevices();
                     let mics = yield AgoraRTC.getMicrophones();
-                    console.log(mics, "mics");
                     const audioTrack = yield AgoraRTC.createMicrophoneAudioTrack({});
-                    console.log(audioTrack, "audioTrack");
                     AgoraRTC.checkAudioTrackIsActive(audioTrack)
                         .then(result => {
                         console.log(`microphoneLabel is ${result ? "available" : "unavailable"}`);
@@ -1540,8 +1647,11 @@
                     case "REQUEST_ENTER_PRE_TALKING": {
                         GameManager.step = "PRE_TALKING";
                         UIManager.goScene("scene/SceneTalking.scene").then(e => {
-                            UIManager.showHint("REQUEST_ENTER_PRE_TALKING", [
-                                "您现在有2分钟告诉大家你的角色背景，以及与案情有关的信息，或者提出你的想法。本环节会在2分钟后自动结束，您也可以选择在完成发言后选择。点击 “结束发言” 提前结束此环节"
+                            UIManager.showHint([
+                                "hintPreTalking",
+                                "hintMine",
+                                "hintRule",
+                                "hintSetting"
                             ]);
                         });
                         GameManager.timeTitle = "自我介绍";
@@ -1553,9 +1663,7 @@
                         GameManager.timeTitle = "总结发言";
                         EventManager.pub("game/updateTimeLeft");
                         Agora.joinRoom();
-                        UIManager.showHint("REQUEST_ENTER_CONCLUSION", [
-                            "这是最后的总结了，告诉大家你为什么不是凶手，并告诉大家你会投出的凶手是谁，原因是什么。\n因为投票环节中侦探的投票算1.5票，所以博得侦探的信任是很重要的哦。Good luck！"
-                        ]);
+                        UIManager.showHint(["hintConclusion"]);
                         break;
                     }
                     case "UPDATE_ROOM_INFO": {
@@ -1594,9 +1702,6 @@
                         GameManager.roomReadyList = [];
                         GameManager.selectRoleMapRoleToUser = data;
                         yield UIManager.goScene("scene/SceneRole.scene");
-                        UIManager.showHint("START_GAME", [
-                            "系统随机分配了您的角色，点击角色可以查看角色的基本信息，您可以在其他玩家的同意下进行角色的交换,确认角色后点击下一步"
-                        ]);
                         break;
                     }
                     case "REQUEST_LOADING": {
@@ -1616,6 +1721,12 @@
                         break;
                     }
                     case "REQUEST_ENTER_FREE_TALKING": {
+                        if (GameManager.gameRound == 1) {
+                            UIManager.showHint(["hintTalking"]);
+                        }
+                        else {
+                            UIManager.showHint(["hintFreeTalking"]);
+                        }
                         GameManager.talkingUserId = 0;
                         GameManager.timeTitle = DataLang.getTxtByType("freeTalking");
                         GameManager.step = "FREE_TALKING";
@@ -1624,33 +1735,12 @@
                         EventManager.pub("game/updateStepRender");
                         break;
                     }
-                    case "REQUEST_ENTER_SCENE": {
-                        GameManager.step = "CLUE_FIND";
-                        GameManager.timeTitle = DataLang.getTxtByType("Searching");
-                        GameManager.goSceneGame().then(e => {
-                            UIManager.showHint("REQUEST_ENTER_SCENE", [
-                                "您可以随时回到这里来查看您的剧本",
-                                "您将有30分钟在所有场景中进行证据搜索，并通过使用或者查看报告特定证据获得更多线索",
-                                "您可以通过选择提问证人获取更多线索，请注意证人的证言有时候并非真相哦",
-                                "您可以在这里记录下你认为重要的线索或者重要的时间线，在游戏的过程中随时复习"
-                            ], ["这是最后一轮搜证了, 你还剩30分钟，开始行动吧!"]);
-                        });
-                        GameManager.resetInStep();
-                        Agora.quitRoom();
-                        EventManager.pub("game/updateStepRender");
-                        break;
-                    }
                     case "SECOND_REQUEST_ENTER_SCENE": {
                         GameManager.gameRound = 2;
                         GameManager.step = "CLUE_FIND";
                         GameManager.timeTitle = DataLang.getTxtByType("Searching");
                         GameManager.goSceneGame().then(e => {
-                            UIManager.showHint("REQUEST_ENTER_SCENE", [
-                                "您可以随时回到这里来查看您的剧本",
-                                "您将有30分钟在所有场景中进行证据搜索，并通过使用或者查看报告特定证据获得更多线索",
-                                "您可以通过选择提问证人获取更多线索，请注意证人的证言有时候并非真相哦",
-                                "您可以在这里记录下你认为重要的线索或者重要的时间线，在游戏的过程中随时复习"
-                            ], ["这是最后一轮搜证了, 你还剩30分钟，开始行动吧!"]);
+                            UIManager.showHint(["hintFind2"]);
                         });
                         GameManager.resetInStep();
                         Agora.quitRoom();
@@ -1662,12 +1752,15 @@
                         GameManager.step = "CLUE_FIND";
                         GameManager.timeTitle = DataLang.getTxtByType("Searching");
                         GameManager.goSceneGame().then(e => {
-                            UIManager.showHint("REQUEST_ENTER_SCENE", [
-                                "您可以随时回到这里来查看您的剧本",
-                                "您将有30分钟在所有场景中进行证据搜索，并通过使用或者查看报告特定证据获得更多线索",
-                                "您可以通过选择提问证人获取更多线索，请注意证人的证言有时候并非真相哦",
-                                "您可以在这里记录下你认为重要的线索或者重要的时间线，在游戏的过程中随时复习"
-                            ], ["这是最后一轮搜证了, 你还剩30分钟，开始行动吧!"]);
+                            UIManager.showHint([
+                                "hintCluEnd",
+                                "hintSelectRoom",
+                                "hintNPC",
+                                "hintBookBack",
+                                "hintTimeline",
+                                "hintDetail",
+                                "hintStep"
+                            ]);
                         });
                         GameManager.resetInStep();
                         Agora.quitRoom();
@@ -1678,6 +1771,12 @@
                         GameManager.talkingUserId = data.talkingUserId;
                         EventManager.pub("talking/changeCurrent", data);
                         if (data.talkingUserId == GameManager.userInfo.userId) {
+                            if (GameManager.step == "PRE_TALKING") {
+                                UIManager.showHint(["hintSelfTalkingEnd"]);
+                            }
+                            else if (GameManager.step == "FREE_TALKING") {
+                                UIManager.showHint(["hintTalkingEnd"]);
+                            }
                         }
                         break;
                     }
@@ -1686,6 +1785,7 @@
                         Agora.quitRoom();
                         GameManager.timeTitle = "投票中...";
                         "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会是作为嫌疑犯被逮捕";
+                        UIManager.showHint(["hintVote"]);
                         EventManager.pub("game/updateStepRender");
                         break;
                     }
@@ -1744,11 +1844,7 @@
                         EventManager.pub("game/ChangeToTalking");
                         EventManager.pub("game/updateCluList");
                         EventManager.pub("game/updateStepRender");
-                        UIManager.showHint("REQUEST_ENTER_TALKING", [
-                            "您有5分钟分享你的发现，并提出你的观点。点击证据图标，选择并分享你的证据，这样大家就能浏览到你的分享\n然后你们有30分钟的自由讨论时间，用这些时间交流案情吧！找到藏在你们中间的凶手，本环节也可以在所有人选择 “下一步” 后提前结束，进入下一环节"
-                        ], [
-                            "在30分钟的组队讨论前，你还有5分钟分享你的发现和想法\n没有时间可以浪费了，记住，好的交流是成功的一半！"
-                        ]);
+                        UIManager.showHint(["hintDetailInTalking", "hintTalkingNext"]);
                         break;
                     }
                     case "SECOND_REQUEST_ENTER_TALKING": {
@@ -1761,27 +1857,6 @@
                         EventManager.pub("game/ChangeToTalking");
                         EventManager.pub("game/updateCluList");
                         EventManager.pub("game/updateStepRender");
-                        UIManager.showHint("REQUEST_ENTER_TALKING", [
-                            "您有5分钟分享你的发现，并提出你的观点。点击证据图标，选择并分享你的证据，这样大家就能浏览到你的分享\n然后你们有30分钟的自由讨论时间，用这些时间交流案情吧！找到藏在你们中间的凶手，本环节也可以在所有人选择 “下一步” 后提前结束，进入下一环节"
-                        ], [
-                            "在30分钟的组队讨论前，你还有5分钟分享你的发现和想法\n没有时间可以浪费了，记住，好的交流是成功的一半！"
-                        ]);
-                        break;
-                    }
-                    case "REQUEST_ENTER_TALKING": {
-                        GameManager.step = "TALKING";
-                        Agora.joinRoom();
-                        GameManager.resetInStep();
-                        GameManager.timeTitle = DataLang.getTxtByType("talking");
-                        UIManager.closeModal("modal/ModalShareClu.scene");
-                        EventManager.pub("game/ChangeToTalking");
-                        EventManager.pub("game/updateCluList");
-                        EventManager.pub("game/updateStepRender");
-                        UIManager.showHint("REQUEST_ENTER_TALKING", [
-                            "您有5分钟分享你的发现，并提出你的观点。点击证据图标，选择并分享你的证据，这样大家就能浏览到你的分享\n然后你们有30分钟的自由讨论时间，用这些时间交流案情吧！找到藏在你们中间的凶手，本环节也可以在所有人选择 “下一步” 后提前结束，进入下一环节"
-                        ], [
-                            "在30分钟的组队讨论前，你还有5分钟分享你的发现和想法\n没有时间可以浪费了，记住，好的交流是成功的一半！"
-                        ]);
                         break;
                     }
                     case "REQUEST_EXCHANGE_ROLE": {
@@ -2019,6 +2094,7 @@
             EventManager.pub("game/updateReadyBtn");
         }
         static resetRoomData() {
+            this.hintedList = [];
             this.hintedMap = {};
             this.chatList = [];
             this.gameRound = 1;
@@ -2065,10 +2141,6 @@
                 EventManager.pub("game/updateChat");
             });
         }
-        static checkShowHint() {
-            let roomId = Laya.LocalStorage.getItem("roomId");
-            GameManager.showHint = !roomId || roomId == GameManager.roomInfo.id;
-        }
         static saveHintedRoomId() {
             let roomId = Laya.LocalStorage.getItem("roomId");
             if (!roomId && GameManager.roomInfo && GameManager.roomInfo.id) {
@@ -2095,7 +2167,6 @@
                 GameManager.sceneMap = dataGame.sceneMap;
                 GameManager.updateChatList();
                 this.setLocalData();
-                this.checkShowHint();
                 if (dataGame) {
                     if (LoadingManager.progress3d < 1 &&
                         dataGame.roomStatus != "GAME_READY" &&
@@ -2124,8 +2195,9 @@
                     GameManager.gameRound = dataGame.cycle || 1;
                     switch (dataGame.roomStatus) {
                         case "GAME_READY": {
-                            UIManager.checkFirstHint();
-                            UIManager.goScene("scene/SceneBeforeStart.scene");
+                            UIManager.goScene("scene/SceneBeforeStart.scene").then(e => {
+                                UIManager.checkFirstHint();
+                            });
                             break;
                         }
                         case "IN_ADVANCE": {
@@ -2420,8 +2492,8 @@
             });
         }
     }
-    GameManager.jumpHint = undefined;
-    GameManager.showHint = false;
+    GameManager.hintedList = [];
+    GameManager.jumpHint = null;
     GameManager.round = 0;
     GameManager.hintedMap = {};
     GameManager.ditectiveRoleId = 6;
@@ -5373,6 +5445,15 @@
             }
             modal.ModalAskChangeRoleUI = ModalAskChangeRoleUI;
             REG("ui.modal.ModalAskChangeRoleUI", ModalAskChangeRoleUI);
+            class ModalAudioTestUI extends Dialog {
+                constructor() { super(); }
+                createChildren() {
+                    super.createChildren();
+                    this.loadScene("modal/ModalAudioTest");
+                }
+            }
+            modal.ModalAudioTestUI = ModalAudioTestUI;
+            REG("ui.modal.ModalAudioTestUI", ModalAudioTestUI);
             class ModalConfirmUI extends Dialog {
                 constructor() { super(); }
                 createChildren() {
@@ -7119,38 +7200,31 @@
             this.hintList = [];
         }
         onEnable() {
-            this.btnClose.on(Laya.Event.CLICK, this, e => {
+            this.bg.on(Laya.Event.CLICK, this, e => {
+                console.log("click");
                 this.doNextStep();
             });
             EventManager.sub("game/closeHint", this, e => {
                 this.close();
-                EventManager.pub("game/hintEnd");
             });
         }
-        onOpened(hintList) {
-            this.hintList = hintList;
+        onOpened(typeList) {
+            this.hintList = typeList;
             this.step = 0;
             this.updateStepRender();
-            if (this.hintList.length > 1) {
-                EventManager.pub("game/changeHint", this.step);
-            }
         }
         updateStepRender() {
-            this.txt.text = this.hintList[this.step];
+            this.inner["_children"].forEach((item) => {
+                item.visible = item.name == this.hintList[this.step];
+            });
         }
         doNextStep() {
             if (this.step >= this.hintList.length - 1) {
                 this.close();
-                if (this.hintList.length > 1) {
-                    EventManager.pub("game/hintEnd");
-                }
                 return;
             }
             this.step++;
             this.updateStepRender();
-            if (this.hintList.length > 1) {
-                EventManager.pub("game/changeHint", this.step);
-            }
         }
     }
 
@@ -7350,6 +7424,39 @@
                 }
                 this.prg.width = (1 - percent) * 695;
             });
+        }
+    }
+
+    class ModalAudioTest extends ui.modal.ModalAudioTestUI {
+        onEnable() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.btnSuccess.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
+                    yield NetController.reqChechAudio(true);
+                    this.close();
+                }));
+                this.btnCancel.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
+                    yield NetController.reqChechAudio(true);
+                    this.close();
+                }));
+                this.btnClose.on(Laya.Event.CLICK, this, e => {
+                    this.close();
+                });
+                this.checkLocal();
+            });
+        }
+        checkLocal() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.prg.mask.width = 0;
+                this.localTrack = yield AgoraRTC.createMicrophoneAudioTrack({});
+                this.timer.frameLoop(1, this, e => {
+                    let level = this.localTrack.getVolumeLevel();
+                    this.prg.mask.width = 307 * level;
+                });
+            });
+        }
+        onClosed() {
+            this.timer.clearAll(this);
+            this.localTrack && this.localTrack.close();
         }
     }
 
@@ -7806,8 +7913,9 @@
             this.btnCancel.on(Laya.Event.CLICK, this, e => {
                 this.close();
             });
+            console.log(data);
             this.btnSure.on(Laya.Event.CLICK, this, e => {
-                Utils.doCopy(data.roomNum);
+                Utils.doCopy(`https://www.theclueonline.com/?type=10004&roomId=${data.roomId}&roomPwd=${data.roomPwd}`);
                 this.close();
             });
         }
@@ -8343,9 +8451,7 @@
         onEnable() {
             let self = this;
             this.btnTestAudio.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
-                let flag = (yield Agora.testAudio(GameManager.userInfo.userId));
-                NetController.reqChechAudio(flag);
-                console.log("音频测试结果", flag);
+                UIManager.openModal("modal/ModalAudioTest.scene");
             }));
             this.userList.mouseHandler = new Laya.Handler(this, (e, idx) => {
                 let data = this.userList.array[idx];
@@ -8433,15 +8539,7 @@
         }
         updateRoomInfo() {
             let selfAudioTestedConf = GameManager.audioChecked.find(item => item.userId == GameManager.userInfo.userId);
-            if (selfAudioTestedConf) {
-                this.btnTestAudio.visible = false;
-                this.tagAudioTested.visible = true;
-                this.tagAudioTested.skin = `v2/${DataLang.lang}/img_test${selfAudioTestedConf.valid ? 1 : 0}.png`;
-            }
-            else {
-                this.btnTestAudio.visible = true;
-                this.tagAudioTested.visible = false;
-            }
+            this.btnTestAudio.visible = true;
             let isHost = GameManager.userInfo.userId == GameManager.roomInfo.masterUserId;
             this.btnStart.visible = false;
             this.btnNext.visible = false;
@@ -8553,6 +8651,7 @@
             SoundManager.togglePB(false);
         }
         onEnable() {
+            UIManager.showHint(["hintBook", "hintBookVoice", "hintBookNext"]);
             this.wrapReady.visible = false;
             this.boxPrg.visible = true;
             Laya.timer.frameLoop(1, this, e => {
@@ -8749,7 +8848,7 @@
                     if (config.script) {
                         scene.addComponent(config.script);
                     }
-                    console.log(this.wrap3d.visible, "viiivivi");
+                    UIManager.showHint(["hintSearch"]);
                 }));
             });
         }
@@ -8902,13 +9001,6 @@
             this.listTag.selectHandler = new Laya.Handler(this, this.changeSelectedTag);
             EventManager.sub("game/updateStepRender", this, e => {
                 this.changeStep();
-            });
-            EventManager.sub("game/hintEnd", this, e => {
-                this.listTag.selectedIndex = 1;
-            });
-            EventManager.sub("game/changeHint", this, e => {
-                console.log(e, "hint的提示");
-                this.listTag.selectedIndex = e;
             });
             this.smallModalCloser.on(Laya.Event.CLICK, this, this.closeAllSmallModal);
         }
@@ -9394,6 +9486,7 @@
             super();
         }
         onEnable() {
+            UIManager.showHint(["hintRole", "hintRoleNext"]);
             this.title.refresh();
             this.frameOnce(1, this, e => {
                 this.title.refresh();
@@ -9872,6 +9965,7 @@
             reg("modal/ModalAddTimeline.ts", ModalAddTimeline);
             reg("comp/InputSelect.ts", InputSelect);
             reg("modal/ModalAskChangeRole.ts", ModalAskChangeRole);
+            reg("modal/ModalAudioTest.ts", ModalAudioTest);
             reg("modal/ModalConfirm.ts", ModalConfirm);
             reg("modal/ModalDetail.ts", ModalDetail);
             reg("modal/ModalDetailList.ts", ModalDetailList);
@@ -9927,7 +10021,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneLoading.scene";
+    GameConfig.startScene = "modal/ModalMessage.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
