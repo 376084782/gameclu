@@ -8504,7 +8504,9 @@
             this.userList.mouseHandler = new Laya.Handler(this, (e, idx) => {
                 let data = this.userList.array[idx];
                 if (e.type == "click") {
-                    UIManager.openModal("modal/ModalInfo.scene", false, data);
+                    if (data.userId) {
+                        UIManager.openModal("modal/ModalInfo.scene", false, data);
+                    }
                 }
             });
             this.userList.renderHandler = new Laya.Handler(this, (cell) => {
