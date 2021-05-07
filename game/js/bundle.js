@@ -421,6 +421,10 @@
         }
     };
     DataLang.txt = {
+        endTalkng: {
+            en: "Tea Party",
+            ch: "茶话会"
+        },
         hintVote: {
             ch: "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会作为嫌疑犯被逮捕。",
             en: `Please think carefully in 2 minutes and throw your killer in your mind. Click the avatar of the character and confirm. Once you click confirm, the vote will not be changed, and the player with the highest vote will be arrested as a suspect.`
@@ -1193,9 +1197,11 @@
         static changePointer(type = "pointer") {
             if (type == "pointer") {
                 Laya.Browser.document.body.className = "cursor-pointer";
+                this.flagTargetIsClu = true;
             }
             else {
                 Laya.Browser.document.body.className = "";
+                this.flagTargetIsClu = false;
             }
         }
         static get flagDialogOpened() {
@@ -1380,6 +1386,7 @@
             });
         }
     }
+    UIManager.flagTargetIsClu = false;
     UIManager.changedHintItem = [];
     UIManager.flagShowDetail = false;
     UIManager.closeOnSide = [];
@@ -3429,6 +3436,37 @@
         }
     }
 
+    class SoundManager {
+        static playEffect(url) {
+            Laya.SoundManager.playSound(url);
+        }
+        static playBgm(url) {
+            Laya.SoundManager.playMusic(url);
+        }
+        static playPB(url) {
+            this.soundPB = Laya.SoundManager.playSound(url);
+            this.togglePB(this.flagPlayPB);
+        }
+        static togglePB(flag) {
+            if (flag == undefined) {
+                this.flagPlayPB = !this.flagPlayPB;
+            }
+            else {
+                this.flagPlayPB = flag;
+            }
+            if (!this.soundPB) {
+                return;
+            }
+            if (this.flagPlayPB) {
+                this.soundPB.resume();
+            }
+            else {
+                this.soundPB.pause();
+            }
+        }
+    }
+    SoundManager.flagPlayPB = true;
+
     class Oprate3dTool {
         static get events() {
             let config = Scene3dConfig.getConfigByName(this.sceneName);
@@ -3528,14 +3566,17 @@
                 let outHitResult = new Laya.HitResult();
                 this.camera3d.viewportPointToRay(point, ray);
                 this.scene3d.physicsSimulation.rayCast(ray, outHitResult, 999999, Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1);
+                let flagTrigerClu = false;
                 if (outHitResult.succeeded) {
                     let nodeName = outHitResult.collider.owner["nodeName"];
                     let handlerData = this.events[nodeName];
                     if (handlerData) {
                         let handler = new Laya.Handler(handlerData.caller, handlerData.method);
+                        flagTrigerClu = true;
                         handler.runWith(outHitResult.collider.owner);
                     }
                 }
+                SoundManager.playEffect(`sound/${flagTrigerClu ? "find" : "err"}.mp3`);
             });
             this.wrap3d.on(Laya.Event.MOUSE_DOWN, this, e => {
                 this.lastMousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
@@ -6102,7 +6143,7 @@
                 return;
             }
             let bgSign = btnSign.getChildByName("img");
-            bgSign.skin = `v2/${DataLang.lang}/img_btn_tag${selDetailData.order ? 1 : 0}.png`;
+            bgSign.skin = `v2/${DataLang.lang}/img_marked${selDetailData.order ? 1 : 0}.png`;
             img.visible = true;
             btnSign.visible = true;
             btnShare.visible = false;
@@ -6189,6 +6230,7 @@
         onEnable() {
             let oldScale = this.owner.scaleX;
             this.owner.on(Laya.Event.MOUSE_DOWN, this, e => {
+                SoundManager.playEffect("sound/btn.mp3");
                 Utils.asyncTween(this.owner, { scaleX: oldScale * 0.9, scaleY: oldScale * 0.9 }, 100);
             });
             Laya.stage.on(Laya.Event.MOUSE_UP, this, e => {
@@ -6226,12 +6268,18 @@
                 roleName.text = roleData.roleName;
                 imgRole.skin = roleData.img;
                 playerName.text = data.username;
-                selfSelect.visible = GameManager.talkingUserId == data.userId;
+                if (this.isFreeTalking) {
+                    selfSelect.visible = Agora.listTalking.indexOf(data.userId) > -1;
+                }
+                else {
+                    selfSelect.visible = GameManager.talkingUserId == data.userId;
+                }
                 let detailBox = cell.getChildByName("detailBox");
                 detailBox.setData(this.getDetailList(data.userId));
             });
             this.timer.loop(500, this, e => {
                 Agora.checkVolumn();
+                this.listUserTalking.refresh();
             });
             this.listUserTalking.array = GameManager.roomUserList;
             this.listUserTalking.width =
@@ -6937,7 +6985,7 @@
                 let selectedUserId = GameManager.selectRoleMapRoleToUser[data.id];
                 if (selectedUserId) {
                     let userData = GameManager.getRoomUserById(selectedUserId);
-                    playerName.text = `${userData.username}`;
+                    playerName.text = Utils.subString(userData.username, 14);
                 }
                 else {
                     playerName.text = "";
@@ -8488,7 +8536,7 @@
                 }
                 else {
                     username.color = isSelf ? "#feb853" : "#fff";
-                    username.text = `${data.username}`;
+                    username.text = Utils.subString(data.username, 14);
                     avatar.skin = data.avatar;
                 }
             });
@@ -8616,31 +8664,6 @@
         }
     }
 
-    class SoundManager {
-        static playPB(url) {
-            this.soundPB = Laya.SoundManager.playSound(url);
-            this.togglePB(this.flagPlayPB);
-        }
-        static togglePB(flag) {
-            if (flag == undefined) {
-                this.flagPlayPB = !this.flagPlayPB;
-            }
-            else {
-                this.flagPlayPB = flag;
-            }
-            if (!this.soundPB) {
-                return;
-            }
-            if (this.flagPlayPB) {
-                this.soundPB.resume();
-            }
-            else {
-                this.soundPB.pause();
-            }
-        }
-    }
-    SoundManager.flagPlayPB = true;
-
     class SceneBook extends ui.scene.SceneBookUI {
         constructor() {
             super(...arguments);
@@ -8736,7 +8759,7 @@
         onOpened() {
             return __awaiter(this, void 0, void 0, function* () {
                 GameManager.step = "ANALYSE";
-                GameManager.timeTitle = "复盘";
+                GameManager.timeTitle = DataLang.getTxtByType("endTalkng");
                 for (let i = 1; i < 8; i++) {
                     let userName = this.wrap.getChildByName("role" + i);
                     if (userName) {
@@ -9508,7 +9531,7 @@
                     img.visible = true;
                     roleShape.visible = false;
                     let userData = GameManager.getRoomUserById(selectedUserId);
-                    playerName.text = `${userData.username}`;
+                    playerName.text = Utils.subString(userData.username, 14);
                     if (GameManager.selfSelectRoleId == data.id) {
                         selfSelect.visible = true;
                     }
@@ -9553,7 +9576,7 @@
                 img.skin = roleData.img;
                 let roleName = cell.getChildByName("roleName");
                 roleName.text = roleData.roleName;
-                playerName.text = `${data.username}`;
+                playerName.text = Utils.subString(data.username, 14);
                 selfSelect.visible = GameManager.talkingUserId == data.userId;
             });
             this.btnNext.on(Laya.Event.CLICK, this, e => {
@@ -10021,7 +10044,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "modal/ModalMessage.scene";
+    GameConfig.startScene = "component/GamaCluDetail.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -10065,6 +10088,7 @@
                 window["Agora"] = Agora;
                 window["Utils"] = Utils;
                 window["LoadingManager"] = LoadingManager;
+                SoundManager.playBgm("sound/bgm.mp3");
                 yield UIManager.init();
                 yield NetController.doLogin();
                 Laya.Scene.open("scene/SceneLoading.scene", false, { showPrg3d: false });
