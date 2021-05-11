@@ -421,6 +421,10 @@
         }
     };
     DataLang.txt = {
+        speakingTurn: {
+            en: "Your turn",
+            ch: "您的回合"
+        },
         endTalkng: {
             en: "Tea Party",
             ch: "茶话会"
@@ -2442,7 +2446,7 @@
             let listRes1 = listRes.sort((a, b) => {
                 let shareTime1 = a.shareTime || 0;
                 let shareTime2 = b.shareTime || 0;
-                return shareTime2 - shareTime1;
+                return shareTime1 - shareTime2;
             });
             return listRes1;
         }
@@ -3443,6 +3447,9 @@
         static playBgm(url) {
             Laya.SoundManager.playMusic(url);
         }
+        static stopBgm() {
+            Laya.SoundManager.stopMusic();
+        }
         static playPB(url) {
             this.soundPB = Laya.SoundManager.playSound(url);
             this.togglePB(this.flagPlayPB);
@@ -3569,6 +3576,7 @@
                 let flagTrigerClu = false;
                 if (outHitResult.succeeded) {
                     let nodeName = outHitResult.collider.owner["nodeName"];
+                    console.log(nodeName, 'nodeNamenodeNamenodeName');
                     let handlerData = this.events[nodeName];
                     if (handlerData) {
                         let handler = new Laya.Handler(handlerData.caller, handlerData.method);
@@ -3815,22 +3823,23 @@
         DetailItemIdConfig[DetailItemIdConfig["underSofa"] = 54] = "underSofa";
         DetailItemIdConfig[DetailItemIdConfig["jipiao"] = 55] = "jipiao";
         DetailItemIdConfig[DetailItemIdConfig["ljt3"] = 56] = "ljt3";
-        DetailItemIdConfig[DetailItemIdConfig["ztxs"] = 57] = "ztxs";
-        DetailItemIdConfig[DetailItemIdConfig["biaokuang"] = 58] = "biaokuang";
-        DetailItemIdConfig[DetailItemIdConfig["janePhone"] = 59] = "janePhone";
-        DetailItemIdConfig[DetailItemIdConfig["joeTicket"] = 60] = "joeTicket";
-        DetailItemIdConfig[DetailItemIdConfig["joePhone"] = 61] = "joePhone";
-        DetailItemIdConfig[DetailItemIdConfig["joePaper"] = 62] = "joePaper";
-        DetailItemIdConfig[DetailItemIdConfig["joeBook"] = 63] = "joeBook";
-        DetailItemIdConfig[DetailItemIdConfig["joePen"] = 64] = "joePen";
-        DetailItemIdConfig[DetailItemIdConfig["joePaint"] = 65] = "joePaint";
-        DetailItemIdConfig[DetailItemIdConfig["joeXL"] = 66] = "joeXL";
-        DetailItemIdConfig[DetailItemIdConfig["yaoshi"] = 67] = "yaoshi";
-        DetailItemIdConfig[DetailItemIdConfig["pmt"] = 68] = "pmt";
-        DetailItemIdConfig[DetailItemIdConfig["wilsonComputer"] = 69] = "wilsonComputer";
-        DetailItemIdConfig[DetailItemIdConfig["phoneTC1"] = 70] = "phoneTC1";
-        DetailItemIdConfig[DetailItemIdConfig["phoneTC2"] = 71] = "phoneTC2";
-        DetailItemIdConfig[DetailItemIdConfig["ytp"] = 72] = "ytp";
+        DetailItemIdConfig[DetailItemIdConfig["ljt4"] = 57] = "ljt4";
+        DetailItemIdConfig[DetailItemIdConfig["ztxs"] = 58] = "ztxs";
+        DetailItemIdConfig[DetailItemIdConfig["biaokuang"] = 59] = "biaokuang";
+        DetailItemIdConfig[DetailItemIdConfig["janePhone"] = 60] = "janePhone";
+        DetailItemIdConfig[DetailItemIdConfig["joeTicket"] = 61] = "joeTicket";
+        DetailItemIdConfig[DetailItemIdConfig["joePhone"] = 62] = "joePhone";
+        DetailItemIdConfig[DetailItemIdConfig["joePaper"] = 63] = "joePaper";
+        DetailItemIdConfig[DetailItemIdConfig["joeBook"] = 64] = "joeBook";
+        DetailItemIdConfig[DetailItemIdConfig["joePen"] = 65] = "joePen";
+        DetailItemIdConfig[DetailItemIdConfig["joePaint"] = 66] = "joePaint";
+        DetailItemIdConfig[DetailItemIdConfig["joeXL"] = 67] = "joeXL";
+        DetailItemIdConfig[DetailItemIdConfig["yaoshi"] = 68] = "yaoshi";
+        DetailItemIdConfig[DetailItemIdConfig["pmt"] = 69] = "pmt";
+        DetailItemIdConfig[DetailItemIdConfig["wilsonComputer"] = 70] = "wilsonComputer";
+        DetailItemIdConfig[DetailItemIdConfig["phoneTC1"] = 71] = "phoneTC1";
+        DetailItemIdConfig[DetailItemIdConfig["phoneTC2"] = 72] = "phoneTC2";
+        DetailItemIdConfig[DetailItemIdConfig["ytp"] = 73] = "ytp";
     })(DetailItemIdConfig || (DetailItemIdConfig = {}));
     var DetailItemIdConfig$1 = DetailItemIdConfig;
 
@@ -4333,7 +4342,7 @@
                     key: "jianli",
                     title: "简历",
                     content: "",
-                    img: "book1/jianli.png",
+                    img: "book1/JR106.png",
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -4382,7 +4391,7 @@
             UIManager.openModal("modalOperate/scene1/WilsonComputer1.scene", false, {}, true);
         }
         static phone1() {
-            UIManager.openModal("modalOperate/scene1/ModalPhone.scene", false, {
+            UIManager.openModal("modalOperate/wilson/PhoneWhilson.scene", false, {
                 imgList: ["book1/WR009.png"],
                 password: 2633,
                 callBack: new Laya.Handler(this, e => {
@@ -4486,7 +4495,7 @@
                     key: "biji",
                     title: "笔记本",
                     content: "",
-                    img: "book1/WR008.jpg",
+                    img: "book1/WR008.png",
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -4569,12 +4578,24 @@
                 }
             ]);
         }
+        static clickLJT2(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.ljt4,
+                    key: "ljt4",
+                    title: "垃圾桶里的迷药盒子",
+                    content: "",
+                    img: "book1/LR008.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
         static clickLJT(target) {
             UIManager.showDetail([
                 {
                     id: DetailItemIdConfig$1.ljt3,
                     key: "ljt3",
-                    title: "垃圾桶里的迷药盒子",
+                    title: "垃圾桶里的迷药盒子说明书",
                     content: "",
                     img: "book1/LR009.jpg",
                     sceneFrom: GameManager.currentScene
@@ -4737,7 +4758,7 @@
                     key: "janePhone",
                     title: "手机记录",
                     content: "",
-                    img: "book1/JR011.jpg",
+                    img: "book1/JR011.png",
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -5200,6 +5221,11 @@
                     caller: RoomLeo,
                     method: RoomLeo.clickLJT,
                     nodeName: "1.对象006"
+                },
+                ljt2: {
+                    caller: RoomLeo,
+                    method: RoomLeo.clickLJT2,
+                    nodeName: "1.Box2131641903"
                 },
                 ztxs: {
                     caller: RoomLeo,
@@ -5750,6 +5776,15 @@
         (function (modalOperate) {
             var wilson;
             (function (wilson) {
+                class PhoneWhilsonUI extends Dialog {
+                    constructor() { super(); }
+                    createChildren() {
+                        super.createChildren();
+                        this.loadScene("modalOperate/wilson/PhoneWhilson");
+                    }
+                }
+                wilson.PhoneWhilsonUI = PhoneWhilsonUI;
+                REG("ui.modalOperate.wilson.PhoneWhilsonUI", PhoneWhilsonUI);
                 class WilsonPMTUI extends Dialog {
                     constructor() { super(); }
                     createChildren() {
@@ -6411,6 +6446,17 @@
         }
     }
 
+    class LangLabel extends Laya.Script {
+        constructor() {
+            super(...arguments);
+            this.type = "";
+        }
+        onEnable() {
+            this.owner.font = "FZZYJW";
+            this.owner.text = DataLang.getTxtByType(this.type);
+        }
+    }
+
     class GameTalkingDetailBox extends Laya.Box {
         constructor() {
             super();
@@ -6934,17 +6980,6 @@
                     console.log(data);
                 }
             });
-        }
-    }
-
-    class LangLabel extends Laya.Script {
-        constructor() {
-            super(...arguments);
-            this.type = "";
-        }
-        onEnable() {
-            this.owner.font = "FZZYJW";
-            this.owner.text = DataLang.getTxtByType(this.type);
         }
     }
 
@@ -7963,7 +7998,7 @@
             });
             console.log(data);
             this.btnSure.on(Laya.Event.CLICK, this, e => {
-                Utils.doCopy(`https://www.theclueonline.com/?type=10004&roomId=${data.roomId}&roomPwd=${data.roomPwd}`);
+                Utils.doCopy(`<a href="https://www.theclueonline.com/?type=10004&roomId=${data.roomId}&roomPwd=${data.roomPwd}">点击加入房间</a>`);
                 this.close();
             });
         }
@@ -8421,7 +8456,7 @@
                         key: "wilsonComputer",
                         title: "亚马逊电子收据",
                         content: "经过搜索，电脑没有内容，在回收站找到亚马逊电子收据",
-                        img: "book1/WR003.png",
+                        img: "book1/WR003.jpg",
                         sceneFrom: GameManager.currentScene
                     }
                 ]);
@@ -8538,7 +8573,7 @@
                 }
                 else {
                     username.color = isSelf ? "#feb853" : "#fff";
-                    username.text = Utils.subString(data.username, 14);
+                    username.text = Utils.subString(data.username, 10);
                     avatar.skin = data.avatar;
                 }
             });
@@ -8873,6 +8908,7 @@
                     if (config.script) {
                         scene.addComponent(config.script);
                     }
+                    SoundManager.playBgm("sound/bgm.mp3");
                     UIManager.showHint(["hintSearch"]);
                 }));
             });
@@ -9016,6 +9052,7 @@
             this.btnExit.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
                 yield NetController.leaveScene();
                 GameManager.currentScene = "";
+                SoundManager.stopBgm();
                 self.updateRender();
                 self.changeMainWrap("sceneChanger");
             }));
@@ -9972,6 +10009,7 @@
             reg("comp/GameExiter.ts", GameExiter);
             reg("comp/WrapReady.ts", WrapReady);
             reg("common/LangImg.ts", LangImg);
+            reg("common/LangLabel.ts", LangLabel);
             reg("comp/GameTalkingDetailBox.ts", GameTalkingDetailBox);
             reg("comp/GameTimeline.ts", GameTimeline);
             reg("comp/GameChatBox.ts", GameChatBox);
@@ -9981,7 +10019,6 @@
             reg("comp/GameNPC.ts", GameNPC);
             reg("comp/GameSetting.ts", GameSetting);
             reg("comp/ListKey.ts", ListKey);
-            reg("common/LangLabel.ts", LangLabel);
             reg("comp/GameVote.ts", GameVote);
             reg("comp/GameWrapBook.ts", GameWrapBook);
             reg("comp/GameWrapMine.ts", GameWrapMine);
@@ -10046,7 +10083,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GamaCluDetail.scene";
+    GameConfig.startScene = "modalOperate/jane/PhoneJane.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -10090,7 +10127,6 @@
                 window["Agora"] = Agora;
                 window["Utils"] = Utils;
                 window["LoadingManager"] = LoadingManager;
-                SoundManager.playBgm("sound/bgm.mp3");
                 yield UIManager.init();
                 yield NetController.doLogin();
                 Laya.Scene.open("scene/SceneLoading.scene", false, { showPrg3d: false });
