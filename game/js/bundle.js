@@ -8629,8 +8629,14 @@
             this.btnStart.visible = false;
             this.btnNext.visible = false;
             this.updateToggleBtn();
-            this.checkPublic.mouseEnabled = isHost;
-            this.checkPublic.selected = GameManager.roomInfo.publicFlag == 1;
+            if (!GameManager.roomInfo.roomPwd) {
+                this.checkPublic.selected = true;
+                this.checkPublic.mouseEnabled = false;
+            }
+            else {
+                this.checkPublic.mouseEnabled = isHost;
+                this.checkPublic.selected = GameManager.roomInfo.publicFlag == 1;
+            }
             this.txtRoomId.text = "" + GameManager.roomInfo.roomNum;
             this.txtTitle.refresh();
             this.wrapUserList.visible = true;
@@ -10083,7 +10089,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "modalOperate/jane/PhoneJane.scene";
+    GameConfig.startScene = "scene/SceneBeforeStart.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
