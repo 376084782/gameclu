@@ -317,7 +317,7 @@
         },
         btnTuichu: {
             ch: "v2/ch/img_tuichu.png",
-            en: "v2/en/img_btn_switch.png"
+            en: "v2/en/img_tuichu.png"
         },
         btnSwitch: {
             ch: "v2/ch/img_btn_switch.png",
@@ -421,6 +421,14 @@
         }
     };
     DataLang.txt = {
+        floor2: {
+            en: "Second Floor",
+            ch: "二楼"
+        },
+        floor1: {
+            en: "First Floor",
+            ch: "一楼"
+        },
         speakingTurn: {
             en: "Your turn",
             ch: "您的回合"
@@ -662,8 +670,12 @@
             ch: "自由发言"
         },
         CONCLUSION: {
-            en: "CONCLUSION",
+            en: "Conclusion Talk",
             ch: "总结发言"
+        },
+        VOTING: {
+            en: "Voting",
+            ch: "投票中"
         },
         VOTE: {
             en: "VOTE",
@@ -1671,7 +1683,7 @@
                     }
                     case "REQUEST_ENTER_CONCLUSION": {
                         GameManager.step = "CONCLUSION";
-                        GameManager.timeTitle = "总结发言";
+                        GameManager.timeTitle = DataLang.getTxtByType("CONCLUSION");
                         EventManager.pub("game/updateTimeLeft");
                         Agora.joinRoom();
                         UIManager.showHint(["hintConclusion"]);
@@ -1794,7 +1806,7 @@
                     case "REQUEST_ENTER_VOTE": {
                         GameManager.step = "VOTE";
                         Agora.quitRoom();
-                        GameManager.timeTitle = "投票中...";
+                        GameManager.timeTitle = DataLang.getTxtByType("VOTING");
                         "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会是作为嫌疑犯被逮捕";
                         UIManager.showHint(["hintVote"]);
                         EventManager.pub("game/updateStepRender");
@@ -10089,7 +10101,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBeforeStart.scene";
+    GameConfig.startScene = "modal/ModalShare.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
