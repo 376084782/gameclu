@@ -203,22 +203,6 @@
     EventManager.eventDispatcher = new EventDispatcher();
     window["EventManager"] = EventManager;
 
-    class LogManager {
-        static log(...[]) {
-            console.log(arguments);
-        }
-        static info(...[]) {
-            console.info(arguments);
-        }
-        static warn(...[]) {
-            console.warn(arguments);
-        }
-        static error(...[]) {
-            console.error(arguments);
-        }
-    }
-    LogManager.logLev = 0;
-
     class DataLang {
         static set lang(lang) {
             this._lang = lang == "en-US" ? "en" : "ch";
@@ -1203,209 +1187,21 @@
         }
     ];
 
-    class UIManager {
-        static playVideo(url = `video/result_book1_${DataLang.lang}.mp4`) {
-            let video = new Laya.Video(Laya.stage.width, Laya.stage.height);
-            video.load(url);
-            Laya.stage.addChild(video);
-            video.play();
+    class LogManager {
+        static log(...[]) {
+            console.log(arguments);
         }
-        static changePointer(type = "pointer") {
-            if (type == "pointer") {
-                Laya.Browser.document.body.className = "cursor-pointer";
-                this.flagTargetIsClu = true;
-            }
-            else {
-                Laya.Browser.document.body.className = "";
-                this.flagTargetIsClu = false;
-            }
+        static info(...[]) {
+            console.info(arguments);
         }
-        static get flagDialogOpened() {
-            return Laya.Dialog.manager.numChildren > 0;
+        static warn(...[]) {
+            console.warn(arguments);
         }
-        static hideItemHintToast() {
-            if (this.spToast) {
-                this.spToast.removeSelf();
-            }
-        }
-        static showItemHintToast(txtHint, pos) {
-            return __awaiter(this, void 0, void 0, function* () {
-                Laya.stage.addChild(this.spToast);
-                let spTxt = this.spToast.getChildByName("label");
-                spTxt.text = txtHint;
-                this.spToast.width = spTxt.width + 50;
-                this.spToast.pivot(this.spToast.width / 2, this.spToast.height / 2);
-                this.spToast.pos(pos.x, pos.y);
-            });
-        }
-        static init() {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!this.spToast) {
-                    let ToastItemName = (yield Utils.createPrefab("prefab/ToastItemName.json"));
-                    this.spToast = Laya.Pool.getItemByCreateFun("ToastItemName", ToastItemName.create, ToastItemName);
-                    this.spToast.zOrder = 100000;
-                }
-                UIConfig.popupBgColor = "#000000";
-                UIConfig.popupBgAlpha = 0.85;
-                Laya.Dialog.manager.closeEffectHandler = Laya.Handler.create(this, (dialog) => {
-                    if (dialog.isShowEffect) {
-                        let centerX = (Laya.stage.width - dialog.width) / 2;
-                        let centerY = (Laya.stage.height - dialog.height) / 2;
-                        dialog.y = centerY;
-                        dialog.x = centerX;
-                        Laya.Tween.to(dialog, {
-                            x: centerX,
-                            y: centerY + 200,
-                            alpha: 0
-                        }, 600, Laya.Ease.backInOut, Laya.Handler.create(Laya.Dialog.manager, Laya.Dialog.manager.doClose, [dialog]));
-                    }
-                }, null, false);
-                Laya.Dialog.manager.popupEffectHandler = Laya.Handler.create(Laya.Dialog.manager, dialog => {
-                    if (dialog.isShowEffect) {
-                        let centerX = (Laya.stage.width - dialog.width) / 2;
-                        let centerY = (Laya.stage.height - dialog.height) / 2;
-                        dialog.y = centerY;
-                        dialog.x = centerX;
-                        let handler = Laya.Handler.create(Laya.Dialog.manager, Laya.Dialog.manager.doOpen, [dialog]);
-                        handler.run();
-                        Laya.Tween.from(dialog, {
-                            x: centerX,
-                            y: centerY + 200,
-                            alpha: 0
-                        }, 600, Laya.Ease.backInOut);
-                    }
-                }, null, false);
-            });
-        }
-        static showDetail(dataList, withBtns = true) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (this.flagShowDetail) {
-                    return;
-                }
-                this.flagShowDetail = true;
-                if (dataList.length > 1) {
-                    yield this.openModal("modal/ModalDetailList.scene", false, {
-                        list: dataList,
-                        withBtns
-                    }, true);
-                }
-                else {
-                    yield this.openModal("modal/ModalDetail.scene", false, {
-                        data: dataList[0],
-                        withBtns
-                    }, true);
-                }
-                this.flagShowDetail = false;
-            });
-        }
-        static showWaiting() {
-            Laya.Scene.open("scene/SceneWaiting.scene", false);
-        }
-        static hideWaiting() {
-            Laya.Scene.close("scene/SceneWaiting.scene");
-        }
-        static checkFirstHint() {
-            let isMaster = GameManager.roomInfo.masterUserId == GameManager.userInfo.userId;
-            UIManager.showHint(["hintTestAudio", "hintShare"]);
-        }
-        static showHint(typeList) {
-            let jumpHint = Laya.LocalStorage.getItem("jumpHint") || GameManager.jumpHint;
-            if (jumpHint) {
-                return;
-            }
-            else if (jumpHint == undefined) {
-                UIManager.showConfirm({
-                    content: DataLang.getTxtByType("jump"),
-                    onCancel() {
-                        GameManager.jumpHint = false;
-                    },
-                    onSure() {
-                        Laya.LocalStorage.setItem("jumpHint", "1");
-                        GameManager.jumpHint = true;
-                        EventManager.pub("game/closeHint");
-                    }
-                });
-            }
-            let strType = typeList.join(",");
-            if (GameManager.hintedList.indexOf(strType) > -1) {
-                return;
-            }
-            GameManager.hintedList.push(strType);
-            UIManager.goScene("component/WrapTip.scene", false, typeList);
-        }
-        static goHall() {
-            console.log("返回大厅");
-            if (window.parent) {
-                window.parent.postMessage({
-                    type: "goBackHall"
-                }, "*");
-            }
-            else {
-                location.href = "http://192.168.10.100:8080/theclueonline#/game";
-            }
-        }
-        static goScene(url, closeOther = true, params = {}) {
-            UIManager.hideItemHintToast();
-            return new Promise(rsv => {
-                Laya.Scene.open(url, closeOther, params, new Laya.Handler(this, e => {
-                    rsv(null);
-                }));
-            });
-        }
-        static openFullModal(url, closeOther = false, params = {}) {
-            UIManager.hideItemHintToast();
-            Laya.View.open(url, closeOther, params);
-        }
-        static openModal(url, closeOther = false, params = {}, closeOnSide = false) {
-            return new Promise((rsv, rej) => {
-                this.closeOnSide.push(closeOnSide);
-                UIConfig.closeDialogOnSide = closeOnSide;
-                UIManager.hideItemHintToast();
-                Laya.Dialog.open(url, closeOther, params, new Laya.Handler(this, e => {
-                    rsv(null);
-                }));
-            });
-        }
-        static showMessage(content) {
-            this.openModal("modal/ModalMessage.scene", false, { content });
-        }
-        static showConfirm({ content, onSure, onCancel }) {
-            this.openModal("modal/ModalConfirm.scene", false, {
-                content,
-                onSure,
-                onCancel
-            });
-        }
-        static closeConfirm() {
-            Laya.Dialog.close("modal/ModalConfirm.scene");
-        }
-        static closeModal(url) {
-            Laya.Dialog.close(url);
-        }
-        static showToast(txt) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!this.toast) {
-                    let prefab = (yield Utils.createPrefab("prefab/toast.json"));
-                    this.toast = Laya.Pool.getItemByCreateFun("toast", prefab.create, prefab);
-                    this.toast.alpha = 0;
-                    Laya.stage.addChild(this.toast);
-                }
-                this.toast.centerY = -100;
-                this.toast.alpha = 0;
-                let spTxt = this.toast.getChildByName("txt");
-                spTxt.text = txt;
-                Laya.Tween.clearAll(this.toast);
-                Laya.timer.clearAll(this.toast);
-                Utils.asyncTween(this.toast, { centerY: -200, alpha: 1 }, 200);
-                yield Utils.asyncByTime(1000, this.toast);
-                Utils.asyncTween(this.toast, { centerY: -100, alpha: 0 }, 200);
-            });
+        static error(...[]) {
+            console.error(arguments);
         }
     }
-    UIManager.flagTargetIsClu = false;
-    UIManager.changedHintItem = [];
-    UIManager.flagShowDetail = false;
-    UIManager.closeOnSide = [];
+    LogManager.logLev = 0;
 
     class Agora {
         static instance() {
@@ -2546,7 +2342,7 @@
         roomName: "",
         roomNum: 0,
         publicFlag: 1,
-        gsId: 1
+        gsId: 2
     };
     GameManager.voteMap = {};
     GameManager.userInfo = {
@@ -3452,6 +3248,1432 @@
         }
     }
 
+    class UIManager {
+        static playVideo(url = `video/result_book1_${DataLang.lang}.mp4`) {
+            let video = new Laya.Video(Laya.stage.width, Laya.stage.height);
+            video.load(url);
+            Laya.stage.addChild(video);
+            video.play();
+        }
+        static changePointer(type = "pointer") {
+            if (type == "pointer") {
+                Laya.Browser.document.body.className = "cursor-pointer";
+                this.flagTargetIsClu = true;
+            }
+            else {
+                Laya.Browser.document.body.className = "";
+                this.flagTargetIsClu = false;
+            }
+        }
+        static get flagDialogOpened() {
+            return Laya.Dialog.manager.numChildren > 0;
+        }
+        static hideItemHintToast() {
+            if (this.spToast) {
+                this.spToast.removeSelf();
+            }
+        }
+        static showItemHintToast(txtHint, pos) {
+            return __awaiter(this, void 0, void 0, function* () {
+                Laya.stage.addChild(this.spToast);
+                let spTxt = this.spToast.getChildByName("label");
+                spTxt.text = txtHint;
+                this.spToast.width = spTxt.width + 50;
+                this.spToast.pivot(this.spToast.width / 2, this.spToast.height / 2);
+                this.spToast.pos(pos.x, pos.y);
+            });
+        }
+        static init() {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (!this.spToast) {
+                    let ToastItemName = (yield Utils.createPrefab("prefab/ToastItemName.json"));
+                    this.spToast = Laya.Pool.getItemByCreateFun("ToastItemName", ToastItemName.create, ToastItemName);
+                    this.spToast.zOrder = 100000;
+                }
+                UIConfig.popupBgColor = "#000000";
+                UIConfig.popupBgAlpha = 0.85;
+                Laya.Dialog.manager.closeEffectHandler = Laya.Handler.create(this, (dialog) => {
+                    if (dialog.isShowEffect) {
+                        let centerX = (Laya.stage.width - dialog.width) / 2;
+                        let centerY = (Laya.stage.height - dialog.height) / 2;
+                        dialog.y = centerY;
+                        dialog.x = centerX;
+                        Laya.Tween.to(dialog, {
+                            x: centerX,
+                            y: centerY + 200,
+                            alpha: 0
+                        }, 600, Laya.Ease.backInOut, Laya.Handler.create(Laya.Dialog.manager, Laya.Dialog.manager.doClose, [dialog]));
+                    }
+                }, null, false);
+                Laya.Dialog.manager.popupEffectHandler = Laya.Handler.create(Laya.Dialog.manager, dialog => {
+                    if (dialog.isShowEffect) {
+                        let centerX = (Laya.stage.width - dialog.width) / 2;
+                        let centerY = (Laya.stage.height - dialog.height) / 2;
+                        dialog.y = centerY;
+                        dialog.x = centerX;
+                        let handler = Laya.Handler.create(Laya.Dialog.manager, Laya.Dialog.manager.doOpen, [dialog]);
+                        handler.run();
+                        Laya.Tween.from(dialog, {
+                            x: centerX,
+                            y: centerY + 200,
+                            alpha: 0
+                        }, 600, Laya.Ease.backInOut);
+                    }
+                }, null, false);
+            });
+        }
+        static showDetail(dataList, withBtns = true) {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (this.flagShowDetail) {
+                    return;
+                }
+                this.flagShowDetail = true;
+                if (dataList.length > 1) {
+                    yield this.openModal("modal/ModalDetailList.scene", false, {
+                        list: dataList,
+                        withBtns
+                    }, true);
+                }
+                else {
+                    yield this.openModal("modal/ModalDetail.scene", false, {
+                        data: dataList[0],
+                        withBtns
+                    }, true);
+                }
+                this.flagShowDetail = false;
+            });
+        }
+        static showWaiting() {
+            Laya.Scene.open("scene/SceneWaiting.scene", false);
+        }
+        static hideWaiting() {
+            Laya.Scene.close("scene/SceneWaiting.scene");
+        }
+        static checkFirstHint() {
+            let isMaster = GameManager.roomInfo.masterUserId == GameManager.userInfo.userId;
+            UIManager.showHint(["hintTestAudio", "hintShare"]);
+        }
+        static showHint(typeList) {
+            let jumpHint = Laya.LocalStorage.getItem("jumpHint") || GameManager.jumpHint;
+            if (jumpHint) {
+                return;
+            }
+            else if (jumpHint == undefined) {
+                UIManager.showConfirm({
+                    content: DataLang.getTxtByType("jump"),
+                    onCancel() {
+                        GameManager.jumpHint = false;
+                    },
+                    onSure() {
+                        Laya.LocalStorage.setItem("jumpHint", "1");
+                        GameManager.jumpHint = true;
+                        EventManager.pub("game/closeHint");
+                    }
+                });
+            }
+            let strType = typeList.join(",");
+            if (GameManager.hintedList.indexOf(strType) > -1) {
+                return;
+            }
+            GameManager.hintedList.push(strType);
+            UIManager.goScene("component/WrapTip.scene", false, typeList);
+        }
+        static goHall() {
+            console.log("返回大厅");
+            if (window.parent) {
+                window.parent.postMessage({
+                    type: "goBackHall"
+                }, "*");
+            }
+            else {
+                location.href = "http://192.168.10.100:8080/theclueonline#/game";
+            }
+        }
+        static goScene(url, closeOther = true, params = {}) {
+            UIManager.hideItemHintToast();
+            return new Promise(rsv => {
+                Laya.Scene.open(url, closeOther, params, new Laya.Handler(this, e => {
+                    rsv(null);
+                }));
+            });
+        }
+        static openFullModal(url, closeOther = false, params = {}) {
+            UIManager.hideItemHintToast();
+            Laya.View.open(url, closeOther, params);
+        }
+        static openModal(url, closeOther = false, params = {}, closeOnSide = false) {
+            return new Promise((rsv, rej) => {
+                this.closeOnSide.push(closeOnSide);
+                UIConfig.closeDialogOnSide = closeOnSide;
+                UIManager.hideItemHintToast();
+                Laya.Dialog.open(url, closeOther, params, new Laya.Handler(this, e => {
+                    rsv(null);
+                }));
+            });
+        }
+        static showMessage(content) {
+            this.openModal("modal/ModalMessage.scene", false, { content });
+        }
+        static showConfirm({ content, onSure, onCancel }) {
+            this.openModal("modal/ModalConfirm.scene", false, {
+                content,
+                onSure,
+                onCancel
+            });
+        }
+        static closeConfirm() {
+            Laya.Dialog.close("modal/ModalConfirm.scene");
+        }
+        static closeModal(url) {
+            Laya.Dialog.close(url);
+        }
+        static showToast(txt) {
+            return __awaiter(this, void 0, void 0, function* () {
+                if (!this.toast) {
+                    let prefab = (yield Utils.createPrefab("prefab/toast.json"));
+                    this.toast = Laya.Pool.getItemByCreateFun("toast", prefab.create, prefab);
+                    this.toast.alpha = 0;
+                    Laya.stage.addChild(this.toast);
+                }
+                this.toast.centerY = -100;
+                this.toast.alpha = 0;
+                let spTxt = this.toast.getChildByName("txt");
+                spTxt.text = txt;
+                Laya.Tween.clearAll(this.toast);
+                Laya.timer.clearAll(this.toast);
+                Utils.asyncTween(this.toast, { centerY: -200, alpha: 1 }, 200);
+                yield Utils.asyncByTime(1000, this.toast);
+                Utils.asyncTween(this.toast, { centerY: -100, alpha: 0 }, 200);
+            });
+        }
+    }
+    UIManager.flagTargetIsClu = false;
+    UIManager.changedHintItem = [];
+    UIManager.flagShowDetail = false;
+    UIManager.closeOnSide = [];
+
+    var DetailItemIdConfig;
+    (function (DetailItemIdConfig) {
+        DetailItemIdConfig[DetailItemIdConfig["joeComputer"] = 0] = "joeComputer";
+        DetailItemIdConfig[DetailItemIdConfig["xieyin"] = 1] = "xieyin";
+        DetailItemIdConfig[DetailItemIdConfig["huochai"] = 2] = "huochai";
+        DetailItemIdConfig[DetailItemIdConfig["joe_to_jane"] = 3] = "joe_to_jane";
+        DetailItemIdConfig[DetailItemIdConfig["joe_to_annie"] = 4] = "joe_to_annie";
+        DetailItemIdConfig[DetailItemIdConfig["xiaopiao"] = 5] = "xiaopiao";
+        DetailItemIdConfig[DetailItemIdConfig["shuomingshu"] = 6] = "shuomingshu";
+        DetailItemIdConfig[DetailItemIdConfig["myjdj"] = 7] = "myjdj";
+        DetailItemIdConfig[DetailItemIdConfig["killerKnife"] = 8] = "killerKnife";
+        DetailItemIdConfig[DetailItemIdConfig["jane_to_joe"] = 9] = "jane_to_joe";
+        DetailItemIdConfig[DetailItemIdConfig["jane_to_annie"] = 10] = "jane_to_annie";
+        DetailItemIdConfig[DetailItemIdConfig["pmt1"] = 11] = "pmt1";
+        DetailItemIdConfig[DetailItemIdConfig["pmt2"] = 12] = "pmt2";
+        DetailItemIdConfig[DetailItemIdConfig["knife"] = 13] = "knife";
+        DetailItemIdConfig[DetailItemIdConfig["gun"] = 14] = "gun";
+        DetailItemIdConfig[DetailItemIdConfig["phoneWilson"] = 15] = "phoneWilson";
+        DetailItemIdConfig[DetailItemIdConfig["janeComputer"] = 16] = "janeComputer";
+        DetailItemIdConfig[DetailItemIdConfig["miyao"] = 17] = "miyao";
+        DetailItemIdConfig[DetailItemIdConfig["scene1PrinterPaper"] = 18] = "scene1PrinterPaper";
+        DetailItemIdConfig[DetailItemIdConfig["scene1DeskKey"] = 19] = "scene1DeskKey";
+        DetailItemIdConfig[DetailItemIdConfig["rubishPaper"] = 20] = "rubishPaper";
+        DetailItemIdConfig[DetailItemIdConfig["scene1Computer"] = 21] = "scene1Computer";
+        DetailItemIdConfig[DetailItemIdConfig["boxPaper"] = 22] = "boxPaper";
+        DetailItemIdConfig[DetailItemIdConfig["paintPaper"] = 23] = "paintPaper";
+        DetailItemIdConfig[DetailItemIdConfig["test11"] = 24] = "test11";
+        DetailItemIdConfig[DetailItemIdConfig["scene1JYSMS"] = 25] = "scene1JYSMS";
+        DetailItemIdConfig[DetailItemIdConfig["scene1DrivePaper"] = 26] = "scene1DrivePaper";
+        DetailItemIdConfig[DetailItemIdConfig["harrisTicket"] = 27] = "harrisTicket";
+        DetailItemIdConfig[DetailItemIdConfig["harrisBag"] = 28] = "harrisBag";
+        DetailItemIdConfig[DetailItemIdConfig["harrisRubish"] = 29] = "harrisRubish";
+        DetailItemIdConfig[DetailItemIdConfig["harrisLetter1"] = 30] = "harrisLetter1";
+        DetailItemIdConfig[DetailItemIdConfig["harrisLetter2"] = 31] = "harrisLetter2";
+        DetailItemIdConfig[DetailItemIdConfig["harrisPocket"] = 32] = "harrisPocket";
+        DetailItemIdConfig[DetailItemIdConfig["harrisId"] = 33] = "harrisId";
+        DetailItemIdConfig[DetailItemIdConfig["phoneHellen"] = 34] = "phoneHellen";
+        DetailItemIdConfig[DetailItemIdConfig["phoneHarris"] = 35] = "phoneHarris";
+        DetailItemIdConfig[DetailItemIdConfig["harrisRubish1"] = 36] = "harrisRubish1";
+        DetailItemIdConfig[DetailItemIdConfig["harrisXingli"] = 37] = "harrisXingli";
+        DetailItemIdConfig[DetailItemIdConfig["anfajsq"] = 38] = "anfajsq";
+        DetailItemIdConfig[DetailItemIdConfig["anfalajitong"] = 39] = "anfalajitong";
+        DetailItemIdConfig[DetailItemIdConfig["jiu"] = 40] = "jiu";
+        DetailItemIdConfig[DetailItemIdConfig["dangao"] = 41] = "dangao";
+        DetailItemIdConfig[DetailItemIdConfig["shoupa"] = 42] = "shoupa";
+        DetailItemIdConfig[DetailItemIdConfig["kfjl"] = 43] = "kfjl";
+        DetailItemIdConfig[DetailItemIdConfig["jianli"] = 44] = "jianli";
+        DetailItemIdConfig[DetailItemIdConfig["riji"] = 45] = "riji";
+        DetailItemIdConfig[DetailItemIdConfig["tonghuajilu"] = 46] = "tonghuajilu";
+        DetailItemIdConfig[DetailItemIdConfig["zdj"] = 47] = "zdj";
+        DetailItemIdConfig[DetailItemIdConfig["tzbg"] = 48] = "tzbg";
+        DetailItemIdConfig[DetailItemIdConfig["kfbg"] = 49] = "kfbg";
+        DetailItemIdConfig[DetailItemIdConfig["biji"] = 50] = "biji";
+        DetailItemIdConfig[DetailItemIdConfig["baozhi"] = 51] = "baozhi";
+        DetailItemIdConfig[DetailItemIdConfig["dgkfbd"] = 52] = "dgkfbd";
+        DetailItemIdConfig[DetailItemIdConfig["gjx"] = 53] = "gjx";
+        DetailItemIdConfig[DetailItemIdConfig["underSofa"] = 54] = "underSofa";
+        DetailItemIdConfig[DetailItemIdConfig["jipiao"] = 55] = "jipiao";
+        DetailItemIdConfig[DetailItemIdConfig["ljt3"] = 56] = "ljt3";
+        DetailItemIdConfig[DetailItemIdConfig["ljt4"] = 57] = "ljt4";
+        DetailItemIdConfig[DetailItemIdConfig["ztxs"] = 58] = "ztxs";
+        DetailItemIdConfig[DetailItemIdConfig["biaokuang"] = 59] = "biaokuang";
+        DetailItemIdConfig[DetailItemIdConfig["janePhone"] = 60] = "janePhone";
+        DetailItemIdConfig[DetailItemIdConfig["joeTicket"] = 61] = "joeTicket";
+        DetailItemIdConfig[DetailItemIdConfig["joePhone"] = 62] = "joePhone";
+        DetailItemIdConfig[DetailItemIdConfig["joePaper"] = 63] = "joePaper";
+        DetailItemIdConfig[DetailItemIdConfig["joeBook"] = 64] = "joeBook";
+        DetailItemIdConfig[DetailItemIdConfig["joePen"] = 65] = "joePen";
+        DetailItemIdConfig[DetailItemIdConfig["joePaint"] = 66] = "joePaint";
+        DetailItemIdConfig[DetailItemIdConfig["joeXL"] = 67] = "joeXL";
+        DetailItemIdConfig[DetailItemIdConfig["yaoshi"] = 68] = "yaoshi";
+        DetailItemIdConfig[DetailItemIdConfig["pmt"] = 69] = "pmt";
+        DetailItemIdConfig[DetailItemIdConfig["wilsonComputer"] = 70] = "wilsonComputer";
+        DetailItemIdConfig[DetailItemIdConfig["phoneTC1"] = 71] = "phoneTC1";
+        DetailItemIdConfig[DetailItemIdConfig["phoneTC2"] = 72] = "phoneTC2";
+        DetailItemIdConfig[DetailItemIdConfig["ytp"] = 73] = "ytp";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA001"] = 74] = "room2_PA001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA002"] = 75] = "room2_PA002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA003"] = 76] = "room2_PA003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA004"] = 77] = "room2_PA004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA005"] = 78] = "room2_PA005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA006"] = 79] = "room2_PA006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA007"] = 80] = "room2_PA007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA008"] = 81] = "room2_PA008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA009"] = 82] = "room2_PA009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_PA0010"] = 83] = "room2_PA0010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR001"] = 84] = "room2_AR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR002"] = 85] = "room2_AR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR003"] = 86] = "room2_AR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR004"] = 87] = "room2_AR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR005"] = 88] = "room2_AR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR006"] = 89] = "room2_AR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR007"] = 90] = "room2_AR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR008"] = 91] = "room2_AR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR001"] = 92] = "room2_MR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR002"] = 93] = "room2_MR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR003"] = 94] = "room2_MR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR004"] = 95] = "room2_MR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR005"] = 96] = "room2_MR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR006"] = 97] = "room2_MR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR007"] = 98] = "room2_MR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR008"] = 99] = "room2_MR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR009"] = 100] = "room2_MR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR001"] = 101] = "room2_OR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR002"] = 102] = "room2_OR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR003"] = 103] = "room2_OR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR004"] = 104] = "room2_OR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR005"] = 105] = "room2_OR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR006"] = 106] = "room2_OR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR007"] = 107] = "room2_OR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR008"] = 108] = "room2_OR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR009"] = 109] = "room2_OR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR010"] = 110] = "room2_OR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR001"] = 111] = "room2_JR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR002"] = 112] = "room2_JR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR003"] = 113] = "room2_JR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR004"] = 114] = "room2_JR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR005"] = 115] = "room2_JR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR006"] = 116] = "room2_JR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR007"] = 117] = "room2_JR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR008"] = 118] = "room2_JR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR009"] = 119] = "room2_JR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR010"] = 120] = "room2_JR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR001"] = 121] = "room2_CR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR002"] = 122] = "room2_CR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR003"] = 123] = "room2_CR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR004"] = 124] = "room2_CR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR005"] = 125] = "room2_CR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR006"] = 126] = "room2_CR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR007"] = 127] = "room2_CR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR008"] = 128] = "room2_CR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR009"] = 129] = "room2_CR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR010"] = 130] = "room2_CR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR001"] = 131] = "room2_HR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR002"] = 132] = "room2_HR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR003"] = 133] = "room2_HR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR004"] = 134] = "room2_HR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR005"] = 135] = "room2_HR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR006"] = 136] = "room2_HR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR007"] = 137] = "room2_HR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR008"] = 138] = "room2_HR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR009"] = 139] = "room2_HR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR010"] = 140] = "room2_HR010";
+    })(DetailItemIdConfig || (DetailItemIdConfig = {}));
+    var DetailItemIdConfig$1 = DetailItemIdConfig;
+
+    class Room2 {
+        static CT11(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static CT10(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static clickHR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR001,
+                    key: "room2_HR001",
+                    img: `book2/${DataLang.lang}/Hanson/HR001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR002,
+                    key: "room2_HR002",
+                    img: `book2/${DataLang.lang}/Hanson/HR002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR003,
+                    key: "room2_HR003",
+                    img: `book2/${DataLang.lang}/Hanson/HR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR004,
+                    key: "room2_HR004",
+                    img: `book2/${DataLang.lang}/Hanson/HR004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR005,
+                    key: "room2_HR005",
+                    img: `book2/${DataLang.lang}/Hanson/HR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR006,
+                    key: "room2_HR006",
+                    img: `book2/${DataLang.lang}/Hanson/HR006.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR007,
+                    key: "room2_HR007",
+                    img: `book2/${DataLang.lang}/Hanson/HR007.jpeg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR008,
+                    key: "room2_HR008",
+                    img: `book2/${DataLang.lang}/Hanson/HR008.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR009,
+                    key: "room2_HR009",
+                    img: `book2/${DataLang.lang}/Hanson/HR009.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR001,
+                    key: "room2_CR001",
+                    img: `book2/${DataLang.lang}/Caroline/CR001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR002,
+                    key: "room2_CR002",
+                    img: `book2/${DataLang.lang}/Caroline/CR002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR003,
+                    key: "room2_CR003",
+                    img: `book2/${DataLang.lang}/Caroline/CR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR004,
+                    key: "room2_CR004",
+                    img: `book2/${DataLang.lang}/Caroline/CR004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR005,
+                    key: "room2_CR005",
+                    img: `book2/${DataLang.lang}/Caroline/CR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR006,
+                    key: "room2_CR006",
+                    img: `book2/${DataLang.lang}/Caroline/CR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR007,
+                    key: "room2_CR007",
+                    img: `book2/${DataLang.lang}/Caroline/CR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR008,
+                    key: "room2_CR008",
+                    img: `book2/${DataLang.lang}/Caroline/CR008.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static CT9(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static CT8(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static clickJR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR001,
+                    key: "room2_JR001",
+                    img: `book2/${DataLang.lang}/Johnathan/JR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR002,
+                    key: "room2_JR002",
+                    img: `book2/${DataLang.lang}/Johnathan/JR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR003,
+                    key: "room2_JR003",
+                    img: `book2/${DataLang.lang}/Johnathan/JR003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR004,
+                    key: "room2_JR004",
+                    img: `book2/${DataLang.lang}/Johnathan/JR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR005,
+                    key: "room2_JR005",
+                    img: `book2/${DataLang.lang}/Johnathan/JR005.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR006,
+                    key: "room2_JR006",
+                    img: `book2/${DataLang.lang}/Johnathan/JR006.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickDX(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.15);
+        }
+        static CT7(tar) {
+            Utils.toggle3dOpen(tar, 3, 0.3);
+        }
+        static CT6(tar) {
+            Utils.toggle3dOpen(tar, 3, 0.3);
+        }
+        static clickOR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR001,
+                    key: "room2_OR001",
+                    img: `book2/${DataLang.lang}/Oliver/OR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR002,
+                    key: "room2_OR002",
+                    img: `book2/${DataLang.lang}/Oliver/OR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR003,
+                    key: "room2_OR003",
+                    img: `book2/${DataLang.lang}/Oliver/OR003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR004,
+                    key: "room2_OR004",
+                    img: `book2/${DataLang.lang}/Oliver/OR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR005,
+                    key: "room2_OR005",
+                    img: `book2/${DataLang.lang}/Oliver/OR005.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR006,
+                    key: "room2_OR006",
+                    img: `book2/${DataLang.lang}/Oliver/OR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR007,
+                    key: "room2_OR007",
+                    img: `book2/${DataLang.lang}/Oliver/OR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR008,
+                    key: "room2_OR008",
+                    img: `book2/${DataLang.lang}/Oliver/OR008.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR009,
+                    key: "room2_OR009",
+                    img: `book2/${DataLang.lang}/Oliver/OR009.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR010() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR010,
+                    key: "room2_OR010",
+                    img: `book2/${DataLang.lang}/Oliver/OR010.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickKuang(target) {
+            Utils.toggle3dOpen(target, 5, 100);
+        }
+        static toggleDrawer(target) {
+            Utils.toggle3dOpen(target, 3, 0.3);
+        }
+        static clickMR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR001,
+                    key: "room2_MR001",
+                    img: `book2/${DataLang.lang}/Margaret/MR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR002,
+                    key: "room2_MR002",
+                    img: `book2/${DataLang.lang}/Margaret/MR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR003,
+                    key: "room2_MR003",
+                    img: `book2/${DataLang.lang}/Margaret/MR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR004,
+                    key: "room2_MR004",
+                    img: `book2/${DataLang.lang}/Margaret/MR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR005,
+                    key: "room2_MR005",
+                    img: `book2/${DataLang.lang}/Margaret/MR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR006,
+                    key: "room2_MR006",
+                    img: `book2/${DataLang.lang}/Margaret/MR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR007,
+                    key: "room2_MR007",
+                    img: `book2/${DataLang.lang}/Margaret/MR007.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR008,
+                    key: "room2_MR008",
+                    img: `book2/${DataLang.lang}/Margaret/MR008.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR009,
+                    key: "room2_MR009",
+                    img: `book2/${DataLang.lang}/Margaret/MR009.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickGui2(target) {
+            Utils.toggle3dOpen(target, 5, 90);
+        }
+        static clickGui1(target) {
+            Utils.toggle3dOpen(target, 5, -90);
+        }
+        static clickBan4(target) {
+            Utils.toggle3dOpen(target, 5, -90);
+        }
+        static clickBan3(target) {
+            Utils.toggle3dOpen(target, 5, 90);
+        }
+        static clickCT5(target) {
+            Utils.toggle3dOpen(target, 3, 0.3);
+        }
+        static clickCT4(target) {
+            Utils.toggle3dOpen(target, 1, -0.3);
+        }
+        static clickCT3(target) {
+            Utils.toggle3dOpen(target, 1, -0.3);
+        }
+        static clickBan1(target) {
+            Utils.toggle3dOpen(target, 4, 70);
+        }
+        static clickBan2(target) {
+            Utils.toggle3dOpen(target, 4, 70);
+        }
+        static clickQian1() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR004,
+                    key: "room2_AR004",
+                    img: `book2/${DataLang.lang}/Abraham/AR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR007,
+                    key: "room2_AR007",
+                    img: `book2/${DataLang.lang}/Abraham/AR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR008,
+                    key: "room2_AR008",
+                    img: `book2/${DataLang.lang}/Abraham/AR008.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickQ3() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR006,
+                    key: "room2_AR006",
+                    img: `book2/${DataLang.lang}/Abraham/AR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickQ2() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR005,
+                    key: "room2_AR005",
+                    img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickXinWu() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR003,
+                    key: "room2_AR003",
+                    img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickXin() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR002,
+                    key: "room2_AR002",
+                    img: `book2/${DataLang.lang}/Abraham/AR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickGan() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR001,
+                    key: "room2_AR001",
+                    img: `book2/${DataLang.lang}/Abraham/AR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickSZ() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA004,
+                    key: "room2_PA004",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCT1(tar) {
+            Utils.toggle3dOpen(tar, 3, -0.3);
+        }
+        static clickXLX() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA005,
+                    key: "room2_PA005",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA005.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickBao() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA003,
+                    key: "room2_PA003",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJiuPin2() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA002,
+                    key: "room2_PA002",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJiuPin() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA001,
+                    key: "room2_PA001",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+    }
+
+    class BookConfig2 {
+    }
+    BookConfig2.sceneList = [
+        {
+            sceneName: "Abraham",
+            sceneId: 3,
+            label: "Abraham",
+            url: `room_book2/LayaScene_Abraham/Conventional/Abraham.ls`,
+            events: {
+                ban1: {
+                    caller: Room2,
+                    method: Room2.clickBan1,
+                    nodeName: "abraham.Obj3d66-1254365-90-603"
+                },
+                ban2: {
+                    caller: Room2,
+                    method: Room2.clickBan2,
+                    nodeName: "abraham.Obj3d66-1254365-90-602"
+                },
+                gan: {
+                    caller: Room2,
+                    method: Room2.clickGan,
+                    nodeName: "1.Obj3d66-711479-25-338"
+                },
+                xin: {
+                    caller: Room2,
+                    method: Room2.clickXin,
+                    nodeName: "abraham.QuadPatch003"
+                },
+                xinwu: {
+                    caller: Room2,
+                    method: Room2.clickXinWu,
+                    nodeName: "abraham.组112.Loft001"
+                },
+                qian1: {
+                    caller: Room2,
+                    method: Room2.clickQian1,
+                    nodeName: "abraham.Box1578958531"
+                },
+                chouti1: {
+                    caller: Room2,
+                    method: Room2.clickCT3,
+                    nodeName: "abraham.model 2"
+                },
+                qian2: {
+                    caller: Room2,
+                    method: Room2.clickQ2,
+                    nodeName: "abraham.model 2.QuadPatch001 (1)"
+                },
+                chouti2: {
+                    caller: Room2,
+                    method: Room2.clickCT4,
+                    nodeName: "abraham.model003"
+                },
+                qian3: {
+                    caller: Room2,
+                    method: Room2.clickQ3,
+                    nodeName: "abraham.model003.QuadPatch002"
+                },
+                shoucang: {
+                    caller: Room2,
+                    method: Room2.clickAR008,
+                    nodeName: "abraham.组107.Obj3d66-1282599-15-749"
+                },
+                gui1: {
+                    caller: Room2,
+                    method: Room2.clickGui1,
+                    nodeName: "abraham.对象002"
+                },
+                gui2: {
+                    caller: Room2,
+                    method: Room2.clickGui2,
+                    nodeName: "abraham.对象001"
+                },
+                xin2: {
+                    caller: Room2,
+                    method: Room2.clickAR007,
+                    nodeName: "abraham.QuadPatch001"
+                }
+            }
+        },
+        {
+            sceneName: "Hall",
+            sceneId: 5,
+            label: "Hall",
+            url: `room_book2/LayaScene_hall/Conventional/hall.ls`,
+            events: {
+                jiupin: {
+                    caller: Room2,
+                    method: Room2.clickJiuPin,
+                    nodeName: "1.Obj3d66-402998-5-224"
+                },
+                jiu2: {
+                    caller: Room2,
+                    method: Room2.clickJiuPin2,
+                    nodeName: "1.组2136555812.Obj3d66-405792-9-449"
+                },
+                bao: {
+                    caller: Room2,
+                    method: Room2.clickBao,
+                    nodeName: "2"
+                },
+                xingli: {
+                    caller: Room2,
+                    method: Room2.clickXLX,
+                    nodeName: "1.Obj3d66-1290256-1-227"
+                },
+                chouti: {
+                    caller: Room2,
+                    method: Room2.clickCT1,
+                    nodeName: "1.对象011"
+                },
+                shouzhuo: {
+                    caller: Room2,
+                    method: Room2.clickSZ,
+                    nodeName: "1.对象011.shouzhuo"
+                }
+            }
+        },
+        {
+            sceneName: "Margaret",
+            sceneId: 1,
+            label: "Margaret",
+            url: `room_book2/LayaScene_Margaret/Conventional/Margaret.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickMR001,
+                    nodeName: "1.QuadPatch004"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.toggleDrawer,
+                    nodeName: "1.model004"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickMR002,
+                    nodeName: "1.model004.QuadPatch003"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickKuang,
+                    nodeName: "1.对象019"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickMR003,
+                    nodeName: "1.Basket_A_grp.Basket_A_Wicker"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickMR004,
+                    nodeName: "1.Box1578958527"
+                },
+                model006: {
+                    caller: Room2,
+                    method: Room2.clickCT5,
+                    nodeName: "1.model006"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickMR005,
+                    nodeName: "1.model006.QuadPatch001"
+                },
+                clickBan: {
+                    caller: Room2,
+                    method: Room2.clickBan3,
+                    nodeName: "1.对象025"
+                },
+                clickBan4: {
+                    caller: Room2,
+                    method: Room2.clickBan4,
+                    nodeName: "1.对象024"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickMR007,
+                    nodeName: "1.Obj3d66-509460-11-208"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickMR006,
+                    nodeName: "1.QuadPatch002"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickMR008,
+                    nodeName: "1.ChamferCyl006"
+                },
+                item11: {
+                    caller: Room2,
+                    method: Room2.clickMR009,
+                    nodeName: "1.Obj3d66-676910-90-278"
+                }
+            }
+        },
+        {
+            sceneName: "Oliver",
+            sceneId: 6,
+            label: "Oliver",
+            url: `room_book2/LayaScene_Oliver/Conventional/Oliver.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.CT6,
+                    nodeName: "1.Box2131641766"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickOR001,
+                    nodeName: "1.Box2131641766.QuadPatch006"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickOR002,
+                    nodeName: "1.model 1"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickOR003,
+                    nodeName: "1.QuadPatch002"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickOR004,
+                    nodeName: "1.QuadPatch003"
+                },
+                对象024: {
+                    caller: Room2,
+                    method: Room2.clickDX,
+                    nodeName: "1.对象024"
+                },
+                xianglian: {
+                    caller: Room2,
+                    method: Room2.clickOR005,
+                    nodeName: "1.组112.model002"
+                },
+                CT7: {
+                    caller: Room2,
+                    method: Room2.CT7,
+                    nodeName: "1.Box2131641769"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickOR006,
+                    nodeName: "1.Box2131641769.QuadPatch001"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickOR007,
+                    nodeName: "1.QuadPatch004"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickOR008,
+                    nodeName: "1.QuadPatch005"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickOR009,
+                    nodeName: "1.QuadPatch005 (1)"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickOR010,
+                    nodeName: "1.Box2131637143"
+                }
+            }
+        },
+        {
+            sceneName: "Johnathan",
+            sceneId: 4,
+            label: "Johnathan",
+            url: `room_book2/LayaScene_Johnathan/Conventional/Johnathan.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickJR001,
+                    nodeName: "model.对象001"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.CT8,
+                    nodeName: "model.Rectangle073"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickJR002,
+                    nodeName: "model.Rectangle073.QuadPatch003"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickJR003,
+                    nodeName: "model.Obj3d66-1282599-17-592"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickJR004,
+                    nodeName: "model.Obj3d66-711884-2-128"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.CT9,
+                    nodeName: "model.chouti1"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickJR005,
+                    nodeName: "model.chouti1.Obj3d66-1163439-4-215"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickJR006,
+                    nodeName: "jiuoing.Obj3d66-402998-5-224"
+                }
+            }
+        },
+        {
+            sceneName: "Caroline",
+            sceneId: 7,
+            label: "Caroline",
+            url: `room_book2/LayaScene_Caroline/Conventional/Caroline.ls`,
+            events: {
+                drawerRightTop: {
+                    caller: Room2,
+                    method: Room2.clickCR001,
+                    nodeName: "1.Line044"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickCR002,
+                    nodeName: "1.Obj3d66-784515-3-729"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickCR003,
+                    nodeName: "1.Obj3d66-784515-2-781"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickCR004,
+                    nodeName: "1.对象014"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickCR005,
+                    nodeName: "1.Obj3d66-711884-2-127"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickCR006,
+                    nodeName: "1.Obj3d66-405792-9-449"
+                },
+                ka1: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch001"
+                },
+                ka2: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch002"
+                },
+                ka3: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch003"
+                },
+                ka4: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch004"
+                },
+                ka5: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch005"
+                },
+                ka6: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch006"
+                },
+                ka7: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch007"
+                }
+            }
+        },
+        {
+            sceneName: "Hanson",
+            sceneId: 2,
+            label: "Hanson",
+            url: `room_book2/LayaScene_Hanson/Conventional/Hanson.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickHR001,
+                    nodeName: "1.Obj3d66-866777-119-712"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickHR002,
+                    nodeName: "1.Loft006"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickHR003,
+                    nodeName: "1.model016"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickHR004,
+                    nodeName: "1.Group-391490-270.Obj3d66-391490-18-1000"
+                },
+                item44: {
+                    caller: Room2,
+                    method: Room2.clickHR005,
+                    nodeName: "1.对象027.QuadPatch001"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.CT10,
+                    nodeName: "1.对象027"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.CT11,
+                    nodeName: "1.对象022"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickHR006,
+                    nodeName: "1.对象022.Obj3d66-1163439-4-215"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickHR007,
+                    nodeName: "1.Loft007"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickHR008,
+                    nodeName: "1.Obj3d66-402998-5-224"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickHR009,
+                    nodeName: "shiti.物件_1"
+                }
+            }
+        }
+    ];
+
     class SoundManager {
         static playEffect(url) {
             Laya.SoundManager.playSound(url);
@@ -3727,250 +4949,94 @@
     Oprate3dTool.flagIsDown = false;
     Oprate3dTool.movePos = new Laya.Vector3(0, 0, 0);
 
-    class Scene1SafeBox {
-        static toggleBox() {
+    class SceneKill {
+        static clickLJTGaizi() {
             return __awaiter(this, void 0, void 0, function* () {
-                this.banIsOpen = !this.banIsOpen;
-                yield Utils.asyncTween(this.ban.transform.position, {
-                    x: this.banIsOpen ? -1.932 : -2.470968,
-                    update: new Laya.Handler(this.ban, e => {
-                        this.ban.transform.position = this.ban.transform.position;
-                    })
-                }, 200);
+                this.flagGaiOpen = !this.flagGaiOpen;
+                let obj = Utils.findChildByName(Oprate3dTool.scene3d, Scene3dConfig.getNodeNameBySceneAndType("RoomKill", "gaizi"));
+                Utils.toggle3dOpen(obj, 4, -120);
             });
         }
-        static moveBox(target) {
-            return __awaiter(this, void 0, void 0, function* () {
-                this.ban = target;
-                let ban = Utils.findChildByName(Oprate3dTool.scene3d, Scene3dConfig.getNodeNameBySceneAndType("RoomAnnie", "Box023"));
-                if (ban["flagOpen"]) {
-                    let targetDoor = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.11473");
-                    Utils.toggle3dOpen(targetDoor, 6, 90, 200, false);
-                }
-                Utils.toggle3dOpen(ban, 1, -0.6);
-            });
-        }
-        static clickSafeBox() {
-            let target = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.11473");
-            if (this.countWrong >= 2) {
-                UIManager.showMessage("错误两次，密码箱已锁死");
-                return;
-            }
-            if (this.flagOpened) {
-                Utils.toggle3dOpen(target, 6, 90, 200);
-                return;
-            }
-            UIManager.openModal("modalOperate/scene1/SafeBox.scene", true, {
-                onWrong: new Laya.Handler(this, e => {
-                    this.countWrong++;
-                    return this.countWrong;
-                }),
-                onSure: new Laya.Handler(this, (e) => __awaiter(this, void 0, void 0, function* () {
-                    this.flagOpened = true;
-                    Utils.toggle3dOpen(target, 6, 90, 200);
-                }))
-            }, true);
-        }
-    }
-    Scene1SafeBox.banIsOpen = false;
-    Scene1SafeBox.flagOpened = false;
-    Scene1SafeBox.countWrong = 0;
-
-    var DetailItemIdConfig;
-    (function (DetailItemIdConfig) {
-        DetailItemIdConfig[DetailItemIdConfig["joeComputer"] = 0] = "joeComputer";
-        DetailItemIdConfig[DetailItemIdConfig["xieyin"] = 1] = "xieyin";
-        DetailItemIdConfig[DetailItemIdConfig["huochai"] = 2] = "huochai";
-        DetailItemIdConfig[DetailItemIdConfig["joe_to_jane"] = 3] = "joe_to_jane";
-        DetailItemIdConfig[DetailItemIdConfig["joe_to_annie"] = 4] = "joe_to_annie";
-        DetailItemIdConfig[DetailItemIdConfig["xiaopiao"] = 5] = "xiaopiao";
-        DetailItemIdConfig[DetailItemIdConfig["shuomingshu"] = 6] = "shuomingshu";
-        DetailItemIdConfig[DetailItemIdConfig["myjdj"] = 7] = "myjdj";
-        DetailItemIdConfig[DetailItemIdConfig["killerKnife"] = 8] = "killerKnife";
-        DetailItemIdConfig[DetailItemIdConfig["jane_to_joe"] = 9] = "jane_to_joe";
-        DetailItemIdConfig[DetailItemIdConfig["jane_to_annie"] = 10] = "jane_to_annie";
-        DetailItemIdConfig[DetailItemIdConfig["pmt1"] = 11] = "pmt1";
-        DetailItemIdConfig[DetailItemIdConfig["pmt2"] = 12] = "pmt2";
-        DetailItemIdConfig[DetailItemIdConfig["knife"] = 13] = "knife";
-        DetailItemIdConfig[DetailItemIdConfig["gun"] = 14] = "gun";
-        DetailItemIdConfig[DetailItemIdConfig["phoneWilson"] = 15] = "phoneWilson";
-        DetailItemIdConfig[DetailItemIdConfig["janeComputer"] = 16] = "janeComputer";
-        DetailItemIdConfig[DetailItemIdConfig["miyao"] = 17] = "miyao";
-        DetailItemIdConfig[DetailItemIdConfig["scene1PrinterPaper"] = 18] = "scene1PrinterPaper";
-        DetailItemIdConfig[DetailItemIdConfig["scene1DeskKey"] = 19] = "scene1DeskKey";
-        DetailItemIdConfig[DetailItemIdConfig["rubishPaper"] = 20] = "rubishPaper";
-        DetailItemIdConfig[DetailItemIdConfig["scene1Computer"] = 21] = "scene1Computer";
-        DetailItemIdConfig[DetailItemIdConfig["boxPaper"] = 22] = "boxPaper";
-        DetailItemIdConfig[DetailItemIdConfig["paintPaper"] = 23] = "paintPaper";
-        DetailItemIdConfig[DetailItemIdConfig["test11"] = 24] = "test11";
-        DetailItemIdConfig[DetailItemIdConfig["scene1JYSMS"] = 25] = "scene1JYSMS";
-        DetailItemIdConfig[DetailItemIdConfig["scene1DrivePaper"] = 26] = "scene1DrivePaper";
-        DetailItemIdConfig[DetailItemIdConfig["harrisTicket"] = 27] = "harrisTicket";
-        DetailItemIdConfig[DetailItemIdConfig["harrisBag"] = 28] = "harrisBag";
-        DetailItemIdConfig[DetailItemIdConfig["harrisRubish"] = 29] = "harrisRubish";
-        DetailItemIdConfig[DetailItemIdConfig["harrisLetter1"] = 30] = "harrisLetter1";
-        DetailItemIdConfig[DetailItemIdConfig["harrisLetter2"] = 31] = "harrisLetter2";
-        DetailItemIdConfig[DetailItemIdConfig["harrisPocket"] = 32] = "harrisPocket";
-        DetailItemIdConfig[DetailItemIdConfig["harrisId"] = 33] = "harrisId";
-        DetailItemIdConfig[DetailItemIdConfig["phoneHellen"] = 34] = "phoneHellen";
-        DetailItemIdConfig[DetailItemIdConfig["phoneHarris"] = 35] = "phoneHarris";
-        DetailItemIdConfig[DetailItemIdConfig["harrisRubish1"] = 36] = "harrisRubish1";
-        DetailItemIdConfig[DetailItemIdConfig["harrisXingli"] = 37] = "harrisXingli";
-        DetailItemIdConfig[DetailItemIdConfig["anfajsq"] = 38] = "anfajsq";
-        DetailItemIdConfig[DetailItemIdConfig["anfalajitong"] = 39] = "anfalajitong";
-        DetailItemIdConfig[DetailItemIdConfig["jiu"] = 40] = "jiu";
-        DetailItemIdConfig[DetailItemIdConfig["dangao"] = 41] = "dangao";
-        DetailItemIdConfig[DetailItemIdConfig["shoupa"] = 42] = "shoupa";
-        DetailItemIdConfig[DetailItemIdConfig["kfjl"] = 43] = "kfjl";
-        DetailItemIdConfig[DetailItemIdConfig["jianli"] = 44] = "jianli";
-        DetailItemIdConfig[DetailItemIdConfig["riji"] = 45] = "riji";
-        DetailItemIdConfig[DetailItemIdConfig["tonghuajilu"] = 46] = "tonghuajilu";
-        DetailItemIdConfig[DetailItemIdConfig["zdj"] = 47] = "zdj";
-        DetailItemIdConfig[DetailItemIdConfig["tzbg"] = 48] = "tzbg";
-        DetailItemIdConfig[DetailItemIdConfig["kfbg"] = 49] = "kfbg";
-        DetailItemIdConfig[DetailItemIdConfig["biji"] = 50] = "biji";
-        DetailItemIdConfig[DetailItemIdConfig["baozhi"] = 51] = "baozhi";
-        DetailItemIdConfig[DetailItemIdConfig["dgkfbd"] = 52] = "dgkfbd";
-        DetailItemIdConfig[DetailItemIdConfig["gjx"] = 53] = "gjx";
-        DetailItemIdConfig[DetailItemIdConfig["underSofa"] = 54] = "underSofa";
-        DetailItemIdConfig[DetailItemIdConfig["jipiao"] = 55] = "jipiao";
-        DetailItemIdConfig[DetailItemIdConfig["ljt3"] = 56] = "ljt3";
-        DetailItemIdConfig[DetailItemIdConfig["ljt4"] = 57] = "ljt4";
-        DetailItemIdConfig[DetailItemIdConfig["ztxs"] = 58] = "ztxs";
-        DetailItemIdConfig[DetailItemIdConfig["biaokuang"] = 59] = "biaokuang";
-        DetailItemIdConfig[DetailItemIdConfig["janePhone"] = 60] = "janePhone";
-        DetailItemIdConfig[DetailItemIdConfig["joeTicket"] = 61] = "joeTicket";
-        DetailItemIdConfig[DetailItemIdConfig["joePhone"] = 62] = "joePhone";
-        DetailItemIdConfig[DetailItemIdConfig["joePaper"] = 63] = "joePaper";
-        DetailItemIdConfig[DetailItemIdConfig["joeBook"] = 64] = "joeBook";
-        DetailItemIdConfig[DetailItemIdConfig["joePen"] = 65] = "joePen";
-        DetailItemIdConfig[DetailItemIdConfig["joePaint"] = 66] = "joePaint";
-        DetailItemIdConfig[DetailItemIdConfig["joeXL"] = 67] = "joeXL";
-        DetailItemIdConfig[DetailItemIdConfig["yaoshi"] = 68] = "yaoshi";
-        DetailItemIdConfig[DetailItemIdConfig["pmt"] = 69] = "pmt";
-        DetailItemIdConfig[DetailItemIdConfig["wilsonComputer"] = 70] = "wilsonComputer";
-        DetailItemIdConfig[DetailItemIdConfig["phoneTC1"] = 71] = "phoneTC1";
-        DetailItemIdConfig[DetailItemIdConfig["phoneTC2"] = 72] = "phoneTC2";
-        DetailItemIdConfig[DetailItemIdConfig["ytp"] = 73] = "ytp";
-    })(DetailItemIdConfig || (DetailItemIdConfig = {}));
-    var DetailItemIdConfig$1 = DetailItemIdConfig;
-
-    class Scene1Desk {
-        static clickDrawer1Papaer(target) {
-            target.active = false;
-        }
-        static clickDrawer2Papaer(target) {
-            target.active = false;
-        }
-        static clickKey(target) {
+        static clickJSQ() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.scene1DeskKey,
-                    key: "scene1DeskKey",
-                    title: "钥匙",
-                    content: "在书架的角落上 放着一枚钥匙",
-                    img: "book1/AR003.png",
-                    sceneFrom: GameManager.currentScene
+                    id: DetailItemIdConfig$1.anfajsq,
+                    key: "anfajsq",
+                    title: "加湿器",
+                    content: "",
+                    img: "book1/KR001.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "加湿器内部的水中发现有透明的晶体，晶体样本已经送去化验，但是可能要一周时间才有结果。"
                 }
             ]);
         }
-        static clickMYJDJ(target) {
+        static clickShouPa() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.myjdj,
-                    key: "myjdj",
-                    title: "强效迷药解毒剂",
-                    content: "强效迷药解毒剂",
-                    img: "book1/AR001.png",
-                    sceneFrom: GameManager.currentScene
+                    id: DetailItemIdConfig$1.shoupa,
+                    key: "shoupa",
+                    title: "手帕",
+                    content: "",
+                    img: "book1/KR006.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "手帕的血迹是死者Annie的，这看上去像是一块西装袋巾"
                 }
             ]);
         }
-        static toggleDrawer1() {
-            return __awaiter(this, void 0, void 0, function* () {
-                this.drawer1Opened = !this.drawer1Opened;
-                yield Utils.asyncTween(this.drawer1.transform.localPosition, {
-                    z: this.drawer1Opened ? -1.6 : -1.260977,
-                    update: new Laya.Handler(this.drawer1, e => {
-                        this.drawer1.transform.localPosition = this.drawer1.transform.localPosition;
-                    })
-                }, 200);
-            });
-        }
-        static clickDrawer1() {
-            return __awaiter(this, void 0, void 0, function* () {
-                this.drawer1 = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.组2143178433");
-                if (this.flagLocked1) {
-                    if (GameManager.selectedDetailItem &&
-                        GameManager.selectedDetailItem.id == DetailItemIdConfig$1.scene1DeskKey) {
-                        this.flagLocked1 = false;
-                    }
-                    else {
-                        UIManager.showMessage("需要钥匙打开此抽屉");
-                        return;
-                    }
+        static clickKnife() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.killerKnife,
+                    key: "killerKnife",
+                    title: "凶器",
+                    content: "",
+                    img: "book1/KR005.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "凶器的血迹是死者Annie的，且凶器上并没有发现任何指纹"
                 }
-                yield this.toggleDrawer1();
-            });
+            ]);
         }
-        static clickDrawer1Inner() {
-            return __awaiter(this, void 0, void 0, function* () {
-                UIManager.showDetail([
-                    {
-                        id: DetailItemIdConfig$1.scene1DrivePaper,
-                        key: "scene1DrivePaper",
-                        title: "驾照",
-                        content: "annie的驾照",
-                        img: "book1/AR009.png",
-                        sceneFrom: GameManager.currentScene
-                    }
-                ]);
-            });
-        }
-        static toggleDrawer2() {
-            return __awaiter(this, void 0, void 0, function* () {
-                this.drawer2Opened = !this.drawer2Opened;
-                yield Utils.asyncTween(this.drawer2.transform.localPosition, {
-                    y: this.drawer2Opened ? 0.456 : 0.11,
-                    update: new Laya.Handler(this.drawer2, e => {
-                        this.drawer2.transform.localPosition = this.drawer2.transform.localPosition;
-                    })
-                }, 200);
-            });
-        }
-        static clickDrawer2() {
-            return __awaiter(this, void 0, void 0, function* () {
-                this.drawer2 = Utils.findChildByName(Oprate3dTool.scene3d, "333.组001.Box002");
-                if (this.flagLocked2) {
-                    UIManager.openFullModal("scene/SceneDrag.scene", false, {
-                        onSuccess() {
-                            Scene1Desk.toggleDrawer2();
-                        }
-                    });
-                    return;
+        static clickDanGao() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.dangao,
+                    key: "dangao",
+                    title: "蛋糕",
+                    content: "",
+                    img: "book1/KR004.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "蛋糕似乎没有被动过，初步检验没有发现任何可疑物质。蛋糕已经送去检查，可能要一周时间才有结果。"
                 }
-                yield this.toggleDrawer2();
-            });
+            ]);
         }
-        static clickDrawer2Inner() {
-            return __awaiter(this, void 0, void 0, function* () {
-                UIManager.showDetail([
-                    {
-                        id: DetailItemIdConfig$1.scene1JYSMS,
-                        key: "scene1JYSMS",
-                        title: "强效迷药解毒剂说明书",
-                        content: "一摞文件 在文件上方 放着两瓶喝过的解药和解药说明书 ",
-                        img: "book1/AR002.png",
-                        sceneFrom: GameManager.currentScene
-                    }
-                ]);
-            });
+        static clickJiu() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.jiu,
+                    key: "jiu",
+                    title: "餐桌上的酒瓶",
+                    content: "",
+                    img: "book1/KR003.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "红酒瓶塞上有针头大的细空，酒里的液体已经送去检查，可能要一周时间才有结果。"
+                }
+            ]);
+        }
+        static clickLJT() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.anfalajitong,
+                    key: "anfalajitong",
+                    title: "走廊的垃圾桶",
+                    content: "",
+                    img: "book1/KR002.png",
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: "发现的3个要瓶中有一瓶已经被使用，另外两瓶还未开封。证据被送往鉴定科化验，但是可能要一周时间才有结果。"
+                }
+            ]);
         }
     }
-    Scene1Desk.drawer1Opened = false;
-    Scene1Desk.flagLocked1 = false;
-    Scene1Desk.drawer2Opened = false;
-    Scene1Desk.flagLocked2 = true;
+    SceneKill.flagGaiOpen = false;
 
     class Scene1 {
         static desktop() { }
@@ -4087,6 +5153,55 @@
         }
     }
     Scene1.flagGuizi2Opened = false;
+
+    class Scene1SafeBox {
+        static toggleBox() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.banIsOpen = !this.banIsOpen;
+                yield Utils.asyncTween(this.ban.transform.position, {
+                    x: this.banIsOpen ? -1.932 : -2.470968,
+                    update: new Laya.Handler(this.ban, e => {
+                        this.ban.transform.position = this.ban.transform.position;
+                    })
+                }, 200);
+            });
+        }
+        static moveBox(target) {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.ban = target;
+                let ban = Utils.findChildByName(Oprate3dTool.scene3d, Scene3dConfig.getNodeNameBySceneAndType("RoomAnnie", "Box023"));
+                if (ban["flagOpen"]) {
+                    let targetDoor = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.11473");
+                    Utils.toggle3dOpen(targetDoor, 6, 90, 200, false);
+                }
+                Utils.toggle3dOpen(ban, 1, -0.6);
+            });
+        }
+        static clickSafeBox() {
+            let target = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.11473");
+            if (this.countWrong >= 2) {
+                UIManager.showMessage("错误两次，密码箱已锁死");
+                return;
+            }
+            if (this.flagOpened) {
+                Utils.toggle3dOpen(target, 6, 90, 200);
+                return;
+            }
+            UIManager.openModal("modalOperate/scene1/SafeBox.scene", true, {
+                onWrong: new Laya.Handler(this, e => {
+                    this.countWrong++;
+                    return this.countWrong;
+                }),
+                onSure: new Laya.Handler(this, (e) => __awaiter(this, void 0, void 0, function* () {
+                    this.flagOpened = true;
+                    Utils.toggle3dOpen(target, 6, 90, 200);
+                }))
+            }, true);
+        }
+    }
+    Scene1SafeBox.banIsOpen = false;
+    Scene1SafeBox.flagOpened = false;
+    Scene1SafeBox.countWrong = 0;
 
     class RoomHarris {
         static chouti1(target) {
@@ -4223,94 +5338,122 @@
         }
     }
 
-    class SceneKill {
-        static clickLJTGaizi() {
+    class Scene1Desk {
+        static clickDrawer1Papaer(target) {
+            target.active = false;
+        }
+        static clickDrawer2Papaer(target) {
+            target.active = false;
+        }
+        static clickKey(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.scene1DeskKey,
+                    key: "scene1DeskKey",
+                    title: "钥匙",
+                    content: "在书架的角落上 放着一枚钥匙",
+                    img: "book1/AR003.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMYJDJ(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.myjdj,
+                    key: "myjdj",
+                    title: "强效迷药解毒剂",
+                    content: "强效迷药解毒剂",
+                    img: "book1/AR001.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static toggleDrawer1() {
             return __awaiter(this, void 0, void 0, function* () {
-                this.flagGaiOpen = !this.flagGaiOpen;
-                let obj = Utils.findChildByName(Oprate3dTool.scene3d, Scene3dConfig.getNodeNameBySceneAndType("RoomKill", "gaizi"));
-                Utils.toggle3dOpen(obj, 4, -120);
+                this.drawer1Opened = !this.drawer1Opened;
+                yield Utils.asyncTween(this.drawer1.transform.localPosition, {
+                    z: this.drawer1Opened ? -1.6 : -1.260977,
+                    update: new Laya.Handler(this.drawer1, e => {
+                        this.drawer1.transform.localPosition = this.drawer1.transform.localPosition;
+                    })
+                }, 200);
             });
         }
-        static clickJSQ() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.anfajsq,
-                    key: "anfajsq",
-                    title: "加湿器",
-                    content: "",
-                    img: "book1/KR001.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "加湿器内部的水中发现有透明的晶体，晶体样本已经送去化验，但是可能要一周时间才有结果。"
+        static clickDrawer1() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.drawer1 = Utils.findChildByName(Oprate3dTool.scene3d, "Annie_Dark.组2143178433");
+                if (this.flagLocked1) {
+                    if (GameManager.selectedDetailItem &&
+                        GameManager.selectedDetailItem.id == DetailItemIdConfig$1.scene1DeskKey) {
+                        this.flagLocked1 = false;
+                    }
+                    else {
+                        UIManager.showMessage("需要钥匙打开此抽屉");
+                        return;
+                    }
                 }
-            ]);
+                yield this.toggleDrawer1();
+            });
         }
-        static clickShouPa() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.shoupa,
-                    key: "shoupa",
-                    title: "手帕",
-                    content: "",
-                    img: "book1/KR006.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "手帕的血迹是死者Annie的，这看上去像是一块西装袋巾"
-                }
-            ]);
+        static clickDrawer1Inner() {
+            return __awaiter(this, void 0, void 0, function* () {
+                UIManager.showDetail([
+                    {
+                        id: DetailItemIdConfig$1.scene1DrivePaper,
+                        key: "scene1DrivePaper",
+                        title: "驾照",
+                        content: "annie的驾照",
+                        img: "book1/AR009.png",
+                        sceneFrom: GameManager.currentScene
+                    }
+                ]);
+            });
         }
-        static clickKnife() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.killerKnife,
-                    key: "killerKnife",
-                    title: "凶器",
-                    content: "",
-                    img: "book1/KR005.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "凶器的血迹是死者Annie的，且凶器上并没有发现任何指纹"
-                }
-            ]);
+        static toggleDrawer2() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.drawer2Opened = !this.drawer2Opened;
+                yield Utils.asyncTween(this.drawer2.transform.localPosition, {
+                    y: this.drawer2Opened ? 0.456 : 0.11,
+                    update: new Laya.Handler(this.drawer2, e => {
+                        this.drawer2.transform.localPosition = this.drawer2.transform.localPosition;
+                    })
+                }, 200);
+            });
         }
-        static clickDanGao() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.dangao,
-                    key: "dangao",
-                    title: "蛋糕",
-                    content: "",
-                    img: "book1/KR004.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "蛋糕似乎没有被动过，初步检验没有发现任何可疑物质。蛋糕已经送去检查，可能要一周时间才有结果。"
+        static clickDrawer2() {
+            return __awaiter(this, void 0, void 0, function* () {
+                this.drawer2 = Utils.findChildByName(Oprate3dTool.scene3d, "333.组001.Box002");
+                if (this.flagLocked2) {
+                    UIManager.openFullModal("scene/SceneDrag.scene", false, {
+                        onSuccess() {
+                            Scene1Desk.toggleDrawer2();
+                        }
+                    });
+                    return;
                 }
-            ]);
+                yield this.toggleDrawer2();
+            });
         }
-        static clickJiu() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.jiu,
-                    key: "jiu",
-                    title: "餐桌上的酒瓶",
-                    content: "",
-                    img: "book1/KR003.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "红酒瓶塞上有针头大的细空，酒里的液体已经送去检查，可能要一周时间才有结果。"
-                }
-            ]);
-        }
-        static clickLJT() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.anfalajitong,
-                    key: "anfalajitong",
-                    title: "走廊的垃圾桶",
-                    content: "",
-                    img: "book1/KR002.png",
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: "发现的3个要瓶中有一瓶已经被使用，另外两瓶还未开封。证据被送往鉴定科化验，但是可能要一周时间才有结果。"
-                }
-            ]);
+        static clickDrawer2Inner() {
+            return __awaiter(this, void 0, void 0, function* () {
+                UIManager.showDetail([
+                    {
+                        id: DetailItemIdConfig$1.scene1JYSMS,
+                        key: "scene1JYSMS",
+                        title: "强效迷药解毒剂说明书",
+                        content: "一摞文件 在文件上方 放着两瓶喝过的解药和解药说明书 ",
+                        img: "book1/AR002.png",
+                        sceneFrom: GameManager.currentScene
+                    }
+                ]);
+            });
         }
     }
-    SceneKill.flagGaiOpen = false;
+    Scene1Desk.drawer1Opened = false;
+    Scene1Desk.flagLocked1 = false;
+    Scene1Desk.drawer2Opened = false;
+    Scene1Desk.flagLocked2 = true;
 
     class RoomJane {
         static clickDianNao() {
@@ -4389,6 +5532,242 @@
         static clickDrawer2(target) {
             let obj = Utils.findChildByName(Oprate3dTool.scene3d, "1.组002");
             Utils.toggle3dOpen(obj, 3, -0.28);
+        }
+    }
+
+    class RoomJoe {
+        static clickDianNao() {
+            UIManager.openModal("modalOperate/scene1/joeComputer1.scene", false, {}, true);
+        }
+        static paper3(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joeXL,
+                    key: "joeXL",
+                    title: "joeXL",
+                    content: "",
+                    img: "book1/JR010.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static joeXL(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joeXL,
+                    key: "joeXL",
+                    title: "joeXL",
+                    content: "",
+                    img: "book1/JR010.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static joePaint(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joePaint,
+                    key: "joePaint",
+                    title: "joePaint",
+                    content: "",
+                    img: "book1/JR009.jpg",
+                    reportDetail: "背影无法分辨是谁，身材看起来照片上的人应该是死者Annie",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static pen(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joePen,
+                    key: "joePen",
+                    title: "joePen",
+                    content: "",
+                    img: "book1/JR008.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static book(target) {
+            UIManager.openModal("modalOperate/joe/BookJoe.scene", false, {}, true);
+        }
+        static chouti1(target) {
+            Utils.toggle3dOpen(target, 1, -0.2);
+        }
+        static chouti2(target) {
+            Utils.toggle3dOpen(target, 1, -0.2);
+        }
+        static gwb(target) {
+            Utils.toggle3dOpen(target, 4, 60);
+        }
+        static paper(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joePaper,
+                    key: "joePaper",
+                    title: "joePaper",
+                    content: "",
+                    img: "book1/JR002.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static phone1(target) {
+            UIManager.openModal("modalOperate/joe/PhoneJoe.scene", false, {}, true);
+        }
+        static jipiao(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.joeTicket,
+                    key: "joeTicket",
+                    title: "joeTicket",
+                    content: "",
+                    img: "book1/JR001.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickPhone1(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.janePhone,
+                    key: "janePhone",
+                    title: "手机记录",
+                    content: "",
+                    img: "book1/JR011.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+    }
+
+    class RoomLeo {
+        static clickPhone2(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.phoneTC1,
+                    key: "phoneTC1",
+                    title: "phoneTC1",
+                    content: "",
+                    img: "book1/LR004.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickPhone1(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.phoneTC2,
+                    key: "phoneTC2",
+                    title: "phoneTC2",
+                    content: "",
+                    img: "book1/LR005.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static biaokuang(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.biaokuang,
+                    key: "biaokuang",
+                    title: "沙发边上的侦探小说",
+                    content: "",
+                    img: "book1/LR010.jpg",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static ztxs(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.ztxs,
+                    key: "ztxs",
+                    title: "沙发边上的侦探小说",
+                    content: "",
+                    img: "book1/LR006.jpg",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickLJT2(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.ljt4,
+                    key: "ljt4",
+                    title: "垃圾桶里的迷药盒子",
+                    content: "",
+                    img: "book1/LR008.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickLJT(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.ljt3,
+                    key: "ljt3",
+                    title: "垃圾桶里的迷药盒子说明书",
+                    content: "",
+                    img: "book1/LR009.jpg",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickTicket(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.jipiao,
+                    key: "jipiao",
+                    title: "抽屉里的机票",
+                    content: "",
+                    img: "book1/LR007.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static chouti1(target) {
+            Utils.toggle3dOpen(target, 3, 0.2);
+        }
+        static underSofa(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.underSofa,
+                    key: "underSofa",
+                    title: "沙发下面的文件",
+                    content: "",
+                    img: "book1/LR003.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static guizi(target) {
+            Utils.toggle3dOpen(target, 5, -90);
+        }
+        static gjx(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.gjx,
+                    key: "gjx",
+                    title: "工具箱",
+                    content: "",
+                    reportDetail: "针管明显被使用过，针头剩余的液体中可以看到有少量晶体残留。晶体样本已经送去化验，但是可能要一周时间才有结果。",
+                    img: "book1/LR002.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickPaper(target) {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.dgkfbd,
+                    key: "dgkfbd",
+                    title: "地宫开发报道",
+                    content: "",
+                    img: "book1/LR001.png",
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
         }
     }
 
@@ -4541,278 +5920,9 @@
         }
     }
 
-    class RoomLeo {
-        static clickPhone2(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.phoneTC1,
-                    key: "phoneTC1",
-                    title: "phoneTC1",
-                    content: "",
-                    img: "book1/LR004.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickPhone1(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.phoneTC2,
-                    key: "phoneTC2",
-                    title: "phoneTC2",
-                    content: "",
-                    img: "book1/LR005.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static biaokuang(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.biaokuang,
-                    key: "biaokuang",
-                    title: "沙发边上的侦探小说",
-                    content: "",
-                    img: "book1/LR010.jpg",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static ztxs(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.ztxs,
-                    key: "ztxs",
-                    title: "沙发边上的侦探小说",
-                    content: "",
-                    img: "book1/LR006.jpg",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickLJT2(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.ljt4,
-                    key: "ljt4",
-                    title: "垃圾桶里的迷药盒子",
-                    content: "",
-                    img: "book1/LR008.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickLJT(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.ljt3,
-                    key: "ljt3",
-                    title: "垃圾桶里的迷药盒子说明书",
-                    content: "",
-                    img: "book1/LR009.jpg",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickTicket(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.jipiao,
-                    key: "jipiao",
-                    title: "抽屉里的机票",
-                    content: "",
-                    img: "book1/LR007.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static chouti1(target) {
-            Utils.toggle3dOpen(target, 3, 0.2);
-        }
-        static underSofa(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.underSofa,
-                    key: "underSofa",
-                    title: "沙发下面的文件",
-                    content: "",
-                    img: "book1/LR003.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static guizi(target) {
-            Utils.toggle3dOpen(target, 5, -90);
-        }
-        static gjx(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.gjx,
-                    key: "gjx",
-                    title: "工具箱",
-                    content: "",
-                    reportDetail: "针管明显被使用过，针头剩余的液体中可以看到有少量晶体残留。晶体样本已经送去化验，但是可能要一周时间才有结果。",
-                    img: "book1/LR002.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickPaper(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.dgkfbd,
-                    key: "dgkfbd",
-                    title: "地宫开发报道",
-                    content: "",
-                    img: "book1/LR001.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
+    class BookConfig1 {
     }
-
-    class RoomJoe {
-        static clickDianNao() {
-            UIManager.openModal("modalOperate/scene1/joeComputer1.scene", false, {}, true);
-        }
-        static paper3(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joeXL,
-                    key: "joeXL",
-                    title: "joeXL",
-                    content: "",
-                    img: "book1/JR010.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static joeXL(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joeXL,
-                    key: "joeXL",
-                    title: "joeXL",
-                    content: "",
-                    img: "book1/JR010.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static joePaint(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joePaint,
-                    key: "joePaint",
-                    title: "joePaint",
-                    content: "",
-                    img: "book1/JR009.jpg",
-                    reportDetail: "背影无法分辨是谁，身材看起来照片上的人应该是死者Annie",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static pen(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joePen,
-                    key: "joePen",
-                    title: "joePen",
-                    content: "",
-                    img: "book1/JR008.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static book(target) {
-            UIManager.openModal("modalOperate/joe/BookJoe.scene", false, {}, true);
-        }
-        static chouti1(target) {
-            Utils.toggle3dOpen(target, 1, -0.2);
-        }
-        static chouti2(target) {
-            Utils.toggle3dOpen(target, 1, -0.2);
-        }
-        static gwb(target) {
-            Utils.toggle3dOpen(target, 4, 60);
-        }
-        static paper(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joePaper,
-                    key: "joePaper",
-                    title: "joePaper",
-                    content: "",
-                    img: "book1/JR002.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static phone1(target) {
-            UIManager.openModal("modalOperate/joe/PhoneJoe.scene", false, {}, true);
-        }
-        static jipiao(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.joeTicket,
-                    key: "joeTicket",
-                    title: "joeTicket",
-                    content: "",
-                    img: "book1/JR001.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickPhone1(target) {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.janePhone,
-                    key: "janePhone",
-                    title: "手机记录",
-                    content: "",
-                    img: "book1/JR011.png",
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-    }
-
-    class Scene3dConfig {
-        static getConfigByName(name) {
-            return this.sceneList.find(item => item.sceneName == name) || {};
-        }
-        static getSceneConfigByName(sceneName) {
-            return this.sceneList.find(item => item.sceneName == sceneName) || {};
-        }
-        static getSceneConfigById(id) {
-            return this.sceneList.find(item => item.sceneId == id) || {};
-        }
-        static getRoleInfoByRoleId(roleId) {
-            let roleData = Scene3dConfig.roleList.find(item => item.id == roleId) || {};
-            return roleData;
-        }
-        static get quesConfig() {
-            return DataLang.lang == "en"
-                ? DataLang.quesConfig_en
-                : DataLang.quesConfig_ch;
-        }
-        static get bookName() {
-            return DataLang.getTxtByType("bookName");
-        }
-        static get bookContent() {
-            return DataLang.content[DataLang.lang];
-        }
-        static get roleList() {
-            return DataLang.lang == "en" ? DataLang.roleList_en : DataLang.roleList_ch;
-        }
-        static getNodeNameBySceneAndType(sceneName, itemName) {
-            let sceneItem = Scene3dConfig.sceneList.find(item => item.sceneName == sceneName);
-            return sceneItem.events[itemName].nodeName;
-        }
-    }
-    Scene3dConfig.maxAnswerTime = 3;
-    Scene3dConfig.roleChangeCountDownSec = 30;
-    Scene3dConfig.sceneList = [
+    BookConfig1.sceneList = [
         {
             sceneName: "RoomKill",
             sceneId: 3,
@@ -5366,6 +6476,54 @@
             }
         }
     ];
+
+    class Scene3dConfig {
+        static getConfigByName(name) {
+            return this.sceneList.find(item => item.sceneName == name) || {};
+        }
+        static getSceneConfigByName(sceneName) {
+            return this.sceneList.find(item => item.sceneName == sceneName) || {};
+        }
+        static getSceneConfigById(id) {
+            return this.sceneList.find(item => item.sceneId == id) || {};
+        }
+        static getRoleInfoByRoleId(roleId) {
+            let roleData = Scene3dConfig.roleList.find(item => item.id == roleId) || {};
+            return roleData;
+        }
+        static get quesConfig() {
+            return DataLang.lang == "en"
+                ? DataLang.quesConfig_en
+                : DataLang.quesConfig_ch;
+        }
+        static get bookName() {
+            return DataLang.getTxtByType("bookName");
+        }
+        static get bookContent() {
+            return DataLang.content[DataLang.lang];
+        }
+        static get roleList() {
+            return DataLang.lang == "en" ? DataLang.roleList_en : DataLang.roleList_ch;
+        }
+        static getNodeNameBySceneAndType(sceneName, itemName) {
+            let sceneItem = Scene3dConfig.sceneList.find(item => item.sceneName == sceneName);
+            return sceneItem.events[itemName].nodeName;
+        }
+        static get sceneList() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.sceneList;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.sceneList;
+            }
+            else {
+                return BookConfig2.sceneList;
+            }
+        }
+    }
+    Scene3dConfig.maxAnswerTime = 3;
+    Scene3dConfig.roleChangeCountDownSec = 30;
 
     var View = Laya.View;
     var Dialog = Laya.Dialog;
@@ -8008,7 +9166,6 @@
             this.btnCancel.on(Laya.Event.CLICK, this, e => {
                 this.close();
             });
-            console.log(data);
             this.btnSure.on(Laya.Event.CLICK, this, e => {
                 Utils.doCopy(`<a href="https://www.theclueonline.com/?type=10004&roomId=${data.roomId}&roomPwd=${data.roomPwd}">点击加入房间</a>`);
                 this.close();
@@ -10101,7 +11258,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "modal/ModalShare.scene";
+    GameConfig.startScene = "scene/SceneBeforeStart.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
