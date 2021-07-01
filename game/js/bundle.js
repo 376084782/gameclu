@@ -405,6 +405,22 @@
         }
     };
     DataLang.txt = {
+        selfIntro: {
+            ch: "自我介绍",
+            en: "Self Introduce"
+        },
+        sureExitGame: {
+            ch: "是否确认退出游戏？",
+            en: "Are you sure to exit the game?"
+        },
+        loadingScene: {
+            en: 'Loading, please hold on…',
+            ch: '场景加载中...请稍候...'
+        },
+        loading: {
+            en: "Loading game, please hold on…",
+            ch: "加载中...请稍候..."
+        },
         floor2: {
             en: "Second Floor",
             ch: "二楼"
@@ -790,20 +806,31 @@
             age: "30",
             relation: "",
             pangbaiUrl: "sound/Joe_en_en.mp3",
-            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
+            detail: "30-year-old chemist. Worked with Professor Helen for 5 years after being hired right after graduation. Married to Jane, the historian.",
             id: 1,
             img: "book1/img_role2.png",
-            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
-    <span style="color:#ff3232">3月</span><br/>
-    3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
-    <span style="color:#ff3232">4月1日</span><br/>
-    3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
-    <span style="color:#ff3232">4月30日</span><br/>
-    火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
-    <span style="color:#ff3232">5月1日</span><br/>
-    虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
-    <span style="color:#ff3232">5月3日</span> <br/>
-    你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
+            content: `You and Annie have studied archaeology under Helen since you were a graduate student. After a few years, you are like childhood sweethearts in others’ eyes. She tells you that you are not the same and you won’t work out together. Later, you are now married to Jane, a historian. Helen always takes care of Annie who is slightly pedantic. They depend on your chemical knowledge to overcome the problems around the operation, but she is reluctant to give you core information. You despise how Helen and Annie treat you.<br/>
+      March<br/>
+      With the help of Leo and Jane, you break through the difficulties surrounding the archeological dig, drafted a blueprint of the underground palace, and soon you’ll be able to unlock this ancient underground palace!
+      Flowers and applause are close at hand. But suddenly one day, Helen tells you that she plans to abandon the excavation of this archeological project. You pretend to be calm, but your inner world collapses. You seem to see your hard work going to waste. You secretly curse Helen for her ways.<br/>
+      You try to persuade the professor with argumentative text messages, but it fails. A dangerous idea flashes through your mind: if the laboratory is destroyed, you can steal the archaeological materials and the palace blueprint then you can go to another team to finish the development.<br/>
+      April 1st<br/>
+      On March 30th, you and Jane take a 3-day vacation to travel. Before leaving, you add an active gas to the toxic gas in the laboratory. This makes the unstable gas sample even more dangerous. When you return from vacation, you hear that the laboratory exploded. However, Helen died in the explosion and the design of the underground palace also disappeared.
+      A competing archaeological institution invites you to work with them. The only requirement is to bring your research report and blueprint of the underground palace. You try to send a text message to ask Annie for the archaeological materials you deserve, but Annie refuses with the professor's wish as an excuse.<br/>
+      April 30th<br/>
+      After the fire broke out, the laboratory is rebuilt, and you reject the investor's request to continue developing the project. You receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”<br/>
+      Apart from the surprise, you quickly realize this gathering could expose you for unintentionally killing Helen. The more you think about it, the more paranoid you become about the situation. So, you decide to go.<br/>
+      May 1<br/>
+      Although Jane is suspicious of your past relationship with Annie, you still take a flight to the laboratory. You find Annie in her office and she leaves at 2:00 p.m. that day to do errands. You make use of this gap to sneak into her office and find the answers. <br/>
+      As you expect, she and a mysterious person are investigating Helen’s death, and they arranged this gathering and bought a humidifier, drugs, and an antidote. You know if you don’t act, it could ruin your career and you would be charged with Helen's death. <br/>
+      It’s better to act first: get rid of her, take away the archaeological materials, and save your future. You copy the antidote recipe, and you find the research report in the safe box, quickly take the photos, and upload them to the Internet. Before Annie comes back at 2:30 p.m., you leave the laboratory. <br/>
+      You buy all the ingredients at the pharmacy to formulate a bottle of antidote and two bottles of cold medicine to carry with you.<br/>
+      May 3rd<br/>
+      After you come to the laboratory at 2:00 p.m., you pretend to be busy in your office. You secretly block the cameras of the corridor at 6:30 p.m., and stuff a note into Annie’s office: "I know who you are! I also know what you are going to do. Come to the villa grove at 7:00, let's talk about it!" Annie, with a guilty conscience, is fooled. <br/>
+      After she leaves, you sneak into the office again, replace the two bottles of antidote in her drawer with the cold medicine bottles then throw the antidote into the trash can in the corridor. You drink the antidote without telling Jane at 7:50 p.m., then take her to the meeting room. You find an opportunity to secretly throw the empty bottle of antidote into the trash can in the meeting room. <br/>
+      At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. Unexpectedly, you fall into a coma with everyone else after a glass of wine. Fortunately, after 30 minutes, you wake up first. <br/>
+      You look around and use the handkerchief on Harris's chest and the cake-cutting knife to stab Annie to death, then you pretend to be unconscious.<br/>
+      Almost another 30 minutes later, you see Wilson wake up, and sneak away from the scene. Wilson comes back and pretends to be asleep. When everyone wakes up, you pretend to wake up last. Everyone sees Annie’s body in the corridor!`
         },
         {
             roleName: "Jane",
@@ -812,86 +839,103 @@
             age: "28",
             sex: "Female",
             relation: "",
-            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
+            detail: "28-year-old historian. Married to Joe, the chemist, for 2 years and joined the archeological team.",
             id: 2,
             img: "book1/img_role3.png",
-            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
-    <span style="color:#ff3232">3月</span><br/>
-    终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
-    <span style="color:#ff3232">4月1日</span><br/>
-    <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
-    <span style="color:#ff3232">4月30日</span><br/>
-    火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
-    <span style="color:#ff3232">5月1日</span><br/>
-    今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
-    <span style="color:#ff3232">5月3日</span><br/>
-    你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+            content: `It has been two years since you joined the archaeological team under the recommendation of your husband, Joe. You use your historical knowledge to break many research bottlenecks. The research phase is about to be completed, and you’ve proven to be a valuable part of the team. 
+      The only thing that makes you uncomfortable is the past relationship between the archaeologist Annie and your husband. This unknown past makes you uncomfortable. Although your husband always guarantees their innocence, you still cannot help but think otherwise.<br/>
+      March<br/>
+      One day, Joe asks if you want to leave the team together because Helen wanted to terminate the excavation plan. You don't care about the excavation plan. You just want to leave this terrible place with Joe. Every time you see Annie and Joe working together, the thoughts continue to nag at your nerves. You also hope that your worries are unnecessary. There’s no better solution than to leave the team. Before leaving, you send an anonymous letter threatening Helen and asking her to hand over the plan and the underground palace blueprints.<br/>
+      April 1st<br/>
+      Joe takes you on a rare trip for 3 days. After you come back, you hear that there is an explosion in the laboratory. Helen died in the explosion, and the underground palace blueprints are missing. While you are fortunate that you and your husband weren’t around for the explosion, you intuitively feel a little uneasy and the accident accelerates your departure from this place.<br/>
+      You and Joe will submit your resumes and look for new jobs. Dealing with the aftermath and rebuilding the laboratory would give Joe and Annie more opportunities to meet. Your anxiety drives you to become more suspicious.
+      April 30th<br/>
+      After the explosion, the laboratory starts to get rebuilt. On the 30th, you receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”
+      It should be over, but now so many unexpected things are happening. You try to persuade Joe not to participate, but Joe's attitude disappoints you. You decide to go together and see what happens.<br/>
+      At the same time, you find the call history between Joe and Annie. Sure enough, they have recently been in contact. Aside from taking tranquilizers, your diary is your only way to vent your gloomy mood. "Do I have to wait until Annie completely disappears before my nightmare ends?"<br/>
+      May 1st<br/>
+      Today, Joe sends you a text message saying that he would fly to the laboratory early which makes you very suspicious. With an uneasy mood, you send Annie a short message. As expected, she is also at the laboratory! Sooner or later, you will find an opportunity to give that bitch a lesson!<br/>
+      May 3rd<br/>
+      You arrive at the laboratory at noon. There is an interview which keeps you busy in the office until 7:50 p.m., and then you go to find Joe to attend the party.<br/>
+      Seeing someone preparing a cake, you run to the kitchen to get a kitchen knife and a plate. At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. After a glass of wine, you drift into darkness as you go unconscious alongside everyone else.<br/>
+      After an hour, everyone wakes up and finds Annie's body!`
         },
         {
             roleName: "Harris",
-            job: "大英博物馆副馆长",
+            job: "Deputy curator at the British Museum",
             pangbaiUrl: "sound/Harris_en.mp3",
             age: "27",
-            sex: "男性",
+            sex: "Male",
             relation: "",
-            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
+            detail: "27-year-old deputy curator at the British Museum. Invited to the gathering mysteriously and arrived early to stay in the guest room.",
             id: 3,
             img: "book1/img_role1.png",
-            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
-    <span style="color:#ff3232">3月</span><br/>
-    你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
-    <span style="color:#ff3232">4月3日</span><br/>
-    教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
-    <span style="color:#ff3232">5月3日</span><br/>
-    你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+            content: `You are the deputy curator of the British Museum and the youngest manager of the museum in the industry. You understand that all honors are not only from your diligences, but also information and academic backing from your mother, Prof. Helen. The jet lag and business from work give rise to little time to connect. The relationship between you and your mother is great. You love your mother more than everything in the world.<br/>
+      March<br/>
+      You know Helen is going to research an ancient underground palace and she’s about to enter the excavation stage. You are excited because your mother must share her achievements with you. This would be a huge accolade to your career because it would help bring up the museum’s poor financial performance. <br/>
+      After you finish your business investment proposals, you are waiting for her excavation to be successful. Suddenly, Helen’s call makes you extremely disappointed. She tells you the limitations of the current technology, the excavation is not only dangerous but would also result in damaging the underground palace. Research is going to be stopped. You feel so disappointed and quarrel with her. Later, you receive a letter from your mother but refuse to write back.<br/>
+      April 3rd<br/>
+      One of the students of the professor, Annie, sends you a letter and tells you the laboratory had an explosion, the blueprint of the underground palace has been lost, and that your mother has died. You feel despair. She sends you the remains and Helen’s mobile phone.<br/>
+      She tells you there are several threatening text messages on the phone. You both feel the accident is related to the lost blueprint. After thinking for a moment, to get revenge, you decide to come back to the villa and help the archaeologists solve the secret behind the accident. 
+      During the process, you want to purchase the research reports, but the archaeologists refuse because it is confidential information. Although you are uneasy, you decide to wait for the opportunity. <br/>
+      After discussing, you and Annie decide to invite all the suspects to the research laboratory where the explosion happened. You invite them with the excuse that there is a copy of the blueprint of the underground palace.<br/>
+      You wait for the opportunity to put together the evidence and figure out who murdered your mother. You book the airline ticket to return to the villa on May 2nd. You nervously wait for the day.<br/>
+      May 3rd<br/>
+      You come to the laboratory at 11:30 a.m. on May 3rd and plan your actions for the night. To protect you, Annie tells you to take the antidotes from her office at 7:45 p.m., but she doesn’t allow you to participate in making the plans.<br/>
+      After having lunch, you return to your room and sleep because of the jet lag at 2:00 in the afternoon. At 7:30 p.m., your clock wakens you, then you drink the antidote in the archaeological office at 7:45 at night. 
+      You arrive at the reception room with Annie at 8:00 p.m. and meet a chemist, Joe, and his wife, Jane who is a historian, a talented scientist, Leo, and the project creator, Wilson, with Annie’s introduction for the first time. The party starts on time. Under Wilson’s suggestion, everyone raises a toast for Helen. After finishing the wine, you succumb to a coma along with the others. After an hour, everyone wakes up and finds Annie’s corpse.`
         },
         {
             roleName: "Leo",
             pangbaiUrl: "sound/Leo_en.mp3",
-            job: "科学家",
-            sex: "男性",
+            job: "Scientist",
+            sex: "Male",
             age: "28",
             relation: "",
-            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
+            detail: "28-year-old world-famous scientist. Has a narcissistic personality. Helped the archeological team for 1 year and created the blueprint which progressed the team to the mining phase.",
             id: 4,
             img: "book1/img_role4.png",
-            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
-    <span style="color:#ff3232">3月</span><br/>
-    “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
-    <span style="color:#ff3232">4月1日</span><br/>
-    实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
-    <span style="color:#ff3232">4月30日</span><br/>
-    火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
-    <span style="color:#ff3232">5月1日</span><br/>
-    这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
-    <span style="color:#ff3232">5月3日</span><br/>
-    你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
-    `
+            content: `You are regarded as the talent in others’ eyes because of your outstanding memory and amazing book knowledge. You publish high-standard articles in the field of biology, history, chemistry, and more. You’re a rising star in the academic world. Before your graduation, Professor Helen invites you to join her archeological team.<br/>
+      You know under your comprehensive knowledge that you can yield brilliant results in the process. After two years, the team solves problems one by one and gets the complete research reports. What’s more important, you make use of the technology to restore the blueprint of the underground palace. With this blueprint, the archeological team can officially start excavating. You know when the project is successful, you will have your highlights. Soon, you’ll have the applause and rewards for such fine work. <br/>
+      March<br/>
+      "What? The excavation plan will be canceled! Are you kidding me? My interview is coming up!” You yell at Helen. You know the limitations of the current development technology. Excavating the underground palace is dangerous, and it may destroy the underground palace. Hellen’s decision to stop the development and forbid the publishing of the research reports is currently the best choice. <br/>
+      You’re unhappy about the situation. Since that day, you become muddleheaded, and the first failure of your career nearly causes you to crack. You don’t know how to face the reporters and stress that it will negatively impact your career. It seems like a nightmare.<br/>
+      April 1st<br/>
+      The revealing of gas in the laboratory may have been caused by you, but you can’t remember the details. You return to the laboratory after your noon break and witness a terrible explosion. Among the smoke, you can’t tell whether you see someone in the lab or not. When you rush into the lab, you spot the underground palace blueprint on the table.<br/>
+      You convince yourself that no one is in the lab and put the blueprint in your pocket and stagger out of the lab. You later learn that Helen died from the explosion. Facing doubts from the public and investors, you tell yourself that you’ll gather the rest of the information to solve the technical problems and complete the excavation.<br/>
+      April 30th<br/>
+      After the disaster, the laboratory starts being rebuilt. On April 30th, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” <br/>
+      You can’t believe your eyes, and you can’t verify the one you hold is the latest version. Helen never told you the details of the confidential documents. You want to gain the rest of the research reports and ensure that you have the proper blueprint, so you can continue the excavation by yourself. Your talent will shine through sooner or later.  <br/>
+      May 1st<br/>
+      You buy some Ezmaclopam, a bottle of expensive wine, and an air ticket for May 4th. You plan to dope people and steal the research reports, and then leave by the night of May 4th.<br/>
+      May 3rd<br/>
+      You arrive at the laboratory at 5:00 p.m. ahead of schedule and talk with the archeologist, Annie. It seems that your purpose hasn’t been exposed. So, you decide to act on your plan. You return to your office at 6:00 p.m., put the drugs into the wine with the injection syringe, and then read a detective novel to pass the time.<br/>
+      You bring the wine to the party on time. Under the suggestion of Wilson, they decide to propose a toast for the professor. You don’t drink it, but you start to feel dizzy. Why? You fall unconscious.<br/>
+      One hour later, everyone wakes up one by one and you find Annie’s corpse.`
         },
         {
             roleName: "Wilson",
             pangbaiUrl: "sound/Wilson_en.mp3",
-            job: "项目投资人",
-            sex: "男性",
+            job: "Investor",
+            sex: "Male",
             age: "40",
             relation: "",
-            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
+            detail: "40-year-old investor. Has a passion for archeology and funded the team with his own money. Invested most of his money into the team and wants a return on his investment.",
             id: 5,
             img: "book1/img_role5.png",
-            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
-    <span style="color:#ff3232">3月</span><br/>
-    “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
-    <span style="color:#ff3232">4月1日</span><br/>
-    不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
-    <span style="color:#ff3232">4月30日</span><br/>
-    30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
-    <span style="color:#ff3232">5月3日</span><br/>
-    你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
-    信件<br/>
-    <span style="color:#ff3232">短信</span><br/>
-    你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
-    你赶忙邀请考古团队的其他成员继续挖掘项目
-    `
+            content: `You are a well-known venture capitalist. Behind the attractive appearance and rich clothing, only you and your accountant know how tight your money is. Recently, you focused on a potentially profitable archaeology project. The reputation and benefits after your success will bring you endless money. To monitor the archeological team, you invite them to the laboratory which was converted from a villa. Along with the development of the project, you realize the expenses of the project are seemingly endless. Gradually, your money dwindles, but you don’t see any rewards. After several years, Helen tells you that the research is finished. Although there are no substantial academic benefits, you know the ancient relics are profitable and your good luck is coming.<br/>
+      March<br/>
+      “What!?” When Helen tells you her plan to give up the excavation operation, you’re stunned. Panic sets in as you see all your money spent on the project reeling through your head. You send countless emails and messages trying to convince her otherwise. You reach the point of both threats and bribes, but she remains firm. You have nothing else to restore your investment. So, you hire Gangdom to threaten Helen and ask her students to steal the materials, both plans fail. <br/>
+      April 1st<br/>
+      You see no way out as your bank account nearly runs out. One night, you’re called and told about the explosion which makes matters worse but also igniting some hope. Helen was the only one who could stop the excavation project and she perished in the explosion. Now, no one will be an obstacle for you. <br/>
+      You are so excited and invite other members of the archeological team together to continue the project. After the explosion, you are busy rebuilding the laboratory and persuading Annie to continue the project. Annie rejected your request to continue the excavation. You message your Gangdom friends to take out Annie, but their fee is more than what you have in the bank. You decide to be lowkey and seek your opportunity to find the blueprint and research reports to turn things around.<br/>
+      April 30th<br/>
+      On this day, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” You can’t wait as this opportunity arises. You need to steal all the reports and the blueprint to recover from the loss of your investment!<br/>
+      May 3rd<br/>
+      You arrive at the laboratory and use your keys to search the rooms, except Annie’s office because she’s already there. You find nothing. You guess the research reports and blueprint must be in Annie’s possession because of her close relationship with Helen. Annie never seems to leave long enough for you to look through her stuff. At 6:55 p.m. you see Annie with the surveillance camera and she’s leaving the laboratory. You sneak into the office. You’re shocked when someone else enters the office and you run away.<br/>
+      Annie returns and stays in her office. You blame everything on bad luck. 
+      When it’s time for the party at 8:00 p.m., you advise everyone to raise their glass together. You plan to steal the reports and blueprint after everyone is drunk, but you start feeling the spins too.<br/>
+      You wake up first and see Annie’s bloodied corpse. You’re horrified by the scene but out of greed, you run to the office and steal the reports, then put them in your safe box. You return and pretend to wake up with the others.`
         },
         {
             roleName: "Stanly",
@@ -902,7 +946,7 @@
             relation: "",
             id: 6,
             img: "book1/img_role7.png",
-            content: "你是一个侦探，接到报警前来查案"
+            content: "You are a detective, you come here to investigate a murder."
         }
     ];
     DataLang.roleList_ch = [
@@ -1473,7 +1517,7 @@
                                 "hintSetting"
                             ]);
                         });
-                        GameManager.timeTitle = "自我介绍";
+                        GameManager.timeTitle = DataLang.getTxtByType('selfIntro');
                         Agora.joinRoom();
                         break;
                     }
@@ -2034,7 +2078,7 @@
                         }
                         case "PRE_TALKING": {
                             Agora.joinRoom();
-                            GameManager.timeTitle = "自我介绍";
+                            GameManager.timeTitle = DataLang.getTxtByType('selfIntro');
                             yield UIManager.goScene("scene/SceneTalking.scene");
                             EventManager.pub("talking/changeCurrent", {
                                 talkingUserId: dataGame.talkingUserId
@@ -4966,7 +5010,7 @@
                     content: "",
                     img: "book1/KR001.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "加湿器内部的水中发现有透明的晶体，晶体样本已经送去化验，但是可能要一周时间才有结果。"
+                    reportDetail: BookConfig1.getDetail("jiashiqi")
                 }
             ]);
         }
@@ -4979,7 +5023,7 @@
                     content: "",
                     img: "book1/KR006.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "手帕的血迹是死者Annie的，这看上去像是一块西装袋巾"
+                    reportDetail: BookConfig1.getDetail("shoupa")
                 }
             ]);
         }
@@ -4992,7 +5036,7 @@
                     content: "",
                     img: "book1/KR005.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "凶器的血迹是死者Annie的，且凶器上并没有发现任何指纹"
+                    reportDetail: BookConfig1.getDetail("xiongqi")
                 }
             ]);
         }
@@ -5005,7 +5049,7 @@
                     content: "",
                     img: "book1/KR004.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "蛋糕似乎没有被动过，初步检验没有发现任何可疑物质。蛋糕已经送去检查，可能要一周时间才有结果。"
+                    reportDetail: BookConfig1.getDetail("dangao")
                 }
             ]);
         }
@@ -5018,7 +5062,7 @@
                     content: "",
                     img: "book1/KR003.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "红酒瓶塞上有针头大的细空，酒里的液体已经送去检查，可能要一周时间才有结果。"
+                    reportDetail: BookConfig1.getDetail("hjp")
                 }
             ]);
         }
@@ -5031,7 +5075,7 @@
                     content: "",
                     img: "book1/KR002.png",
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: "发现的3个要瓶中有一瓶已经被使用，另外两瓶还未开封。证据被送往鉴定科化验，但是可能要一周时间才有结果。"
+                    reportDetail: BookConfig1.getDetail("yaop1")
                 }
             ]);
         }
@@ -5571,7 +5615,7 @@
                     title: "joePaint",
                     content: "",
                     img: "book1/JR009.jpg",
-                    reportDetail: "背影无法分辨是谁，身材看起来照片上的人应该是死者Annie",
+                    reportDetail: BookConfig1.getDetail('beiy'),
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -5751,7 +5795,7 @@
                     key: "gjx",
                     title: "工具箱",
                     content: "",
-                    reportDetail: "针管明显被使用过，针头剩余的液体中可以看到有少量晶体残留。晶体样本已经送去化验，但是可能要一周时间才有结果。",
+                    reportDetail: BookConfig1.getDetail("zhenguan"),
                     img: "book1/LR002.png",
                     sceneFrom: GameManager.currentScene
                 }
@@ -5921,6 +5965,9 @@
     }
 
     class BookConfig1 {
+        static getDetail(type) {
+            return this.detailList[type][DataLang.lang];
+        }
     }
     BookConfig1.sceneList = [
         {
@@ -6476,6 +6523,40 @@
             }
         }
     ];
+    BookConfig1.detailList = {
+        zhenguan: {
+            ch: "针管明显被使用过，针头剩余的液体中可以看到有少量晶体残留。晶体样本已经送去化验，但是可能要一周时间才有结果 (Leo’s office柜子里的针头)",
+            en: "The syringe is used and there is still some liquid and crystals inside. The liquid has been sent to the lab which takes a week to analyze."
+        },
+        beiy: {
+            ch: "背影无法分辨是谁，身材看起来照片上的人应该是死者Annie (Joe’s Office办公桌上照片)",
+            en: "The photo is of a person’s back. It’s hard to tell who is in the photo, but it appears to be Annie."
+        },
+        yaop1: {
+            ch: "发现的3个药瓶中有一瓶已经被使用，另外两瓶还未开封。证据被送往鉴定科化验，但是可能要一周时间才有结果",
+            en: "One of the vials is opened and empty. Two of them were unopened. The contents were sent to the lab which takes a week to analyze."
+        },
+        hjp: {
+            ch: "红酒瓶塞上有针头打的细孔，酒里的液体已经送去检验，可能要一周时间才有结果",
+            en: "There is a small pinhole in the stopper that appears to be made by a needle. The liquid in the bottle was sent to the lab which takes a week to analyze."
+        },
+        shoupa: {
+            ch: "手帕的血迹是死者Annie的，这看上去像是一块西装袋巾",
+            en: "It seems to be a Pocket Square from a suit. The blood on the pocket square is from Annie."
+        },
+        jiashiqi: {
+            ch: "加湿器内部的水中发现有透明的晶体，晶体样本已经送去化验，但是可能要一周时间才有结果",
+            en: "There are translucent crystals in the water tap. The crystals have been sent to the lab which takes a week to analyze."
+        },
+        xiongqi: {
+            ch: "凶器的血迹是死者Annie的，且凶器上没有发现任何指纹",
+            en: "The blood on the knife is from Annie. There were no fingerprints found on the knife."
+        },
+        dangao: {
+            en: "The cake is untouched, and no suspicious substances were found by the forensic kit. It seems safe.",
+            ch: "蛋糕似乎没有被动过，初步检验没有发现任何可以物质。蛋糕已经送去检查，可能要一周时间才有结果"
+        }
+    };
 
     class Scene3dConfig {
         static getConfigByName(name) {
@@ -7572,7 +7653,7 @@
         onEnable() {
             this.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
                 UIManager.showConfirm({
-                    content: `是否确认退出游戏？`,
+                    content: DataLang.getTxtByType('sureExitGame'),
                     onSure(e) {
                         return __awaiter(this, void 0, void 0, function* () {
                             yield NetController.reqExitRoom(GameManager.roomInfo.id);
@@ -9742,7 +9823,7 @@
                 }
                 else {
                     username.color = isSelf ? "#feb853" : "#fff";
-                    username.text = Utils.subString(data.username, 10);
+                    username.text = data.username;
                     avatar.skin = data.avatar;
                 }
             });
@@ -10633,9 +10714,7 @@
                 if (showPrg3d) {
                     LoadingManager.loadScene3d();
                 }
-                this.tipLoading.text = showPrg3d
-                    ? "场景准备中...请稍后..."
-                    : "加载中...请稍后...";
+                this.tipLoading.text = DataLang.getTxtByType(showPrg3d ? "loadingScene" : "loading");
             });
         }
     }
@@ -11258,7 +11337,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBeforeStart.scene";
+    GameConfig.startScene = "scene/SceneRole.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
