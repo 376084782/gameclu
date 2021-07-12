@@ -115,7 +115,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.007038716,
+											-0.007584605,
+											4.705622E-05
+										],
+										"size":[
+											0.05033561,
+											0.03349744,
+											9.411731E-05
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					}
 				]
@@ -935,7 +958,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											2.980232E-08,
+											0,
+											-5.960464E-08
+										],
+										"size":[
+											0.4025815,
+											1.426556,
+											1.745532
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -972,7 +1018,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-1.750886E-07,
+											3.725296E-09,
+											5.267279E-15
+										],
+										"size":[
+											0.2473353,
+											0.1415437,
+											0.001854273
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1009,7 +1078,21 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-model.lm"
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1194,7 +1277,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-5.901832E-08,
+											2.269657E-07,
+											0.01385564
+										],
+										"size":[
+											0.2611378,
+											0.1600001,
+											0.02771081
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1337,7 +1443,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.01437622,
+											-0.00795581,
+											0.1312349
+										],
+										"size":[
+											0.1115372,
+											0.1115372,
+											0.2614041
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1448,7 +1577,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.1289918,
+											0.2142555,
+											0.005503092
+										],
+										"size":[
+											0.7135732,
+											0.9847884,
+											0.8545846
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1485,7 +1637,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.1289918,
+											0.2142555,
+											0.005503203
+										],
+										"size":[
+											0.7135732,
+											0.9847884,
+											0.8545843
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1522,7 +1697,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.128992,
+											0.2142555,
+											0.005503029
+										],
+										"size":[
+											0.7135733,
+											0.9847884,
+											0.8545846
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1559,7 +1757,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											2.980234E-08,
+											2.980231E-08,
+											1.341105E-07
+										],
+										"size":[
+											0.6615393,
+											0.6615399,
+											0.4833663
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1596,7 +1817,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											2.086163E-07,
+											8.940697E-08,
+											7.45058E-08
+										],
+										"size":[
+											0.6615392,
+											0.6615397,
+											0.4833661
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1935,7 +2179,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-5.401671E-08,
+											-0.1133983,
+											3.166496E-08
+										],
+										"size":[
+											0.08627246,
+											0.2334774,
+											0.08627249
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -2009,7 +2276,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.000209868,
+											0.5101728,
+											0
+										],
+										"size":[
+											0.5605776,
+											1.020327,
+											0.5829145
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -2275,81 +2565,6 @@
 						"type":"MeshSprite3D",
 						"instanceID":61,
 						"props":{
-							"name":"对象022",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								2.25264,
-								0.5786436,
-								0.3416723
-							],
-							"rotation":[
-								0.6446682,
-								-0.2905218,
-								-0.2905218,
-								-0.6446682
-							],
-							"scale":[
-								1.661695,
-								1.661695,
-								1.366145
-							],
-							"meshPath":"Assets/model/1-对象022.lm",
-							"enableRender":true,
-							"receiveShadows":true,
-							"castShadow":true,
-							"materials":[
-								{
-									"path":"Assets/model/New Material 19.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[
-							{
-								"type":"MeshSprite3D",
-								"instanceID":62,
-								"props":{
-									"name":"Obj3d66-1163439-4-215",
-									"active":true,
-									"isStatic":false,
-									"layer":0,
-									"position":[
-										0.03568004,
-										0.01324861,
-										0.01683561
-									],
-									"rotation":[
-										2.21709E-09,
-										4.825892E-09,
-										0.665997,
-										-0.7459543
-									],
-									"scale":[
-										0.8346899,
-										0.8346903,
-										1.015266
-									],
-									"meshPath":"Assets/model/1-Obj3d66-1163439-4-215.lm",
-									"enableRender":true,
-									"receiveShadows":true,
-									"castShadow":true,
-									"materials":[
-										{
-											"path":"Assets/model/New Material 21.lmat"
-										}
-									]
-								},
-								"components":[],
-								"child":[]
-							}
-						]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":63,
-						"props":{
 							"name":"对象027",
 							"active":true,
 							"isStatic":false,
@@ -2384,7 +2599,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":64,
+								"instanceID":62,
 								"props":{
 									"name":"QuadPatch001",
 									"active":true,
@@ -2420,12 +2635,115 @@
 								"child":[]
 							}
 						]
+					},
+					{
+						"type":"Sprite3D",
+						"instanceID":63,
+						"props":{
+							"name":"组2136555820",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								2.26664,
+								0.5786435,
+								0.3086725
+							],
+							"rotation":[
+								0.7071068,
+								0,
+								0,
+								-0.7071068
+							],
+							"scale":[
+								1,
+								1,
+								1
+							]
+						},
+						"components":[],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"instanceID":64,
+								"props":{
+									"name":"Obj3d66-1163439-4-215",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0.008779786,
+										0.026,
+										0.023
+									],
+									"rotation":[
+										0,
+										0,
+										0.3007057,
+										-0.953717
+									],
+									"scale":[
+										1.387,
+										1.387,
+										1.387
+									],
+									"meshPath":"Assets/model/1-Obj3d66-1163439-4-215.lm",
+									"enableRender":true,
+									"receiveShadows":true,
+									"castShadow":true,
+									"materials":[
+										{
+											"path":"Assets/model/New Material 21.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							},
+							{
+								"type":"MeshSprite3D",
+								"instanceID":65,
+								"props":{
+									"name":"对象022",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										-0.014,
+										-0.033,
+										0
+									],
+									"rotation":[
+										0,
+										0,
+										-0.4108599,
+										-0.9116985
+									],
+									"scale":[
+										1.661695,
+										1.661695,
+										1.366145
+									],
+									"meshPath":"Assets/model/1-对象022.lm",
+									"enableRender":true,
+									"receiveShadows":true,
+									"castShadow":true,
+									"materials":[
+										{
+											"path":"Assets/model/New Material 19.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
 					}
 				]
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":65,
+				"instanceID":66,
 				"props":{
 					"name":"canMove",
 					"active":true,
@@ -2452,7 +2770,7 @@
 				"child":[
 					{
 						"type":"MeshSprite3D",
-						"instanceID":66,
+						"instanceID":67,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2513,7 +2831,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":67,
+						"instanceID":68,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2574,7 +2892,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":68,
+						"instanceID":69,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2635,7 +2953,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":69,
+						"instanceID":70,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2696,7 +3014,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":70,
+						"instanceID":71,
 						"props":{
 							"name":"Cube (1)",
 							"active":true,
@@ -2754,12 +3072,134 @@
 							}
 						],
 						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":72,
+						"props":{
+							"name":"Cube (2)",
+							"active":true,
+							"isStatic":true,
+							"layer":0,
+							"position":[
+								0.437,
+								1.55,
+								-3.0729
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								0.2926424,
+								2.5253,
+								3.08252
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"receiveShadows":true,
+							"castShadow":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
+					},
+					{
+						"type":"MeshSprite3D",
+						"instanceID":73,
+						"props":{
+							"name":"Cube (3)",
+							"active":true,
+							"isStatic":true,
+							"layer":0,
+							"position":[
+								0.437,
+								1.55,
+								3.224
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								0.29264,
+								2.5253,
+								3.08252
+							],
+							"meshPath":"Library/unity default resources-Cube.lm",
+							"enableRender":false,
+							"receiveShadows":true,
+							"castShadow":true,
+							"materials":[
+								{
+									"type":"Laya.BlinnPhongMaterial",
+									"path":"Resources/unity_builtin_extra.lmat"
+								}
+							]
+						},
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											0,
+											0
+										],
+										"size":[
+											1,
+											1,
+											1
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[]
 					}
 				]
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":71,
+				"instanceID":74,
 				"props":{
 					"name":"people",
 					"active":true,
@@ -2786,7 +3226,7 @@
 				"child":[
 					{
 						"type":"Camera",
-						"instanceID":72,
+						"instanceID":75,
 						"props":{
 							"name":"Main Camera",
 							"active":true,

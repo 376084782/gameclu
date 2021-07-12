@@ -115,7 +115,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.126213,
+											-0.001253224,
+											0.05122734
+										],
+										"size":[
+											0.08667597,
+											0.08658038,
+											0.1016124
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -156,7 +179,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.01437622,
+											-0.00795581,
+											0.1312349
+										],
+										"size":[
+											0.1115372,
+											0.1115372,
+											0.2614041
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					}
 				]
@@ -259,7 +305,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.007039964,
+											-0.1873863,
+											0.2459571
+										],
+										"size":[
+											2.101565,
+											2.464456,
+											1.765114
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -370,7 +439,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-5.894899E-05,
+											-0.2342181,
+											-0.1881292
+										],
+										"size":[
+											0.6290171,
+											0.6784723,
+											0.4328084
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -444,7 +536,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-5.818899E-05,
+											-0.2342181,
+											-0.188129
+										],
+										"size":[
+											0.6290171,
+											0.6784723,
+											0.4328084
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -584,7 +699,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											8.195639E-08,
+											3.72529E-08,
+											-0.6544961
+										],
+										"size":[
+											0.2867805,
+											0.2867798,
+											1.508622
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -843,7 +981,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.001792988,
+											0.06627964,
+											-0.002759814
+										],
+										"size":[
+											0.08474254,
+											0.1325593,
+											0.08803601
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -917,7 +1078,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											4.246831E-07,
+											3.501773E-07,
+											-0.2361738
+										],
+										"size":[
+											0.2642462,
+											0.2642462,
+											1.22561
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1065,7 +1249,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											2.384186E-07,
+											1.862645E-09,
+											0
+										],
+										"size":[
+											0.08612653,
+											0.07276572,
+											0.04604136
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1102,7 +1309,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											4.786998E-07,
+											0
+										],
+										"size":[
+											0.08612653,
+											0.07276572,
+											0.04604136
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1139,7 +1369,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											2.775558E-17,
+											-4.749745E-07,
+											2.980232E-08
+										],
+										"size":[
+											0.08612657,
+											0.07276575,
+											0.0460414
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1176,7 +1429,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											4.768372E-07,
+											1.862645E-09,
+											3.576279E-07
+										],
+										"size":[
+											0.08612654,
+											0.07276574,
+											0.04604137
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1213,7 +1489,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											-0.0005874038,
+											0.259468,
+											0.01275194
+										],
+										"size":[
+											2.014894,
+											0.6030927,
+											1.992407
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1804,7 +2103,30 @@
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"PhysicsCollider",
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													-1.192093E-07,
+													2.384186E-07,
+													-3.72529E-08
+												],
+												"size":[
+													0.2668467,
+													0.178067,
+													5.435774E-09
+												]
+											}
+										],
+										"isTrigger":false
+									}
+								],
 								"child":[]
 							}
 						]
@@ -2020,7 +2342,30 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0.00626308,
+											0.00113023,
+											-0.0003957276
+										],
+										"size":[
+											0.02395598,
+											0.02243584,
+											0.02314142
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -2093,7 +2438,30 @@
 										}
 									]
 								},
-								"components":[],
+								"components":[
+									{
+										"type":"PhysicsCollider",
+										"restitution":0,
+										"friction":0.5,
+										"rollingFriction":0,
+										"shapes":[
+											{
+												"type":"BoxColliderShape",
+												"center":[
+													2.84892E-09,
+													-1.336937E-09,
+													0.005660281
+												],
+												"size":[
+													0.08193152,
+													0.05452979,
+													0.01132065
+												]
+											}
+										],
+										"isTrigger":false
+									}
+								],
 								"child":[]
 							}
 						]

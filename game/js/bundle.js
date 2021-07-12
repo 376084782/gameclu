@@ -4650,6 +4650,11 @@
                     caller: Room2,
                     method: Room2.clickCR007,
                     nodeName: "1.QuadPatch007"
+                },
+                wang: {
+                    caller: Room2,
+                    method: Room2.clickCR008,
+                    nodeName: "1.Obj3d66-806782-1-101"
                 }
             }
         },
@@ -4888,6 +4893,7 @@
                         item["nodeName"] = key;
                         console.log(key);
                         let collider = item.getComponent(Laya.PhysicsCollider);
+                        console.log(collider, '22222222222');
                         if (!collider) {
                             collider = item.addComponent(Laya.PhysicsCollider);
                             let physhape = new Laya.MeshColliderShape();
@@ -11337,7 +11343,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneRole.scene";
+    GameConfig.startScene = "component/GamaCluDetail.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
