@@ -21,7 +21,7 @@
 		"textures":[
 			{
 				"name":"albedoTexture",
-				"path":"../map/taideng.jpg",
+				"path":"taideng.jpg",
 				"constructParams":[
 					1024,
 					1024,

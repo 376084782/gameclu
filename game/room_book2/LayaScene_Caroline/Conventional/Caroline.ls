@@ -689,30 +689,7 @@
 										}
 									]
 								},
-								"components":[
-									{
-										"type":"PhysicsCollider",
-										"restitution":0,
-										"friction":0.5,
-										"rollingFriction":0,
-										"shapes":[
-											{
-												"type":"BoxColliderShape",
-												"center":[
-													5.456584E-05,
-													4.370582E-05,
-													-0.001773136
-												],
-												"size":[
-													0.006985981,
-													0.006985964,
-													0.007082047
-												]
-											}
-										],
-										"isTrigger":false
-									}
-								],
+								"components":[],
 								"child":[]
 							}
 						]
@@ -759,17 +736,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0.001871488,
-											0.01024479,
-											0.0005949516
-										],
-										"size":[
-											0.01762208,
-											0.02184774,
-											0.01042678
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-Line044.lm"
 									}
 								],
 								"isTrigger":false
@@ -1138,17 +1106,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0.1418607,
-											-0.1154862,
-											0.05273509
-										],
-										"size":[
-											0.3286098,
-											0.2755759,
-											0.1053626
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-Obj3d66-405792-9-449.lm"
 									}
 								],
 								"isTrigger":false
@@ -1338,7 +1297,21 @@
 								}
 							]
 						},
-						"components":[],
+						"components":[
+							{
+								"type":"PhysicsCollider",
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"shapes":[
+									{
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-Obj3d66-566098-7-169.lm"
+									}
+								],
+								"isTrigger":false
+							}
+						],
 						"child":[]
 					},
 					{
@@ -1568,17 +1541,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											9.536743E-07,
-											4.786998E-07,
-											-2.046393E-16
-										],
-										"size":[
-											0.08612654,
-											0.07276574,
-											0.04604138
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-Obj3d66-711884-2-127.lm"
 									}
 								],
 								"isTrigger":false
@@ -1628,17 +1592,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											3.524125E-06,
-											5.089124E-13,
-											-6.323682E-06
-										],
-										"size":[
-											0.3120557,
-											0.238015,
-											0.06724533
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-Obj3d66-784515-2-781.lm"
 									}
 								],
 								"isTrigger":false
@@ -1739,8 +1694,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-Obj3d66-806782-1-101.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											-0.716822,
+											-0.01015927,
+											0.227643
+										],
+										"size":[
+											1.136586,
+											0.04346366,
+											2.700197
+										]
 									}
 								],
 								"isTrigger":false
@@ -1961,17 +1925,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											0,
-											0
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch001.lm"
 									}
 								],
 								"isTrigger":false
@@ -2021,17 +1976,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											-1.907349E-06,
-											2.980232E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch002.lm"
 									}
 								],
 								"isTrigger":false
@@ -2081,17 +2027,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											-9.536743E-07,
-											5.960464E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch003.lm"
 									}
 								],
 								"isTrigger":false
@@ -2141,17 +2078,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											9.536743E-07,
-											5.960464E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch004.lm"
 									}
 								],
 								"isTrigger":false
@@ -2201,17 +2129,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											-9.536743E-07,
-											2.980232E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch005.lm"
 									}
 								],
 								"isTrigger":false
@@ -2261,17 +2180,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											-1.907349E-06,
-											-2.980232E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch006.lm"
 									}
 								],
 								"isTrigger":false
@@ -2321,17 +2231,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											-3.814697E-06,
-											-9.536743E-07,
-											2.980232E-08
-										],
-										"size":[
-											0.5129656,
-											0.1242702,
-											5.556113E-09
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-QuadPatch007.lm"
 									}
 								],
 								"isTrigger":false
@@ -2470,17 +2371,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											-5.704351E-09,
-											-7.450581E-09,
-											3.49246E-10
-										],
-										"size":[
-											0.003995224,
-											0.004918976,
-											0.00505123
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-对象014.lm"
 									}
 								],
 								"isTrigger":false
@@ -2530,17 +2422,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											-1.164144E-10,
-											2.255141E-16,
-											3.49246E-10
-										],
-										"size":[
-											0.003995223,
-											0.004918976,
-											0.00505123
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-对象217.lm"
 									}
 								],
 								"isTrigger":false
@@ -2590,17 +2473,8 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"BoxColliderShape",
-										"center":[
-											-7.566996E-09,
-											7.450581E-09,
-											3.49246E-10
-										],
-										"size":[
-											0.003995224,
-											0.004918976,
-											0.00505123
-										]
+										"type":"MeshColliderShape",
+										"mesh":"Assets/model/1-对象218.lm"
 									}
 								],
 								"isTrigger":false
@@ -2642,30 +2516,7 @@
 								}
 							]
 						},
-						"components":[
-							{
-								"type":"PhysicsCollider",
-								"restitution":0,
-								"friction":0.5,
-								"rollingFriction":0,
-								"shapes":[
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											-8.575383E-06,
-											-0.0001021349,
-											0.002092453
-										],
-										"size":[
-											0.00727163,
-											0.004561462,
-											0.004289236
-										]
-									}
-								],
-								"isTrigger":false
-							}
-						],
+						"components":[],
 						"child":[]
 					},
 					{
@@ -2711,6 +2562,82 @@
 				"type":"Sprite3D",
 				"instanceID":60,
 				"props":{
+					"name":"people",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						-7.71,
+						1.723,
+						-8.383
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"Camera",
+						"instanceID":61,
+						"props":{
+							"name":"Main Camera",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								0,
+								0,
+								0
+							],
+							"rotation":[
+								7.45058E-09,
+								0.9929215,
+								0.1187724,
+								0
+							],
+							"scale":[
+								1,
+								1,
+								1
+							],
+							"clearFlag":1,
+							"orthographic":false,
+							"orthographicVerticalSize":10,
+							"fieldOfView":60,
+							"enableHDR":true,
+							"nearPlane":0.01,
+							"farPlane":1000,
+							"viewport":[
+								0,
+								0,
+								1,
+								1
+							],
+							"clearColor":[
+								0.1921569,
+								0.3019608,
+								0.4745098,
+								0
+							]
+						},
+						"components":[],
+						"child":[]
+					}
+				]
+			},
+			{
+				"type":"Sprite3D",
+				"instanceID":62,
+				"props":{
 					"name":"canMove",
 					"active":true,
 					"isStatic":true,
@@ -2736,7 +2663,7 @@
 				"child":[
 					{
 						"type":"MeshSprite3D",
-						"instanceID":61,
+						"instanceID":63,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2797,7 +2724,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":62,
+						"instanceID":64,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2858,7 +2785,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":63,
+						"instanceID":65,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2919,7 +2846,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":64,
+						"instanceID":66,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2980,7 +2907,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":65,
+						"instanceID":67,
 						"props":{
 							"name":"Cube (1)",
 							"active":true,
@@ -3037,82 +2964,6 @@
 								"isTrigger":false
 							}
 						],
-						"child":[]
-					}
-				]
-			},
-			{
-				"type":"Sprite3D",
-				"instanceID":66,
-				"props":{
-					"name":"people",
-					"active":true,
-					"isStatic":false,
-					"layer":0,
-					"position":[
-						-7.71,
-						1.723,
-						-8.383
-					],
-					"rotation":[
-						0,
-						0,
-						0,
-						-1
-					],
-					"scale":[
-						1,
-						1,
-						1
-					]
-				},
-				"components":[],
-				"child":[
-					{
-						"type":"Camera",
-						"instanceID":67,
-						"props":{
-							"name":"Main Camera",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								0,
-								0,
-								0
-							],
-							"rotation":[
-								7.45058E-09,
-								0.9929215,
-								0.1187724,
-								0
-							],
-							"scale":[
-								1,
-								1,
-								1
-							],
-							"clearFlag":1,
-							"orthographic":false,
-							"orthographicVerticalSize":10,
-							"fieldOfView":60,
-							"enableHDR":true,
-							"nearPlane":0.01,
-							"farPlane":1000,
-							"viewport":[
-								0,
-								0,
-								1,
-								1
-							],
-							"clearColor":[
-								0.1921569,
-								0.3019608,
-								0.4745098,
-								0
-							]
-						},
-						"components":[],
 						"child":[]
 					}
 				]

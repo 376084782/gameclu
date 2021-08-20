@@ -3590,57 +3590,340 @@
         DetailItemIdConfig[DetailItemIdConfig["room2_AR006"] = 89] = "room2_AR006";
         DetailItemIdConfig[DetailItemIdConfig["room2_AR007"] = 90] = "room2_AR007";
         DetailItemIdConfig[DetailItemIdConfig["room2_AR008"] = 91] = "room2_AR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR001"] = 92] = "room2_MR001";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR002"] = 93] = "room2_MR002";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR003"] = 94] = "room2_MR003";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR004"] = 95] = "room2_MR004";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR005"] = 96] = "room2_MR005";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR006"] = 97] = "room2_MR006";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR007"] = 98] = "room2_MR007";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR008"] = 99] = "room2_MR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_MR009"] = 100] = "room2_MR009";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR001"] = 101] = "room2_OR001";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR002"] = 102] = "room2_OR002";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR003"] = 103] = "room2_OR003";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR004"] = 104] = "room2_OR004";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR005"] = 105] = "room2_OR005";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR006"] = 106] = "room2_OR006";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR007"] = 107] = "room2_OR007";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR008"] = 108] = "room2_OR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR009"] = 109] = "room2_OR009";
-        DetailItemIdConfig[DetailItemIdConfig["room2_OR010"] = 110] = "room2_OR010";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR001"] = 111] = "room2_JR001";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR002"] = 112] = "room2_JR002";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR003"] = 113] = "room2_JR003";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR004"] = 114] = "room2_JR004";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR005"] = 115] = "room2_JR005";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR006"] = 116] = "room2_JR006";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR007"] = 117] = "room2_JR007";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR008"] = 118] = "room2_JR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR009"] = 119] = "room2_JR009";
-        DetailItemIdConfig[DetailItemIdConfig["room2_JR010"] = 120] = "room2_JR010";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR001"] = 121] = "room2_CR001";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR002"] = 122] = "room2_CR002";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR003"] = 123] = "room2_CR003";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR004"] = 124] = "room2_CR004";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR005"] = 125] = "room2_CR005";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR006"] = 126] = "room2_CR006";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR007"] = 127] = "room2_CR007";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR008"] = 128] = "room2_CR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR009"] = 129] = "room2_CR009";
-        DetailItemIdConfig[DetailItemIdConfig["room2_CR010"] = 130] = "room2_CR010";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR001"] = 131] = "room2_HR001";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR002"] = 132] = "room2_HR002";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR003"] = 133] = "room2_HR003";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR004"] = 134] = "room2_HR004";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR005"] = 135] = "room2_HR005";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR006"] = 136] = "room2_HR006";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR007"] = 137] = "room2_HR007";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR008"] = 138] = "room2_HR008";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR009"] = 139] = "room2_HR009";
-        DetailItemIdConfig[DetailItemIdConfig["room2_HR010"] = 140] = "room2_HR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_AR009"] = 92] = "room2_AR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR001"] = 93] = "room2_MR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR002"] = 94] = "room2_MR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR003"] = 95] = "room2_MR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR004"] = 96] = "room2_MR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR005"] = 97] = "room2_MR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR006"] = 98] = "room2_MR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR007"] = 99] = "room2_MR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR008"] = 100] = "room2_MR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_MR009"] = 101] = "room2_MR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR001"] = 102] = "room2_OR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR002"] = 103] = "room2_OR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR003"] = 104] = "room2_OR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR004"] = 105] = "room2_OR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR005"] = 106] = "room2_OR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR006"] = 107] = "room2_OR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR007"] = 108] = "room2_OR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR008"] = 109] = "room2_OR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR009"] = 110] = "room2_OR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_OR010"] = 111] = "room2_OR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR001"] = 112] = "room2_JR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR002"] = 113] = "room2_JR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR003"] = 114] = "room2_JR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR004"] = 115] = "room2_JR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR005"] = 116] = "room2_JR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR006"] = 117] = "room2_JR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR007"] = 118] = "room2_JR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR008"] = 119] = "room2_JR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR009"] = 120] = "room2_JR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_JR010"] = 121] = "room2_JR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR001"] = 122] = "room2_CR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR002"] = 123] = "room2_CR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR003"] = 124] = "room2_CR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR004"] = 125] = "room2_CR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR005"] = 126] = "room2_CR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR006"] = 127] = "room2_CR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR007"] = 128] = "room2_CR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR008"] = 129] = "room2_CR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR009"] = 130] = "room2_CR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_CR010"] = 131] = "room2_CR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR001"] = 132] = "room2_HR001";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR002"] = 133] = "room2_HR002";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR003"] = 134] = "room2_HR003";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR004"] = 135] = "room2_HR004";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR005"] = 136] = "room2_HR005";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR006"] = 137] = "room2_HR006";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR007"] = 138] = "room2_HR007";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR008"] = 139] = "room2_HR008";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR009"] = 140] = "room2_HR009";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR010"] = 141] = "room2_HR010";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR011"] = 142] = "room2_HR011";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR012"] = 143] = "room2_HR012";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR013"] = 144] = "room2_HR013";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR014"] = 145] = "room2_HR014";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR015"] = 146] = "room2_HR015";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR016"] = 147] = "room2_HR016";
     })(DetailItemIdConfig || (DetailItemIdConfig = {}));
     var DetailItemIdConfig$1 = DetailItemIdConfig;
+
+    class SoundManager {
+        static playEffect(url) {
+            Laya.SoundManager.playSound(url);
+        }
+        static playBgm(url) {
+            Laya.SoundManager.playMusic(url);
+        }
+        static stopBgm() {
+            Laya.SoundManager.stopMusic();
+        }
+        static playPB(url) {
+            this.soundPB = Laya.SoundManager.playSound(url);
+            this.togglePB(this.flagPlayPB);
+        }
+        static togglePB(flag) {
+            if (flag == undefined) {
+                this.flagPlayPB = !this.flagPlayPB;
+            }
+            else {
+                this.flagPlayPB = flag;
+            }
+            if (!this.soundPB) {
+                return;
+            }
+            if (this.flagPlayPB) {
+                this.soundPB.resume();
+            }
+            else {
+                this.soundPB.pause();
+            }
+        }
+    }
+    SoundManager.flagPlayPB = true;
+
+    class Oprate3dTool {
+        static get events() {
+            let config = Scene3dConfig.getConfigByName(this.sceneName);
+            return config.events;
+        }
+        static init3d(scene3d, wrap3d, sceneName) {
+            this.sceneName = sceneName;
+            GameManager.currentScene = sceneName;
+            this.scene3d = scene3d;
+            this.wrap3d = wrap3d;
+            Laya.stage.offAllCaller(this);
+            EventManager.unSub(this);
+            this.wrap3d.offAllCaller(this);
+            Laya.timer.clearAll(this);
+            console.log("off");
+            EventManager.pub("game/updateScene");
+            this.spBlank = new Laya.Sprite3D();
+            this.scene3d.addChild(this.spBlank);
+            this.peopleWrap = this.scene3d.getChildByName("people");
+            this.people = this.peopleWrap.getComponent(Laya.CharacterController);
+            if (GameManager.currentScene == "testMove") {
+                if (this.people) {
+                    this.people.destroy();
+                }
+            }
+            else if (!this.people) {
+                this.people = this.peopleWrap.addComponent(Laya.CharacterController);
+                var sphereShape = new Laya.CapsuleColliderShape(0.1, 1.8, 1);
+                this.people.ccdMotionThreshold = 0.00000001;
+                sphereShape.localOffset = new Laya.Vector3(0, -0.9, 0);
+                this.people.colliderShape = sphereShape;
+            }
+            this.peopleWrap.transform.position.y = 0.7;
+            this.movePeople(0, 0, 0);
+            this.camera3d = this.peopleWrap.getChildByName("Main Camera");
+            this.camera3d.nearPlane = 0.01;
+            if (!this.camera3d) {
+                this.camera3d = this.scene3d.getChildByName("Main Camera");
+            }
+            this.camera3d.fieldOfView = +Utils.getQueryVariable("cameView") || 40;
+            this.camera3d.enableHDR = false;
+            EventManager.sub("d3/updateFrame", this, e => {
+                if (UIManager.flagDialogOpened) {
+                    return;
+                }
+                this.checkMouseAndKeyboardByFrame();
+            });
+            this.wrap3d.on(Laya.Event.MOUSE_MOVE, this, e => {
+                if (this.flagTouchMoving) {
+                    return;
+                }
+                let point = new Laya.Vector2();
+                point.x = e.stageX;
+                point.y = e.stageY;
+                let ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
+                let outHitResult = new Laya.HitResult();
+                this.camera3d.viewportPointToRay(point, ray);
+                this.scene3d.physicsSimulation.rayCast(ray, outHitResult, 999999, Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1);
+                this.hightlightList.forEach(mat1 => {
+                    if (mat1) {
+                        mat1.albedoIntensity = 1;
+                    }
+                });
+                this.hightlightList = [];
+                if (outHitResult.succeeded) {
+                    let owner = outHitResult.collider
+                        .owner;
+                    let nodeName = owner["nodeName"];
+                    let handlerData = this.events[nodeName];
+                    if (handlerData && handlerData.method) {
+                        let mat = owner.meshRenderer.material;
+                        if (handlerData.lightNode) {
+                            let lightNode = Utils.findChildByName(Oprate3dTool.scene3d, handlerData.lightNode);
+                            mat = lightNode.meshRenderer
+                                .material;
+                        }
+                        UIManager.changePointer("pointer");
+                        mat.albedoIntensity = 2;
+                        this.hightlightList.push(mat);
+                    }
+                    else {
+                        UIManager.changePointer("");
+                    }
+                }
+                else {
+                    UIManager.changePointer("");
+                }
+            });
+            this.wrap3d.on(Laya.Event.MOUSE_UP, this, e => {
+                if (this.flagTouchMoving) {
+                    return;
+                }
+                let point = new Laya.Vector2();
+                point.x = e.stageX;
+                point.y = e.stageY;
+                let ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
+                let outHitResult = new Laya.HitResult();
+                this.camera3d.viewportPointToRay(point, ray);
+                this.scene3d.physicsSimulation.rayCast(ray, outHitResult, 999999, Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1);
+                let flagTrigerClu = false;
+                if (outHitResult.succeeded) {
+                    let nodeName = outHitResult.collider.owner["nodeName"];
+                    console.log(nodeName, 'nodeNamenodeNamenodeName');
+                    let handlerData = this.events[nodeName];
+                    if (handlerData) {
+                        let handler = new Laya.Handler(handlerData.caller, handlerData.method);
+                        flagTrigerClu = true;
+                        handler.runWith(outHitResult.collider.owner);
+                    }
+                }
+                SoundManager.playEffect(`sound/${flagTrigerClu ? "find" : "err"}.mp3`);
+            });
+            this.wrap3d.on(Laya.Event.MOUSE_DOWN, this, e => {
+                this.lastMousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
+            });
+            this.wrap3d.on(Laya.Event.MOUSE_OUT, this, e => {
+                this.lastMousePos = null;
+                Laya.timer.once(300, this, e => {
+                    this.flagTouchMoving = false;
+                });
+            });
+            this.wrap3d.on(Laya.Event.MOUSE_UP, this, e => {
+                this.lastMousePos = null;
+                Laya.timer.once(300, this, e => {
+                    this.flagTouchMoving = false;
+                });
+            });
+            let config = Scene3dConfig.getConfigByName(GameManager.currentScene);
+            if (config.events) {
+                for (let key in config.events) {
+                    let nodePath = config.events[key].nodeName;
+                    let item = Utils.findChildByName(this.scene3d, nodePath);
+                    if (item) {
+                        item["nodeName"] = key;
+                        console.log(key);
+                        let collider = item.getComponent(Laya.PhysicsCollider);
+                        console.log('有碰撞体');
+                        if (!collider) {
+                            collider = item.addComponent(Laya.PhysicsCollider);
+                            let physhape = new Laya.MeshColliderShape();
+                            if (item.meshFilter) {
+                                physhape.mesh = item.meshFilter.sharedMesh;
+                            }
+                            else {
+                                console.log(item, name);
+                            }
+                            collider.colliderShape = physhape;
+                        }
+                        collider.collisionGroup =
+                            Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1;
+                    }
+                }
+            }
+        }
+        static checkMouseAndKeyboardByFrame() {
+            if (!GameManager.flagCanMove) {
+                return;
+            }
+            let mousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
+            let moveRatio = +Utils.getQueryVariable("cameMoveStep") || 0.0006;
+            let peopleWrapRotateY = 0;
+            let cameraRotateX = 0;
+            if (this.lastMousePos) {
+                let offsetX = mousePos.x - this.lastMousePos.x;
+                let offsetY = mousePos.y - this.lastMousePos.y;
+                if (Math.abs(offsetX) > 4 || Math.abs(offsetY) > 4) {
+                    this.flagTouchMoving = true;
+                }
+                cameraRotateX -= offsetY * moveRatio;
+                peopleWrapRotateY -= offsetX * moveRatio;
+                this.lastMousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
+            }
+            let moveData = new Laya.Vector3();
+            let { x, y, z } = moveData;
+            let stepLen = +Utils.getQueryVariable("stepLen") || 0.03;
+            let downW = GameManager.downW || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.W);
+            let downA = GameManager.downA || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.A);
+            let downS = GameManager.downS || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.S);
+            let downD = GameManager.downD || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.D);
+            if (downW) {
+                z += stepLen;
+            }
+            if (downS) {
+                z -= stepLen;
+            }
+            if (downA) {
+                if (GameManager.modeAd == 1) {
+                    x += stepLen;
+                }
+                else {
+                    peopleWrapRotateY += 14 * moveRatio;
+                }
+            }
+            if (downD) {
+                if (GameManager.modeAd == 1) {
+                    x -= stepLen;
+                }
+                else {
+                    peopleWrapRotateY -= 14 * moveRatio;
+                }
+            }
+            this.camera3d.transform.rotate(new Laya.Vector3(cameraRotateX, 0, 0), true);
+            this.peopleWrap.transform.rotate(new Laya.Vector3(0, peopleWrapRotateY, 0), false);
+            if (x || y || z) {
+                this.spBlank.transform.rotation = this.peopleWrap.transform.rotation;
+                this.spBlank.transform.position = new Laya.Vector3(0, 0, 0);
+                this.spBlank.transform.translate(new Laya.Vector3(x, y, z), true);
+                let posRes = this.spBlank.transform.position;
+                this.movePeople(posRes.x, posRes.y, posRes.z);
+            }
+            else {
+                this.movePeople(0, 0, 0);
+            }
+            if (!this.peopleWrap.getChildByName("Main Camera")) {
+                this.camera3d.transform.position = this.peopleWrap.transform.position;
+                this.camera3d.transform.rotation = new Laya.Quaternion(0, this.peopleWrap.transform.rotation.y, 0);
+            }
+            this.camera3d.transform.localPositionY = Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.V)
+                ? -0.7
+                : 0;
+        }
+        static peopleToggleDown() {
+            this.flagIsDown = !this.flagIsDown;
+            console.log(this.flagIsDown, "蹲下");
+            this.camera3d.transform.localPositionY = this.flagIsDown ? -0.7 : 0;
+        }
+        static movePeople(x, y, z) {
+            if (GameManager.currentScene != "testMove") {
+                this.movePos = new Laya.Vector3(x, y, z);
+                this.people.move(this.movePos);
+            }
+            else {
+                this.peopleWrap.transform.translate(new Laya.Vector3(x / 2, y / 2, z / 2), false);
+            }
+        }
+    }
+    Oprate3dTool.hightlightList = [];
+    Oprate3dTool.flagTouchMoving = false;
+    Oprate3dTool.sceneName = "";
+    Oprate3dTool.flagIsDown = false;
+    Oprate3dTool.movePos = new Laya.Vector3(0, 0, 0);
 
     class Room2 {
         static CT11(tar) {
@@ -3728,6 +4011,50 @@
                     sceneFrom: GameManager.currentScene
                 }
             ]);
+        }
+        static clickHR016() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR016,
+                    key: "room2_HR016",
+                    img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR015() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR015,
+                    key: "room2_HR015",
+                    img: `book2/${DataLang.lang}/Hanson/HR015.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR014() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR014,
+                    key: "room2_HR014",
+                    img: `book2/${DataLang.lang}/Hanson/HR014.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR013() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR013,
+                    key: "room2_HR013",
+                    img: `book2/${DataLang.lang}/Hanson/HR013.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static openDoor() {
+            let tar = Utils.findChildByName(Oprate3dTool.scene3d, "model.Box1748");
+            Utils.toggle3dOpen(tar, 1, -1.5);
         }
         static clickHR009() {
             UIManager.showDetail([
@@ -3818,6 +4145,9 @@
                     sceneFrom: GameManager.currentScene
                 }
             ]);
+        }
+        static CT16(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
         }
         static CT9(tar) {
             Utils.toggle3dOpen(tar, 1, 0.3);
@@ -4075,7 +4405,7 @@
                 {
                     id: DetailItemIdConfig$1.room2_MR008,
                     key: "room2_MR008",
-                    img: `book2/${DataLang.lang}/Margaret/MR008.jpg`,
+                    img: `book2/${DataLang.lang}/Margaret/MR008.png`,
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -4123,6 +4453,16 @@
                     id: DetailItemIdConfig$1.room2_AR004,
                     key: "room2_AR004",
                     img: `book2/${DataLang.lang}/Abraham/AR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR009,
+                    key: "room2_AR009",
+                    img: `book2/${DataLang.lang}/Abraham/AR009.png`,
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -4197,7 +4537,10 @@
                 }
             ]);
         }
-        static clickSZ() {
+        static clickCT1(tar) {
+            Utils.toggle3dOpen(tar, 3, -0.3);
+        }
+        static clickXLX() {
             UIManager.showDetail([
                 {
                     id: DetailItemIdConfig$1.room2_PA004,
@@ -4205,21 +4548,6 @@
                     title: "床头柜上",
                     content: "教授写的信",
                     img: `book2/${DataLang.lang}/hall/PA004.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCT1(tar) {
-            Utils.toggle3dOpen(tar, 3, -0.3);
-        }
-        static clickXLX() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_PA005,
-                    key: "room2_PA005",
-                    title: "床头柜上",
-                    content: "教授写的信",
-                    img: `book2/${DataLang.lang}/hall/PA005.png`,
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -4291,6 +4619,11 @@
                     method: Room2.clickXin,
                     nodeName: "abraham.QuadPatch003"
                 },
+                xinwu1: {
+                    caller: Room2,
+                    method: Room2.clickXinWu,
+                    nodeName: "abraham.组112.model002"
+                },
                 xinwu: {
                     caller: Room2,
                     method: Room2.clickXinWu,
@@ -4340,6 +4673,41 @@
                     caller: Room2,
                     method: Room2.clickAR007,
                     nodeName: "abraham.QuadPatch001"
+                },
+                hui1: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-125"
+                },
+                hui2: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-126"
+                },
+                hui3: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-127"
+                },
+                hui4: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-128"
+                },
+                hui5: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-129"
+                },
+                hui6: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-130"
+                },
+                hui7: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-131"
                 }
             }
         },
@@ -4373,11 +4741,6 @@
                     caller: Room2,
                     method: Room2.clickCT1,
                     nodeName: "1.对象011"
-                },
-                shouzhuo: {
-                    caller: Room2,
-                    method: Room2.clickSZ,
-                    nodeName: "1.对象011.shouzhuo"
                 }
             }
         },
@@ -4566,12 +4929,12 @@
                 item6: {
                     caller: Room2,
                     method: Room2.CT9,
-                    nodeName: "model.chouti1"
+                    nodeName: "model.Rectangle017"
                 },
                 item7: {
                     caller: Room2,
                     method: Room2.clickJR005,
-                    nodeName: "model.chouti1.Obj3d66-1163439-4-215"
+                    nodeName: "model.Rectangle017.Obj3d66-1163439-4-215"
                 },
                 item8: {
                     caller: Room2,
@@ -4667,337 +5030,91 @@
                 item1: {
                     caller: Room2,
                     method: Room2.clickHR001,
-                    nodeName: "1.Obj3d66-866777-119-712"
+                    nodeName: "model.组2136555823.Obj3d66-866777-119-712"
                 },
                 item2: {
                     caller: Room2,
                     method: Room2.clickHR002,
-                    nodeName: "1.Loft006"
+                    nodeName: "model.Obj3d66-1508352-12-993"
                 },
                 item3: {
                     caller: Room2,
                     method: Room2.clickHR003,
-                    nodeName: "1.model016"
+                    nodeName: "model.model016"
                 },
                 item4: {
                     caller: Room2,
                     method: Room2.clickHR004,
-                    nodeName: "1.Group-391490-270.Obj3d66-391490-18-1000"
+                    nodeName: "model.Group-391490-270.Obj3d66-391490-18-1000"
                 },
                 item44: {
                     caller: Room2,
                     method: Room2.clickHR005,
-                    nodeName: "1.对象027.QuadPatch001"
+                    nodeName: "desk.对象027.QuadPatch001"
                 },
                 item5: {
                     caller: Room2,
                     method: Room2.CT10,
-                    nodeName: "1.对象027"
+                    nodeName: "desk.对象027"
                 },
                 item6: {
                     caller: Room2,
                     method: Room2.CT11,
-                    nodeName: "1.对象022"
+                    nodeName: "desk.对象022"
                 },
                 item7: {
                     caller: Room2,
                     method: Room2.clickHR006,
-                    nodeName: "1.对象022.Obj3d66-1163439-4-215"
+                    nodeName: "desk.对象022.Obj3d66-1163439-4-215"
                 },
                 item8: {
                     caller: Room2,
                     method: Room2.clickHR007,
-                    nodeName: "1.Loft007"
+                    nodeName: "model.Loft007"
                 },
                 item9: {
                     caller: Room2,
                     method: Room2.clickHR008,
-                    nodeName: "1.Obj3d66-402998-5-224"
+                    nodeName: "model.Obj3d66-402998-5-224"
                 },
                 item10: {
                     caller: Room2,
                     method: Room2.clickHR009,
-                    nodeName: "shiti.物件_1"
+                    nodeName: "model.Obj3d66-1017952-9-519"
+                },
+                door: {
+                    caller: Room2,
+                    method: Room2.openDoor,
+                    nodeName: "model.组2136555825.Box1752"
+                },
+                shouzhuo: {
+                    caller: Room2,
+                    method: Room2.clickHR013,
+                    nodeName: "shouzhuo"
+                },
+                jiaoyin: {
+                    caller: Room2,
+                    method: Room2.clickHR014,
+                    nodeName: "1.物件_1"
+                },
+                fengzheng: {
+                    caller: Room2,
+                    method: Room2.clickHR015,
+                    nodeName: "fengzheng11.物件_5"
+                },
+                CT16: {
+                    caller: Room2,
+                    method: Room2.CT16,
+                    nodeName: "desk.对象025"
+                },
+                fengzhengxian: {
+                    caller: Room2,
+                    method: Room2.clickHR016,
+                    nodeName: "desk.对象025.fengzhengxian"
                 }
             }
         }
     ];
-
-    class SoundManager {
-        static playEffect(url) {
-            Laya.SoundManager.playSound(url);
-        }
-        static playBgm(url) {
-            Laya.SoundManager.playMusic(url);
-        }
-        static stopBgm() {
-            Laya.SoundManager.stopMusic();
-        }
-        static playPB(url) {
-            this.soundPB = Laya.SoundManager.playSound(url);
-            this.togglePB(this.flagPlayPB);
-        }
-        static togglePB(flag) {
-            if (flag == undefined) {
-                this.flagPlayPB = !this.flagPlayPB;
-            }
-            else {
-                this.flagPlayPB = flag;
-            }
-            if (!this.soundPB) {
-                return;
-            }
-            if (this.flagPlayPB) {
-                this.soundPB.resume();
-            }
-            else {
-                this.soundPB.pause();
-            }
-        }
-    }
-    SoundManager.flagPlayPB = true;
-
-    class Oprate3dTool {
-        static get events() {
-            let config = Scene3dConfig.getConfigByName(this.sceneName);
-            return config.events;
-        }
-        static init3d(scene3d, wrap3d, sceneName) {
-            this.sceneName = sceneName;
-            GameManager.currentScene = sceneName;
-            this.scene3d = scene3d;
-            this.wrap3d = wrap3d;
-            Laya.stage.offAllCaller(this);
-            EventManager.unSub(this);
-            this.wrap3d.offAllCaller(this);
-            Laya.timer.clearAll(this);
-            console.log("off");
-            EventManager.pub("game/updateScene");
-            this.spBlank = new Laya.Sprite3D();
-            this.scene3d.addChild(this.spBlank);
-            this.peopleWrap = this.scene3d.getChildByName("people");
-            this.people = this.peopleWrap.getComponent(Laya.CharacterController);
-            if (GameManager.currentScene == "testMove") {
-                if (this.people) {
-                    this.people.destroy();
-                }
-            }
-            else if (!this.people) {
-                this.people = this.peopleWrap.addComponent(Laya.CharacterController);
-                var sphereShape = new Laya.CapsuleColliderShape(0.1, 1.8, 1);
-                this.people.ccdMotionThreshold = 0.00000001;
-                sphereShape.localOffset = new Laya.Vector3(0, -0.9, 0);
-                this.people.colliderShape = sphereShape;
-            }
-            this.peopleWrap.transform.position.y = 0.7;
-            this.movePeople(0, 0, 0);
-            this.camera3d = this.peopleWrap.getChildByName("Main Camera");
-            this.camera3d.nearPlane = 0.01;
-            if (!this.camera3d) {
-                this.camera3d = this.scene3d.getChildByName("Main Camera");
-            }
-            this.camera3d.fieldOfView = +Utils.getQueryVariable("cameView") || 40;
-            this.camera3d.enableHDR = false;
-            EventManager.sub("d3/updateFrame", this, e => {
-                if (UIManager.flagDialogOpened) {
-                    return;
-                }
-                this.checkMouseAndKeyboardByFrame();
-            });
-            this.wrap3d.on(Laya.Event.MOUSE_MOVE, this, e => {
-                if (this.flagTouchMoving) {
-                    return;
-                }
-                let point = new Laya.Vector2();
-                point.x = e.stageX;
-                point.y = e.stageY;
-                let ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
-                let outHitResult = new Laya.HitResult();
-                this.camera3d.viewportPointToRay(point, ray);
-                this.scene3d.physicsSimulation.rayCast(ray, outHitResult, 999999, Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1);
-                this.hightlightList.forEach(mat1 => {
-                    if (mat1) {
-                        mat1.albedoIntensity = 1;
-                    }
-                });
-                this.hightlightList = [];
-                if (outHitResult.succeeded) {
-                    let owner = outHitResult.collider
-                        .owner;
-                    let nodeName = owner["nodeName"];
-                    let handlerData = this.events[nodeName];
-                    if (handlerData && handlerData.method) {
-                        let mat = owner.meshRenderer.material;
-                        if (handlerData.lightNode) {
-                            let lightNode = Utils.findChildByName(Oprate3dTool.scene3d, handlerData.lightNode);
-                            mat = lightNode.meshRenderer
-                                .material;
-                        }
-                        UIManager.changePointer("pointer");
-                        mat.albedoIntensity = 2;
-                        this.hightlightList.push(mat);
-                    }
-                    else {
-                        UIManager.changePointer("");
-                    }
-                }
-                else {
-                    UIManager.changePointer("");
-                }
-            });
-            this.wrap3d.on(Laya.Event.MOUSE_UP, this, e => {
-                if (this.flagTouchMoving) {
-                    return;
-                }
-                let point = new Laya.Vector2();
-                point.x = e.stageX;
-                point.y = e.stageY;
-                let ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());
-                let outHitResult = new Laya.HitResult();
-                this.camera3d.viewportPointToRay(point, ray);
-                this.scene3d.physicsSimulation.rayCast(ray, outHitResult, 999999, Laya.Physics3DUtils.COLLISIONFILTERGROUP_DEFAULTFILTER, Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1);
-                let flagTrigerClu = false;
-                if (outHitResult.succeeded) {
-                    let nodeName = outHitResult.collider.owner["nodeName"];
-                    console.log(nodeName, 'nodeNamenodeNamenodeName');
-                    let handlerData = this.events[nodeName];
-                    if (handlerData) {
-                        let handler = new Laya.Handler(handlerData.caller, handlerData.method);
-                        flagTrigerClu = true;
-                        handler.runWith(outHitResult.collider.owner);
-                    }
-                }
-                SoundManager.playEffect(`sound/${flagTrigerClu ? "find" : "err"}.mp3`);
-            });
-            this.wrap3d.on(Laya.Event.MOUSE_DOWN, this, e => {
-                this.lastMousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
-            });
-            this.wrap3d.on(Laya.Event.MOUSE_OUT, this, e => {
-                this.lastMousePos = null;
-                Laya.timer.once(300, this, e => {
-                    this.flagTouchMoving = false;
-                });
-            });
-            this.wrap3d.on(Laya.Event.MOUSE_UP, this, e => {
-                this.lastMousePos = null;
-                Laya.timer.once(300, this, e => {
-                    this.flagTouchMoving = false;
-                });
-            });
-            let config = Scene3dConfig.getConfigByName(GameManager.currentScene);
-            if (config.events) {
-                for (let key in config.events) {
-                    let nodePath = config.events[key].nodeName;
-                    let item = Utils.findChildByName(this.scene3d, nodePath);
-                    if (item) {
-                        item["nodeName"] = key;
-                        console.log(key);
-                        let collider = item.getComponent(Laya.PhysicsCollider);
-                        console.log(collider, '22222222222');
-                        if (!collider) {
-                            collider = item.addComponent(Laya.PhysicsCollider);
-                            let physhape = new Laya.MeshColliderShape();
-                            if (item.meshFilter) {
-                                physhape.mesh = item.meshFilter.sharedMesh;
-                            }
-                            else {
-                                console.log(item, name);
-                            }
-                            collider.colliderShape = physhape;
-                        }
-                        collider.collisionGroup =
-                            Laya.Physics3DUtils.COLLISIONFILTERGROUP_CUSTOMFILTER1;
-                    }
-                }
-            }
-        }
-        static checkMouseAndKeyboardByFrame() {
-            if (!GameManager.flagCanMove) {
-                return;
-            }
-            let mousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
-            let moveRatio = +Utils.getQueryVariable("cameMoveStep") || 0.0006;
-            let peopleWrapRotateY = 0;
-            let cameraRotateX = 0;
-            if (this.lastMousePos) {
-                let offsetX = mousePos.x - this.lastMousePos.x;
-                let offsetY = mousePos.y - this.lastMousePos.y;
-                if (Math.abs(offsetX) > 4 || Math.abs(offsetY) > 4) {
-                    this.flagTouchMoving = true;
-                }
-                cameraRotateX -= offsetY * moveRatio;
-                peopleWrapRotateY -= offsetX * moveRatio;
-                this.lastMousePos = new Laya.Point(Laya.MouseManager.instance.mouseX, Laya.MouseManager.instance.mouseY);
-            }
-            let moveData = new Laya.Vector3();
-            let { x, y, z } = moveData;
-            let stepLen = +Utils.getQueryVariable("stepLen") || 0.03;
-            let downW = GameManager.downW || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.W);
-            let downA = GameManager.downA || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.A);
-            let downS = GameManager.downS || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.S);
-            let downD = GameManager.downD || Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.D);
-            if (downW) {
-                z += stepLen;
-            }
-            if (downS) {
-                z -= stepLen;
-            }
-            if (downA) {
-                if (GameManager.modeAd == 1) {
-                    x += stepLen;
-                }
-                else {
-                    peopleWrapRotateY += 14 * moveRatio;
-                }
-            }
-            if (downD) {
-                if (GameManager.modeAd == 1) {
-                    x -= stepLen;
-                }
-                else {
-                    peopleWrapRotateY -= 14 * moveRatio;
-                }
-            }
-            this.camera3d.transform.rotate(new Laya.Vector3(cameraRotateX, 0, 0), true);
-            this.peopleWrap.transform.rotate(new Laya.Vector3(0, peopleWrapRotateY, 0), false);
-            if (x || y || z) {
-                this.spBlank.transform.rotation = this.peopleWrap.transform.rotation;
-                this.spBlank.transform.position = new Laya.Vector3(0, 0, 0);
-                this.spBlank.transform.translate(new Laya.Vector3(x, y, z), true);
-                let posRes = this.spBlank.transform.position;
-                this.movePeople(posRes.x, posRes.y, posRes.z);
-            }
-            else {
-                this.movePeople(0, 0, 0);
-            }
-            if (!this.peopleWrap.getChildByName("Main Camera")) {
-                this.camera3d.transform.position = this.peopleWrap.transform.position;
-                this.camera3d.transform.rotation = new Laya.Quaternion(0, this.peopleWrap.transform.rotation.y, 0);
-            }
-            this.camera3d.transform.localPositionY = Laya.KeyBoardManager.hasKeyDown(Laya.Keyboard.V)
-                ? -0.7
-                : 0;
-        }
-        static peopleToggleDown() {
-            this.flagIsDown = !this.flagIsDown;
-            console.log(this.flagIsDown, "蹲下");
-            this.camera3d.transform.localPositionY = this.flagIsDown ? -0.7 : 0;
-        }
-        static movePeople(x, y, z) {
-            if (GameManager.currentScene != "testMove") {
-                this.movePos = new Laya.Vector3(x, y, z);
-                this.people.move(this.movePos);
-            }
-            else {
-                this.peopleWrap.transform.translate(new Laya.Vector3(x / 2, y / 2, z / 2), false);
-            }
-        }
-    }
-    Oprate3dTool.hightlightList = [];
-    Oprate3dTool.flagTouchMoving = false;
-    Oprate3dTool.sceneName = "";
-    Oprate3dTool.flagIsDown = false;
-    Oprate3dTool.movePos = new Laya.Vector3(0, 0, 0);
 
     class SceneKill {
         static clickLJTGaizi() {
