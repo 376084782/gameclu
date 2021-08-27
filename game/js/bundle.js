@@ -203,1034 +203,6 @@
     EventManager.eventDispatcher = new EventDispatcher();
     window["EventManager"] = EventManager;
 
-    class DataLang {
-        static set lang(lang) {
-            this._lang = lang == "en-US" ? "en" : "ch";
-        }
-        static get lang() {
-            return this._lang;
-        }
-        static changeLang() {
-            EventManager.pub("changeLang");
-        }
-        static getImgByType(type = "") {
-            let conf = this.imgConfig[type];
-            if (!conf) {
-                console.log(type, "遗漏语言包配置");
-            }
-            return conf ? conf[this.lang] : "";
-        }
-        static getTxtByType(type = "", params = {}) {
-            let conf = this.txt[type] || {};
-            let str = conf[this.lang] || "";
-            for (let key in params) {
-                str = str.replace(new RegExp(`{${key}}`, "gm"), params[key]);
-            }
-            return str;
-        }
-    }
-    DataLang._lang = "ch";
-    DataLang.imgConfig = {
-        btnSuccess: {
-            ch: "v2/ch/img_btn_success.png",
-            en: "v2/en/img_btn_success.png"
-        },
-        btnFail: {
-            ch: "v2/ch/img_btn_fail.png",
-            en: "v2/en/img_btn_fail.png"
-        },
-        btn_voice: {
-            ch: "v2/ch/img_btn_voice.png",
-            en: "v2/en/img_btn_voice.png"
-        },
-        testAudio: {
-            ch: "v2/ch/img_test_audio.png",
-            en: "v2/en/img_test_audio.png"
-        },
-        btnAddFriend: {
-            ch: "v2/ch/btn_add_friend.png",
-            en: "v2/en/btn_add_friend.png"
-        },
-        btnKick: {
-            ch: "v2/ch/btn_kick.png",
-            en: "v2/en/btn_kick.png"
-        },
-        btnRefuse: {
-            ch: "v2/ch/img_btnRefuse.png",
-            en: "v2/en/img_btnRefuse.png"
-        },
-        voted: {
-            ch: "v2/ch/img_ytp.png",
-            en: "v2/en/img_ytp.png"
-        },
-        wuzheng: {
-            ch: "v2/ch/img_wuzheng.png",
-            en: "v2/en/img_wuzheng.png"
-        },
-        btnAny: {
-            ch: "v2/ch/img_any.png",
-            en: "v2/en/img_any.png"
-        },
-        btnConfirm: {
-            ch: "v2/ch/img_confirm.png",
-            en: "v2/en/img_confirm.png"
-        },
-        titleAdd: {
-            ch: "v2/ch/img_add_timeline.png",
-            en: "v2/en/img_add_timeline.png"
-        },
-        btnAdd: {
-            ch: "v2/ch/img_btn_add.png",
-            en: "v2/en/img_btn_add.png"
-        },
-        fengmian1: {
-            ch: "v2/ch/img_fengmian.png",
-            en: "v2/en/img_fengmian.png"
-        },
-        isPublic: {
-            ch: "v2/ch/img_public1.png",
-            en: "v2/en/img_public1.png"
-        },
-        notPublic: {
-            ch: "v2/ch/img_public0.png",
-            en: "v2/en/img_public0.png"
-        },
-        txtTip: {
-            ch: "v2/ch/img_wxts.png",
-            en: "v2/en/img_wxts.png"
-        },
-        btnTuichu: {
-            ch: "v2/ch/img_tuichu.png",
-            en: "v2/en/img_tuichu.png"
-        },
-        btnSwitch: {
-            ch: "v2/ch/img_btn_switch.png",
-            en: "v2/en/img_btn_switch.png"
-        },
-        btnSend: {
-            ch: "v2/ch/img_send.png",
-            en: "v2/en/img_send.png"
-        },
-        btnShare: {
-            ch: "v2/ch/img_share.png",
-            en: "v2/en/img_share.png"
-        },
-        fengmian: {
-            ch: "v2/ch/img_fengmian.png",
-            en: "v2/en/img_fengmian.png"
-        },
-        btnStart: {
-            ch: "v2/ch/img_kaishi1.png",
-            en: "v2/en/img_kaishi1.png"
-        },
-        btnDismiss: {
-            ch: "v2/ch/img_jiesan.png",
-            en: "v2/en/img_jiesan.png"
-        },
-        btnBack: {
-            ch: "v2/ch/img_back.png",
-            en: "v2/en/img_back.png"
-        },
-        btnNext: {
-            ch: "v2/ch/img_next.png",
-            en: "v2/en/img_next.png"
-        },
-        btnReady: {
-            ch: "v2/ch/img_btn_ready.png",
-            en: "v2/en/img_btn_ready.png"
-        },
-        xiongshou: {
-            ch: "v2/ch/img_xiongshou.png",
-            en: "v2/en/img_xiongshou.png"
-        },
-        result: {
-            ch: "v2/ch/img_result.png",
-            en: "v2/en/img_result.png"
-        },
-        btnVoted: {
-            ch: "v2/ch/img_voted.png",
-            en: "v2/en/img_voted.png"
-        },
-        btnBook: {
-            ch: "v2/ch/img_book.png",
-            en: "v2/en/img_book.png"
-        },
-        btnSure1: {
-            ch: "v2/ch/img_queding_small.png",
-            en: "v2/en/img_queding_small.png"
-        },
-        btnCancel1: {
-            ch: "v2/ch/img_cancel_small.png",
-            en: "v2/en/img_cancel_small.png"
-        },
-        btnCancel: {
-            ch: "v2/ch/img_quxiao.png",
-            en: "v2/en/img_quxiao.png"
-        },
-        btnCopy: {
-            ch: "v2/ch/img_copy.png",
-            en: "v2/en/img_copy.png"
-        },
-        btnCancelReady: {
-            ch: "v2/ch/img_btn_ready0.png",
-            en: "v2/en/img_btn_ready0.png"
-        },
-        btnCreate: {
-            ch: "v2/ch/img_create.png",
-            en: "v2/en/img_create.png"
-        },
-        txtLTS: {
-            ch: "v2/ch/img_lts.png",
-            en: "v2/en/img_lts.png"
-        },
-        testYY: {
-            ch: "v2/ch/img_yycs.png",
-            en: "v2/en/img_yycs.png"
-        },
-        tagReady: {
-            ch: "v2/ch/img_ready.png",
-            en: "v2/en/img_ready.png"
-        },
-        btnEnd: {
-            ch: "v2/ch/img_btn_end.png",
-            en: "v2/en/img_btn_end.png"
-        },
-        btnTCYX: {
-            ch: "v2/ch/img_btn_tcyx.png",
-            en: "v2/en/img_btn_tcyx.png"
-        },
-        img_ytp: {
-            ch: "v2/ch/img_ytp.png",
-            en: "v2/en/img_ytp.png"
-        }
-    };
-    DataLang.txt = {
-        selfIntro: {
-            ch: "自我介绍",
-            en: "Self Introduce"
-        },
-        sureExitGame: {
-            ch: "是否确认退出游戏？",
-            en: "Are you sure to exit the game?"
-        },
-        loadingScene: {
-            en: 'Loading, please hold on…',
-            ch: '场景加载中...请稍候...'
-        },
-        loading: {
-            en: "Loading game, please hold on…",
-            ch: "加载中...请稍候..."
-        },
-        floor2: {
-            en: "Second Floor",
-            ch: "二楼"
-        },
-        floor1: {
-            en: "First Floor",
-            ch: "一楼"
-        },
-        speakingTurn: {
-            en: "Your turn",
-            ch: "您的回合"
-        },
-        endTalkng: {
-            en: "Tea Party",
-            ch: "茶话会"
-        },
-        hintVote: {
-            ch: "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会作为嫌疑犯被逮捕。",
-            en: `Please think carefully in 2 minutes and throw your killer in your mind. Click the avatar of the character and confirm. Once you click confirm, the vote will not be changed, and the player with the highest vote will be arrested as a suspect.`
-        },
-        hintFreeTalking: {
-            ch: "因为投票环节中探员的投票算1.5票，所以博得探员的信任是很重要的哦。Good luck!",
-            en: `Because the vote of the agent is 1.5 in the voting, it is important to win the trust of the agent. Good luck!`
-        },
-        hintConclusion: {
-            ch: "最后的总结，告诉大家你为什么不是凶手，并告诉大家你会投出的凶手是谁，原因是什么。",
-            en: `The final conclusion is to tell you why you are not the murderer, who you will throw the murderer and why.`
-        },
-        hintFind2: {
-            ch: "这是最后一轮搜证，分享，讨论，开始行动吧！",
-            en: `This is the last round of evidence search, sharing, discussion and action!`
-        },
-        hintTalkingEnd: {
-            ch: "30分钟后环节自动结束，或者所有人在完成讨论后，点击“结束发言”",
-            en: `After 30 minutes, the session will end automatically, or after everyone finishes the discussion, click "end speech"`
-        },
-        hintTalking: {
-            ch: "第一轮自由讨论时间，尽情交流案情，找到藏在你们中间的关键人物。",
-            en: `The first round of free discussion time, enjoy the exchange of the case, find the key people hidden in the middle of you.`
-        },
-        hintTalkingNext: {
-            ch: "5分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
-            en: `After 5 minutes, the session will end automatically, or after finishing speaking, click "end speaking"`
-        },
-        hintDetailInTalking: {
-            ch: "告诉大家你的发现，你可以通过分享让他们看到你搜集的证据",
-            en: `Tell people what you found, and you can share with them the evidence you've collected`
-        },
-        hintSearch: {
-            ch: "可收集的证据会有高亮提示。",
-            en: `The evidence that can be collected will be highlighted.`
-        },
-        hintStep: {
-            ch: "点击此处查看游戏进度。",
-            en: `Click here to see the progress of the game.`
-        },
-        hintDetail: {
-            ch: "点击证据列表，可以查看你找到证据，并可以在讨论环节中分享给大家。",
-            en: `Click the evidence list to view the evidence you found and share it with you in the discussion session.`
-        },
-        hintTimeline: {
-            ch: "点击记录线索或者角色时间线，在游戏的过程中随时编辑和复习。",
-            en: `Click record clues or character timeline to edit and review at any time during the game.`
-        },
-        hintBookBack: {
-            ch: "点击复习剧本。",
-            en: `Click review script.`
-        },
-        hintNPC: {
-            ch: "点击提问证人获取更多线索，请注意证言有时候并非全部真相",
-            en: `Click question witness for more clues. Please note that sometimes testimony is not the whole truth`
-        },
-        hintSelectRoom: {
-            ch: "双击点击“场景名”或“场景图标”进入搜证场景。",
-            en: `Double click "Scene name" or "Scene icon" to enter the search scene.`
-        },
-        hintCluEnd: {
-            ch: "第一轮搜证环节，30分钟后环节自动结束，或者所有玩家在点击下一步后，提前进入下一环节",
-            en: "The first round of certificate search will automatically end in 30 minutes, or all players will enter the next link ahead of time after clicking next"
-        },
-        hintSelfTalkingEnd: {
-            ch: "2分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
-            en: "Click to view the operation method"
-        },
-        hintSetting: {
-            ch: "点击查看操作方法",
-            en: "Click to view the operation method"
-        },
-        hintRule: {
-            ch: "点击此处查看胜利条件",
-            en: "Click here to see the winning conditions"
-        },
-        hintMine: {
-            ch: "点击此处查看任务简介",
-            en: "Click here to view the mission profile"
-        },
-        hintPreTalking: {
-            ch: "告诉大家你的角色背景，以及与案情有关的信息，或者提出你的想法。",
-            en: "Tell everyone about your role background and information about the case, or put forward your ideas."
-        },
-        hintBookNext: {
-            ch: "点击下一步。或者计时完毕后自动进入下一环节。",
-            en: "Click next. Or automatically enter the next link after timing."
-        },
-        hintBookVoice: {
-            ch: "点击静音关闭旁白。",
-            en: "Click mute to turn off the narration."
-        },
-        hintBook: {
-            ch: "你有5分钟阅读你的剧本。",
-            en: "You have 5 min to read your script."
-        },
-        hintRoleNext: {
-            ch: "选定角色后，点击下一步",
-            en: "After selecting the role, click next"
-        },
-        hintRole: {
-            ch: "点击任意角色可以获取人物信息",
-            en: "Click any character to get character information"
-        },
-        hintShare: {
-            ch: "你可以通过分享链接，邀请你的好友加入本局游戏",
-            en: "You can invite your friends to join the game by sharing links"
-        },
-        hintTestAudio: {
-            ch: "请在全员准备后点击语音按钮,全员准备完毕后即可由房主开启游戏",
-            en: "Please click the voice button after all the members are ready. After all the members are ready, the owner can start the game"
-        },
-        someonekicked: {
-            ch: "{username}已被踢出",
-            en: "{username} have been kicked"
-        },
-        kicked: {
-            ch: "您已被踢出",
-            en: "You have been kicked"
-        },
-        playerKicked: {
-            ch: "玩家已踢出",
-            en: "Player kicked"
-        },
-        txtCanceled: {
-            ch: "临时取消的局数:{count}",
-            en: "temporary cancellations:{count}"
-        },
-        txtLose: {
-            ch: "输的局数:{count}",
-            en: "Lose:{count}"
-        },
-        txtNoShow: {
-            ch: "没有出现的局数:{count}",
-            en: "Not shown:{count}"
-        },
-        txtTotal: {
-            ch: "总局数:{count}",
-            en: "Total:{count}"
-        },
-        txtWin: {
-            ch: "赢的局数:{count}",
-            en: "Win:{count}"
-        },
-        requestSend: {
-            ch: "请求已发送",
-            en: "request send"
-        },
-        Note: {
-            ch: "笔记",
-            en: "Note"
-        },
-        Searching: {
-            ch: "搜证中",
-            en: "Searching"
-        },
-        Talking: {
-            ch: "发言",
-            en: "Talking"
-        },
-        Vote: {
-            ch: "投票",
-            en: "Vote"
-        },
-        NPC: {
-            ch: "证人",
-            en: "Witness"
-        },
-        Timeline: {
-            ch: "时间线",
-            en: "Time Line"
-        },
-        Scene: {
-            ch: "场景",
-            en: "Scene"
-        },
-        Book: {
-            ch: "剧本",
-            en: "Script"
-        },
-        talking: {
-            ch: "发言中",
-            en: "Talking"
-        },
-        freeTalking: {
-            ch: "自由发言中",
-            en: "Free Talking"
-        },
-        pressToSpeak: {
-            ch: "你的发言中...",
-            en: "Your time to speak..."
-        },
-        askChange: {
-            ch: "{username}请求交换",
-            en: "{username} ask change"
-        },
-        sex: {
-            ch: "性别",
-            en: "sex"
-        },
-        age: {
-            ch: "年龄",
-            en: "age"
-        },
-        job: {
-            ch: "职业",
-            en: "job"
-        },
-        bookName: {
-            ch: "剧本一",
-            en: "book1"
-        },
-        jump: {
-            ch: "是否跳过新手引导？",
-            en: "Skip novice guidance?"
-        },
-        CLUE_FIND: {
-            en: "Find",
-            ch: "搜证"
-        },
-        TALKING: {
-            en: "Talking",
-            ch: "发言"
-        },
-        PRE_TALKING: {
-            en: "PRE_TALKING",
-            ch: "自我介绍"
-        },
-        FREE_TALKING: {
-            en: "FREE_TALKING",
-            ch: "自由发言"
-        },
-        CONCLUSION: {
-            en: "Conclusion Talk",
-            ch: "总结发言"
-        },
-        VOTING: {
-            en: "Voting",
-            ch: "投票中"
-        },
-        VOTE: {
-            en: "VOTE",
-            ch: "投票"
-        },
-        ANALYSE: {
-            en: "ANALYSE",
-            ch: "复盘"
-        },
-        progress: {
-            en: "Game Progress",
-            ch: "破案进度"
-        },
-        power: {
-            en: "{num}",
-            ch: "{num}票"
-        },
-        murderWin: {
-            en: "The murderer escaped the law",
-            ch: "凶手逃脱了法律的制裁"
-        },
-        murderWinBut: {
-            en: "But,\nThe murderer escaped the law",
-            ch: "但是\n凶手逃脱了法律的制裁"
-        },
-        murderLoseBut: {
-            en: "But with the concerted efforts of all of us,\nThe murderer was punished",
-            ch: "但是在大家的齐心协力下\n凶手受到了制裁"
-        },
-        murderLose: {
-            en: "With the concerted efforts of all of us,\nThe murderer was punished",
-            ch: "在大家的齐心协力下\n凶手受到了制裁"
-        },
-        selfTrue: {
-            ch: "恭喜你选对了凶手",
-            en: "Voted correct!"
-        },
-        selfFalse: {
-            ch: "遗憾你选错了凶手",
-            en: "Voted wrong!"
-        },
-        txtResultMaxVoted: {
-            ch: "{username}得票最高",
-            en: "The most gamer voted {username}"
-        },
-        talkingPeople: {
-            ch: "{username}发言中...",
-            en: "{username} speaking..."
-        },
-        setting: {
-            ch: "设置",
-            en: "Setting"
-        },
-        role1: {
-            ch: "选择",
-            en: "Choose a"
-        },
-        role2: {
-            ch: "角色",
-            en: "Character"
-        },
-        notFullButStart: {
-            ch: "人数未满，房主发起提前开始游戏，\n是否同意？",
-            en: "Not full,But the host want to start,\nDo you agree?"
-        },
-        roomNumberHtml: {
-            ch: `<span>房间号:<span style="color:#ff6f48;">{roomNum}</span></span>`,
-            en: `<span>Room Number:<span style="color:#ff6f48;">{roomNum}</span></span>`
-        },
-        roomNumber1: {
-            ch: "房间号:{roomNum}",
-            en: "Room Number:{roomNum}"
-        },
-        roomNumber: {
-            ch: "房间号:",
-            en: "Room Number:"
-        },
-        readyedPeople: {
-            ch: "已准备玩家",
-            en: "Ready"
-        },
-        SSSC: {
-            ch: "属性/时长",
-            en: "Attrbute/Duration"
-        },
-        timeSZ: {
-            ch: "搜证时间",
-            en: "Time Find"
-        },
-        timeFY: {
-            ch: "发言时间",
-            en: "Time Chat"
-        },
-        timeTP: {
-            ch: "投票时间",
-            en: "Time Vote"
-        },
-        QJ: {
-            ch: "前进",
-            en: "Forward"
-        },
-        HT: {
-            ch: "后退",
-            en: "Back"
-        },
-        ZY: {
-            ch: "左移",
-            en: "Left"
-        },
-        YY: {
-            ch: "右移",
-            en: "Right"
-        },
-        XD: {
-            ch: "下蹲",
-            en: "Down"
-        }
-    };
-    DataLang.content = {
-        ch: "剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容",
-        en: "bookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbook"
-    };
-    DataLang.roleList_en = [
-        {
-            roleName: "Joe",
-            job: "chemist",
-            sex: "Male",
-            age: "30",
-            relation: "",
-            pangbaiUrl: "sound/Joe_en_en.mp3",
-            detail: "30-year-old chemist. Worked with Professor Helen for 5 years after being hired right after graduation. Married to Jane, the historian.",
-            id: 1,
-            img: "book1/img_role2.png",
-            content: `You and Annie have studied archaeology under Helen since you were a graduate student. After a few years, you are like childhood sweethearts in others’ eyes. She tells you that you are not the same and you won’t work out together. Later, you are now married to Jane, a historian. Helen always takes care of Annie who is slightly pedantic. They depend on your chemical knowledge to overcome the problems around the operation, but she is reluctant to give you core information. You despise how Helen and Annie treat you.<br/>
-      March<br/>
-      With the help of Leo and Jane, you break through the difficulties surrounding the archeological dig, drafted a blueprint of the underground palace, and soon you’ll be able to unlock this ancient underground palace!
-      Flowers and applause are close at hand. But suddenly one day, Helen tells you that she plans to abandon the excavation of this archeological project. You pretend to be calm, but your inner world collapses. You seem to see your hard work going to waste. You secretly curse Helen for her ways.<br/>
-      You try to persuade the professor with argumentative text messages, but it fails. A dangerous idea flashes through your mind: if the laboratory is destroyed, you can steal the archaeological materials and the palace blueprint then you can go to another team to finish the development.<br/>
-      April 1st<br/>
-      On March 30th, you and Jane take a 3-day vacation to travel. Before leaving, you add an active gas to the toxic gas in the laboratory. This makes the unstable gas sample even more dangerous. When you return from vacation, you hear that the laboratory exploded. However, Helen died in the explosion and the design of the underground palace also disappeared.
-      A competing archaeological institution invites you to work with them. The only requirement is to bring your research report and blueprint of the underground palace. You try to send a text message to ask Annie for the archaeological materials you deserve, but Annie refuses with the professor's wish as an excuse.<br/>
-      April 30th<br/>
-      After the fire broke out, the laboratory is rebuilt, and you reject the investor's request to continue developing the project. You receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”<br/>
-      Apart from the surprise, you quickly realize this gathering could expose you for unintentionally killing Helen. The more you think about it, the more paranoid you become about the situation. So, you decide to go.<br/>
-      May 1<br/>
-      Although Jane is suspicious of your past relationship with Annie, you still take a flight to the laboratory. You find Annie in her office and she leaves at 2:00 p.m. that day to do errands. You make use of this gap to sneak into her office and find the answers. <br/>
-      As you expect, she and a mysterious person are investigating Helen’s death, and they arranged this gathering and bought a humidifier, drugs, and an antidote. You know if you don’t act, it could ruin your career and you would be charged with Helen's death. <br/>
-      It’s better to act first: get rid of her, take away the archaeological materials, and save your future. You copy the antidote recipe, and you find the research report in the safe box, quickly take the photos, and upload them to the Internet. Before Annie comes back at 2:30 p.m., you leave the laboratory. <br/>
-      You buy all the ingredients at the pharmacy to formulate a bottle of antidote and two bottles of cold medicine to carry with you.<br/>
-      May 3rd<br/>
-      After you come to the laboratory at 2:00 p.m., you pretend to be busy in your office. You secretly block the cameras of the corridor at 6:30 p.m., and stuff a note into Annie’s office: "I know who you are! I also know what you are going to do. Come to the villa grove at 7:00, let's talk about it!" Annie, with a guilty conscience, is fooled. <br/>
-      After she leaves, you sneak into the office again, replace the two bottles of antidote in her drawer with the cold medicine bottles then throw the antidote into the trash can in the corridor. You drink the antidote without telling Jane at 7:50 p.m., then take her to the meeting room. You find an opportunity to secretly throw the empty bottle of antidote into the trash can in the meeting room. <br/>
-      At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. Unexpectedly, you fall into a coma with everyone else after a glass of wine. Fortunately, after 30 minutes, you wake up first. <br/>
-      You look around and use the handkerchief on Harris's chest and the cake-cutting knife to stab Annie to death, then you pretend to be unconscious.<br/>
-      Almost another 30 minutes later, you see Wilson wake up, and sneak away from the scene. Wilson comes back and pretends to be asleep. When everyone wakes up, you pretend to wake up last. Everyone sees Annie’s body in the corridor!`
-        },
-        {
-            roleName: "Jane",
-            job: "Historian",
-            pangbaiUrl: "sound/Jane_en.mp3",
-            age: "28",
-            sex: "Female",
-            relation: "",
-            detail: "28-year-old historian. Married to Joe, the chemist, for 2 years and joined the archeological team.",
-            id: 2,
-            img: "book1/img_role3.png",
-            content: `It has been two years since you joined the archaeological team under the recommendation of your husband, Joe. You use your historical knowledge to break many research bottlenecks. The research phase is about to be completed, and you’ve proven to be a valuable part of the team. 
-      The only thing that makes you uncomfortable is the past relationship between the archaeologist Annie and your husband. This unknown past makes you uncomfortable. Although your husband always guarantees their innocence, you still cannot help but think otherwise.<br/>
-      March<br/>
-      One day, Joe asks if you want to leave the team together because Helen wanted to terminate the excavation plan. You don't care about the excavation plan. You just want to leave this terrible place with Joe. Every time you see Annie and Joe working together, the thoughts continue to nag at your nerves. You also hope that your worries are unnecessary. There’s no better solution than to leave the team. Before leaving, you send an anonymous letter threatening Helen and asking her to hand over the plan and the underground palace blueprints.<br/>
-      April 1st<br/>
-      Joe takes you on a rare trip for 3 days. After you come back, you hear that there is an explosion in the laboratory. Helen died in the explosion, and the underground palace blueprints are missing. While you are fortunate that you and your husband weren’t around for the explosion, you intuitively feel a little uneasy and the accident accelerates your departure from this place.<br/>
-      You and Joe will submit your resumes and look for new jobs. Dealing with the aftermath and rebuilding the laboratory would give Joe and Annie more opportunities to meet. Your anxiety drives you to become more suspicious.
-      April 30th<br/>
-      After the explosion, the laboratory starts to get rebuilt. On the 30th, you receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”
-      It should be over, but now so many unexpected things are happening. You try to persuade Joe not to participate, but Joe's attitude disappoints you. You decide to go together and see what happens.<br/>
-      At the same time, you find the call history between Joe and Annie. Sure enough, they have recently been in contact. Aside from taking tranquilizers, your diary is your only way to vent your gloomy mood. "Do I have to wait until Annie completely disappears before my nightmare ends?"<br/>
-      May 1st<br/>
-      Today, Joe sends you a text message saying that he would fly to the laboratory early which makes you very suspicious. With an uneasy mood, you send Annie a short message. As expected, she is also at the laboratory! Sooner or later, you will find an opportunity to give that bitch a lesson!<br/>
-      May 3rd<br/>
-      You arrive at the laboratory at noon. There is an interview which keeps you busy in the office until 7:50 p.m., and then you go to find Joe to attend the party.<br/>
-      Seeing someone preparing a cake, you run to the kitchen to get a kitchen knife and a plate. At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. After a glass of wine, you drift into darkness as you go unconscious alongside everyone else.<br/>
-      After an hour, everyone wakes up and finds Annie's body!`
-        },
-        {
-            roleName: "Harris",
-            job: "Deputy curator at the British Museum",
-            pangbaiUrl: "sound/Harris_en.mp3",
-            age: "27",
-            sex: "Male",
-            relation: "",
-            detail: "27-year-old deputy curator at the British Museum. Invited to the gathering mysteriously and arrived early to stay in the guest room.",
-            id: 3,
-            img: "book1/img_role1.png",
-            content: `You are the deputy curator of the British Museum and the youngest manager of the museum in the industry. You understand that all honors are not only from your diligences, but also information and academic backing from your mother, Prof. Helen. The jet lag and business from work give rise to little time to connect. The relationship between you and your mother is great. You love your mother more than everything in the world.<br/>
-      March<br/>
-      You know Helen is going to research an ancient underground palace and she’s about to enter the excavation stage. You are excited because your mother must share her achievements with you. This would be a huge accolade to your career because it would help bring up the museum’s poor financial performance. <br/>
-      After you finish your business investment proposals, you are waiting for her excavation to be successful. Suddenly, Helen’s call makes you extremely disappointed. She tells you the limitations of the current technology, the excavation is not only dangerous but would also result in damaging the underground palace. Research is going to be stopped. You feel so disappointed and quarrel with her. Later, you receive a letter from your mother but refuse to write back.<br/>
-      April 3rd<br/>
-      One of the students of the professor, Annie, sends you a letter and tells you the laboratory had an explosion, the blueprint of the underground palace has been lost, and that your mother has died. You feel despair. She sends you the remains and Helen’s mobile phone.<br/>
-      She tells you there are several threatening text messages on the phone. You both feel the accident is related to the lost blueprint. After thinking for a moment, to get revenge, you decide to come back to the villa and help the archaeologists solve the secret behind the accident. 
-      During the process, you want to purchase the research reports, but the archaeologists refuse because it is confidential information. Although you are uneasy, you decide to wait for the opportunity. <br/>
-      After discussing, you and Annie decide to invite all the suspects to the research laboratory where the explosion happened. You invite them with the excuse that there is a copy of the blueprint of the underground palace.<br/>
-      You wait for the opportunity to put together the evidence and figure out who murdered your mother. You book the airline ticket to return to the villa on May 2nd. You nervously wait for the day.<br/>
-      May 3rd<br/>
-      You come to the laboratory at 11:30 a.m. on May 3rd and plan your actions for the night. To protect you, Annie tells you to take the antidotes from her office at 7:45 p.m., but she doesn’t allow you to participate in making the plans.<br/>
-      After having lunch, you return to your room and sleep because of the jet lag at 2:00 in the afternoon. At 7:30 p.m., your clock wakens you, then you drink the antidote in the archaeological office at 7:45 at night. 
-      You arrive at the reception room with Annie at 8:00 p.m. and meet a chemist, Joe, and his wife, Jane who is a historian, a talented scientist, Leo, and the project creator, Wilson, with Annie’s introduction for the first time. The party starts on time. Under Wilson’s suggestion, everyone raises a toast for Helen. After finishing the wine, you succumb to a coma along with the others. After an hour, everyone wakes up and finds Annie’s corpse.`
-        },
-        {
-            roleName: "Leo",
-            pangbaiUrl: "sound/Leo_en.mp3",
-            job: "Scientist",
-            sex: "Male",
-            age: "28",
-            relation: "",
-            detail: "28-year-old world-famous scientist. Has a narcissistic personality. Helped the archeological team for 1 year and created the blueprint which progressed the team to the mining phase.",
-            id: 4,
-            img: "book1/img_role4.png",
-            content: `You are regarded as the talent in others’ eyes because of your outstanding memory and amazing book knowledge. You publish high-standard articles in the field of biology, history, chemistry, and more. You’re a rising star in the academic world. Before your graduation, Professor Helen invites you to join her archeological team.<br/>
-      You know under your comprehensive knowledge that you can yield brilliant results in the process. After two years, the team solves problems one by one and gets the complete research reports. What’s more important, you make use of the technology to restore the blueprint of the underground palace. With this blueprint, the archeological team can officially start excavating. You know when the project is successful, you will have your highlights. Soon, you’ll have the applause and rewards for such fine work. <br/>
-      March<br/>
-      "What? The excavation plan will be canceled! Are you kidding me? My interview is coming up!” You yell at Helen. You know the limitations of the current development technology. Excavating the underground palace is dangerous, and it may destroy the underground palace. Hellen’s decision to stop the development and forbid the publishing of the research reports is currently the best choice. <br/>
-      You’re unhappy about the situation. Since that day, you become muddleheaded, and the first failure of your career nearly causes you to crack. You don’t know how to face the reporters and stress that it will negatively impact your career. It seems like a nightmare.<br/>
-      April 1st<br/>
-      The revealing of gas in the laboratory may have been caused by you, but you can’t remember the details. You return to the laboratory after your noon break and witness a terrible explosion. Among the smoke, you can’t tell whether you see someone in the lab or not. When you rush into the lab, you spot the underground palace blueprint on the table.<br/>
-      You convince yourself that no one is in the lab and put the blueprint in your pocket and stagger out of the lab. You later learn that Helen died from the explosion. Facing doubts from the public and investors, you tell yourself that you’ll gather the rest of the information to solve the technical problems and complete the excavation.<br/>
-      April 30th<br/>
-      After the disaster, the laboratory starts being rebuilt. On April 30th, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” <br/>
-      You can’t believe your eyes, and you can’t verify the one you hold is the latest version. Helen never told you the details of the confidential documents. You want to gain the rest of the research reports and ensure that you have the proper blueprint, so you can continue the excavation by yourself. Your talent will shine through sooner or later.  <br/>
-      May 1st<br/>
-      You buy some Ezmaclopam, a bottle of expensive wine, and an air ticket for May 4th. You plan to dope people and steal the research reports, and then leave by the night of May 4th.<br/>
-      May 3rd<br/>
-      You arrive at the laboratory at 5:00 p.m. ahead of schedule and talk with the archeologist, Annie. It seems that your purpose hasn’t been exposed. So, you decide to act on your plan. You return to your office at 6:00 p.m., put the drugs into the wine with the injection syringe, and then read a detective novel to pass the time.<br/>
-      You bring the wine to the party on time. Under the suggestion of Wilson, they decide to propose a toast for the professor. You don’t drink it, but you start to feel dizzy. Why? You fall unconscious.<br/>
-      One hour later, everyone wakes up one by one and you find Annie’s corpse.`
-        },
-        {
-            roleName: "Wilson",
-            pangbaiUrl: "sound/Wilson_en.mp3",
-            job: "Investor",
-            sex: "Male",
-            age: "40",
-            relation: "",
-            detail: "40-year-old investor. Has a passion for archeology and funded the team with his own money. Invested most of his money into the team and wants a return on his investment.",
-            id: 5,
-            img: "book1/img_role5.png",
-            content: `You are a well-known venture capitalist. Behind the attractive appearance and rich clothing, only you and your accountant know how tight your money is. Recently, you focused on a potentially profitable archaeology project. The reputation and benefits after your success will bring you endless money. To monitor the archeological team, you invite them to the laboratory which was converted from a villa. Along with the development of the project, you realize the expenses of the project are seemingly endless. Gradually, your money dwindles, but you don’t see any rewards. After several years, Helen tells you that the research is finished. Although there are no substantial academic benefits, you know the ancient relics are profitable and your good luck is coming.<br/>
-      March<br/>
-      “What!?” When Helen tells you her plan to give up the excavation operation, you’re stunned. Panic sets in as you see all your money spent on the project reeling through your head. You send countless emails and messages trying to convince her otherwise. You reach the point of both threats and bribes, but she remains firm. You have nothing else to restore your investment. So, you hire Gangdom to threaten Helen and ask her students to steal the materials, both plans fail. <br/>
-      April 1st<br/>
-      You see no way out as your bank account nearly runs out. One night, you’re called and told about the explosion which makes matters worse but also igniting some hope. Helen was the only one who could stop the excavation project and she perished in the explosion. Now, no one will be an obstacle for you. <br/>
-      You are so excited and invite other members of the archeological team together to continue the project. After the explosion, you are busy rebuilding the laboratory and persuading Annie to continue the project. Annie rejected your request to continue the excavation. You message your Gangdom friends to take out Annie, but their fee is more than what you have in the bank. You decide to be lowkey and seek your opportunity to find the blueprint and research reports to turn things around.<br/>
-      April 30th<br/>
-      On this day, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” You can’t wait as this opportunity arises. You need to steal all the reports and the blueprint to recover from the loss of your investment!<br/>
-      May 3rd<br/>
-      You arrive at the laboratory and use your keys to search the rooms, except Annie’s office because she’s already there. You find nothing. You guess the research reports and blueprint must be in Annie’s possession because of her close relationship with Helen. Annie never seems to leave long enough for you to look through her stuff. At 6:55 p.m. you see Annie with the surveillance camera and she’s leaving the laboratory. You sneak into the office. You’re shocked when someone else enters the office and you run away.<br/>
-      Annie returns and stays in her office. You blame everything on bad luck. 
-      When it’s time for the party at 8:00 p.m., you advise everyone to raise their glass together. You plan to steal the reports and blueprint after everyone is drunk, but you start feeling the spins too.<br/>
-      You wake up first and see Annie’s bloodied corpse. You’re horrified by the scene but out of greed, you run to the office and steal the reports, then put them in your safe box. You return and pretend to wake up with the others.`
-        },
-        {
-            roleName: "Stanly",
-            job: "Detective",
-            age: "37",
-            sex: "Male",
-            detail: "37 years old, has worked as the detective for 15 years.",
-            relation: "",
-            id: 6,
-            img: "book1/img_role7.png",
-            content: "You are a detective, you come here to investigate a murder."
-        }
-    ];
-    DataLang.roleList_ch = [
-        {
-            roleName: "Joe",
-            job: "化学家",
-            age: "30",
-            sex: "男性",
-            relation: "",
-            pangbaiUrl: "sound/Joe_ch.mp3",
-            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
-            id: 1,
-            img: "book1/img_role2.png",
-            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
-      <span style="color:#ff3232">5月3日</span> <br/>
-      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
-        },
-        {
-            roleName: "Jane",
-            job: "Historian",
-            pangbaiUrl: "sound/Jane_ch.mp3",
-            sex: "Female",
-            age: "28",
-            relation: "",
-            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
-            id: 2,
-            img: "book1/img_role3.png",
-            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
-        },
-        {
-            roleName: "Harris",
-            job: "大英博物馆副馆长",
-            pangbaiUrl: "sound/Harris_ch.mp3",
-            age: "27",
-            sex: "男性",
-            relation: "",
-            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
-            id: 3,
-            img: "book1/img_role1.png",
-            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
-      <span style="color:#ff3232">4月3日</span><br/>
-      教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
-        },
-        {
-            roleName: "Leo",
-            pangbaiUrl: "sound/Leo_ch.mp3",
-            age: "28",
-            job: "科学家",
-            sex: "男性",
-            relation: "",
-            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
-            id: 4,
-            img: "book1/img_role4.png",
-            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
-      <span style="color:#ff3232">5月1日</span><br/>
-      这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
-      `
-        },
-        {
-            roleName: "Wilson",
-            pangbaiUrl: "sound/Wilson_ch.mp3",
-            job: "项目投资人",
-            age: "40",
-            sex: "男性",
-            relation: "",
-            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
-            id: 5,
-            img: "book1/img_role5.png",
-            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
-      <span style="color:#ff3232">3月</span><br/>
-      “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
-      <span style="color:#ff3232">4月1日</span><br/>
-      不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
-      <span style="color:#ff3232">4月30日</span><br/>
-      30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
-      <span style="color:#ff3232">5月3日</span><br/>
-      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
-      信件<br/>
-      <span style="color:#ff3232">短信</span><br/>
-      你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
-      你赶忙邀请考古团队的其他成员继续挖掘项目
-      `
-        },
-        {
-            roleName: "Stanly",
-            job: "Detective",
-            sex: "Male",
-            age: "37",
-            detail: "37 years old, has worked as the detective for 15 years.",
-            relation: "",
-            id: 6,
-            img: "book1/img_role7.png",
-            content: "你是一个侦探，接到报警前来查案"
-        }
-    ];
-    DataLang.quesConfig_ch = [
-        {
-            roleId: 6,
-            quesList: [
-                {
-                    id: 1,
-                    title: "你做这份工作多久了？",
-                    content: "也就不到一年吧？我之前在罗姆尼老大手下看场子的，后来犯事儿，是Wilson老大给我了个机会，来这儿做保安。他希望我帮他看着这帮“聪明鬼”，不要浪费他的投资。",
-                    answer: "1"
-                },
-                {
-                    id: 2,
-                    title: "案发时，案发现场的摄像头有拍到任何什么特别的事情吗？",
-                    content: "今天我已经下班了，一楼的监控一直是坏掉的，我上个礼拜就群发email和大家说明过了，但是很奇怪，似乎没人有对此感兴趣。",
-                    answer: "2"
-                },
-                {
-                    id: 3,
-                    title: "在研究所整修期间，有人回来过吗？",
-                    content: "火灾后，这里就只有我和Annie每天都还有来上班，另外Wilson偶尔会过来看看。我记得Joe5月1号过来了，我以为他来找Annie呢，当时Annie不在，奇怪的是他没等Annie回来就走了。",
-                    answer: "3"
-                },
-                {
-                    id: 4,
-                    title: "今天Annie有和各位嫌疑人有过互动吗？",
-                    content: "我刚刚仔细看了监控，Leo在5:00pm去找了Annie。后来Harris在7:45pm的时候去见了Annie。",
-                    answer: "4"
-                },
-                {
-                    id: 5,
-                    title: "今天有陌生人进出过现场吗？",
-                    content: "今天一天都没有陌生人来过，连个送信的都没有。哦！对了，我看见Annie6:50pm出了研究所，但很快就回来了，我当时都有在做记录，大约是7:10pm吧",
-                    answer: "5"
-                },
-                {
-                    id: 6,
-                    title: "你对这把凶器餐刀有印象吗？",
-                    content: "啊！我下班之前看到Jane在找餐刀，还问我要不要一起吃个蛋糕再走，虽然我想吃蛋糕，但是老婆在家做了我最爱吃的晚饭，我就拒绝了。",
-                    answer: "5"
-                },
-                {
-                    id: 7,
-                    title: "今天的监视设备有什么异常吗？",
-                    content: "二楼走道的监视器被不知道被什么人在6:30pm的时候挡住了，我怀疑一定是有人故意这么做的，因为他一定是熟悉监控的位置的内部人员。",
-                    answer: "5"
-                },
-                {
-                    id: 8,
-                    title: "这块带血的手帕你有印象吗？",
-                    content: "哦，这不就是那新来的人西装里的手帕吗？我今天见到他就觉得很奇怪，穿着套装，装什么大尾巴狼！",
-                    answer: "5"
-                },
-                {
-                    id: 9,
-                    title: "你觉得教授的死和今天的凶案有关系吗？",
-                    content: "啊？这我可不敢乱说话，老大会打死我的！反正他们几个天天吵来吵去的，要说这聪明人也会杀人，以前我是不信的，现在嘛！啧啧。",
-                    answer: "5"
-                },
-                {
-                    id: 10,
-                    title: "教授的意外细节你知道多少？",
-                    content: "当天的研究所只有Annie，Leo，Helen和我在，当时我在午休，突然二楼的实验室发生爆炸，很快就烧起来了，我赶忙叫了消防队，但是很遗憾，当时Helen教授自己在做实验，她没能跑出来。",
-                    answer: "5"
-                },
-                {
-                    id: 11,
-                    title: "你觉得研究所里大家的关系怎么样？",
-                    content: "怎么说呢？天天听他们吵架，我要是说他们关系好你也不信是吧？偷偷告诉你，这里男女关系也挺混乱的，听说这Joe以前还和死者好过，现在还能带着老婆和她在一个公司工作，心也真的是大。不过我也都是道听途说。",
-                    answer: "5"
-                },
-                {
-                    id: 12,
-                    title: "今天你有一直都关注监控里发生的事情吗？",
-                    content: "啊，我当然不会一直坐在监控室里了。今天Wilson老大过来然我去做了几次小区内的巡查，虽然他平时很少这么做。后来我们就在监控室里喝酒聊天，快7：00pm他才离开。",
-                    answer: "5"
-                }
-            ]
-        }
-    ];
-    DataLang.quesConfig_en = [
-        {
-            roleId: 6,
-            quesList: [
-                {
-                    id: 1,
-                    title: "How long have you been in this job?",
-                    content: `Less than a year, right? I used to watch the show under boss Romney, but later I did something wrong. Boss Wilson gave me a chance to be a security guard here. He wants me to help him watch these "smart guys" and not waste his investment.`,
-                    answer: "1"
-                },
-                {
-                    id: 2,
-                    title: `Did the camera at the scene of the crime catch anything special at the time of the crime?`,
-                    content: "Today, I'm off work. The monitor on the first floor is broken all the time. I sent a group of emails last week to explain it to you, but it's strange that no one seems to be interested in it.",
-                    answer: "2"
-                },
-                {
-                    id: 3,
-                    title: "Did anyone come back during the renovation of the Institute?",
-                    content: "After the fire, Annie and I were the only ones who came to work every day, and Wilson occasionally came to have a look. I remember Joe came here on May 1st. I thought he came to find Annie. Annie was not there at that time. It was strange that he left without waiting for Annie to come back.",
-                    answer: "3"
-                },
-                {
-                    id: 4,
-                    title: "Did Annie interact with the suspects today?",
-                    content: "I just looked at the surveillance. Leo went to see Annie at 5:00pm. Then Harris went to see Annie at 7:45pm.",
-                    answer: "4"
-                },
-                {
-                    id: 5,
-                    title: "Did any strangers come in and out of the scene today?",
-                    content: "No stranger has been here all day, not even a messenger. oh By the way, I saw Annie leave the Research Institute at 6:50pm, but she came back soon. I was making records at that time, about 7:10pm",
-                    answer: "5"
-                },
-                {
-                    id: 6,
-                    title: "Do you have any impression of this knife?",
-                    content: "Ah! Before I got off work, I saw Jane looking for a knife and asked me if I wanted to have a cake before I left. Although I wanted to have a cake, my wife made my favorite dinner at home, so I refused.",
-                    answer: "5"
-                },
-                {
-                    id: 7,
-                    title: "Is there anything wrong with today's surveillance equipment?",
-                    content: "The monitor in the aisle on the second floor was blocked at 6:30pm by someone I don't know. I suspect someone must have done it on purpose, because he must be an insider familiar with the location of the monitor.",
-                    answer: "5"
-                },
-                {
-                    id: 8,
-                    title: "Do you remember this bloody handkerchief?",
-                    content: "Oh, isn't this the handkerchief in the new comer's suit? I think it's very strange when I see him today. He's wearing a suit and a big tail wolf!",
-                    answer: "5"
-                },
-                {
-                    id: 9,
-                    title: "Do you think the professor's death has anything to do with today's murder?",
-                    content: "Ah? I dare not talk about it. The boss will kill me! Anyway, they quarrel every day. If you want to say that this smart man can kill people, I didn't believe it before, but now! Tut tut.",
-                    answer: "5"
-                },
-                {
-                    id: 10,
-                    title: "What do you know about the details of the professor's accident?",
-                    content: "On that day, only Annie, Leo, Helen and I were in the Research Institute. At that time, I was on a lunch break. Suddenly, an explosion occurred in the laboratory on the second floor, which soon burned up. I called the fire brigade. Unfortunately, Professor Helen was doing the experiment herself, and she couldn't run out.",
-                    answer: "5"
-                },
-                {
-                    id: 11,
-                    title: "What do you think of the relationship in the Institute?",
-                    content: "How to put it? I hear them quarrel every day. If I say they have a good relationship, you don't believe it, do you? I'll tell you secretly that the relationship between men and women here is also very chaotic. It's said that Joe used to have a good time with the dead, but now he can still work with his wife in the same company with her, and his heart is really big. But it's all hearsay.",
-                    answer: "5"
-                },
-                {
-                    id: 12,
-                    title: "Have you been paying attention to what's going on in the surveillance today?",
-                    content: "Ah, of course I won't be sitting in the monitoring room all the time. Today, boss Wilson came over, but I went to inspect the community several times, although he seldom did so. Later, we drank and chatted in the monitoring room, and he didn't leave until 7:00pm.",
-                    answer: "5"
-                }
-            ]
-        }
-    ];
-
     class LogManager {
         static log(...[]) {
             console.log(arguments);
@@ -3925,1197 +2897,6 @@
     Oprate3dTool.flagIsDown = false;
     Oprate3dTool.movePos = new Laya.Vector3(0, 0, 0);
 
-    class Room2 {
-        static CT11(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.3);
-        }
-        static CT10(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.3);
-        }
-        static clickHR001() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR001,
-                    key: "room2_HR001",
-                    img: `book2/${DataLang.lang}/Hanson/HR001.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR002() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR002,
-                    key: "room2_HR002",
-                    img: `book2/${DataLang.lang}/Hanson/HR002.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR003() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR003,
-                    key: "room2_HR003",
-                    img: `book2/${DataLang.lang}/Hanson/HR003.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR004() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR004,
-                    key: "room2_HR004",
-                    img: `book2/${DataLang.lang}/Hanson/HR004.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR005() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR005,
-                    key: "room2_HR005",
-                    img: `book2/${DataLang.lang}/Hanson/HR005.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR006,
-                    key: "room2_HR006",
-                    img: `book2/${DataLang.lang}/Hanson/HR006.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR007() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR007,
-                    key: "room2_HR007",
-                    img: `book2/${DataLang.lang}/Hanson/HR007.jpeg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR008() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR008,
-                    key: "room2_HR008",
-                    img: `book2/${DataLang.lang}/Hanson/HR008.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR016() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR016,
-                    key: "room2_HR016",
-                    img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR015() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR015,
-                    key: "room2_HR015",
-                    img: `book2/${DataLang.lang}/Hanson/HR015.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR014() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR014,
-                    key: "room2_HR014",
-                    img: `book2/${DataLang.lang}/Hanson/HR014.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickHR013() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR013,
-                    key: "room2_HR013",
-                    img: `book2/${DataLang.lang}/Hanson/HR013.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static openDoor() {
-            let tar = Utils.findChildByName(Oprate3dTool.scene3d, "model.Box1748");
-            Utils.toggle3dOpen(tar, 1, -1.5);
-        }
-        static clickHR009() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_HR009,
-                    key: "room2_HR009",
-                    img: `book2/${DataLang.lang}/Hanson/HR009.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR001() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR001,
-                    key: "room2_CR001",
-                    img: `book2/${DataLang.lang}/Caroline/CR001.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR002() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR002,
-                    key: "room2_CR002",
-                    img: `book2/${DataLang.lang}/Caroline/CR002.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR003() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR003,
-                    key: "room2_CR003",
-                    img: `book2/${DataLang.lang}/Caroline/CR003.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR004() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR004,
-                    key: "room2_CR004",
-                    img: `book2/${DataLang.lang}/Caroline/CR004.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR005() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR005,
-                    key: "room2_CR005",
-                    img: `book2/${DataLang.lang}/Caroline/CR005.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR006,
-                    key: "room2_CR006",
-                    img: `book2/${DataLang.lang}/Caroline/CR006.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR007() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR007,
-                    key: "room2_CR007",
-                    img: `book2/${DataLang.lang}/Caroline/CR007.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCR008() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_CR008,
-                    key: "room2_CR008",
-                    img: `book2/${DataLang.lang}/Caroline/CR008.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static CT16(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.3);
-        }
-        static CT9(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.3);
-        }
-        static CT8(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.3);
-        }
-        static clickJR001() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR001,
-                    key: "room2_JR001",
-                    img: `book2/${DataLang.lang}/Johnathan/JR001.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJR002() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR002,
-                    key: "room2_JR002",
-                    img: `book2/${DataLang.lang}/Johnathan/JR002.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJR003() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR003,
-                    key: "room2_JR003",
-                    img: `book2/${DataLang.lang}/Johnathan/JR003.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJR004() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR004,
-                    key: "room2_JR004",
-                    img: `book2/${DataLang.lang}/Johnathan/JR004.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJR005() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR005,
-                    key: "room2_JR005",
-                    img: `book2/${DataLang.lang}/Johnathan/JR005.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR006,
-                    key: "room2_JR006",
-                    img: `book2/${DataLang.lang}/Johnathan/JR006.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickDX(tar) {
-            Utils.toggle3dOpen(tar, 1, 0.15);
-        }
-        static CT7(tar) {
-            Utils.toggle3dOpen(tar, 3, 0.3);
-        }
-        static CT6(tar) {
-            Utils.toggle3dOpen(tar, 3, 0.3);
-        }
-        static clickOR001() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR001,
-                    key: "room2_OR001",
-                    img: `book2/${DataLang.lang}/Oliver/OR001.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR002() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR002,
-                    key: "room2_OR002",
-                    img: `book2/${DataLang.lang}/Oliver/OR002.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR003() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR003,
-                    key: "room2_OR003",
-                    img: `book2/${DataLang.lang}/Oliver/OR003.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR004() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR004,
-                    key: "room2_OR004",
-                    img: `book2/${DataLang.lang}/Oliver/OR004.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR005() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR005,
-                    key: "room2_OR005",
-                    img: `book2/${DataLang.lang}/Oliver/OR005.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR006,
-                    key: "room2_OR006",
-                    img: `book2/${DataLang.lang}/Oliver/OR006.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR007() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR007,
-                    key: "room2_OR007",
-                    img: `book2/${DataLang.lang}/Oliver/OR007.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR008() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR008,
-                    key: "room2_OR008",
-                    img: `book2/${DataLang.lang}/Oliver/OR008.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR009() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR009,
-                    key: "room2_OR009",
-                    img: `book2/${DataLang.lang}/Oliver/OR009.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR010() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR010,
-                    key: "room2_OR010",
-                    img: `book2/${DataLang.lang}/Oliver/OR010.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickKuang(target) {
-            Utils.toggle3dOpen(target, 5, 100);
-        }
-        static toggleDrawer(target) {
-            Utils.toggle3dOpen(target, 3, 0.3);
-        }
-        static clickMR001() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR001,
-                    key: "room2_MR001",
-                    img: `book2/${DataLang.lang}/Margaret/MR001.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR002() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR002,
-                    key: "room2_MR002",
-                    img: `book2/${DataLang.lang}/Margaret/MR002.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR003() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR003,
-                    key: "room2_MR003",
-                    img: `book2/${DataLang.lang}/Margaret/MR003.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR004() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR004,
-                    key: "room2_MR004",
-                    img: `book2/${DataLang.lang}/Margaret/MR004.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR005() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR005,
-                    key: "room2_MR005",
-                    img: `book2/${DataLang.lang}/Margaret/MR005.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR006,
-                    key: "room2_MR006",
-                    img: `book2/${DataLang.lang}/Margaret/MR006.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR007() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR007,
-                    key: "room2_MR007",
-                    img: `book2/${DataLang.lang}/Margaret/MR007.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR008() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR008,
-                    key: "room2_MR008",
-                    img: `book2/${DataLang.lang}/Margaret/MR008.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickMR009() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_MR009,
-                    key: "room2_MR009",
-                    img: `book2/${DataLang.lang}/Margaret/MR009.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickGui2(target) {
-            Utils.toggle3dOpen(target, 5, 90);
-        }
-        static clickGui1(target) {
-            Utils.toggle3dOpen(target, 5, -90);
-        }
-        static clickBan4(target) {
-            Utils.toggle3dOpen(target, 5, -90);
-        }
-        static clickBan3(target) {
-            Utils.toggle3dOpen(target, 5, 90);
-        }
-        static clickCT5(target) {
-            Utils.toggle3dOpen(target, 3, 0.3);
-        }
-        static clickCT4(target) {
-            Utils.toggle3dOpen(target, 1, -0.3);
-        }
-        static clickCT3(target) {
-            Utils.toggle3dOpen(target, 1, -0.3);
-        }
-        static clickBan1(target) {
-            Utils.toggle3dOpen(target, 4, 70);
-        }
-        static clickBan2(target) {
-            Utils.toggle3dOpen(target, 4, 70);
-        }
-        static clickQian1() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR004,
-                    key: "room2_AR004",
-                    img: `book2/${DataLang.lang}/Abraham/AR004.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickAR009() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR009,
-                    key: "room2_AR009",
-                    img: `book2/${DataLang.lang}/Abraham/AR009.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickAR007() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR007,
-                    key: "room2_AR007",
-                    img: `book2/${DataLang.lang}/Abraham/AR007.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickAR008() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR008,
-                    key: "room2_AR008",
-                    img: `book2/${DataLang.lang}/Abraham/AR008.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickQ3() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR006,
-                    key: "room2_AR006",
-                    img: `book2/${DataLang.lang}/Abraham/AR006.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickQ2() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR005,
-                    key: "room2_AR005",
-                    img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickXinWu() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR003,
-                    key: "room2_AR003",
-                    img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickXin() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR002,
-                    key: "room2_AR002",
-                    img: `book2/${DataLang.lang}/Abraham/AR002.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickGan() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR001,
-                    key: "room2_AR001",
-                    img: `book2/${DataLang.lang}/Abraham/AR001.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickCT1(tar) {
-            Utils.toggle3dOpen(tar, 3, -0.3);
-        }
-        static clickXLX() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_PA004,
-                    key: "room2_PA004",
-                    title: "床头柜上",
-                    content: "教授写的信",
-                    img: `book2/${DataLang.lang}/hall/PA004.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickBao() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_PA003,
-                    key: "room2_PA003",
-                    title: "床头柜上",
-                    content: "教授写的信",
-                    img: `book2/${DataLang.lang}/hall/PA003.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJiuPin2() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_PA002,
-                    key: "room2_PA002",
-                    title: "床头柜上",
-                    content: "教授写的信",
-                    img: `book2/${DataLang.lang}/hall/PA002.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickJiuPin() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_PA001,
-                    key: "room2_PA001",
-                    title: "床头柜上",
-                    content: "教授写的信",
-                    img: `book2/${DataLang.lang}/hall/PA001.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-    }
-
-    class BookConfig2 {
-    }
-    BookConfig2.sceneList = [
-        {
-            sceneName: "Abraham",
-            sceneId: 3,
-            label: "Abraham",
-            url: `room_book2/LayaScene_Abraham/Conventional/Abraham.ls`,
-            events: {
-                ban1: {
-                    caller: Room2,
-                    method: Room2.clickBan1,
-                    nodeName: "abraham.Obj3d66-1254365-90-603"
-                },
-                ban2: {
-                    caller: Room2,
-                    method: Room2.clickBan2,
-                    nodeName: "abraham.Obj3d66-1254365-90-602"
-                },
-                gan: {
-                    caller: Room2,
-                    method: Room2.clickGan,
-                    nodeName: "1.Obj3d66-711479-25-338"
-                },
-                xin: {
-                    caller: Room2,
-                    method: Room2.clickXin,
-                    nodeName: "abraham.QuadPatch003"
-                },
-                xinwu1: {
-                    caller: Room2,
-                    method: Room2.clickXinWu,
-                    nodeName: "abraham.组112.model002"
-                },
-                xinwu: {
-                    caller: Room2,
-                    method: Room2.clickXinWu,
-                    nodeName: "abraham.组112.Loft001"
-                },
-                qian1: {
-                    caller: Room2,
-                    method: Room2.clickQian1,
-                    nodeName: "abraham.Box1578958531"
-                },
-                chouti1: {
-                    caller: Room2,
-                    method: Room2.clickCT3,
-                    nodeName: "abraham.model 2"
-                },
-                qian2: {
-                    caller: Room2,
-                    method: Room2.clickQ2,
-                    nodeName: "abraham.model 2.QuadPatch001 (1)"
-                },
-                chouti2: {
-                    caller: Room2,
-                    method: Room2.clickCT4,
-                    nodeName: "abraham.model003"
-                },
-                qian3: {
-                    caller: Room2,
-                    method: Room2.clickQ3,
-                    nodeName: "abraham.model003.QuadPatch002"
-                },
-                shoucang: {
-                    caller: Room2,
-                    method: Room2.clickAR008,
-                    nodeName: "abraham.组107.Obj3d66-1282599-15-749"
-                },
-                gui1: {
-                    caller: Room2,
-                    method: Room2.clickGui1,
-                    nodeName: "abraham.对象002"
-                },
-                gui2: {
-                    caller: Room2,
-                    method: Room2.clickGui2,
-                    nodeName: "abraham.对象001"
-                },
-                xin2: {
-                    caller: Room2,
-                    method: Room2.clickAR007,
-                    nodeName: "abraham.QuadPatch001"
-                },
-                hui1: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-125"
-                },
-                hui2: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-126"
-                },
-                hui3: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-127"
-                },
-                hui4: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-128"
-                },
-                hui5: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-129"
-                },
-                hui6: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-130"
-                },
-                hui7: {
-                    caller: Room2,
-                    method: Room2.clickAR009,
-                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-131"
-                }
-            }
-        },
-        {
-            sceneName: "Hall",
-            sceneId: 5,
-            label: "Hall",
-            url: `room_book2/LayaScene_hall/Conventional/hall.ls`,
-            events: {
-                jiupin: {
-                    caller: Room2,
-                    method: Room2.clickJiuPin,
-                    nodeName: "1.Obj3d66-402998-5-224"
-                },
-                jiu2: {
-                    caller: Room2,
-                    method: Room2.clickJiuPin2,
-                    nodeName: "1.组2136555812.Obj3d66-405792-9-449"
-                },
-                bao: {
-                    caller: Room2,
-                    method: Room2.clickBao,
-                    nodeName: "2"
-                },
-                xingli: {
-                    caller: Room2,
-                    method: Room2.clickXLX,
-                    nodeName: "1.Obj3d66-1290256-1-227"
-                },
-                chouti: {
-                    caller: Room2,
-                    method: Room2.clickCT1,
-                    nodeName: "1.对象011"
-                }
-            }
-        },
-        {
-            sceneName: "Margaret",
-            sceneId: 1,
-            label: "Margaret",
-            url: `room_book2/LayaScene_Margaret/Conventional/Margaret.ls`,
-            events: {
-                item1: {
-                    caller: Room2,
-                    method: Room2.clickMR001,
-                    nodeName: "1.QuadPatch004"
-                },
-                item2: {
-                    caller: Room2,
-                    method: Room2.toggleDrawer,
-                    nodeName: "1.model004"
-                },
-                item3: {
-                    caller: Room2,
-                    method: Room2.clickMR002,
-                    nodeName: "1.model004.QuadPatch003"
-                },
-                item4: {
-                    caller: Room2,
-                    method: Room2.clickKuang,
-                    nodeName: "1.对象019"
-                },
-                item5: {
-                    caller: Room2,
-                    method: Room2.clickMR003,
-                    nodeName: "1.Basket_A_grp.Basket_A_Wicker"
-                },
-                item6: {
-                    caller: Room2,
-                    method: Room2.clickMR004,
-                    nodeName: "1.Box1578958527"
-                },
-                model006: {
-                    caller: Room2,
-                    method: Room2.clickCT5,
-                    nodeName: "1.model006"
-                },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickMR005,
-                    nodeName: "1.model006.QuadPatch001"
-                },
-                clickBan: {
-                    caller: Room2,
-                    method: Room2.clickBan3,
-                    nodeName: "1.对象025"
-                },
-                clickBan4: {
-                    caller: Room2,
-                    method: Room2.clickBan4,
-                    nodeName: "1.对象024"
-                },
-                item8: {
-                    caller: Room2,
-                    method: Room2.clickMR007,
-                    nodeName: "1.Obj3d66-509460-11-208"
-                },
-                item9: {
-                    caller: Room2,
-                    method: Room2.clickMR006,
-                    nodeName: "1.QuadPatch002"
-                },
-                item10: {
-                    caller: Room2,
-                    method: Room2.clickMR008,
-                    nodeName: "1.ChamferCyl006"
-                },
-                item11: {
-                    caller: Room2,
-                    method: Room2.clickMR009,
-                    nodeName: "1.Obj3d66-676910-90-278"
-                }
-            }
-        },
-        {
-            sceneName: "Oliver",
-            sceneId: 6,
-            label: "Oliver",
-            url: `room_book2/LayaScene_Oliver/Conventional/Oliver.ls`,
-            events: {
-                item1: {
-                    caller: Room2,
-                    method: Room2.CT6,
-                    nodeName: "1.Box2131641766"
-                },
-                item2: {
-                    caller: Room2,
-                    method: Room2.clickOR001,
-                    nodeName: "1.Box2131641766.QuadPatch006"
-                },
-                item3: {
-                    caller: Room2,
-                    method: Room2.clickOR002,
-                    nodeName: "1.model 1"
-                },
-                item4: {
-                    caller: Room2,
-                    method: Room2.clickOR003,
-                    nodeName: "1.QuadPatch002"
-                },
-                item5: {
-                    caller: Room2,
-                    method: Room2.clickOR004,
-                    nodeName: "1.QuadPatch003"
-                },
-                对象024: {
-                    caller: Room2,
-                    method: Room2.clickDX,
-                    nodeName: "1.对象024"
-                },
-                xianglian: {
-                    caller: Room2,
-                    method: Room2.clickOR005,
-                    nodeName: "1.组112.model002"
-                },
-                CT7: {
-                    caller: Room2,
-                    method: Room2.CT7,
-                    nodeName: "1.Box2131641769"
-                },
-                item6: {
-                    caller: Room2,
-                    method: Room2.clickOR006,
-                    nodeName: "1.Box2131641769.QuadPatch001"
-                },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickOR007,
-                    nodeName: "1.QuadPatch004"
-                },
-                item8: {
-                    caller: Room2,
-                    method: Room2.clickOR008,
-                    nodeName: "1.QuadPatch005"
-                },
-                item9: {
-                    caller: Room2,
-                    method: Room2.clickOR009,
-                    nodeName: "1.QuadPatch005 (1)"
-                },
-                item10: {
-                    caller: Room2,
-                    method: Room2.clickOR010,
-                    nodeName: "1.Box2131637143"
-                }
-            }
-        },
-        {
-            sceneName: "Johnathan",
-            sceneId: 4,
-            label: "Johnathan",
-            url: `room_book2/LayaScene_Johnathan/Conventional/Johnathan.ls`,
-            events: {
-                item1: {
-                    caller: Room2,
-                    method: Room2.clickJR001,
-                    nodeName: "model.对象001"
-                },
-                item2: {
-                    caller: Room2,
-                    method: Room2.CT8,
-                    nodeName: "model.Rectangle073"
-                },
-                item3: {
-                    caller: Room2,
-                    method: Room2.clickJR002,
-                    nodeName: "model.Rectangle073.QuadPatch003"
-                },
-                item4: {
-                    caller: Room2,
-                    method: Room2.clickJR003,
-                    nodeName: "model.Obj3d66-1282599-17-592"
-                },
-                item5: {
-                    caller: Room2,
-                    method: Room2.clickJR004,
-                    nodeName: "model.Obj3d66-711884-2-128"
-                },
-                item6: {
-                    caller: Room2,
-                    method: Room2.CT9,
-                    nodeName: "model.Rectangle017"
-                },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickJR005,
-                    nodeName: "model.Rectangle017.Obj3d66-1163439-4-215"
-                },
-                item8: {
-                    caller: Room2,
-                    method: Room2.clickJR006,
-                    nodeName: "jiuoing.Obj3d66-402998-5-224"
-                }
-            }
-        },
-        {
-            sceneName: "Caroline",
-            sceneId: 7,
-            label: "Caroline",
-            url: `room_book2/LayaScene_Caroline/Conventional/Caroline.ls`,
-            events: {
-                drawerRightTop: {
-                    caller: Room2,
-                    method: Room2.clickCR001,
-                    nodeName: "1.Line044"
-                },
-                item2: {
-                    caller: Room2,
-                    method: Room2.clickCR002,
-                    nodeName: "1.Obj3d66-784515-3-729"
-                },
-                item3: {
-                    caller: Room2,
-                    method: Room2.clickCR003,
-                    nodeName: "1.Obj3d66-784515-2-781"
-                },
-                item4: {
-                    caller: Room2,
-                    method: Room2.clickCR004,
-                    nodeName: "1.对象014"
-                },
-                item5: {
-                    caller: Room2,
-                    method: Room2.clickCR005,
-                    nodeName: "1.Obj3d66-711884-2-127"
-                },
-                item6: {
-                    caller: Room2,
-                    method: Room2.clickCR006,
-                    nodeName: "1.Obj3d66-405792-9-449"
-                },
-                ka1: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch001"
-                },
-                ka2: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch002"
-                },
-                ka3: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch003"
-                },
-                ka4: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch004"
-                },
-                ka5: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch005"
-                },
-                ka6: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch006"
-                },
-                ka7: {
-                    caller: Room2,
-                    method: Room2.clickCR007,
-                    nodeName: "1.QuadPatch007"
-                },
-                wang: {
-                    caller: Room2,
-                    method: Room2.clickCR008,
-                    nodeName: "1.Obj3d66-806782-1-101"
-                }
-            }
-        },
-        {
-            sceneName: "Hanson",
-            sceneId: 2,
-            label: "Hanson",
-            url: `room_book2/LayaScene_Hanson/Conventional/Hanson.ls`,
-            events: {
-                item1: {
-                    caller: Room2,
-                    method: Room2.clickHR001,
-                    nodeName: "model.组2136555823.Obj3d66-866777-119-712"
-                },
-                item2: {
-                    caller: Room2,
-                    method: Room2.clickHR002,
-                    nodeName: "model.Obj3d66-1508352-12-993"
-                },
-                item3: {
-                    caller: Room2,
-                    method: Room2.clickHR003,
-                    nodeName: "model.model016"
-                },
-                item4: {
-                    caller: Room2,
-                    method: Room2.clickHR004,
-                    nodeName: "model.Group-391490-270.Obj3d66-391490-18-1000"
-                },
-                item44: {
-                    caller: Room2,
-                    method: Room2.clickHR005,
-                    nodeName: "desk.对象027.QuadPatch001"
-                },
-                item5: {
-                    caller: Room2,
-                    method: Room2.CT10,
-                    nodeName: "desk.对象027"
-                },
-                item6: {
-                    caller: Room2,
-                    method: Room2.CT11,
-                    nodeName: "desk.对象022"
-                },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickHR006,
-                    nodeName: "desk.对象022.Obj3d66-1163439-4-215"
-                },
-                item8: {
-                    caller: Room2,
-                    method: Room2.clickHR007,
-                    nodeName: "model.Loft007"
-                },
-                item9: {
-                    caller: Room2,
-                    method: Room2.clickHR008,
-                    nodeName: "model.Obj3d66-402998-5-224"
-                },
-                item10: {
-                    caller: Room2,
-                    method: Room2.clickHR009,
-                    nodeName: "model.Obj3d66-1017952-9-519"
-                },
-                door: {
-                    caller: Room2,
-                    method: Room2.openDoor,
-                    nodeName: "model.组2136555825.Box1752"
-                },
-                shouzhuo: {
-                    caller: Room2,
-                    method: Room2.clickHR013,
-                    nodeName: "shouzhuo"
-                },
-                jiaoyin: {
-                    caller: Room2,
-                    method: Room2.clickHR014,
-                    nodeName: "1.物件_1"
-                },
-                fengzheng: {
-                    caller: Room2,
-                    method: Room2.clickHR015,
-                    nodeName: "fengzheng11.物件_5"
-                },
-                CT16: {
-                    caller: Room2,
-                    method: Room2.CT16,
-                    nodeName: "desk.对象025"
-                },
-                fengzhengxian: {
-                    caller: Room2,
-                    method: Room2.clickHR016,
-                    nodeName: "desk.对象025.fengzhengxian"
-                }
-            }
-        }
-    ];
-
     class SceneKill {
         static clickLJTGaizi() {
             return __awaiter(this, void 0, void 0, function* () {
@@ -6678,6 +4459,2697 @@
         dangao: {
             en: "The cake is untouched, and no suspicious substances were found by the forensic kit. It seems safe.",
             ch: "蛋糕似乎没有被动过，初步检验没有发现任何可以物质。蛋糕已经送去检查，可能要一周时间才有结果"
+        }
+    };
+    BookConfig1.roleList_en = [
+        {
+            roleName: "Joe",
+            job: "chemist",
+            sex: "Male",
+            age: "30",
+            relation: "",
+            pangbaiUrl: "sound/Joe_en_en.mp3",
+            detail: "30-year-old chemist. Worked with Professor Helen for 5 years after being hired right after graduation. Married to Jane, the historian.",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `You and Annie have studied archaeology under Helen since you were a graduate student. After a few years, you are like childhood sweethearts in others’ eyes. She tells you that you are not the same and you won’t work out together. Later, you are now married to Jane, a historian. Helen always takes care of Annie who is slightly pedantic. They depend on your chemical knowledge to overcome the problems around the operation, but she is reluctant to give you core information. You despise how Helen and Annie treat you.<br/>
+      March<br/>
+      With the help of Leo and Jane, you break through the difficulties surrounding the archeological dig, drafted a blueprint of the underground palace, and soon you’ll be able to unlock this ancient underground palace!
+      Flowers and applause are close at hand. But suddenly one day, Helen tells you that she plans to abandon the excavation of this archeological project. You pretend to be calm, but your inner world collapses. You seem to see your hard work going to waste. You secretly curse Helen for her ways.<br/>
+      You try to persuade the professor with argumentative text messages, but it fails. A dangerous idea flashes through your mind: if the laboratory is destroyed, you can steal the archaeological materials and the palace blueprint then you can go to another team to finish the development.<br/>
+      April 1st<br/>
+      On March 30th, you and Jane take a 3-day vacation to travel. Before leaving, you add an active gas to the toxic gas in the laboratory. This makes the unstable gas sample even more dangerous. When you return from vacation, you hear that the laboratory exploded. However, Helen died in the explosion and the design of the underground palace also disappeared.
+      A competing archaeological institution invites you to work with them. The only requirement is to bring your research report and blueprint of the underground palace. You try to send a text message to ask Annie for the archaeological materials you deserve, but Annie refuses with the professor's wish as an excuse.<br/>
+      April 30th<br/>
+      After the fire broke out, the laboratory is rebuilt, and you reject the investor's request to continue developing the project. You receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”<br/>
+      Apart from the surprise, you quickly realize this gathering could expose you for unintentionally killing Helen. The more you think about it, the more paranoid you become about the situation. So, you decide to go.<br/>
+      May 1<br/>
+      Although Jane is suspicious of your past relationship with Annie, you still take a flight to the laboratory. You find Annie in her office and she leaves at 2:00 p.m. that day to do errands. You make use of this gap to sneak into her office and find the answers. <br/>
+      As you expect, she and a mysterious person are investigating Helen’s death, and they arranged this gathering and bought a humidifier, drugs, and an antidote. You know if you don’t act, it could ruin your career and you would be charged with Helen's death. <br/>
+      It’s better to act first: get rid of her, take away the archaeological materials, and save your future. You copy the antidote recipe, and you find the research report in the safe box, quickly take the photos, and upload them to the Internet. Before Annie comes back at 2:30 p.m., you leave the laboratory. <br/>
+      You buy all the ingredients at the pharmacy to formulate a bottle of antidote and two bottles of cold medicine to carry with you.<br/>
+      May 3rd<br/>
+      After you come to the laboratory at 2:00 p.m., you pretend to be busy in your office. You secretly block the cameras of the corridor at 6:30 p.m., and stuff a note into Annie’s office: "I know who you are! I also know what you are going to do. Come to the villa grove at 7:00, let's talk about it!" Annie, with a guilty conscience, is fooled. <br/>
+      After she leaves, you sneak into the office again, replace the two bottles of antidote in her drawer with the cold medicine bottles then throw the antidote into the trash can in the corridor. You drink the antidote without telling Jane at 7:50 p.m., then take her to the meeting room. You find an opportunity to secretly throw the empty bottle of antidote into the trash can in the meeting room. <br/>
+      At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. Unexpectedly, you fall into a coma with everyone else after a glass of wine. Fortunately, after 30 minutes, you wake up first. <br/>
+      You look around and use the handkerchief on Harris's chest and the cake-cutting knife to stab Annie to death, then you pretend to be unconscious.<br/>
+      Almost another 30 minutes later, you see Wilson wake up, and sneak away from the scene. Wilson comes back and pretends to be asleep. When everyone wakes up, you pretend to wake up last. Everyone sees Annie’s body in the corridor!`
+        },
+        {
+            roleName: "Jane",
+            job: "Historian",
+            pangbaiUrl: "sound/Jane_en.mp3",
+            age: "28",
+            sex: "Female",
+            relation: "",
+            detail: "28-year-old historian. Married to Joe, the chemist, for 2 years and joined the archeological team.",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `It has been two years since you joined the archaeological team under the recommendation of your husband, Joe. You use your historical knowledge to break many research bottlenecks. The research phase is about to be completed, and you’ve proven to be a valuable part of the team. 
+      The only thing that makes you uncomfortable is the past relationship between the archaeologist Annie and your husband. This unknown past makes you uncomfortable. Although your husband always guarantees their innocence, you still cannot help but think otherwise.<br/>
+      March<br/>
+      One day, Joe asks if you want to leave the team together because Helen wanted to terminate the excavation plan. You don't care about the excavation plan. You just want to leave this terrible place with Joe. Every time you see Annie and Joe working together, the thoughts continue to nag at your nerves. You also hope that your worries are unnecessary. There’s no better solution than to leave the team. Before leaving, you send an anonymous letter threatening Helen and asking her to hand over the plan and the underground palace blueprints.<br/>
+      April 1st<br/>
+      Joe takes you on a rare trip for 3 days. After you come back, you hear that there is an explosion in the laboratory. Helen died in the explosion, and the underground palace blueprints are missing. While you are fortunate that you and your husband weren’t around for the explosion, you intuitively feel a little uneasy and the accident accelerates your departure from this place.<br/>
+      You and Joe will submit your resumes and look for new jobs. Dealing with the aftermath and rebuilding the laboratory would give Joe and Annie more opportunities to meet. Your anxiety drives you to become more suspicious.
+      April 30th<br/>
+      After the explosion, the laboratory starts to get rebuilt. On the 30th, you receive an invitation: "You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.”
+      It should be over, but now so many unexpected things are happening. You try to persuade Joe not to participate, but Joe's attitude disappoints you. You decide to go together and see what happens.<br/>
+      At the same time, you find the call history between Joe and Annie. Sure enough, they have recently been in contact. Aside from taking tranquilizers, your diary is your only way to vent your gloomy mood. "Do I have to wait until Annie completely disappears before my nightmare ends?"<br/>
+      May 1st<br/>
+      Today, Joe sends you a text message saying that he would fly to the laboratory early which makes you very suspicious. With an uneasy mood, you send Annie a short message. As expected, she is also at the laboratory! Sooner or later, you will find an opportunity to give that bitch a lesson!<br/>
+      May 3rd<br/>
+      You arrive at the laboratory at noon. There is an interview which keeps you busy in the office until 7:50 p.m., and then you go to find Joe to attend the party.<br/>
+      Seeing someone preparing a cake, you run to the kitchen to get a kitchen knife and a plate. At 8:00 p.m., the party starts on time. Under the suggestion of the investor, Wilson, everyone has a drink in honor of Helen. After a glass of wine, you drift into darkness as you go unconscious alongside everyone else.<br/>
+      After an hour, everyone wakes up and finds Annie's body!`
+        },
+        {
+            roleName: "Harris",
+            job: "Deputy curator at the British Museum",
+            pangbaiUrl: "sound/Harris_en.mp3",
+            age: "27",
+            sex: "Male",
+            relation: "",
+            detail: "27-year-old deputy curator at the British Museum. Invited to the gathering mysteriously and arrived early to stay in the guest room.",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `You are the deputy curator of the British Museum and the youngest manager of the museum in the industry. You understand that all honors are not only from your diligences, but also information and academic backing from your mother, Prof. Helen. The jet lag and business from work give rise to little time to connect. The relationship between you and your mother is great. You love your mother more than everything in the world.<br/>
+      March<br/>
+      You know Helen is going to research an ancient underground palace and she’s about to enter the excavation stage. You are excited because your mother must share her achievements with you. This would be a huge accolade to your career because it would help bring up the museum’s poor financial performance. <br/>
+      After you finish your business investment proposals, you are waiting for her excavation to be successful. Suddenly, Helen’s call makes you extremely disappointed. She tells you the limitations of the current technology, the excavation is not only dangerous but would also result in damaging the underground palace. Research is going to be stopped. You feel so disappointed and quarrel with her. Later, you receive a letter from your mother but refuse to write back.<br/>
+      April 3rd<br/>
+      One of the students of the professor, Annie, sends you a letter and tells you the laboratory had an explosion, the blueprint of the underground palace has been lost, and that your mother has died. You feel despair. She sends you the remains and Helen’s mobile phone.<br/>
+      She tells you there are several threatening text messages on the phone. You both feel the accident is related to the lost blueprint. After thinking for a moment, to get revenge, you decide to come back to the villa and help the archaeologists solve the secret behind the accident. 
+      During the process, you want to purchase the research reports, but the archaeologists refuse because it is confidential information. Although you are uneasy, you decide to wait for the opportunity. <br/>
+      After discussing, you and Annie decide to invite all the suspects to the research laboratory where the explosion happened. You invite them with the excuse that there is a copy of the blueprint of the underground palace.<br/>
+      You wait for the opportunity to put together the evidence and figure out who murdered your mother. You book the airline ticket to return to the villa on May 2nd. You nervously wait for the day.<br/>
+      May 3rd<br/>
+      You come to the laboratory at 11:30 a.m. on May 3rd and plan your actions for the night. To protect you, Annie tells you to take the antidotes from her office at 7:45 p.m., but she doesn’t allow you to participate in making the plans.<br/>
+      After having lunch, you return to your room and sleep because of the jet lag at 2:00 in the afternoon. At 7:30 p.m., your clock wakens you, then you drink the antidote in the archaeological office at 7:45 at night. 
+      You arrive at the reception room with Annie at 8:00 p.m. and meet a chemist, Joe, and his wife, Jane who is a historian, a talented scientist, Leo, and the project creator, Wilson, with Annie’s introduction for the first time. The party starts on time. Under Wilson’s suggestion, everyone raises a toast for Helen. After finishing the wine, you succumb to a coma along with the others. After an hour, everyone wakes up and finds Annie’s corpse.`
+        },
+        {
+            roleName: "Leo",
+            pangbaiUrl: "sound/Leo_en.mp3",
+            job: "Scientist",
+            sex: "Male",
+            age: "28",
+            relation: "",
+            detail: "28-year-old world-famous scientist. Has a narcissistic personality. Helped the archeological team for 1 year and created the blueprint which progressed the team to the mining phase.",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `You are regarded as the talent in others’ eyes because of your outstanding memory and amazing book knowledge. You publish high-standard articles in the field of biology, history, chemistry, and more. You’re a rising star in the academic world. Before your graduation, Professor Helen invites you to join her archeological team.<br/>
+      You know under your comprehensive knowledge that you can yield brilliant results in the process. After two years, the team solves problems one by one and gets the complete research reports. What’s more important, you make use of the technology to restore the blueprint of the underground palace. With this blueprint, the archeological team can officially start excavating. You know when the project is successful, you will have your highlights. Soon, you’ll have the applause and rewards for such fine work. <br/>
+      March<br/>
+      "What? The excavation plan will be canceled! Are you kidding me? My interview is coming up!” You yell at Helen. You know the limitations of the current development technology. Excavating the underground palace is dangerous, and it may destroy the underground palace. Hellen’s decision to stop the development and forbid the publishing of the research reports is currently the best choice. <br/>
+      You’re unhappy about the situation. Since that day, you become muddleheaded, and the first failure of your career nearly causes you to crack. You don’t know how to face the reporters and stress that it will negatively impact your career. It seems like a nightmare.<br/>
+      April 1st<br/>
+      The revealing of gas in the laboratory may have been caused by you, but you can’t remember the details. You return to the laboratory after your noon break and witness a terrible explosion. Among the smoke, you can’t tell whether you see someone in the lab or not. When you rush into the lab, you spot the underground palace blueprint on the table.<br/>
+      You convince yourself that no one is in the lab and put the blueprint in your pocket and stagger out of the lab. You later learn that Helen died from the explosion. Facing doubts from the public and investors, you tell yourself that you’ll gather the rest of the information to solve the technical problems and complete the excavation.<br/>
+      April 30th<br/>
+      After the disaster, the laboratory starts being rebuilt. On April 30th, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” <br/>
+      You can’t believe your eyes, and you can’t verify the one you hold is the latest version. Helen never told you the details of the confidential documents. You want to gain the rest of the research reports and ensure that you have the proper blueprint, so you can continue the excavation by yourself. Your talent will shine through sooner or later.  <br/>
+      May 1st<br/>
+      You buy some Ezmaclopam, a bottle of expensive wine, and an air ticket for May 4th. You plan to dope people and steal the research reports, and then leave by the night of May 4th.<br/>
+      May 3rd<br/>
+      You arrive at the laboratory at 5:00 p.m. ahead of schedule and talk with the archeologist, Annie. It seems that your purpose hasn’t been exposed. So, you decide to act on your plan. You return to your office at 6:00 p.m., put the drugs into the wine with the injection syringe, and then read a detective novel to pass the time.<br/>
+      You bring the wine to the party on time. Under the suggestion of Wilson, they decide to propose a toast for the professor. You don’t drink it, but you start to feel dizzy. Why? You fall unconscious.<br/>
+      One hour later, everyone wakes up one by one and you find Annie’s corpse.`
+        },
+        {
+            roleName: "Wilson",
+            pangbaiUrl: "sound/Wilson_en.mp3",
+            job: "Investor",
+            sex: "Male",
+            age: "40",
+            relation: "",
+            detail: "40-year-old investor. Has a passion for archeology and funded the team with his own money. Invested most of his money into the team and wants a return on his investment.",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `You are a well-known venture capitalist. Behind the attractive appearance and rich clothing, only you and your accountant know how tight your money is. Recently, you focused on a potentially profitable archaeology project. The reputation and benefits after your success will bring you endless money. To monitor the archeological team, you invite them to the laboratory which was converted from a villa. Along with the development of the project, you realize the expenses of the project are seemingly endless. Gradually, your money dwindles, but you don’t see any rewards. After several years, Helen tells you that the research is finished. Although there are no substantial academic benefits, you know the ancient relics are profitable and your good luck is coming.<br/>
+      March<br/>
+      “What!?” When Helen tells you her plan to give up the excavation operation, you’re stunned. Panic sets in as you see all your money spent on the project reeling through your head. You send countless emails and messages trying to convince her otherwise. You reach the point of both threats and bribes, but she remains firm. You have nothing else to restore your investment. So, you hire Gangdom to threaten Helen and ask her students to steal the materials, both plans fail. <br/>
+      April 1st<br/>
+      You see no way out as your bank account nearly runs out. One night, you’re called and told about the explosion which makes matters worse but also igniting some hope. Helen was the only one who could stop the excavation project and she perished in the explosion. Now, no one will be an obstacle for you. <br/>
+      You are so excited and invite other members of the archeological team together to continue the project. After the explosion, you are busy rebuilding the laboratory and persuading Annie to continue the project. Annie rejected your request to continue the excavation. You message your Gangdom friends to take out Annie, but their fee is more than what you have in the bank. You decide to be lowkey and seek your opportunity to find the blueprint and research reports to turn things around.<br/>
+      April 30th<br/>
+      On this day, you receive an invitation: “You're cordially invited to the reveal party on May 3rd at the research villa. In honor of the late professor Helen, we will be revealing the updated blueprint. Drinks and food will be provided. The party starts at 8:00 pm, please don't be late.” You can’t wait as this opportunity arises. You need to steal all the reports and the blueprint to recover from the loss of your investment!<br/>
+      May 3rd<br/>
+      You arrive at the laboratory and use your keys to search the rooms, except Annie’s office because she’s already there. You find nothing. You guess the research reports and blueprint must be in Annie’s possession because of her close relationship with Helen. Annie never seems to leave long enough for you to look through her stuff. At 6:55 p.m. you see Annie with the surveillance camera and she’s leaving the laboratory. You sneak into the office. You’re shocked when someone else enters the office and you run away.<br/>
+      Annie returns and stays in her office. You blame everything on bad luck. 
+      When it’s time for the party at 8:00 p.m., you advise everyone to raise their glass together. You plan to steal the reports and blueprint after everyone is drunk, but you start feeling the spins too.<br/>
+      You wake up first and see Annie’s bloodied corpse. You’re horrified by the scene but out of greed, you run to the office and steal the reports, then put them in your safe box. You return and pretend to wake up with the others.`
+        },
+        {
+            roleName: "Stanly",
+            job: "Detective",
+            age: "37",
+            sex: "Male",
+            detail: "37 years old, has worked as the detective for 15 years.",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: "You are a detective, you come here to investigate a murder."
+        }
+    ];
+    BookConfig1.roleList_ch = [
+        {
+            roleName: "Joe",
+            job: "化学家",
+            age: "30",
+            sex: "男性",
+            relation: "",
+            pangbaiUrl: "sound/Joe_ch.mp3",
+            detail: "30岁，化学家，和死者一样，是已故的原项目负责人May教授的弟子，从毕业就跟随教授一起参与到地宫的开发活动，已经有5年了。已婚，妻子是同样在考古队中的历史学家Jane",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `你和考古学家<span style="color:#ff3232">Annie</span>从研究生就跟着教授<span style="color:#ff3232">Helen</span>进行考古学习，几年下来，是大家眼中的青梅竹马。虽然和小师妹有着各种说不清的暧昧，但是她却告诉你，彼此不是一路人，在一起没有结果。后来，你也有了自己的妻子<span style="color:#ff3232">Jane</span>，一个历史学家。<span style="color:#ff3232">Helen</span>总是更多的照顾着那个你看起来略显迂腐的师妹，在你眼中，她要依仗着你的化学知识，攻克各种难题，却总是不情愿把核心的信息交授给你。你渴望成功，总有一天，你要让教授和没有选择你的小师妹知道，看不上你，是她们的错！<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      3月开始的非常顺利，在<span style="color:#ff3232">Leo</span>和<span style="color:#ff3232">Jane</span>的帮助下，你们突破了考古的瓶颈，找到并破译了地宫的设计图，马上就可以解开这个人类史上古老的地宫文明了！鲜花和掌声离你近在咫尺。可是突然有一天，Helen告诉你她计划放弃这考古项目的挖掘，你的表面假装平静，内心的世界已经几乎坍塌。你仿佛看到自己这几年来的努力前功尽弃。你不仅暗骂<span style="color:#ff3232">Helen</span>的迂腐，做大事怎么能没有牺牲，哪有人能成功却不用承担风险！你试着发短信说服教授，但失败了。这时你的脑海中闪过一个危险的想法：如果实验室被毁掉，那你就能偷走考古资料和地宫设计图，那么你就可以去其他的团队继续进行开发，那时候，成功的你，可以站在高处，用胜利者的口吻嘲笑她们的迂腐是多么的愚蠢。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      3月30日，你和<span style="color:#ff3232">Jane</span>请了3天假去旅游。临走前，你在收集用来分析的地宫毒性气体中加入了一些活性气体，使本来就非常不稳定的气体样本更加危险。果然，你休假回来后听说实验室如你所料的发生了爆炸，但令你意外的是，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而地宫的设计图也不翼而飞。这样的变故让你非常痛苦，你决定要离开这个实验室，拿着简历跑遍几家公司，终于，这时有个竞争关系的考古机构向你发出了橄榄枝，唯一的要求是，带来你们已经完成的考古资料和地宫设计图。你试着发短信向Annie索要你应得的考古资料，却被<span style="color:#ff3232">Annie</span>以教授的心愿为借口拒绝。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。期间，你拒绝了投资人继续开发项目的要求。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 惊喜之余，你很快意识到这个邀请并不简单，是不是你做的事情暴露了？虽然无意，但是你的所作所为还是导致了<span style="color:#ff3232">Helen</span>的死亡。你越想越怕，决定要提前过去一探究竟。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      虽然Jane一直在怀疑你和<span style="color:#ff3232">Helen</span>的暧昧关系，你还是订了5月1日的机票飞往考古实验室。你查到当天14:00 <span style="color:#ff3232">Helen</span>要离开的办公室去办事，利用这个间隙，你潜入在她的办公室里，在这里你找到了全部的答案，果然如你预想的，她和一个神秘人在调查<span style="color:#ff3232">Helen</span>的死因，安排了这次聚会，并买了加湿器，迷药和解药想要有所行动。你知道如果坐视她这样调查，你不仅有身败名裂的危险，甚至会威胁到你的生命安全。不如先下手为强，除掉她，拿走考古资料，自己以后的前途不可限量。这时你在自己的笔记本上抄下了迷药盒子上解药的做法，并将这一页撕掉拿去制作解药。你找到了保险箱里的考古资料，赶忙拍下照片上传到云端，并删除了手机里的照片。花了好多时间，也没用找到她藏起来的地宫的设计图，在14:30<span style="color:#ff3232">Helen</span>回来之前，你匆匆离开了实验室，随后你在药店买到了所有的原料，配制出了一瓶解药和两瓶没有药效的药剂，并带在了身上。<br/>
+      <span style="color:#ff3232">5月3日</span> <br/>
+      你在下午16:00来到研究所以后，就假装忙着工作，一头扎进了自己的办公室。你在18:30分偷偷挡住了走廊的监控，并在<span style="color:#ff3232">Helen</span>的办公室门缝塞入字条： “我知道你是谁！也知道你要干什么，19：00来别墅小树林，我们说清楚！” 心虚的<span style="color:#ff3232">Helen</span>果然上当了，她走后，你再次偷偷溜进办公室，把她抽屉里的两瓶解药偷按计划换成了没有药效的药剂，并顺手把解药扔进走廊的垃圾桶。你在19:50背着<span style="color:#ff3232">Jane</span>偷偷喝下解药，然后带她一起去会议室集合，并借机偷偷的把解药的空瓶扔进了会议室的垃圾桶。20:00，party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。幸运的是，30分钟后，你率先醒来，原来还有别人也想要迷药大家！多亏了强力迷药和解药，你成为当时唯一一个清醒的人。你环视四周，你用<span style="color:#ff3232">Harris</span>胸前的手帕，垫着切蛋糕的刀捅死了<span style="color:#ff3232">Helen</span>。随后，你假装晕倒。差不多又过了30分钟，你看到Wilson醒来，偷偷离开了现场，你没有打草惊蛇，等到他回来以后摇醒大家，才假装最后一个醒来。大家先后醒了过来后，就在走廊上看到的了<span style="color:#ff3232">Helen</span>的尸体！`
+        },
+        {
+            roleName: "Jane",
+            job: "Historian",
+            pangbaiUrl: "sound/Jane_ch.mp3",
+            sex: "Female",
+            age: "28",
+            relation: "",
+            detail: "28岁，历史学家，Joe的妻子，二人于两年前结婚，婚后陪同Joe加入了考古队，利用其丰富的历史知识为考古队打开了多项瓶颈。",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `你在丈夫<span style="color:#ff3232">Joe</span>的推荐下加入这个考古团队已经两年了，在这段不长的时间里，你用你的历史知识给这个团队打破了很多研究的瓶颈，研究阶段工作即将完成，你也证明了自己对这个团队的贡献。唯一让你不舒服的，是这个团队里考古学家<span style="color:#ff3232">Annie</span>与你的丈夫那暧昧不清的关系，这一段未知的过去让你不舒服，虽然丈夫一直保证他们的清白，你还是无法控制的在疑神疑鬼。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      终于，有一天<span style="color:#ff3232">Joe</span>问你想不想一起离开这个团队，原因是教授<span style="color:#ff3232">Helen</span>想要终止之后的挖掘计划。你并不在乎这些，只想和<span style="color:#ff3232">Joe</span>早点离开这个鬼地方，每每看到<span style="color:#ff3232">Annie</span>和<span style="color:#ff3232">Joe</span>在一起工作，不断的刺激着你的神经，你也希望自己的担心是多余的。还有什么是比离开这个团队更好的解决方法呢。离开前，你给<span style="color:#ff3232">Helen</span>发了一封匿名威胁信，要让她把方案和地宫设计图交出来。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      <span style="color:#ff3232">Joe</span>难得的带你去旅游了3天，回来以后你听说实验室发生了爆炸，<span style="color:#ff3232">Helen</span>竟然死于爆炸之中，而辛苦复原的地宫的设计图也不翼而飞。你在庆幸自己和丈夫逃过一劫的同时，又直觉的感受到一点点的不安。但是这场火灾无疑加速了你们离开这个地方，不容自己多想，你就和<span style="color:#ff3232">Joe</span>一起投出简历，寻找新的工作。处理善后工作和研究所的重建让<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>有了更多的机会见面，你的不安刺激着你越来越疑神疑鬼。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 本来都可以结束了，还搞这么多幺蛾子，到底是想怎样！你试图劝<span style="color:#ff3232">Joe</span>不要参加，<span style="color:#ff3232">Joe</span>的态度让你很失望。你决定一起去看看到底会发生什么。同时，你查到了<span style="color:#ff3232">Joe</span>和<span style="color:#ff3232">Annie</span>的通话记录，果然他们最近联系频繁。这一段时间，你除了服用镇定药剂以外，只能用日记来发泄自己的阴郁的心情： “是不是一定要等到这个考古团队彻底消失掉我的噩梦才会结束” 你是这样写道。<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      今天的跟<span style="color:#ff3232">Joe</span>跟你发了一封短信，说要提前飞去研究所，这让你很怀疑。怀着不安的心情，你给<span style="color:#ff3232">Annie</span>发了短息，不出所料，她果然也在研究所！这个坏女人，早晚要找机会好好教训她！<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你中午就早早的来到了别墅，因为面试的关系，你在办公室里一直忙到了7：50，然后去找到<span style="color:#ff3232">Joe</span>参加party。看到有人准备了蛋糕，你好心的跑去厨房拿了菜刀和餐盘。20:00，party准时开始。在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Harris",
+            job: "大英博物馆副馆长",
+            pangbaiUrl: "sound/Harris_ch.mp3",
+            age: "27",
+            sex: "男性",
+            relation: "",
+            detail: "27岁，大英博物馆的副馆长，神秘的被邀请人，于前几日来到研究所，先居住在研究所的客房中。",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `你是大英博古馆的副馆长，也是这一行中最年轻的博古馆管理者。你明白，这一切，不仅仅来自于你的勤奋，还有你母亲<span style="color:#ff3232">Helen</span>教授给你的莫大的情报和学术支持。时差和工作的繁忙让你们没有很多时间联系，但母子之间的感情仍然很好。你爱你的母亲，升过世间一切。<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      你知道<span style="color:#ff3232">Helen</span>最近马上要完成一个古代地宫的研究，之后就会进入到挖掘阶段，你很兴奋，因为母亲一定会跟你分享她的发掘成果，而你，马上也会因此作出更大的成绩，如果一切顺利，馆长的位置也不在话下。就在你完成了商业投资建议书，正准备等待教授的挖掘成功，自己可以青云直上的时候，教授突如其来的一通越洋电话，让你失望透顶。她告诉了你由于现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏，所以挖掘和研究可能要从此终止。你听后大失所望，跟她电话上吵了起来，最终不欢而散。<br/>
+      <span style="color:#ff3232">4月3日</span><br/>
+      教授的学生<span style="color:#ff3232">Annie</span>这一天给你发来一封邮件，告诉你实验室烧毁，地宫的设计图遗失，教授遇难的消息。你仿佛五雷轰顶。她给你寄来了教授的遗物手机，并告诉你在手机上发现了多封威胁短信。你们都觉得这场事故非常可以，可能和遗失的设计图有关，一番思量后，你决定回国帮助考古一起，解开事故之谜，给教授报仇。期间，你想要高价收购考古手中的研究资料，但是被考古以机密为由拒绝，虽然心有不甘，但是你决定按兵不动，等待机会。经过讨论，你决定和<span style="color:#ff3232">Annie</span>以遗失的地宫设计图是假的为由，邀请所有的嫌疑人在原本<span style="color:#ff3232">Helen</span>生日的这天到之前发生火灾的研究所，找机会迷晕众人以后，找出证据和害死教授的凶手，将其绳之以法。之后，你定了5月2日回国的机票，忐忑的等待这一天的来临。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你在5月3日的11:30来到了别墅，和Annie计划了晚上的行动，出于对你的保护，她没有让你过多的参与计划，只是告诉你在7:45来她办公室来拿解药。共进午饭后，你在14：00回到自己房间因为时差的关系睡了一觉。19:30被闹钟吵醒，19:45去到考古办公室喝下解药。8:00 准时和<span style="color:#ff3232">Annie</span>一起到会客室，并在Annie的引荐下第一次见到了化学家<span style="color:#ff3232">Joe</span>和他的妻子历史学家<span style="color:#ff3232">Jane</span>，天才科学家<span style="color:#ff3232">Leo</span>和项目投资人<span style="color:#ff3232">Wilson</span>. party准时开始，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家为教授<span style="color:#ff3232">Helen</span>喝一杯，一杯酒过后，你惊诧的和众人一起昏迷了过去。一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！`
+        },
+        {
+            roleName: "Leo",
+            pangbaiUrl: "sound/Leo_ch.mp3",
+            age: "28",
+            job: "科学家",
+            sex: "男性",
+            relation: "",
+            detail: "28岁，著名的天才型科学家，于去年加入考古队，为人极为自恋，仅用一年时间便帮助考古团队还原了地宫设计图，从而使考古开发转为考古发掘。",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `你从小凭借的出色的记忆力和惊人的学习能力，一直是大家眼中的天才。年级轻轻便在化学，历史，生物等领域发表过高水准的论文，是一个冉冉升起的学术界的新星。毕业前，教授Helen邀请你加入她的考古队。你知道凭借着你综合的知识，肯定能在这一过程大放异彩，于是你答应了下来。两年过去了，团队解开了一个又一个难题，终于拿到的齐全的考古资料，更重要的，你利用技术还原了地宫的设计图，考古队可以正式开启队地宫的挖掘。你知道，项目成功后，你会再次获得你的高光时刻，到时候，无数的鲜花，掌声…<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      “什么？挖掘计划要取消！不要开这种玩笑，我最近的采访都播出去了！”你朝着Helen咆哮到。你也知道现今开发技术的局限，开采地宫不仅危险，而且会很大可能导致地宫受损甚至有可能被毁坏。Helen决定停止开发并禁止发表研究成果的决定是现在最好的结果。但是不甘心的情绪还是充斥着你的心，自从那天开始，你生活变得浑浑噩噩，第一次事业上的失败让你近乎崩溃，你不知道该如何面对铺天盖地的记者，大众和投资人的期待，这一切好像是一场噩梦。<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      实验气体的泄露可能和你有关，你已经记不得细节了。你午休后回到实验室就看到了可怕的爆炸，在浓烟之后，你似乎看到一个模糊的倒下的身影。你正在纠结的想冲进火海救人的时候，桌子上的地宫复原图出现在你的视野中。自私的想法战胜了救人的冲动，你将复原图放进了口袋，踉跄的跑出了火海。没想到，Helen最终在爆炸中遇难。面对这大众的质疑，投资人的催促，你告诉自己，你一定会找到剩下的资料，突破技术上的难题，完成这一次挖掘来证明自己！<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      火灾发生后，实验室就开始了重建。30日这天，30日这天，你收到一封情贴：“被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！”。你不敢相信自己的眼睛。你无法证明手中的设计图是不是最终的版本，Helen也从来不会和你透露这些机密的研究细节。不！绝不可以！你要想办法拿到其余的考古资料。确认手中的设计图，这样你可以选择自己继续研究，天才迟早可以为自己正名！<br/>
+      <span style="color:#ff3232">5月1日</span><br/>
+      这一天，你购买了轻度的迷药，一瓶名贵的好酒和5月4日的机票。计划在迷晕众人后，偷偷拿走考古资料，坐第二天的飞机离开这个地方。<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你提早5:00就来到了别墅，并和考古学家Annie谈了谈，言语中，好像你的目的并没有暴露。于是你决定执行自己的计划，6:00回到你的办公室后，用注射器将研磨好的迷药注入酒中，然后就看了会侦探小说消磨时间。8：00你准时带着酒参加了聚会，在投资人<span style="color:#ff3232">Wilson</span>的建议下，大家决定敬在九泉之下的教授一杯，你当然不会傻得喝下迷药，但很快你也被迷倒了，这是怎么回事？你惊诧的被迷晕了过去，一个小时后，大家先后醒了过来后，就看到的了<span style="color:#ff3232">Annie</span>的尸体！
+      `
+        },
+        {
+            roleName: "Wilson",
+            pangbaiUrl: "sound/Wilson_ch.mp3",
+            job: "项目投资人",
+            age: "40",
+            sex: "男性",
+            relation: "",
+            detail: "40岁，项目投资人，凭借着对考古的热爱，私人资助考古队。虽然现今投入巨大，但发掘后可以获得巨大巨额。",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `你是一个名声在外的风险投资人，风光的表面下，只有你自己和你的会计知道你现在的资金有多紧张，最近你把目光放在了很有潜力的考古上，虽然成本不菲，但是成功后的名利会让你指数级的暴富，为了方便你监控考古团队，你邀请他们把实验室建立在你的别墅改造的研究所里，随着项目的进行，你才明白这就是一个无底洞，渐渐地，你的现金越来越少，可一分钱的回报都没看到。终于在几年后，教授Helen告诉你，考古的研究已经完成，虽然学术上的收入并不多，但是你知道，等到挖掘出古代遗迹，你的好运就要来了！<br/>
+      <span style="color:#ff3232">3月</span><br/>
+      “什么！”当Helen告诉你她计划放弃这考古项目的挖掘时，你简直不能相信自己的耳朵，仿佛看到自己这几年来的投资血本无归。你给教授发了无数封邮件和短信，好坏话说尽，可她好像铁了心一样。你不能眼睁睁的看着自己的钱就这么打了水漂。你雇黑社会恐吓Helen，你联系她的学生们窃取研究资料，可你的计划无一例外的失败了，“让教授消失，换一个听话的负责人，不管付出任何代价”你和你的黑帮朋友这样说<br/>
+      <span style="color:#ff3232">4月1日</span><br/>
+      不知道是不是否极泰来，就在你为了发掘项目被取消一筹莫展时，一场本应雪上加霜的爆炸却点燃了你的希望。Helen在事故中葬身火海，这个唯一能阻止挖掘项目的人终于不用再挡你的财路。你大喜过望，这一天过后，你赶忙邀请考古团队的其他成员继续挖掘项目，可出乎你的意外，除了天才Leo外，所有人用各种理由拒绝了你继续挖掘的要求。这是想怎么样？难道真的要把你往绝路上逼吗？火灾发生后，你就一边忙着重建实验室，一边游说考古队的成员，更重要的，寻找着考古的的研究成果，寻找着最后翻盘的机会。<br/>
+      <span style="color:#ff3232">4月30日</span><br/>
+      30日这天，你收到一封情贴： “被盗的设计图是赝品，5月3日来研究所，让我们一起见证还原后的地宫设计图！” 你坐不住了，是你最后的机会，你要找机会偷走所以的资料，挽回你的损失！<br/>
+      <span style="color:#ff3232">5月3日</span><br/>
+      你早早的来到了别墅，寻找机会，用自己手上的钥匙搜查了所有人的房间，然而并没有任何发现。你猜想研究资料一定是在和Helen教授关系最亲近的 Annie那里。可是苦于她一直在房间里，你没有任何机会。突然你通过监控看到Annie大约在6:55的时候出了别墅，你偷偷溜过去，不料却看到一个男人的身影溜进考古的办公室，很快的又跑出来。而不久后考古也很快的返回了办公室。你暗骂自己运气太差。好不容易等到8:00 party准时开始，你开始撺掇大家一起喝完酒以后，想趁把他们灌醉之际偷偷潜入房间偷走资料，但没想到你被迷昏了过去。大约一个小时后，你第一个醒来，在看到的了<span style="color:#ff3232">Annie</span>的尸体后，你吃一惊，但是利欲熏心的你还是拖着眩晕的身体，跑去Annie的办公室，偷走了Annie保险柜里的资料，放回了自己房间里的保险柜中。然后假装刚刚清醒，叫醒了众人。。。。。。<br/>
+      信件<br/>
+      <span style="color:#ff3232">短信</span><br/>
+      你联系她的学生们<span style="color:#ff3232">窃取研究资料</span><br/>
+      你赶忙邀请考古团队的其他成员继续挖掘项目
+      `
+        },
+        {
+            roleName: "Stanly",
+            job: "Detective",
+            sex: "Male",
+            age: "37",
+            detail: "37 years old, has worked as the detective for 15 years.",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: "你是一个侦探，接到报警前来查案"
+        }
+    ];
+    BookConfig1.quesConfig_ch = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "你做这份工作多久了？",
+                    content: "也就不到一年吧？我之前在罗姆尼老大手下看场子的，后来犯事儿，是Wilson老大给我了个机会，来这儿做保安。他希望我帮他看着这帮“聪明鬼”，不要浪费他的投资。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "案发时，案发现场的摄像头有拍到任何什么特别的事情吗？",
+                    content: "今天我已经下班了，一楼的监控一直是坏掉的，我上个礼拜就群发email和大家说明过了，但是很奇怪，似乎没人有对此感兴趣。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "在研究所整修期间，有人回来过吗？",
+                    content: "火灾后，这里就只有我和Annie每天都还有来上班，另外Wilson偶尔会过来看看。我记得Joe5月1号过来了，我以为他来找Annie呢，当时Annie不在，奇怪的是他没等Annie回来就走了。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "今天Annie有和各位嫌疑人有过互动吗？",
+                    content: "我刚刚仔细看了监控，Leo在5:00pm去找了Annie。后来Harris在7:45pm的时候去见了Annie。",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "今天有陌生人进出过现场吗？",
+                    content: "今天一天都没有陌生人来过，连个送信的都没有。哦！对了，我看见Annie6:50pm出了研究所，但很快就回来了，我当时都有在做记录，大约是7:10pm吧",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "你对这把凶器餐刀有印象吗？",
+                    content: "啊！我下班之前看到Jane在找餐刀，还问我要不要一起吃个蛋糕再走，虽然我想吃蛋糕，但是老婆在家做了我最爱吃的晚饭，我就拒绝了。",
+                    answer: "5"
+                },
+                {
+                    id: 7,
+                    title: "今天的监视设备有什么异常吗？",
+                    content: "二楼走道的监视器被不知道被什么人在6:30pm的时候挡住了，我怀疑一定是有人故意这么做的，因为他一定是熟悉监控的位置的内部人员。",
+                    answer: "5"
+                },
+                {
+                    id: 8,
+                    title: "这块带血的手帕你有印象吗？",
+                    content: "哦，这不就是那新来的人西装里的手帕吗？我今天见到他就觉得很奇怪，穿着套装，装什么大尾巴狼！",
+                    answer: "5"
+                },
+                {
+                    id: 9,
+                    title: "你觉得教授的死和今天的凶案有关系吗？",
+                    content: "啊？这我可不敢乱说话，老大会打死我的！反正他们几个天天吵来吵去的，要说这聪明人也会杀人，以前我是不信的，现在嘛！啧啧。",
+                    answer: "5"
+                },
+                {
+                    id: 10,
+                    title: "教授的意外细节你知道多少？",
+                    content: "当天的研究所只有Annie，Leo，Helen和我在，当时我在午休，突然二楼的实验室发生爆炸，很快就烧起来了，我赶忙叫了消防队，但是很遗憾，当时Helen教授自己在做实验，她没能跑出来。",
+                    answer: "5"
+                },
+                {
+                    id: 11,
+                    title: "你觉得研究所里大家的关系怎么样？",
+                    content: "怎么说呢？天天听他们吵架，我要是说他们关系好你也不信是吧？偷偷告诉你，这里男女关系也挺混乱的，听说这Joe以前还和死者好过，现在还能带着老婆和她在一个公司工作，心也真的是大。不过我也都是道听途说。",
+                    answer: "5"
+                },
+                {
+                    id: 12,
+                    title: "今天你有一直都关注监控里发生的事情吗？",
+                    content: "啊，我当然不会一直坐在监控室里了。今天Wilson老大过来然我去做了几次小区内的巡查，虽然他平时很少这么做。后来我们就在监控室里喝酒聊天，快7：00pm他才离开。",
+                    answer: "5"
+                }
+            ]
+        }
+    ];
+    BookConfig1.quesConfig_en = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "How long have you been in this job?",
+                    content: `Less than a year, right? I used to watch the show under boss Romney, but later I did something wrong. Boss Wilson gave me a chance to be a security guard here. He wants me to help him watch these "smart guys" and not waste his investment.`,
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: `Did the camera at the scene of the crime catch anything special at the time of the crime?`,
+                    content: "Today, I'm off work. The monitor on the first floor is broken all the time. I sent a group of emails last week to explain it to you, but it's strange that no one seems to be interested in it.",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "Did anyone come back during the renovation of the Institute?",
+                    content: "After the fire, Annie and I were the only ones who came to work every day, and Wilson occasionally came to have a look. I remember Joe came here on May 1st. I thought he came to find Annie. Annie was not there at that time. It was strange that he left without waiting for Annie to come back.",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "Did Annie interact with the suspects today?",
+                    content: "I just looked at the surveillance. Leo went to see Annie at 5:00pm. Then Harris went to see Annie at 7:45pm.",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "Did any strangers come in and out of the scene today?",
+                    content: "No stranger has been here all day, not even a messenger. oh By the way, I saw Annie leave the Research Institute at 6:50pm, but she came back soon. I was making records at that time, about 7:10pm",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "Do you have any impression of this knife?",
+                    content: "Ah! Before I got off work, I saw Jane looking for a knife and asked me if I wanted to have a cake before I left. Although I wanted to have a cake, my wife made my favorite dinner at home, so I refused.",
+                    answer: "5"
+                },
+                {
+                    id: 7,
+                    title: "Is there anything wrong with today's surveillance equipment?",
+                    content: "The monitor in the aisle on the second floor was blocked at 6:30pm by someone I don't know. I suspect someone must have done it on purpose, because he must be an insider familiar with the location of the monitor.",
+                    answer: "5"
+                },
+                {
+                    id: 8,
+                    title: "Do you remember this bloody handkerchief?",
+                    content: "Oh, isn't this the handkerchief in the new comer's suit? I think it's very strange when I see him today. He's wearing a suit and a big tail wolf!",
+                    answer: "5"
+                },
+                {
+                    id: 9,
+                    title: "Do you think the professor's death has anything to do with today's murder?",
+                    content: "Ah? I dare not talk about it. The boss will kill me! Anyway, they quarrel every day. If you want to say that this smart man can kill people, I didn't believe it before, but now! Tut tut.",
+                    answer: "5"
+                },
+                {
+                    id: 10,
+                    title: "What do you know about the details of the professor's accident?",
+                    content: "On that day, only Annie, Leo, Helen and I were in the Research Institute. At that time, I was on a lunch break. Suddenly, an explosion occurred in the laboratory on the second floor, which soon burned up. I called the fire brigade. Unfortunately, Professor Helen was doing the experiment herself, and she couldn't run out.",
+                    answer: "5"
+                },
+                {
+                    id: 11,
+                    title: "What do you think of the relationship in the Institute?",
+                    content: "How to put it? I hear them quarrel every day. If I say they have a good relationship, you don't believe it, do you? I'll tell you secretly that the relationship between men and women here is also very chaotic. It's said that Joe used to have a good time with the dead, but now he can still work with his wife in the same company with her, and his heart is really big. But it's all hearsay.",
+                    answer: "5"
+                },
+                {
+                    id: 12,
+                    title: "Have you been paying attention to what's going on in the surveillance today?",
+                    content: "Ah, of course I won't be sitting in the monitoring room all the time. Today, boss Wilson came over, but I went to inspect the community several times, although he seldom did so. Later, we drank and chatted in the monitoring room, and he didn't leave until 7:00pm.",
+                    answer: "5"
+                }
+            ]
+        }
+    ];
+    BookConfig1.content = {
+        ch: "剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容剧本内容",
+        en: "bookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbookbook"
+    };
+
+    class Room2 {
+        static CT11(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static CT10(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static clickHR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR001,
+                    key: "room2_HR001",
+                    img: `book2/${DataLang.lang}/Hanson/HR001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR002,
+                    key: "room2_HR002",
+                    img: `book2/${DataLang.lang}/Hanson/HR002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR003,
+                    key: "room2_HR003",
+                    img: `book2/${DataLang.lang}/Hanson/HR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR004,
+                    key: "room2_HR004",
+                    img: `book2/${DataLang.lang}/Hanson/HR004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR005,
+                    key: "room2_HR005",
+                    img: `book2/${DataLang.lang}/Hanson/HR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR006,
+                    key: "room2_HR006",
+                    img: `book2/${DataLang.lang}/Hanson/HR006.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR007,
+                    key: "room2_HR007",
+                    img: `book2/${DataLang.lang}/Hanson/HR007.jpeg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR008,
+                    key: "room2_HR008",
+                    img: `book2/${DataLang.lang}/Hanson/HR008.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR016() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR016,
+                    key: "room2_HR016",
+                    img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR015() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR015,
+                    key: "room2_HR015",
+                    img: `book2/${DataLang.lang}/Hanson/HR015.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR014() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR014,
+                    key: "room2_HR014",
+                    img: `book2/${DataLang.lang}/Hanson/HR014.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickHR013() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR013,
+                    key: "room2_HR013",
+                    img: `book2/${DataLang.lang}/Hanson/HR013.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static openDoor() {
+            let tar = Utils.findChildByName(Oprate3dTool.scene3d, "model.Box1748");
+            Utils.toggle3dOpen(tar, 1, -1.5);
+        }
+        static clickHR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR009,
+                    key: "room2_HR009",
+                    img: `book2/${DataLang.lang}/Hanson/HR009.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR001,
+                    key: "room2_CR001",
+                    img: `book2/${DataLang.lang}/Caroline/CR001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR002,
+                    key: "room2_CR002",
+                    img: `book2/${DataLang.lang}/Caroline/CR002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR003,
+                    key: "room2_CR003",
+                    img: `book2/${DataLang.lang}/Caroline/CR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR004,
+                    key: "room2_CR004",
+                    img: `book2/${DataLang.lang}/Caroline/CR004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR005,
+                    key: "room2_CR005",
+                    img: `book2/${DataLang.lang}/Caroline/CR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR006,
+                    key: "room2_CR006",
+                    img: `book2/${DataLang.lang}/Caroline/CR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR007,
+                    key: "room2_CR007",
+                    img: `book2/${DataLang.lang}/Caroline/CR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_CR008,
+                    key: "room2_CR008",
+                    img: `book2/${DataLang.lang}/Caroline/CR008.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static CT16(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static CT9(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static CT8(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.3);
+        }
+        static clickJR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR001,
+                    key: "room2_JR001",
+                    img: `book2/${DataLang.lang}/Johnathan/JR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR002,
+                    key: "room2_JR002",
+                    img: `book2/${DataLang.lang}/Johnathan/JR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR003,
+                    key: "room2_JR003",
+                    img: `book2/${DataLang.lang}/Johnathan/JR003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR004,
+                    key: "room2_JR004",
+                    img: `book2/${DataLang.lang}/Johnathan/JR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR005,
+                    key: "room2_JR005",
+                    img: `book2/${DataLang.lang}/Johnathan/JR005.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_JR006,
+                    key: "room2_JR006",
+                    img: `book2/${DataLang.lang}/Johnathan/JR006.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickDX(tar) {
+            Utils.toggle3dOpen(tar, 1, 0.15);
+        }
+        static CT7(tar) {
+            Utils.toggle3dOpen(tar, 3, 0.3);
+        }
+        static CT6(tar) {
+            Utils.toggle3dOpen(tar, 3, 0.3);
+        }
+        static clickOR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR001,
+                    key: "room2_OR001",
+                    img: `book2/${DataLang.lang}/Oliver/OR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR002,
+                    key: "room2_OR002",
+                    img: `book2/${DataLang.lang}/Oliver/OR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR003,
+                    key: "room2_OR003",
+                    img: `book2/${DataLang.lang}/Oliver/OR003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR004,
+                    key: "room2_OR004",
+                    img: `book2/${DataLang.lang}/Oliver/OR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR005,
+                    key: "room2_OR005",
+                    img: `book2/${DataLang.lang}/Oliver/OR005.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR006,
+                    key: "room2_OR006",
+                    img: `book2/${DataLang.lang}/Oliver/OR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR007,
+                    key: "room2_OR007",
+                    img: `book2/${DataLang.lang}/Oliver/OR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR008,
+                    key: "room2_OR008",
+                    img: `book2/${DataLang.lang}/Oliver/OR008.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR009,
+                    key: "room2_OR009",
+                    img: `book2/${DataLang.lang}/Oliver/OR009.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickOR010() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_OR010,
+                    key: "room2_OR010",
+                    img: `book2/${DataLang.lang}/Oliver/OR010.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickKuang(target) {
+            Utils.toggle3dOpen(target, 5, 100);
+        }
+        static toggleDrawer(target) {
+            Utils.toggle3dOpen(target, 3, 0.3);
+        }
+        static clickMR001() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR001,
+                    key: "room2_MR001",
+                    img: `book2/${DataLang.lang}/Margaret/MR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR002() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR002,
+                    key: "room2_MR002",
+                    img: `book2/${DataLang.lang}/Margaret/MR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR003,
+                    key: "room2_MR003",
+                    img: `book2/${DataLang.lang}/Margaret/MR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR004() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR004,
+                    key: "room2_MR004",
+                    img: `book2/${DataLang.lang}/Margaret/MR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR005() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR005,
+                    key: "room2_MR005",
+                    img: `book2/${DataLang.lang}/Margaret/MR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR006,
+                    key: "room2_MR006",
+                    img: `book2/${DataLang.lang}/Margaret/MR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR007,
+                    key: "room2_MR007",
+                    img: `book2/${DataLang.lang}/Margaret/MR007.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR008,
+                    key: "room2_MR008",
+                    img: `book2/${DataLang.lang}/Margaret/MR008.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickMR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_MR009,
+                    key: "room2_MR009",
+                    img: `book2/${DataLang.lang}/Margaret/MR009.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickGui2(target) {
+            Utils.toggle3dOpen(target, 5, 90);
+        }
+        static clickGui1(target) {
+            Utils.toggle3dOpen(target, 5, -90);
+        }
+        static clickBan4(target) {
+            Utils.toggle3dOpen(target, 5, -90);
+        }
+        static clickBan3(target) {
+            Utils.toggle3dOpen(target, 5, 90);
+        }
+        static clickCT5(target) {
+            Utils.toggle3dOpen(target, 3, 0.3);
+        }
+        static clickCT4(target) {
+            Utils.toggle3dOpen(target, 1, -0.3);
+        }
+        static clickCT3(target) {
+            Utils.toggle3dOpen(target, 1, -0.3);
+        }
+        static clickBan1(target) {
+            Utils.toggle3dOpen(target, 4, 70);
+        }
+        static clickBan2(target) {
+            Utils.toggle3dOpen(target, 4, 70);
+        }
+        static clickQian1() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR004,
+                    key: "room2_AR004",
+                    img: `book2/${DataLang.lang}/Abraham/AR004.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR009() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR009,
+                    key: "room2_AR009",
+                    img: `book2/${DataLang.lang}/Abraham/AR009.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR007() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR007,
+                    key: "room2_AR007",
+                    img: `book2/${DataLang.lang}/Abraham/AR007.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickAR008() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR008,
+                    key: "room2_AR008",
+                    img: `book2/${DataLang.lang}/Abraham/AR008.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickQ3() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR006,
+                    key: "room2_AR006",
+                    img: `book2/${DataLang.lang}/Abraham/AR006.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickQ2() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR005,
+                    key: "room2_AR005",
+                    img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickXinWu() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR003,
+                    key: "room2_AR003",
+                    img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickXin() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR002,
+                    key: "room2_AR002",
+                    img: `book2/${DataLang.lang}/Abraham/AR002.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickGan() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR001,
+                    key: "room2_AR001",
+                    img: `book2/${DataLang.lang}/Abraham/AR001.jpg`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickCT1(tar) {
+            Utils.toggle3dOpen(tar, 3, -0.3);
+        }
+        static clickXLX() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA004,
+                    key: "room2_PA004",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA004.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickBao() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA003,
+                    key: "room2_PA003",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA003.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJiuPin2() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA002,
+                    key: "room2_PA002",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA002.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+        static clickJiuPin() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_PA001,
+                    key: "room2_PA001",
+                    title: "床头柜上",
+                    content: "教授写的信",
+                    img: `book2/${DataLang.lang}/hall/PA001.png`,
+                    sceneFrom: GameManager.currentScene
+                }
+            ]);
+        }
+    }
+
+    class BookConfig2 {
+    }
+    BookConfig2.roleList_en = [
+        {
+            roleName: "乔纳森",
+            job: "海军水手",
+            age: "35",
+            sex: "男性",
+            relation: "",
+            pangbaiUrl: "sound/Joe_ch.mp3",
+            detail: "海军水手，身材健壮，皮肤黝黑。刚刚退伍，回到小镇。",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `你是<span style="color:#ff3232"><span style="color:#ff3232">汉森</span></span>镇长的弟弟。曾经的你，和哥哥关系亲密，互相扶持着在市井中一起长大。在贫苦的环境中，你们只能通过不法的手段赚钱养活自己。天性纯良的你，慢慢的开始厌恶打打杀杀的生活。离开了小镇，入伍成为一名海军。从海军退伍后，你又回到了小镇福克斯，探望自己的哥哥。<br/>
+      15年前<br/>
+      作为哥哥的左右手，你做了许多为人所不齿的事情，你对善恶的界限开始麻木。直到有一天，你的哥哥为了自己的利益，诬陷并烧死了一个外乡的女孩儿。终于在良知的责备下，你和哥哥大吵了一架，哥哥的冷漠让你感到绝望。你决定远离现在罪恶的生活和邪恶的哥哥。<br/>
+      3个月前<br/>
+      刚刚从海军退伍的你已经回到小镇几天，一切已经大不一样了，你的哥哥也从一个小流氓洗白成了一镇之长。这一天你在路上，碰到了新任警长正在找一个吉普赛女孩的麻烦。在众目睽睽下，只有你伸出援手，帮助了这个叫<span style="color:#ff3232">卡洛琳</span>的可怜女孩。而你，通过这个善举，秘密的收获了一个和<span style="color:#ff3232">卡洛琳</span>的美妙约会。<br/>
+      1天前<br/>
+      回到小镇之后，你有意的保持着和哥哥之间的接触，避免和他的“生意”扯上关系。同时因为小镇人的保守，你和<span style="color:#ff3232">卡洛琳</span>决定将你们的恋情对所有人保密。随着竞选的临近，<span style="color:#ff3232">汉森</span>的处境越来越不利，你还是不可避免的被哥哥叫去商量对策。几杯威士忌下肚，<span style="color:#ff3232">汉森</span>告诉你戈登警长在找自己麻烦，自己想要想15年前一样，利用一个最近出现的吉普赛女孩儿和警长的矛盾，除掉他，嫁祸给这帮外族人。<br/>
+      你强忍着震惊，假装没事的附和着，草草的结束了对话。你找个借口，离开家，迅速的去找<span style="color:#ff3232">卡洛琳</span>。你向<span style="color:#ff3232">卡洛琳</span>解释了事情的来龙去脉，答应和她一起私奔，离开这个是非之地。为了确保你们的安全，你计划偷走<span style="color:#ff3232">汉森</span>的账本。账本里面记录的各种违法的证据，足以使他投鼠忌器。<span style="color:#ff3232">卡洛琳</span>帮你做了一瓶“女巫汤”（一种吉普赛酒），并在里面下了足以让一个成年人迅速昏迷的迷药。这时，<span style="color:#ff3232">卡洛琳</span>告诉你，镇长夫人明天下午邀请她过去算命，你们正好可以一起过去，到时候见机行事，偷走账本后一起私奔。<br/>
+      当天<br/>
+      一大清早，你悄悄地打包好自己的行李，准备和<span style="color:#ff3232">卡洛琳</span>一起离开这里。4:50，你把行李的藏到客厅一个不起眼的角落，准备完成计划后偷偷带走。为了计划的顺利，你遣散了在客厅打牌的保镖<span style="color:#ff3232">亚伯拉罕</span>和几个打手。然后便带着酒来到了哥哥的书房。<span style="color:#ff3232">汉森</span>很高兴的接待了你，并为倒了一杯他最爱的威士忌给你。你开门见山的劝说哥哥放弃计划，不要再伤害别人。然而，<span style="color:#ff3232">汉森</span>却将你的好意视为对他的背叛，而那个吉普赛女人就是魅惑了你的罪魁祸首。眼见不能说服他，你便倒了一杯 “女巫汤” 让他喝下。很快，<span style="color:#ff3232">汉森</span>便昏迷了过去。你找遍了房间，终于在密室里找到了他隐藏的账本。<br/>
+      你看了一眼时间，已经是5:05，离你和<span style="color:#ff3232">卡洛琳</span>约定的见面时间已经很近了。你匆忙的下楼准备离开，却碰到了嫂子<span style="color:#ff3232">玛格丽特</span>。敷衍的寒暄了几句，在她疑惑的目光中，你甚至都没有机会拿走事先藏好的行李箱。到达了约定的车站，<span style="color:#ff3232">卡洛琳</span>并没有和预计的一样在在此等候，直到5:45的时候，才姗姗来迟。看到支支吾吾，又不肯解释的她，你知道这事情不那么简单。<br/>
+      8点的时候，因为火车的迟到，你们还是被戈登警长找到，和其他嫌疑人一起被带到了镇长的自杀现场， “这到底是自杀还是他杀？你们几个是今天下午房子周围出现的嫌疑人，把你们知道的都给我老实交代出来，市长的死可是大事，你们要还原出今天下午这栋房子里到底发生了什么，给大众一个交代，不然，所有的人都吃不了兜着走！” 看到哥哥的死，你痛苦不已。你暗暗感到<span style="color:#ff3232">卡洛琳</span>可能与此有关。但是刚刚失去亲人的你不能再失去爱人。于是你决定保护她，消除警长对她的怀疑。`
+        },
+        {
+            roleName: "卡洛琳",
+            job: "吉普赛女郎",
+            pangbaiUrl: "sound/Jane_ch.mp3",
+            sex: "女性",
+            age: "27",
+            relation: "",
+            detail: "美丽开朗。靠售卖吉普赛草药食品和算命生活。",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `你叫<span style="color:#ff3232">卡洛琳</span>，是一个吉普赛后裔，从小便跟着家人颠沛流离。长大后，你厌倦了这一切，于是离开了家人，开始一个人流浪。你来到小镇福克斯已经3个多月了，靠着算命和流传的吉普赛手艺，过起了稳定的生活。</br>
+      15年前</br>
+      就像所有涉世未深的小女孩，你和家人们一起生活，从一个小镇流浪到另一个小镇。慢慢的，你们发现这现在的小镇对外乡人越来越不友好。听说最近镇上烧死了一个吉普赛女巫，恐惧的氛围笼罩了整座小镇，你的家人和大多数族人一样，选择搬离这个是非之地。</br>
+      3个月前</br>
+      因为偷窃未遂，你不得已逃离了居住了多年的小镇。机缘巧合下，你路过了福克斯。在路边短暂的停留之际，戈登警长出现在你的马车边，警告你早点离开，这个小镇并不欢迎吉普赛人。就在这个窘迫的时候，一个叫<span style="color:#ff3232">乔纳森</span>的男人出现，替你解了围。为了感谢他，你答应和他共进晚餐。你深深的被眼前这个帅气善良的男人所吸引。第二天，你搬进了一间废弃的守林人小屋，决定先留下来碰碰运气。</br>
+      1个月前</br>
+      慢慢的，你已经习惯了这座小镇的生活。你和情人<span style="color:#ff3232">乔纳森</span>如胶似漆，也靠着手艺赚了一些钱，足以养活自己。有一天，镇长夫人<span style="color:#ff3232">玛格丽特</span>来找到你，说她最近被害虫搞得头疼，要求你为她制作杀虫的毒药，在拿走了一个月剂量的毒药后匆匆离开了。</br>
+      1天前</br>
+      这一天，<span style="color:#ff3232">玛格丽特</span>又出现在你的小屋。希望你能为她再制作一些之前的毒药。你告诉她这可能需要一些时间，但是你明天可以给她送货上门。她同意了，并要求你假借算命为由上门，不要把毒药的事情告诉任何人。虽然这听起来很可疑，可谁又会跟钱过不去呢。</br>
+      <span style="color:#ff3232">玛格丽特</span>刚离开，<span style="color:#ff3232">乔纳森</span>就慌张的跑来找你。<span style="color:#ff3232">汉森</span>镇长，他的哥哥，计划杀死戈登警长并嫁祸给你。你说服他一起逃离这里，但是为了确保你们的安全，<span style="color:#ff3232">乔纳森</span>决定在临走前偷走<span style="color:#ff3232">汉森</span>的账本。那里记录着很多<span style="color:#ff3232">汉森</span>的不法交易，应该会让他的哥哥投鼠忌器。</br>
+      你记起明天要去镇长家送药，可以从旁协助。于是<span style="color:#ff3232">乔纳森</span>让你帮他做了一瓶“女巫汤”（一种吉普赛酒），并在酒里掺入了很快可以使人昏迷的药草。</br>
+      当天</br>
+      你在4:00的时候按计划来到<span style="color:#ff3232">汉森</span>镇长的庄园。回想起<span style="color:#ff3232">玛格丽特</span>的种种行为和今天的计划，借着解释塔罗牌，你告诉她的生活会有巨大的转变。你们相视一笑，体会着彼此眼神中的深意。放下了杀毒药，5:00的时候，镇长保镖<span style="color:#ff3232">亚伯拉罕</span>送你出了庄园。在走向约定的地点的路上，你突然发现<span style="color:#ff3232">乔纳森</span>送给自己的定情手镯落在了客厅，于是你冒险在5:20的时候再一次潜入了庄园。</br>
+      别墅的大门紧锁，无人应答。但是这难不倒你，凭借着多年在市井中练就的开锁技能，你轻松的打开了房门，悄悄溜进了楼上夫人的房间。在那里，你找到了自己的手镯。正准备离开，忽然楼下传来了脚步声。你慌不择路的躲进了<span style="color:#ff3232">汉森</span>的书房，看到镇长在迷药的作用下，倒在沙发上。脚步越来越近，你赶忙躲进一间打开的密室。在密室中，你听不清外面发生了什么。仿佛间，你听到一阵争吵，然后周围又迅速回归平静。你溜出来，发现<span style="color:#ff3232">汉森</span>倒在了血泊之中，地上丢弃这一尊沾血的塑像，旁边桌子上放着一把手枪。你刚想逃走，却被慢慢苏醒的镇长发现，“吉普赛女巫，我一定会抓到你，你们就只能用来烧火！” 愤怒和恐惧的支配下，你拿起了枪，抵住了他的太阳穴。这个恶魔终于意识到了危险，开始低三下四的求饶，但是已经太晚了。“到地狱里去忏悔吧！”说罢，你按下了扳机，子弹从他左边太阳穴的伤口打入，结果了这个魔鬼的生命。你留下了一封“我来复仇了-艾斯米拉达”的字条，匆忙离开了现场。见到<span style="color:#ff3232">乔纳森</span>后，你发现找回的手镯再一次不见了，可能是掉落在了密室之中。为避免节外生枝，你没有对<span style="color:#ff3232">乔纳森</span>坦白之后发生的事情。只希望和他快点离开这个可怕的地方，到下一站去继续你们的生活。</br>
+      8点的时候，因为火车的迟到，你们还是被戈登警长找到，和其他嫌疑人一起带到了镇长的死亡现场。 “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "玛格丽特",
+            job: "贵妇",
+            pangbaiUrl: "sound/Harris_ch.mp3",
+            age: "34",
+            sex: "女性",
+            relation: "",
+            detail: "高贵大方。每天过着锦衣玉食的阔太太生活。",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `你叫玛格丽特，是镇长<span style="color:#ff3232">汉森</span>的夫人。你很清楚丈夫的财富和权力来路不正，却贪恋于现在富足的生活，对他的犯罪行为选择了缄默。十年的婚姻里，你住的是小镇里最好的房子，穿的是最精致的衣服，喝着最贵的酒。但是这样的生活却始终无法满足你情感上的空虚，因为你的心，一直都属于那个在远方的初恋。</br>
+      10年前</br>
+      你在这个小镇上长大，父亲是个矿工，母亲在酒吧里调酒。你从小都没有体会过富人的生活，自视甚高的你一直在埋怨命运的不公。然而，不公的命运却赐予了你一份最美妙的爱情。你们如胶似漆，正准备谈婚论嫁的时候，你的初恋却因为强制兵役离开了你们居住的小镇，没过多久，你收到消息，服役中的他死于意外。就在你痛苦万分的时候，<span style="color:#ff3232">汉森</span>走进了你的生活，这个有权有势的男人对你展开追求，没多久，绝望中的你接受了他的求婚。</br>
+      一个月前</br>
+      这天，你偷听到丈夫和手下的爪牙们商量如何偷偷除掉<span style="color:#ff3232">戈登</span>警长，来阻止他调查自己的那些见不得人的买卖。你开始害怕，他会因此锒铛入狱，更会连累到你失去现在的生活。同时，一封来自初恋的信打破了你平静的生活，原来这场婚姻是一场<span style="color:#ff3232">汉森</span>安排下的阴谋，初恋的兵役，意外死亡都是假的。愤怒的你决定离开这个小镇，去和初恋一起开始新的生活。你咨询了理财顾问，得知想要继承<span style="color:#ff3232">汉森</span>的财产，最好的办法是通过遗嘱。你知道你剩余的时间不多了，因为如果<span style="color:#ff3232">汉森</span>被定罪，你很可能会一无所有，甚至会被他连累到锒铛入狱。一番筹谋，你决定用一种慢性毒药来制造<span style="color:#ff3232">汉森</span>的意外死亡。你找到新搬来小镇的吉普赛女郎，<span style="color:#ff3232">卡洛琳</span>，买到了一些虽然毒性不强，但是也可以致人慢性死亡的杀虫药。那时起，你开始把毒药偷偷的投放的<span style="color:#ff3232">汉森</span>的威士忌里。</br>
+      1天前</br>
+      一个月后，毒药已经用完了，<span style="color:#ff3232">汉森</span>的身体虽然出现了一些反应，但是还没有将他置于死地。于是你找到<span style="color:#ff3232">卡洛琳</span>，想购买之前的毒药。她答应会在第二天假借算命之名送货上门，并为你保密杀虫药的事情。</br>
+      当天</br>
+      这天中午，你去银行取了几百块的现金，这种大笔的取现让柜员很不耐烦。<span style="color:#ff3232">卡洛琳</span>在4:00的时候按计划来给你送药，算命过程中，她神秘的告诉你，你的生活会有巨大的转变。你们相视一笑，体会着彼此眼神中的深意。5:00的时候，你让保镖<span style="color:#ff3232">亚伯拉罕</span>送走了<span style="color:#ff3232">卡洛琳</span>，在上楼的时候遇到了神色慌张的<span style="color:#ff3232">乔纳森</span>，你的小叔子。你猜想这对兄弟应该是又吵架了。走到丈夫位于二楼尽头的书房，你看到房门大开，<span style="color:#ff3232">汉森</span>人歪坐在沙发上，桌上还摆着快喝完的酒。大白天的又喝多了！你一边厌恶的想着，一遍回到房休息。你约了太太们5:30打牌，可不想去收拾一个醉鬼，破坏了自己的雅兴。5:25分的时候，你远远的看见书房的门关上了，猜想<span style="color:#ff3232">汉森</span>应该是酒醒了正在工作，便自顾自的下楼离开了家。</br>
+      6:30，你回到家，发现家里空无一人，找到<span style="color:#ff3232">汉森</span>的书房，门是反锁的。你拿出备用钥匙打开门，发现<span style="color:#ff3232">汉森</span>倒在沙发上，一把手枪被丢在手边，他的太阳穴中弹，已经没有了呼吸。你急忙跑到小镇上，叫来了<span style="color:#ff3232">戈登</span>警长。8点的时候，你和其他嫌疑人一起被带到了镇长的自杀现场， “这到底是自杀还是他杀？你们几个是今天下午房子周围出现的嫌疑人，把你们知道的都给我老实交代出来，镇长的死可是大事，你们要还原出今天下午这栋房子里到底发生了什么，给大众一个交代，不然，所有的人都吃不了兜着走！”`
+        },
+        {
+            roleName: "奥利佛",
+            pangbaiUrl: "sound/Leo_ch.mp3",
+            age: "37",
+            job: "富商",
+            sex: "男性",
+            relation: "",
+            detail: "身材瘦削，眼神坚毅。小镇政坛冉冉升起的新星。",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `你的名字叫<span style="color:#ff3232">奥斯卡</span>。在几年的牢狱生活后，你回到了这座熟悉的小镇。这一切，始于你对现任镇长<span style="color:#ff3232">汉森</span>的仇恨。你要摧毁他那光鲜外表下，用罪恶支撑起的邪恶帝国。更要为当年，被他害死的爱人报仇。现在的你，早已将名字改为<span style="color:#ff3232">奥利佛</span>。经过了几年的努力，现在的你作为一名富商，正欲跻身政坛，与你的仇人<span style="color:#ff3232">汉森</span>一起，竞争下一届的镇长。</br>
+      15年前</br>
+      做为一个年轻的银行家，你凭借着对金融的天赋，很快便在同行中崭露头角。你不仅得到了可观的财富，同时还收获了一份宝贵的爱情。你于一位叫<span style="color:#ff3232">艾丝美拉达</span>的吉普赛女孩坠入爱河，虽然他们神秘的族人为小镇的人所忌惮，但这对你们的爱情没有丝毫影响。直到有一天，你发现镇上的人指责艾斯米拉达用巫术蛊惑了小镇的警长，并控制他自杀。排外的警长虽然和她有过节，但你确定，善良的<span style="color:#ff3232">艾丝美拉达</span>绝对不会做出这样的事情。在一个叫<span style="color:#ff3232">汉森</span>的流氓的怂恿下，愤怒的人群把艾斯米拉达当成女巫抓了起来，最终被烧死在十字架上。</br>
+      你想尽办法，没能改变爱人悲惨的命运，痛苦的终日买醉，逃离现实。却在无意间从一个醉酒的客户嘴里听说<span style="color:#ff3232">汉森</span>才是警长之死的真凶，而艾斯米拉达只是替罪羊。愤怒和酒精的作用下，你试图杀掉<span style="color:#ff3232">汉森</span>为她报仇，可终因寡不敌众，被他的爪牙制伏并扔进了监狱。</br>
+      10年前</br>
+      在监狱服刑的日子里，你时常握着她死前几天送你的半块心形项链，一遍一遍的计划着如何在出狱后为自己的爱人报仇，并找到她死后失散的私生子。在你的刑期快结束时，你得知<span style="color:#ff3232">汉森</span>凭借多年的经营，已经成为福克斯镇的镇长。你发誓要夺走<span style="color:#ff3232">汉森</span>所拥有的名利以后，让他在痛苦中死去，以祭奠艾斯米拉达的在天之灵。离开监狱后，你改名为<span style="color:#ff3232">奥利佛</span>，来隐藏自己的身份。或许是<span style="color:#ff3232">艾丝美拉达</span>在天上的庇佑，短短的几年时间里，你发了财，变成了远近闻名的富翁。你知道，你终于可以展开对<span style="color:#ff3232">汉森</span>的复仇了。</br>
+      5个月前</br>
+      你参加镇长的竞选已经有一段时间了。你慢慢拥有了自己的支持者，但是这并不足以扳倒<span style="color:#ff3232">汉森</span>镇长。这时，你找到了<span style="color:#ff3232">亚伯拉罕</span>，<span style="color:#ff3232">汉森</span>的保镖。从他那里，你买到了一些关于<span style="color:#ff3232">汉森</span>的黑料。你雇人添油加醋的散播这些黑料。正如你预期的，这引来了新任的警长<span style="color:#ff3232">戈登</span>对<span style="color:#ff3232">汉森</span>的调查，他的民意开始下滑。</br>
+      1天前
+      今天，你收到一封来自<span style="color:#ff3232">汉森</span>的邀请函，让你到他的别墅会面。你很担心，天知道这个暴徒会拿你怎么样。万幸的是，很快你便收到了来自<span style="color:#ff3232">亚伯拉罕</span>的消息，让你在5:40在<span style="color:#ff3232">汉森</span>家旁边的老树旁与他见面，届时他会为你确认与<span style="color:#ff3232">汉森</span>的会面是否安全。</br>
+      当天</br>
+      这一天，你怀着忐忑的心情，提前来到了和<span style="color:#ff3232">亚伯拉罕</span>约定的地点。5分钟后，一向守时的他才姗姗来迟。你留意到<span style="color:#ff3232">亚伯拉罕</span>的脖子上好像有血迹，便不动声色的提醒了他。得知今天的会面不会要你性命后，你放心的径直去向<span style="color:#ff3232">汉森</span>的别墅。</br>
+      来到别墅，半天都没有人应答你的敲门。推开虚掩的大门，你发现家里空无一人。不安的你探索着找到了<span style="color:#ff3232">汉森</span>的书房。透过虚掩的房门，里面的一切让你大吃一惊。<span style="color:#ff3232">汉森</span>倒在自己的血泊之中，不远处扔着一把手枪。子弹正中<span style="color:#ff3232">汉森</span>左边的太阳穴。尸体旁边的桌子上放着一封信，上面写道，“我来复仇了-<span style="color:#ff3232">艾斯美拉达</span>” 。慌乱中，你的脚踢到一条项链，拿起后发现上面的心形坠饰竟然和<span style="color:#ff3232">艾丝美拉达</span>留下的项链是一对。你心里一震，再想到<span style="color:#ff3232">亚伯拉罕</span>刚刚的举动，你便明白了发生的一切。原来他就是艾斯米拉达失散了的私生子。刚刚<span style="color:#ff3232">亚伯拉罕</span>一定是找到了机会，杀掉了<span style="color:#ff3232">汉森</span>为母亲报仇。然而这样做，已然让他自己陷入了万劫不复的深渊。你决定要保护这个可怜的孩子。留意到桌子上的吉普赛酒，地上的手枪，太阳穴中弹的尸体，你突然想起当年警长被杀和艾斯米拉达被诬陷为女巫的案子。果然天道好轮回，你脑海里浮现出了一个计划。你把尸体抱到沙发上，用手绢把手枪放到<span style="color:#ff3232">汉森</span>手上，做出自杀的假象。收起了地上的项链和桌子上的字条，关上窗户，最后在桌子上剪了一段风筝用的丝线，把书房门从外面锁了起来，造成密室自杀的假象。伪装完现场，你看到四下无人，在大门口留下了一张字条：“前来赴约，无人在家。改日再来拜访”。关上了大门，扔掉了案发现场捡到的项链和字条。之后你回到了小镇上，找了间酒吧，强装镇定的坐了下来。</br>
+      8:00的时候，<span style="color:#ff3232">戈登</span>警长找到你，把你和其他嫌疑人一起带到了镇长的死亡现场。 “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "亚伯拉罕",
+            pangbaiUrl: "sound/Wilson_ch.mp3",
+            job: "保镖",
+            age: "18",
+            sex: "男性",
+            relation: "",
+            detail: "身体强壮，精力充沛。操着一口外乡口音的年轻人。",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `你叫亚伯拉罕。不久前，你回到了这座叫福克斯的小镇，寻找关于你生母死亡的真相。为了生活，你成了<span style="color:#ff3232">汉森</span>镇长的保镖。这份工作给你提供了稳定的收入。慢慢的，镇长一些可疑的行为引起了你的注意。 后来，你发现<span style="color:#ff3232">汉森</span>是用违法手段，靠暴力和贿赂，维持自己在小镇的身份与地位。但是作为一个外乡人，迫于生计，你不得不向现实低头，成为<span style="color:#ff3232">汉森</span>的爪牙之一。</br>
+      15年前</br>
+      母亲在你三岁的时候就去世了，你辗转被另一座小镇上的一家好心人收养。直到你成年那天，你的养父母在无意间透露了你的亲生母亲是被福克斯小镇上的居民当成女巫烧死的。悲伤和震惊之余，你决定搬回福克斯，寻求事情的真相。你临走之前，你的养父母把你母亲的遗物，半颗心形的吊坠交还到你的手里。</br>
+      5个月前</br>
+      你回到这里已经有几个月了，闲暇时候在河边钓鱼，打发时间和烦闷的心情。有一天，一个叫<span style="color:#ff3232">奥利佛</span>的男人在河边找到你。作为新一届镇长竞选的有力竞争者，他愿意从你手中购买有关<span style="color:#ff3232">汉森</span>镇长违法交易的黑料。难以抵挡巨额报酬的诱惑，你决定背叛<span style="color:#ff3232">汉森</span>，成为了<span style="color:#ff3232">奥利佛</span>的卧底。</br>
+      1个月前</br>
+      你在小镇的时间越来越久，虽然小镇的居民都对你母亲的事情讳莫如深，但是你还是打听到她的名字叫<span style="color:#ff3232">艾斯米拉达</span>，她的死和自杀身亡的前任警长有关。</br>
+      1天前</br>
+      这天，你照常和一众打手在镇长家的客厅里打牌。期间，你打听到，今天没有安排任何行动，你可以确定<span style="color:#ff3232">奥利佛</span>至少在今天的会面中是安全的。4：00的时候，镇长夫人<span style="color:#ff3232">玛格丽特</span>接待了一位叫<span style="color:#ff3232">卡洛琳</span>的吉普赛女孩儿，听说是来算命的神棍。镇长弟弟<span style="color:#ff3232">乔纳森</span>在4:50的时候来到别墅，说今天没什么事情，遣散了众打手。5:00的时候<span style="color:#ff3232">玛格丽特</span>让你送<span style="color:#ff3232">卡洛琳</span>出门，说自己身体不舒服，想回房间休息。5:05的时候你回到自己的房间，拿出了当天买好的鱼线摆弄了起来。</br>
+      5:25的时候，你上楼提醒<span style="color:#ff3232">汉森</span>他傍晚的行程，却发现他在办公室的沙发上睡着了。被你摇醒后，<span style="color:#ff3232">汉森</span>大发雷霆，大骂自己的弟弟为了吉普赛情人，竟然敢背叛自己。他叫嚣着让你马上把他们抓回来， “我要让<span style="color:#ff3232">乔纳森</span>知道背叛我的下场，他会像15年前的那个傻瓜银行家一样，看着心爱的女人在自己面前活活被烧死。” 你压下心中的震惊，试探的问<span style="color:#ff3232">汉森</span>，下一步要怎么做。这时的<span style="color:#ff3232">汉森</span>已经失去了理智，“还能怎么做？去杀了警长，布置成自杀，像15年前一样栽赃给这些肮脏的吉普赛人，她们唯一的作用就是当柴火烧。” 这时的你意识到，<span style="color:#ff3232">汉森</span>就是当年陷害你母亲，杀死前任警长的元凶。你被怒火所吞噬，你质问他为什么要害死你无辜的母亲。<span style="color:#ff3232">汉森</span>的眼神从惊诧变成了恐惧，随即看向了桌上放着的手枪。你不等他有任何动作，抄起手边的塑像砸中他左边的太阳穴。这个恶魔在恐惧的眼神里，结束了他罪恶的一生。慌乱中，你用袖子擦掉雕像上的血迹，为了避免被人发现，从窗户逃离了现场。</br>
+      你回到自己的房间，换下沾了血的衣服，赶忙跑去和<span style="color:#ff3232">奥利佛</span>碰面。5:45的时候，你看到他早早的就在约定地点等你了。你告诉他，这次的会面是安全的，可以按计划赴约。临走前，<span style="color:#ff3232">奥利佛</span>似有似无的提醒你脖子上有血迹，看着他奇妙的眼神，你很担心他可能会揭穿你。强装镇定的你回到了自己的房间，擦掉脖子上的血迹，并在垃圾桶里烧掉了带血的外衣。别人问起来，你大可以说是烧掉了没用的信件，无凭无据，没人能拿你怎么样。</br>
+      8:00的时候，<span style="color:#ff3232">戈登</span>警长找到你，把你和其他嫌疑人一起带到了镇长的死亡现场。你懵了，难道有人在暗中帮助你伪造了自杀现场？ “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "戈登",
+            job: "警长",
+            sex: "男性",
+            age: "40",
+            detail: "小镇的警长，不拘言笑。刚调任不久，因一丝不苟的态度很快让小镇的人们信服，相传他为人公正却保守。",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: `你数月前来到小镇福克斯，开始清理上一任警长留下的烂摊子。最近总有人匿名给你送来一些镇长汉森的黑料，经调查后，你发现这些竟然并非空穴来风。你获得了足够多的证据后，向检察官申请了搜查令，要求汉森镇长配合调查。</br>
+      今天晚上8：00的时候，镇长夫人玛格丽特来警局找到你，说她的丈夫在家自杀身亡。你检查了现场，并让警员带回了下午出现在镇长别墅的嫌疑人： “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”</br>`
+        }
+    ];
+    BookConfig2.roleList_ch = [
+        {
+            roleName: "乔纳森",
+            job: "海军水手",
+            age: "35",
+            sex: "男性",
+            relation: "",
+            pangbaiUrl: "sound/Joe_ch.mp3",
+            detail: "海军水手，身材健壮，皮肤黝黑。刚刚退伍，回到小镇。",
+            id: 1,
+            img: "book1/img_role2.png",
+            content: `你是<span style="color:#ff3232"><span style="color:#ff3232">汉森</span></span>镇长的弟弟。曾经的你，和哥哥关系亲密，互相扶持着在市井中一起长大。在贫苦的环境中，你们只能通过不法的手段赚钱养活自己。天性纯良的你，慢慢的开始厌恶打打杀杀的生活。离开了小镇，入伍成为一名海军。从海军退伍后，你又回到了小镇福克斯，探望自己的哥哥。<br/>
+      15年前<br/>
+      作为哥哥的左右手，你做了许多为人所不齿的事情，你对善恶的界限开始麻木。直到有一天，你的哥哥为了自己的利益，诬陷并烧死了一个外乡的女孩儿。终于在良知的责备下，你和哥哥大吵了一架，哥哥的冷漠让你感到绝望。你决定远离现在罪恶的生活和邪恶的哥哥。<br/>
+      3个月前<br/>
+      刚刚从海军退伍的你已经回到小镇几天，一切已经大不一样了，你的哥哥也从一个小流氓洗白成了一镇之长。这一天你在路上，碰到了新任警长正在找一个吉普赛女孩的麻烦。在众目睽睽下，只有你伸出援手，帮助了这个叫<span style="color:#ff3232">卡洛琳</span>的可怜女孩。而你，通过这个善举，秘密的收获了一个和<span style="color:#ff3232">卡洛琳</span>的美妙约会。<br/>
+      1天前<br/>
+      回到小镇之后，你有意的保持着和哥哥之间的接触，避免和他的“生意”扯上关系。同时因为小镇人的保守，你和<span style="color:#ff3232">卡洛琳</span>决定将你们的恋情对所有人保密。随着竞选的临近，<span style="color:#ff3232">汉森</span>的处境越来越不利，你还是不可避免的被哥哥叫去商量对策。几杯威士忌下肚，<span style="color:#ff3232">汉森</span>告诉你戈登警长在找自己麻烦，自己想要想15年前一样，利用一个最近出现的吉普赛女孩儿和警长的矛盾，除掉他，嫁祸给这帮外族人。<br/>
+      你强忍着震惊，假装没事的附和着，草草的结束了对话。你找个借口，离开家，迅速的去找<span style="color:#ff3232">卡洛琳</span>。你向<span style="color:#ff3232">卡洛琳</span>解释了事情的来龙去脉，答应和她一起私奔，离开这个是非之地。为了确保你们的安全，你计划偷走<span style="color:#ff3232">汉森</span>的账本。账本里面记录的各种违法的证据，足以使他投鼠忌器。<span style="color:#ff3232">卡洛琳</span>帮你做了一瓶“女巫汤”（一种吉普赛酒），并在里面下了足以让一个成年人迅速昏迷的迷药。这时，<span style="color:#ff3232">卡洛琳</span>告诉你，镇长夫人明天下午邀请她过去算命，你们正好可以一起过去，到时候见机行事，偷走账本后一起私奔。<br/>
+      当天<br/>
+      一大清早，你悄悄地打包好自己的行李，准备和<span style="color:#ff3232">卡洛琳</span>一起离开这里。4:50，你把行李的藏到客厅一个不起眼的角落，准备完成计划后偷偷带走。为了计划的顺利，你遣散了在客厅打牌的保镖<span style="color:#ff3232">亚伯拉罕</span>和几个打手。然后便带着酒来到了哥哥的书房。<span style="color:#ff3232">汉森</span>很高兴的接待了你，并为倒了一杯他最爱的威士忌给你。你开门见山的劝说哥哥放弃计划，不要再伤害别人。然而，<span style="color:#ff3232">汉森</span>却将你的好意视为对他的背叛，而那个吉普赛女人就是魅惑了你的罪魁祸首。眼见不能说服他，你便倒了一杯 “女巫汤” 让他喝下。很快，<span style="color:#ff3232">汉森</span>便昏迷了过去。你找遍了房间，终于在密室里找到了他隐藏的账本。<br/>
+      你看了一眼时间，已经是5:05，离你和<span style="color:#ff3232">卡洛琳</span>约定的见面时间已经很近了。你匆忙的下楼准备离开，却碰到了嫂子<span style="color:#ff3232">玛格丽特</span>。敷衍的寒暄了几句，在她疑惑的目光中，你甚至都没有机会拿走事先藏好的行李箱。到达了约定的车站，<span style="color:#ff3232">卡洛琳</span>并没有和预计的一样在在此等候，直到5:45的时候，才姗姗来迟。看到支支吾吾，又不肯解释的她，你知道这事情不那么简单。<br/>
+      8点的时候，因为火车的迟到，你们还是被戈登警长找到，和其他嫌疑人一起被带到了镇长的自杀现场， “这到底是自杀还是他杀？你们几个是今天下午房子周围出现的嫌疑人，把你们知道的都给我老实交代出来，市长的死可是大事，你们要还原出今天下午这栋房子里到底发生了什么，给大众一个交代，不然，所有的人都吃不了兜着走！” 看到哥哥的死，你痛苦不已。你暗暗感到<span style="color:#ff3232">卡洛琳</span>可能与此有关。但是刚刚失去亲人的你不能再失去爱人。于是你决定保护她，消除警长对她的怀疑。`
+        },
+        {
+            roleName: "卡洛琳",
+            job: "吉普赛女郎",
+            pangbaiUrl: "sound/Jane_ch.mp3",
+            sex: "女性",
+            age: "27",
+            relation: "",
+            detail: "美丽开朗。靠售卖吉普赛草药食品和算命生活。",
+            id: 2,
+            img: "book1/img_role3.png",
+            content: `你叫<span style="color:#ff3232">卡洛琳</span>，是一个吉普赛后裔，从小便跟着家人颠沛流离。长大后，你厌倦了这一切，于是离开了家人，开始一个人流浪。你来到小镇福克斯已经3个多月了，靠着算命和流传的吉普赛手艺，过起了稳定的生活。</br>
+      15年前</br>
+      就像所有涉世未深的小女孩，你和家人们一起生活，从一个小镇流浪到另一个小镇。慢慢的，你们发现这现在的小镇对外乡人越来越不友好。听说最近镇上烧死了一个吉普赛女巫，恐惧的氛围笼罩了整座小镇，你的家人和大多数族人一样，选择搬离这个是非之地。</br>
+      3个月前</br>
+      因为偷窃未遂，你不得已逃离了居住了多年的小镇。机缘巧合下，你路过了福克斯。在路边短暂的停留之际，戈登警长出现在你的马车边，警告你早点离开，这个小镇并不欢迎吉普赛人。就在这个窘迫的时候，一个叫<span style="color:#ff3232">乔纳森</span>的男人出现，替你解了围。为了感谢他，你答应和他共进晚餐。你深深的被眼前这个帅气善良的男人所吸引。第二天，你搬进了一间废弃的守林人小屋，决定先留下来碰碰运气。</br>
+      1个月前</br>
+      慢慢的，你已经习惯了这座小镇的生活。你和情人<span style="color:#ff3232">乔纳森</span>如胶似漆，也靠着手艺赚了一些钱，足以养活自己。有一天，镇长夫人<span style="color:#ff3232">玛格丽特</span>来找到你，说她最近被害虫搞得头疼，要求你为她制作杀虫的毒药，在拿走了一个月剂量的毒药后匆匆离开了。</br>
+      1天前</br>
+      这一天，<span style="color:#ff3232">玛格丽特</span>又出现在你的小屋。希望你能为她再制作一些之前的毒药。你告诉她这可能需要一些时间，但是你明天可以给她送货上门。她同意了，并要求你假借算命为由上门，不要把毒药的事情告诉任何人。虽然这听起来很可疑，可谁又会跟钱过不去呢。</br>
+      <span style="color:#ff3232">玛格丽特</span>刚离开，<span style="color:#ff3232">乔纳森</span>就慌张的跑来找你。<span style="color:#ff3232">汉森</span>镇长，他的哥哥，计划杀死戈登警长并嫁祸给你。你说服他一起逃离这里，但是为了确保你们的安全，<span style="color:#ff3232">乔纳森</span>决定在临走前偷走<span style="color:#ff3232">汉森</span>的账本。那里记录着很多<span style="color:#ff3232">汉森</span>的不法交易，应该会让他的哥哥投鼠忌器。</br>
+      你记起明天要去镇长家送药，可以从旁协助。于是<span style="color:#ff3232">乔纳森</span>让你帮他做了一瓶“女巫汤”（一种吉普赛酒），并在酒里掺入了很快可以使人昏迷的药草。</br>
+      当天</br>
+      你在4:00的时候按计划来到<span style="color:#ff3232">汉森</span>镇长的庄园。回想起<span style="color:#ff3232">玛格丽特</span>的种种行为和今天的计划，借着解释塔罗牌，你告诉她的生活会有巨大的转变。你们相视一笑，体会着彼此眼神中的深意。放下了杀毒药，5:00的时候，镇长保镖<span style="color:#ff3232">亚伯拉罕</span>送你出了庄园。在走向约定的地点的路上，你突然发现<span style="color:#ff3232">乔纳森</span>送给自己的定情手镯落在了客厅，于是你冒险在5:20的时候再一次潜入了庄园。</br>
+      别墅的大门紧锁，无人应答。但是这难不倒你，凭借着多年在市井中练就的开锁技能，你轻松的打开了房门，悄悄溜进了楼上夫人的房间。在那里，你找到了自己的手镯。正准备离开，忽然楼下传来了脚步声。你慌不择路的躲进了<span style="color:#ff3232">汉森</span>的书房，看到镇长在迷药的作用下，倒在沙发上。脚步越来越近，你赶忙躲进一间打开的密室。在密室中，你听不清外面发生了什么。仿佛间，你听到一阵争吵，然后周围又迅速回归平静。你溜出来，发现<span style="color:#ff3232">汉森</span>倒在了血泊之中，地上丢弃这一尊沾血的塑像，旁边桌子上放着一把手枪。你刚想逃走，却被慢慢苏醒的镇长发现，“吉普赛女巫，我一定会抓到你，你们就只能用来烧火！” 愤怒和恐惧的支配下，你拿起了枪，抵住了他的太阳穴。这个恶魔终于意识到了危险，开始低三下四的求饶，但是已经太晚了。“到地狱里去忏悔吧！”说罢，你按下了扳机，子弹从他左边太阳穴的伤口打入，结果了这个魔鬼的生命。你留下了一封“我来复仇了-艾斯米拉达”的字条，匆忙离开了现场。见到<span style="color:#ff3232">乔纳森</span>后，你发现找回的手镯再一次不见了，可能是掉落在了密室之中。为避免节外生枝，你没有对<span style="color:#ff3232">乔纳森</span>坦白之后发生的事情。只希望和他快点离开这个可怕的地方，到下一站去继续你们的生活。</br>
+      8点的时候，因为火车的迟到，你们还是被戈登警长找到，和其他嫌疑人一起带到了镇长的死亡现场。 “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "玛格丽特",
+            job: "贵妇",
+            pangbaiUrl: "sound/Harris_ch.mp3",
+            age: "34",
+            sex: "女性",
+            relation: "",
+            detail: "高贵大方。每天过着锦衣玉食的阔太太生活。",
+            id: 3,
+            img: "book1/img_role1.png",
+            content: `你叫玛格丽特，是镇长<span style="color:#ff3232">汉森</span>的夫人。你很清楚丈夫的财富和权力来路不正，却贪恋于现在富足的生活，对他的犯罪行为选择了缄默。十年的婚姻里，你住的是小镇里最好的房子，穿的是最精致的衣服，喝着最贵的酒。但是这样的生活却始终无法满足你情感上的空虚，因为你的心，一直都属于那个在远方的初恋。</br>
+      10年前</br>
+      你在这个小镇上长大，父亲是个矿工，母亲在酒吧里调酒。你从小都没有体会过富人的生活，自视甚高的你一直在埋怨命运的不公。然而，不公的命运却赐予了你一份最美妙的爱情。你们如胶似漆，正准备谈婚论嫁的时候，你的初恋却因为强制兵役离开了你们居住的小镇，没过多久，你收到消息，服役中的他死于意外。就在你痛苦万分的时候，<span style="color:#ff3232">汉森</span>走进了你的生活，这个有权有势的男人对你展开追求，没多久，绝望中的你接受了他的求婚。</br>
+      一个月前</br>
+      这天，你偷听到丈夫和手下的爪牙们商量如何偷偷除掉<span style="color:#ff3232">戈登</span>警长，来阻止他调查自己的那些见不得人的买卖。你开始害怕，他会因此锒铛入狱，更会连累到你失去现在的生活。同时，一封来自初恋的信打破了你平静的生活，原来这场婚姻是一场<span style="color:#ff3232">汉森</span>安排下的阴谋，初恋的兵役，意外死亡都是假的。愤怒的你决定离开这个小镇，去和初恋一起开始新的生活。你咨询了理财顾问，得知想要继承<span style="color:#ff3232">汉森</span>的财产，最好的办法是通过遗嘱。你知道你剩余的时间不多了，因为如果<span style="color:#ff3232">汉森</span>被定罪，你很可能会一无所有，甚至会被他连累到锒铛入狱。一番筹谋，你决定用一种慢性毒药来制造<span style="color:#ff3232">汉森</span>的意外死亡。你找到新搬来小镇的吉普赛女郎，<span style="color:#ff3232">卡洛琳</span>，买到了一些虽然毒性不强，但是也可以致人慢性死亡的杀虫药。那时起，你开始把毒药偷偷的投放的<span style="color:#ff3232">汉森</span>的威士忌里。</br>
+      1天前</br>
+      一个月后，毒药已经用完了，<span style="color:#ff3232">汉森</span>的身体虽然出现了一些反应，但是还没有将他置于死地。于是你找到<span style="color:#ff3232">卡洛琳</span>，想购买之前的毒药。她答应会在第二天假借算命之名送货上门，并为你保密杀虫药的事情。</br>
+      当天</br>
+      这天中午，你去银行取了几百块的现金，这种大笔的取现让柜员很不耐烦。<span style="color:#ff3232">卡洛琳</span>在4:00的时候按计划来给你送药，算命过程中，她神秘的告诉你，你的生活会有巨大的转变。你们相视一笑，体会着彼此眼神中的深意。5:00的时候，你让保镖<span style="color:#ff3232">亚伯拉罕</span>送走了<span style="color:#ff3232">卡洛琳</span>，在上楼的时候遇到了神色慌张的<span style="color:#ff3232">乔纳森</span>，你的小叔子。你猜想这对兄弟应该是又吵架了。走到丈夫位于二楼尽头的书房，你看到房门大开，<span style="color:#ff3232">汉森</span>人歪坐在沙发上，桌上还摆着快喝完的酒。大白天的又喝多了！你一边厌恶的想着，一遍回到房休息。你约了太太们5:30打牌，可不想去收拾一个醉鬼，破坏了自己的雅兴。5:25分的时候，你远远的看见书房的门关上了，猜想<span style="color:#ff3232">汉森</span>应该是酒醒了正在工作，便自顾自的下楼离开了家。</br>
+      6:30，你回到家，发现家里空无一人，找到<span style="color:#ff3232">汉森</span>的书房，门是反锁的。你拿出备用钥匙打开门，发现<span style="color:#ff3232">汉森</span>倒在沙发上，一把手枪被丢在手边，他的太阳穴中弹，已经没有了呼吸。你急忙跑到小镇上，叫来了<span style="color:#ff3232">戈登</span>警长。8点的时候，你和其他嫌疑人一起被带到了镇长的自杀现场， “这到底是自杀还是他杀？你们几个是今天下午房子周围出现的嫌疑人，把你们知道的都给我老实交代出来，镇长的死可是大事，你们要还原出今天下午这栋房子里到底发生了什么，给大众一个交代，不然，所有的人都吃不了兜着走！”`
+        },
+        {
+            roleName: "奥利佛",
+            pangbaiUrl: "sound/Leo_ch.mp3",
+            age: "37",
+            job: "富商",
+            sex: "男性",
+            relation: "",
+            detail: "身材瘦削，眼神坚毅。小镇政坛冉冉升起的新星。",
+            id: 4,
+            img: "book1/img_role4.png",
+            content: `你的名字叫<span style="color:#ff3232">奥斯卡</span>。在几年的牢狱生活后，你回到了这座熟悉的小镇。这一切，始于你对现任镇长<span style="color:#ff3232">汉森</span>的仇恨。你要摧毁他那光鲜外表下，用罪恶支撑起的邪恶帝国。更要为当年，被他害死的爱人报仇。现在的你，早已将名字改为<span style="color:#ff3232">奥利佛</span>。经过了几年的努力，现在的你作为一名富商，正欲跻身政坛，与你的仇人<span style="color:#ff3232">汉森</span>一起，竞争下一届的镇长。</br>
+      15年前</br>
+      做为一个年轻的银行家，你凭借着对金融的天赋，很快便在同行中崭露头角。你不仅得到了可观的财富，同时还收获了一份宝贵的爱情。你于一位叫<span style="color:#ff3232">艾丝美拉达</span>的吉普赛女孩坠入爱河，虽然他们神秘的族人为小镇的人所忌惮，但这对你们的爱情没有丝毫影响。直到有一天，你发现镇上的人指责艾斯米拉达用巫术蛊惑了小镇的警长，并控制他自杀。排外的警长虽然和她有过节，但你确定，善良的<span style="color:#ff3232">艾丝美拉达</span>绝对不会做出这样的事情。在一个叫<span style="color:#ff3232">汉森</span>的流氓的怂恿下，愤怒的人群把艾斯米拉达当成女巫抓了起来，最终被烧死在十字架上。</br>
+      你想尽办法，没能改变爱人悲惨的命运，痛苦的终日买醉，逃离现实。却在无意间从一个醉酒的客户嘴里听说<span style="color:#ff3232">汉森</span>才是警长之死的真凶，而艾斯米拉达只是替罪羊。愤怒和酒精的作用下，你试图杀掉<span style="color:#ff3232">汉森</span>为她报仇，可终因寡不敌众，被他的爪牙制伏并扔进了监狱。</br>
+      10年前</br>
+      在监狱服刑的日子里，你时常握着她死前几天送你的半块心形项链，一遍一遍的计划着如何在出狱后为自己的爱人报仇，并找到她死后失散的私生子。在你的刑期快结束时，你得知<span style="color:#ff3232">汉森</span>凭借多年的经营，已经成为福克斯镇的镇长。你发誓要夺走<span style="color:#ff3232">汉森</span>所拥有的名利以后，让他在痛苦中死去，以祭奠艾斯米拉达的在天之灵。离开监狱后，你改名为<span style="color:#ff3232">奥利佛</span>，来隐藏自己的身份。或许是<span style="color:#ff3232">艾丝美拉达</span>在天上的庇佑，短短的几年时间里，你发了财，变成了远近闻名的富翁。你知道，你终于可以展开对<span style="color:#ff3232">汉森</span>的复仇了。</br>
+      5个月前</br>
+      你参加镇长的竞选已经有一段时间了。你慢慢拥有了自己的支持者，但是这并不足以扳倒<span style="color:#ff3232">汉森</span>镇长。这时，你找到了<span style="color:#ff3232">亚伯拉罕</span>，<span style="color:#ff3232">汉森</span>的保镖。从他那里，你买到了一些关于<span style="color:#ff3232">汉森</span>的黑料。你雇人添油加醋的散播这些黑料。正如你预期的，这引来了新任的警长<span style="color:#ff3232">戈登</span>对<span style="color:#ff3232">汉森</span>的调查，他的民意开始下滑。</br>
+      1天前
+      今天，你收到一封来自<span style="color:#ff3232">汉森</span>的邀请函，让你到他的别墅会面。你很担心，天知道这个暴徒会拿你怎么样。万幸的是，很快你便收到了来自<span style="color:#ff3232">亚伯拉罕</span>的消息，让你在5:40在<span style="color:#ff3232">汉森</span>家旁边的老树旁与他见面，届时他会为你确认与<span style="color:#ff3232">汉森</span>的会面是否安全。</br>
+      当天</br>
+      这一天，你怀着忐忑的心情，提前来到了和<span style="color:#ff3232">亚伯拉罕</span>约定的地点。5分钟后，一向守时的他才姗姗来迟。你留意到<span style="color:#ff3232">亚伯拉罕</span>的脖子上好像有血迹，便不动声色的提醒了他。得知今天的会面不会要你性命后，你放心的径直去向<span style="color:#ff3232">汉森</span>的别墅。</br>
+      来到别墅，半天都没有人应答你的敲门。推开虚掩的大门，你发现家里空无一人。不安的你探索着找到了<span style="color:#ff3232">汉森</span>的书房。透过虚掩的房门，里面的一切让你大吃一惊。<span style="color:#ff3232">汉森</span>倒在自己的血泊之中，不远处扔着一把手枪。子弹正中<span style="color:#ff3232">汉森</span>左边的太阳穴。尸体旁边的桌子上放着一封信，上面写道，“我来复仇了-<span style="color:#ff3232">艾斯美拉达</span>” 。慌乱中，你的脚踢到一条项链，拿起后发现上面的心形坠饰竟然和<span style="color:#ff3232">艾丝美拉达</span>留下的项链是一对。你心里一震，再想到<span style="color:#ff3232">亚伯拉罕</span>刚刚的举动，你便明白了发生的一切。原来他就是艾斯米拉达失散了的私生子。刚刚<span style="color:#ff3232">亚伯拉罕</span>一定是找到了机会，杀掉了<span style="color:#ff3232">汉森</span>为母亲报仇。然而这样做，已然让他自己陷入了万劫不复的深渊。你决定要保护这个可怜的孩子。留意到桌子上的吉普赛酒，地上的手枪，太阳穴中弹的尸体，你突然想起当年警长被杀和艾斯米拉达被诬陷为女巫的案子。果然天道好轮回，你脑海里浮现出了一个计划。你把尸体抱到沙发上，用手绢把手枪放到<span style="color:#ff3232">汉森</span>手上，做出自杀的假象。收起了地上的项链和桌子上的字条，关上窗户，最后在桌子上剪了一段风筝用的丝线，把书房门从外面锁了起来，造成密室自杀的假象。伪装完现场，你看到四下无人，在大门口留下了一张字条：“前来赴约，无人在家。改日再来拜访”。关上了大门，扔掉了案发现场捡到的项链和字条。之后你回到了小镇上，找了间酒吧，强装镇定的坐了下来。</br>
+      8:00的时候，<span style="color:#ff3232">戈登</span>警长找到你，把你和其他嫌疑人一起带到了镇长的死亡现场。 “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "亚伯拉罕",
+            pangbaiUrl: "sound/Wilson_ch.mp3",
+            job: "保镖",
+            age: "18",
+            sex: "男性",
+            relation: "",
+            detail: "身体强壮，精力充沛。操着一口外乡口音的年轻人。",
+            id: 5,
+            img: "book1/img_role5.png",
+            content: `你叫亚伯拉罕。不久前，你回到了这座叫福克斯的小镇，寻找关于你生母死亡的真相。为了生活，你成了<span style="color:#ff3232">汉森</span>镇长的保镖。这份工作给你提供了稳定的收入。慢慢的，镇长一些可疑的行为引起了你的注意。 后来，你发现<span style="color:#ff3232">汉森</span>是用违法手段，靠暴力和贿赂，维持自己在小镇的身份与地位。但是作为一个外乡人，迫于生计，你不得不向现实低头，成为<span style="color:#ff3232">汉森</span>的爪牙之一。</br>
+      15年前</br>
+      母亲在你三岁的时候就去世了，你辗转被另一座小镇上的一家好心人收养。直到你成年那天，你的养父母在无意间透露了你的亲生母亲是被福克斯小镇上的居民当成女巫烧死的。悲伤和震惊之余，你决定搬回福克斯，寻求事情的真相。你临走之前，你的养父母把你母亲的遗物，半颗心形的吊坠交还到你的手里。</br>
+      5个月前</br>
+      你回到这里已经有几个月了，闲暇时候在河边钓鱼，打发时间和烦闷的心情。有一天，一个叫<span style="color:#ff3232">奥利佛</span>的男人在河边找到你。作为新一届镇长竞选的有力竞争者，他愿意从你手中购买有关<span style="color:#ff3232">汉森</span>镇长违法交易的黑料。难以抵挡巨额报酬的诱惑，你决定背叛<span style="color:#ff3232">汉森</span>，成为了<span style="color:#ff3232">奥利佛</span>的卧底。</br>
+      1个月前</br>
+      你在小镇的时间越来越久，虽然小镇的居民都对你母亲的事情讳莫如深，但是你还是打听到她的名字叫<span style="color:#ff3232">艾斯米拉达</span>，她的死和自杀身亡的前任警长有关。</br>
+      1天前</br>
+      这天，你照常和一众打手在镇长家的客厅里打牌。期间，你打听到，今天没有安排任何行动，你可以确定<span style="color:#ff3232">奥利佛</span>至少在今天的会面中是安全的。4：00的时候，镇长夫人<span style="color:#ff3232">玛格丽特</span>接待了一位叫<span style="color:#ff3232">卡洛琳</span>的吉普赛女孩儿，听说是来算命的神棍。镇长弟弟<span style="color:#ff3232">乔纳森</span>在4:50的时候来到别墅，说今天没什么事情，遣散了众打手。5:00的时候<span style="color:#ff3232">玛格丽特</span>让你送<span style="color:#ff3232">卡洛琳</span>出门，说自己身体不舒服，想回房间休息。5:05的时候你回到自己的房间，拿出了当天买好的鱼线摆弄了起来。</br>
+      5:25的时候，你上楼提醒<span style="color:#ff3232">汉森</span>他傍晚的行程，却发现他在办公室的沙发上睡着了。被你摇醒后，<span style="color:#ff3232">汉森</span>大发雷霆，大骂自己的弟弟为了吉普赛情人，竟然敢背叛自己。他叫嚣着让你马上把他们抓回来， “我要让<span style="color:#ff3232">乔纳森</span>知道背叛我的下场，他会像15年前的那个傻瓜银行家一样，看着心爱的女人在自己面前活活被烧死。” 你压下心中的震惊，试探的问<span style="color:#ff3232">汉森</span>，下一步要怎么做。这时的<span style="color:#ff3232">汉森</span>已经失去了理智，“还能怎么做？去杀了警长，布置成自杀，像15年前一样栽赃给这些肮脏的吉普赛人，她们唯一的作用就是当柴火烧。” 这时的你意识到，<span style="color:#ff3232">汉森</span>就是当年陷害你母亲，杀死前任警长的元凶。你被怒火所吞噬，你质问他为什么要害死你无辜的母亲。<span style="color:#ff3232">汉森</span>的眼神从惊诧变成了恐惧，随即看向了桌上放着的手枪。你不等他有任何动作，抄起手边的塑像砸中他左边的太阳穴。这个恶魔在恐惧的眼神里，结束了他罪恶的一生。慌乱中，你用袖子擦掉雕像上的血迹，为了避免被人发现，从窗户逃离了现场。</br>
+      你回到自己的房间，换下沾了血的衣服，赶忙跑去和<span style="color:#ff3232">奥利佛</span>碰面。5:45的时候，你看到他早早的就在约定地点等你了。你告诉他，这次的会面是安全的，可以按计划赴约。临走前，<span style="color:#ff3232">奥利佛</span>似有似无的提醒你脖子上有血迹，看着他奇妙的眼神，你很担心他可能会揭穿你。强装镇定的你回到了自己的房间，擦掉脖子上的血迹，并在垃圾桶里烧掉了带血的外衣。别人问起来，你大可以说是烧掉了没用的信件，无凭无据，没人能拿你怎么样。</br>
+      8:00的时候，<span style="color:#ff3232">戈登</span>警长找到你，把你和其他嫌疑人一起带到了镇长的死亡现场。你懵了，难道有人在暗中帮助你伪造了自杀现场？ “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”`
+        },
+        {
+            roleName: "戈登",
+            job: "警长",
+            sex: "男性",
+            age: "40",
+            detail: "小镇的警长，不拘言笑。刚调任不久，因一丝不苟的态度很快让小镇的人们信服，相传他为人公正却保守。",
+            relation: "",
+            id: 6,
+            img: "book1/img_role7.png",
+            content: `你数月前来到小镇福克斯，开始清理上一任警长留下的烂摊子。最近总有人匿名给你送来一些镇长汉森的黑料，经调查后，你发现这些竟然并非空穴来风。你获得了足够多的证据后，向检察官申请了搜查令，要求汉森镇长配合调查。</br>
+      今天晚上8：00的时候，镇长夫人玛格丽特来警局找到你，说她的丈夫在家自杀身亡。你检查了现场，并让警员带回了下午出现在镇长别墅的嫌疑人： “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”</br>`
+        }
+    ];
+    BookConfig2.content = {
+        ch: "今天8点，警局接到镇长夫人玛格丽特的报案，家中的书房发现了一具尸体，正是这个镇子里举足轻重的大人物，汉森镇长。本镇的新任警长戈登在接到报案后，调查了现场。尸体被发现在一间反锁的书房，汉森先生左边的额头中弹，手枪落在左手边。房间内有被翻找的迹象，初步怀疑是自杀。基于现场和流言的各种疑点，戈登警长召集了今天下午出现在别墅内的嫌疑人，“这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！",
+        en: "今天8点，警局接到镇长夫人玛格丽特的报案，家中的书房发现了一具尸体，正是这个镇子里举足轻重的大人物，汉森镇长。本镇的新任警长戈登在接到报案后，调查了现场。尸体被发现在一间反锁的书房，汉森先生左边的额头中弹，手枪落在左手边。房间内有被翻找的迹象，初步怀疑是自杀。基于现场和流言的各种疑点，戈登警长召集了今天下午出现在别墅内的嫌疑人，“这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！"
+    };
+    BookConfig2.quesConfig_ch = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "你听说了今天发生在镇长家的事情了吗？",
+                    content: "听说了呀！他们说镇长的死状是15年前的老警长一模一样，大家都在传是当年被烧死的吉普赛女巫回来报仇啦。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "今天你见过任何一位嫌疑人了吗？",
+                    content: "今天生意不忙，来喝酒的人很少。下午6点半之后我好像看到奥利佛在一个人喝闷酒。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "今天发生了任何奇怪的事情了吗？",
+                    content: "今天我在垃圾桶里发现一张纸团，上面写着：”我来复仇了-艾斯米拉达“，结果就发现了这么可怕的事情，你说吓人不吓人。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "你听说过有关嫌疑人的八卦了吗？",
+                    content: "听说镇长和夫人的关系挺紧张的，银行的乔治刚刚来喝酒的时候告诉我，玛格丽特早上取了好多现金，有钱人的生活真让人羡慕啊。",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "你知道有人可能对镇长不利吗？",
+                    content: "听说新任警长正在调查汉森镇长，他们关系紧张。风评他正直又古板，对人特别不友好。",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "你听说过吉普赛酒吗？",
+                    content: "镇上的人都管这种酒叫女巫汤，是吉普赛特制的美酒，听说人喝了以后会被迷惑心智。",
+                    answer: "5"
+                }
+            ]
+        },
+        {
+            roleId: 7,
+            quesList: [
+                {
+                    id: 1,
+                    title: "现场有什么奇怪的发现吗？",
+                    content: "大门是从里面反锁的，窗户也是关着的。我们在窗户下面的地面上发现了几个模糊的脚印。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "尸体有什么奇怪的发现吗？",
+                    content: "尸体是挺奇怪的，镇长的太阳穴上不止有枪伤，还有硬物导致的开放式伤口，很难说哪个是致命伤。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "嫌疑人有什么古怪的地方吗？",
+                    content: "我们在火车站找到了准备出城的乔纳森和卡洛琳，他们像是要出远门的样子。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "别墅周围有什么奇怪的发现吗？",
+                    content: "我们在路边无意间发现了一跳有半心形吊坠的项链，这样一个珍贵的项链被丢在别墅附近的草地里，还挺奇怪的。",
+                    answer: "4"
+                }
+            ]
+        }
+    ];
+    BookConfig2.quesConfig_en = [
+        {
+            roleId: 6,
+            quesList: [
+                {
+                    id: 1,
+                    title: "你听说了今天发生在镇长家的事情了吗？",
+                    content: "听说了呀！他们说镇长的死状是15年前的老警长一模一样，大家都在传是当年被烧死的吉普赛女巫回来报仇啦。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "今天你见过任何一位嫌疑人了吗？",
+                    content: "今天生意不忙，来喝酒的人很少。下午6点半之后我好像看到奥利佛在一个人喝闷酒。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "今天发生了任何奇怪的事情了吗？",
+                    content: "今天我在垃圾桶里发现一张纸团，上面写着：”我来复仇了-艾斯米拉达“，结果就发现了这么可怕的事情，你说吓人不吓人。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "你听说过有关嫌疑人的八卦了吗？",
+                    content: "听说镇长和夫人的关系挺紧张的，银行的乔治刚刚来喝酒的时候告诉我，玛格丽特早上取了好多现金，有钱人的生活真让人羡慕啊。",
+                    answer: "4"
+                },
+                {
+                    id: 5,
+                    title: "你知道有人可能对镇长不利吗？",
+                    content: "听说新任警长正在调查汉森镇长，他们关系紧张。风评他正直又古板，对人特别不友好。",
+                    answer: "5"
+                },
+                {
+                    id: 6,
+                    title: "你听说过吉普赛酒吗？",
+                    content: "镇上的人都管这种酒叫女巫汤，是吉普赛特制的美酒，听说人喝了以后会被迷惑心智。",
+                    answer: "5"
+                }
+            ]
+        },
+        {
+            roleId: 7,
+            quesList: [
+                {
+                    id: 1,
+                    title: "现场有什么奇怪的发现吗？",
+                    content: "大门是从里面反锁的，窗户也是关着的。我们在窗户下面的地面上发现了几个模糊的脚印。",
+                    answer: "1"
+                },
+                {
+                    id: 2,
+                    title: "尸体有什么奇怪的发现吗？",
+                    content: "尸体是挺奇怪的，镇长的太阳穴上不止有枪伤，还有硬物导致的开放式伤口，很难说哪个是致命伤。",
+                    answer: "2"
+                },
+                {
+                    id: 3,
+                    title: "嫌疑人有什么古怪的地方吗？",
+                    content: "我们在火车站找到了准备出城的乔纳森和卡洛琳，他们像是要出远门的样子。",
+                    answer: "3"
+                },
+                {
+                    id: 4,
+                    title: "别墅周围有什么奇怪的发现吗？",
+                    content: "我们在路边无意间发现了一跳有半心形吊坠的项链，这样一个珍贵的项链被丢在别墅附近的草地里，还挺奇怪的。",
+                    answer: "4"
+                }
+            ]
+        }
+    ];
+    BookConfig2.sceneList = [
+        {
+            sceneName: "Abraham",
+            sceneId: 3,
+            label: "Abraham",
+            url: `room_book2/LayaScene_Abraham/Conventional/Abraham.ls`,
+            events: {
+                ban1: {
+                    caller: Room2,
+                    method: Room2.clickBan1,
+                    nodeName: "abraham.Obj3d66-1254365-90-603"
+                },
+                ban2: {
+                    caller: Room2,
+                    method: Room2.clickBan2,
+                    nodeName: "abraham.Obj3d66-1254365-90-602"
+                },
+                gan: {
+                    caller: Room2,
+                    method: Room2.clickGan,
+                    nodeName: "1.Obj3d66-711479-25-338"
+                },
+                xin: {
+                    caller: Room2,
+                    method: Room2.clickXin,
+                    nodeName: "abraham.QuadPatch003"
+                },
+                xinwu1: {
+                    caller: Room2,
+                    method: Room2.clickXinWu,
+                    nodeName: "abraham.组112.model002"
+                },
+                xinwu: {
+                    caller: Room2,
+                    method: Room2.clickXinWu,
+                    nodeName: "abraham.组112.Loft001"
+                },
+                qian1: {
+                    caller: Room2,
+                    method: Room2.clickQian1,
+                    nodeName: "abraham.Box1578958531"
+                },
+                chouti1: {
+                    caller: Room2,
+                    method: Room2.clickCT3,
+                    nodeName: "abraham.model 2"
+                },
+                qian2: {
+                    caller: Room2,
+                    method: Room2.clickQ2,
+                    nodeName: "abraham.model 2.QuadPatch001 (1)"
+                },
+                chouti2: {
+                    caller: Room2,
+                    method: Room2.clickCT4,
+                    nodeName: "abraham.model003"
+                },
+                qian3: {
+                    caller: Room2,
+                    method: Room2.clickQ3,
+                    nodeName: "abraham.model003.QuadPatch002"
+                },
+                shoucang: {
+                    caller: Room2,
+                    method: Room2.clickAR008,
+                    nodeName: "abraham.组107.Obj3d66-1282599-15-749"
+                },
+                gui1: {
+                    caller: Room2,
+                    method: Room2.clickGui1,
+                    nodeName: "abraham.对象002"
+                },
+                gui2: {
+                    caller: Room2,
+                    method: Room2.clickGui2,
+                    nodeName: "abraham.对象001"
+                },
+                xin2: {
+                    caller: Room2,
+                    method: Room2.clickAR007,
+                    nodeName: "abraham.QuadPatch001"
+                },
+                hui1: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-125"
+                },
+                hui2: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-126"
+                },
+                hui3: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-127"
+                },
+                hui4: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-128"
+                },
+                hui5: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-129"
+                },
+                hui6: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-130"
+                },
+                hui7: {
+                    caller: Room2,
+                    method: Room2.clickAR009,
+                    nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-131"
+                }
+            }
+        },
+        {
+            sceneName: "Hall",
+            sceneId: 5,
+            label: "Hall",
+            url: `room_book2/LayaScene_hall/Conventional/hall.ls`,
+            events: {
+                jiupin: {
+                    caller: Room2,
+                    method: Room2.clickJiuPin,
+                    nodeName: "1.Obj3d66-402998-5-224"
+                },
+                jiu2: {
+                    caller: Room2,
+                    method: Room2.clickJiuPin2,
+                    nodeName: "1.组2136555812.Obj3d66-405792-9-449"
+                },
+                bao: {
+                    caller: Room2,
+                    method: Room2.clickBao,
+                    nodeName: "2"
+                },
+                xingli: {
+                    caller: Room2,
+                    method: Room2.clickXLX,
+                    nodeName: "1.Obj3d66-1290256-1-227"
+                },
+                chouti: {
+                    caller: Room2,
+                    method: Room2.clickCT1,
+                    nodeName: "1.对象011"
+                }
+            }
+        },
+        {
+            sceneName: "Margaret",
+            sceneId: 1,
+            label: "Margaret",
+            url: `room_book2/LayaScene_Margaret/Conventional/Margaret.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickMR001,
+                    nodeName: "1.QuadPatch004"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.toggleDrawer,
+                    nodeName: "1.model004"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickMR002,
+                    nodeName: "1.model004.QuadPatch003"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickKuang,
+                    nodeName: "1.对象019"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickMR003,
+                    nodeName: "1.Basket_A_grp.Basket_A_Wicker"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickMR004,
+                    nodeName: "1.Box1578958527"
+                },
+                model006: {
+                    caller: Room2,
+                    method: Room2.clickCT5,
+                    nodeName: "1.model006"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickMR005,
+                    nodeName: "1.model006.QuadPatch001"
+                },
+                clickBan: {
+                    caller: Room2,
+                    method: Room2.clickBan3,
+                    nodeName: "1.对象025"
+                },
+                clickBan4: {
+                    caller: Room2,
+                    method: Room2.clickBan4,
+                    nodeName: "1.对象024"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickMR007,
+                    nodeName: "1.Obj3d66-509460-11-208"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickMR006,
+                    nodeName: "1.QuadPatch002"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickMR008,
+                    nodeName: "1.ChamferCyl006"
+                },
+                item11: {
+                    caller: Room2,
+                    method: Room2.clickMR009,
+                    nodeName: "1.Obj3d66-676910-90-278"
+                }
+            }
+        },
+        {
+            sceneName: "Oliver",
+            sceneId: 6,
+            label: "Oliver",
+            url: `room_book2/LayaScene_Oliver/Conventional/Oliver.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.CT6,
+                    nodeName: "1.Box2131641766"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickOR001,
+                    nodeName: "1.Box2131641766.QuadPatch006"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickOR002,
+                    nodeName: "1.model 1"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickOR003,
+                    nodeName: "1.QuadPatch002"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickOR004,
+                    nodeName: "1.QuadPatch003"
+                },
+                对象024: {
+                    caller: Room2,
+                    method: Room2.clickDX,
+                    nodeName: "1.对象024"
+                },
+                xianglian: {
+                    caller: Room2,
+                    method: Room2.clickOR005,
+                    nodeName: "1.组112.model002"
+                },
+                CT7: {
+                    caller: Room2,
+                    method: Room2.CT7,
+                    nodeName: "1.Box2131641769"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickOR006,
+                    nodeName: "1.Box2131641769.QuadPatch001"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickOR007,
+                    nodeName: "1.QuadPatch004"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickOR008,
+                    nodeName: "1.QuadPatch005"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickOR009,
+                    nodeName: "1.QuadPatch005 (1)"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickOR010,
+                    nodeName: "1.Box2131637143"
+                }
+            }
+        },
+        {
+            sceneName: "Johnathan",
+            sceneId: 4,
+            label: "Johnathan",
+            url: `room_book2/LayaScene_Johnathan/Conventional/Johnathan.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickJR001,
+                    nodeName: "model.对象001"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.CT8,
+                    nodeName: "model.Rectangle073"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickJR002,
+                    nodeName: "model.Rectangle073.QuadPatch003"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickJR003,
+                    nodeName: "model.Obj3d66-1282599-17-592"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickJR004,
+                    nodeName: "model.Obj3d66-711884-2-128"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.CT9,
+                    nodeName: "model.Rectangle017"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickJR005,
+                    nodeName: "model.Rectangle017.Obj3d66-1163439-4-215"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickJR006,
+                    nodeName: "jiuoing.Obj3d66-402998-5-224"
+                }
+            }
+        },
+        {
+            sceneName: "Caroline",
+            sceneId: 7,
+            label: "Caroline",
+            url: `room_book2/LayaScene_Caroline/Conventional/Caroline.ls`,
+            events: {
+                drawerRightTop: {
+                    caller: Room2,
+                    method: Room2.clickCR001,
+                    nodeName: "1.Line044"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickCR002,
+                    nodeName: "1.Obj3d66-784515-3-729"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickCR003,
+                    nodeName: "1.Obj3d66-784515-2-781"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickCR004,
+                    nodeName: "1.对象014"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.clickCR005,
+                    nodeName: "1.Obj3d66-711884-2-127"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.clickCR006,
+                    nodeName: "1.Obj3d66-405792-9-449"
+                },
+                ka1: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch001"
+                },
+                ka2: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch002"
+                },
+                ka3: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch003"
+                },
+                ka4: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch004"
+                },
+                ka5: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch005"
+                },
+                ka6: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch006"
+                },
+                ka7: {
+                    caller: Room2,
+                    method: Room2.clickCR007,
+                    nodeName: "1.QuadPatch007"
+                },
+                wang: {
+                    caller: Room2,
+                    method: Room2.clickCR008,
+                    nodeName: "1.Obj3d66-806782-1-101"
+                }
+            }
+        },
+        {
+            sceneName: "Hanson",
+            sceneId: 2,
+            label: "Hanson",
+            url: `room_book2/LayaScene_Hanson/Conventional/Hanson.ls`,
+            events: {
+                item1: {
+                    caller: Room2,
+                    method: Room2.clickHR001,
+                    nodeName: "model.组2136555823.Obj3d66-866777-119-712"
+                },
+                item2: {
+                    caller: Room2,
+                    method: Room2.clickHR002,
+                    nodeName: "model.Obj3d66-1508352-12-993"
+                },
+                item3: {
+                    caller: Room2,
+                    method: Room2.clickHR003,
+                    nodeName: "model.model016"
+                },
+                item4: {
+                    caller: Room2,
+                    method: Room2.clickHR004,
+                    nodeName: "model.Group-391490-270.Obj3d66-391490-18-1000"
+                },
+                item44: {
+                    caller: Room2,
+                    method: Room2.clickHR005,
+                    nodeName: "desk.对象027.QuadPatch001"
+                },
+                item5: {
+                    caller: Room2,
+                    method: Room2.CT10,
+                    nodeName: "desk.对象027"
+                },
+                item6: {
+                    caller: Room2,
+                    method: Room2.CT11,
+                    nodeName: "desk.对象022"
+                },
+                item7: {
+                    caller: Room2,
+                    method: Room2.clickHR006,
+                    nodeName: "desk.对象022.Obj3d66-1163439-4-215"
+                },
+                item8: {
+                    caller: Room2,
+                    method: Room2.clickHR007,
+                    nodeName: "model.Loft007"
+                },
+                item9: {
+                    caller: Room2,
+                    method: Room2.clickHR008,
+                    nodeName: "model.Obj3d66-402998-5-224"
+                },
+                item10: {
+                    caller: Room2,
+                    method: Room2.clickHR009,
+                    nodeName: "model.Obj3d66-1017952-9-519"
+                },
+                door: {
+                    caller: Room2,
+                    method: Room2.openDoor,
+                    nodeName: "model.组2136555825.Box1752"
+                },
+                shouzhuo: {
+                    caller: Room2,
+                    method: Room2.clickHR013,
+                    nodeName: "shouzhuo"
+                },
+                jiaoyin: {
+                    caller: Room2,
+                    method: Room2.clickHR014,
+                    nodeName: "1.物件_1"
+                },
+                fengzheng: {
+                    caller: Room2,
+                    method: Room2.clickHR015,
+                    nodeName: "fengzheng11.物件_5"
+                },
+                CT16: {
+                    caller: Room2,
+                    method: Room2.CT16,
+                    nodeName: "desk.对象025"
+                },
+                fengzhengxian: {
+                    caller: Room2,
+                    method: Room2.clickHR016,
+                    nodeName: "desk.对象025.fengzhengxian"
+                }
+            }
+        }
+    ];
+
+    class DataLang {
+        static set lang(lang) {
+            this._lang = lang == "en-US" ? "en" : "ch";
+        }
+        static get lang() {
+            return this._lang;
+        }
+        static changeLang() {
+            EventManager.pub("changeLang");
+        }
+        static getImgByType(type = "") {
+            let conf = this.imgConfig[type];
+            if (!conf) {
+                console.log(type, "遗漏语言包配置");
+            }
+            return conf ? conf[this.lang] : "";
+        }
+        static getTxtByType(type = "", params = {}) {
+            let conf = this.txt[type] || {};
+            let str = conf[this.lang] || "";
+            for (let key in params) {
+                str = str.replace(new RegExp(`{${key}}`, "gm"), params[key]);
+            }
+            return str;
+        }
+        static get content() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.content;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.content;
+            }
+            else {
+                return BookConfig2.content;
+            }
+        }
+        static get roleList_en() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.roleList_en;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.roleList_en;
+            }
+            else {
+                return BookConfig2.roleList_en;
+            }
+        }
+        static get roleList_ch() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.roleList_ch;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.roleList_ch;
+            }
+            else {
+                return BookConfig2.roleList_ch;
+            }
+        }
+        static get quesConfig_ch() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.quesConfig_ch;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.quesConfig_ch;
+            }
+            else {
+                return BookConfig2.quesConfig_ch;
+            }
+        }
+        static get quesConfig_en() {
+            let gsId = GameManager.roomInfo.gsId;
+            if (gsId == 1) {
+                return BookConfig1.quesConfig_en;
+            }
+            else if (gsId == 2) {
+                return BookConfig2.quesConfig_en;
+            }
+            else {
+                return BookConfig2.quesConfig_en;
+            }
+        }
+    }
+    DataLang._lang = "ch";
+    DataLang.imgConfig = {
+        btnSuccess: {
+            ch: "v2/ch/img_btn_success.png",
+            en: "v2/en/img_btn_success.png"
+        },
+        btnFail: {
+            ch: "v2/ch/img_btn_fail.png",
+            en: "v2/en/img_btn_fail.png"
+        },
+        btn_voice: {
+            ch: "v2/ch/img_btn_voice.png",
+            en: "v2/en/img_btn_voice.png"
+        },
+        testAudio: {
+            ch: "v2/ch/img_test_audio.png",
+            en: "v2/en/img_test_audio.png"
+        },
+        btnAddFriend: {
+            ch: "v2/ch/btn_add_friend.png",
+            en: "v2/en/btn_add_friend.png"
+        },
+        btnKick: {
+            ch: "v2/ch/btn_kick.png",
+            en: "v2/en/btn_kick.png"
+        },
+        btnRefuse: {
+            ch: "v2/ch/img_btnRefuse.png",
+            en: "v2/en/img_btnRefuse.png"
+        },
+        voted: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        },
+        wuzheng: {
+            ch: "v2/ch/img_wuzheng.png",
+            en: "v2/en/img_wuzheng.png"
+        },
+        btnAny: {
+            ch: "v2/ch/img_any.png",
+            en: "v2/en/img_any.png"
+        },
+        btnConfirm: {
+            ch: "v2/ch/img_confirm.png",
+            en: "v2/en/img_confirm.png"
+        },
+        titleAdd: {
+            ch: "v2/ch/img_add_timeline.png",
+            en: "v2/en/img_add_timeline.png"
+        },
+        btnAdd: {
+            ch: "v2/ch/img_btn_add.png",
+            en: "v2/en/img_btn_add.png"
+        },
+        fengmian1: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        isPublic: {
+            ch: "v2/ch/img_public1.png",
+            en: "v2/en/img_public1.png"
+        },
+        notPublic: {
+            ch: "v2/ch/img_public0.png",
+            en: "v2/en/img_public0.png"
+        },
+        txtTip: {
+            ch: "v2/ch/img_wxts.png",
+            en: "v2/en/img_wxts.png"
+        },
+        btnTuichu: {
+            ch: "v2/ch/img_tuichu.png",
+            en: "v2/en/img_tuichu.png"
+        },
+        btnSwitch: {
+            ch: "v2/ch/img_btn_switch.png",
+            en: "v2/en/img_btn_switch.png"
+        },
+        btnSend: {
+            ch: "v2/ch/img_send.png",
+            en: "v2/en/img_send.png"
+        },
+        btnShare: {
+            ch: "v2/ch/img_share.png",
+            en: "v2/en/img_share.png"
+        },
+        fengmian: {
+            ch: "v2/ch/img_fengmian.png",
+            en: "v2/en/img_fengmian.png"
+        },
+        btnStart: {
+            ch: "v2/ch/img_kaishi1.png",
+            en: "v2/en/img_kaishi1.png"
+        },
+        btnDismiss: {
+            ch: "v2/ch/img_jiesan.png",
+            en: "v2/en/img_jiesan.png"
+        },
+        btnBack: {
+            ch: "v2/ch/img_back.png",
+            en: "v2/en/img_back.png"
+        },
+        btnNext: {
+            ch: "v2/ch/img_next.png",
+            en: "v2/en/img_next.png"
+        },
+        btnReady: {
+            ch: "v2/ch/img_btn_ready.png",
+            en: "v2/en/img_btn_ready.png"
+        },
+        xiongshou: {
+            ch: "v2/ch/img_xiongshou.png",
+            en: "v2/en/img_xiongshou.png"
+        },
+        result: {
+            ch: "v2/ch/img_result.png",
+            en: "v2/en/img_result.png"
+        },
+        btnVoted: {
+            ch: "v2/ch/img_voted.png",
+            en: "v2/en/img_voted.png"
+        },
+        btnBook: {
+            ch: "v2/ch/img_book.png",
+            en: "v2/en/img_book.png"
+        },
+        btnSure1: {
+            ch: "v2/ch/img_queding_small.png",
+            en: "v2/en/img_queding_small.png"
+        },
+        btnCancel1: {
+            ch: "v2/ch/img_cancel_small.png",
+            en: "v2/en/img_cancel_small.png"
+        },
+        btnCancel: {
+            ch: "v2/ch/img_quxiao.png",
+            en: "v2/en/img_quxiao.png"
+        },
+        btnCopy: {
+            ch: "v2/ch/img_copy.png",
+            en: "v2/en/img_copy.png"
+        },
+        btnCancelReady: {
+            ch: "v2/ch/img_btn_ready0.png",
+            en: "v2/en/img_btn_ready0.png"
+        },
+        btnCreate: {
+            ch: "v2/ch/img_create.png",
+            en: "v2/en/img_create.png"
+        },
+        txtLTS: {
+            ch: "v2/ch/img_lts.png",
+            en: "v2/en/img_lts.png"
+        },
+        testYY: {
+            ch: "v2/ch/img_yycs.png",
+            en: "v2/en/img_yycs.png"
+        },
+        tagReady: {
+            ch: "v2/ch/img_ready.png",
+            en: "v2/en/img_ready.png"
+        },
+        btnEnd: {
+            ch: "v2/ch/img_btn_end.png",
+            en: "v2/en/img_btn_end.png"
+        },
+        btnTCYX: {
+            ch: "v2/ch/img_btn_tcyx.png",
+            en: "v2/en/img_btn_tcyx.png"
+        },
+        img_ytp: {
+            ch: "v2/ch/img_ytp.png",
+            en: "v2/en/img_ytp.png"
+        }
+    };
+    DataLang.txt = {
+        selfIntro: {
+            ch: "自我介绍",
+            en: "Self Introduce"
+        },
+        sureExitGame: {
+            ch: "是否确认退出游戏？",
+            en: "Are you sure to exit the game?"
+        },
+        loadingScene: {
+            en: "Loading, please hold on…",
+            ch: "场景加载中...请稍候..."
+        },
+        loading: {
+            en: "Loading game, please hold on…",
+            ch: "加载中...请稍候..."
+        },
+        floor2: {
+            en: "Second Floor",
+            ch: "二楼"
+        },
+        floor1: {
+            en: "First Floor",
+            ch: "一楼"
+        },
+        speakingTurn: {
+            en: "Your turn",
+            ch: "您的回合"
+        },
+        endTalkng: {
+            en: "Tea Party",
+            ch: "茶话会"
+        },
+        hintVote: {
+            ch: "请在2分钟内谨慎思考后投出你心目中的凶手。点击角色头像，并确认，一旦点击确认，投票将不可更改，得票最高的玩家将会作为嫌疑犯被逮捕。",
+            en: `Please think carefully in 2 minutes and throw your killer in your mind. Click the avatar of the character and confirm. Once you click confirm, the vote will not be changed, and the player with the highest vote will be arrested as a suspect.`
+        },
+        hintFreeTalking: {
+            ch: "因为投票环节中探员的投票算1.5票，所以博得探员的信任是很重要的哦。Good luck!",
+            en: `Because the vote of the agent is 1.5 in the voting, it is important to win the trust of the agent. Good luck!`
+        },
+        hintConclusion: {
+            ch: "最后的总结，告诉大家你为什么不是凶手，并告诉大家你会投出的凶手是谁，原因是什么。",
+            en: `The final conclusion is to tell you why you are not the murderer, who you will throw the murderer and why.`
+        },
+        hintFind2: {
+            ch: "这是最后一轮搜证，分享，讨论，开始行动吧！",
+            en: `This is the last round of evidence search, sharing, discussion and action!`
+        },
+        hintTalkingEnd: {
+            ch: "30分钟后环节自动结束，或者所有人在完成讨论后，点击“结束发言”",
+            en: `After 30 minutes, the session will end automatically, or after everyone finishes the discussion, click "end speech"`
+        },
+        hintTalking: {
+            ch: "第一轮自由讨论时间，尽情交流案情，找到藏在你们中间的关键人物。",
+            en: `The first round of free discussion time, enjoy the exchange of the case, find the key people hidden in the middle of you.`
+        },
+        hintTalkingNext: {
+            ch: "5分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
+            en: `After 5 minutes, the session will end automatically, or after finishing speaking, click "end speaking"`
+        },
+        hintDetailInTalking: {
+            ch: "告诉大家你的发现，你可以通过分享让他们看到你搜集的证据",
+            en: `Tell people what you found, and you can share with them the evidence you've collected`
+        },
+        hintSearch: {
+            ch: "可收集的证据会有高亮提示。",
+            en: `The evidence that can be collected will be highlighted.`
+        },
+        hintStep: {
+            ch: "点击此处查看游戏进度。",
+            en: `Click here to see the progress of the game.`
+        },
+        hintDetail: {
+            ch: "点击证据列表，可以查看你找到证据，并可以在讨论环节中分享给大家。",
+            en: `Click the evidence list to view the evidence you found and share it with you in the discussion session.`
+        },
+        hintTimeline: {
+            ch: "点击记录线索或者角色时间线，在游戏的过程中随时编辑和复习。",
+            en: `Click record clues or character timeline to edit and review at any time during the game.`
+        },
+        hintBookBack: {
+            ch: "点击复习剧本。",
+            en: `Click review script.`
+        },
+        hintNPC: {
+            ch: "点击提问证人获取更多线索，请注意证言有时候并非全部真相",
+            en: `Click question witness for more clues. Please note that sometimes testimony is not the whole truth`
+        },
+        hintSelectRoom: {
+            ch: "双击点击“场景名”或“场景图标”进入搜证场景。",
+            en: `Double click "Scene name" or "Scene icon" to enter the search scene.`
+        },
+        hintCluEnd: {
+            ch: "第一轮搜证环节，30分钟后环节自动结束，或者所有玩家在点击下一步后，提前进入下一环节",
+            en: "The first round of certificate search will automatically end in 30 minutes, or all players will enter the next link ahead of time after clicking next"
+        },
+        hintSelfTalkingEnd: {
+            ch: "2分钟后环节自动结束，或者在完成发言后，点击“结束发言”",
+            en: "Click to view the operation method"
+        },
+        hintSetting: {
+            ch: "点击查看操作方法",
+            en: "Click to view the operation method"
+        },
+        hintRule: {
+            ch: "点击此处查看胜利条件",
+            en: "Click here to see the winning conditions"
+        },
+        hintMine: {
+            ch: "点击此处查看任务简介",
+            en: "Click here to view the mission profile"
+        },
+        hintPreTalking: {
+            ch: "告诉大家你的角色背景，以及与案情有关的信息，或者提出你的想法。",
+            en: "Tell everyone about your role background and information about the case, or put forward your ideas."
+        },
+        hintBookNext: {
+            ch: "点击下一步。或者计时完毕后自动进入下一环节。",
+            en: "Click next. Or automatically enter the next link after timing."
+        },
+        hintBookVoice: {
+            ch: "点击静音关闭旁白。",
+            en: "Click mute to turn off the narration."
+        },
+        hintBook: {
+            ch: "你有5分钟阅读你的剧本。",
+            en: "You have 5 min to read your script."
+        },
+        hintRoleNext: {
+            ch: "选定角色后，点击下一步",
+            en: "After selecting the role, click next"
+        },
+        hintRole: {
+            ch: "点击任意角色可以获取人物信息",
+            en: "Click any character to get character information"
+        },
+        hintShare: {
+            ch: "你可以通过分享链接，邀请你的好友加入本局游戏",
+            en: "You can invite your friends to join the game by sharing links"
+        },
+        hintTestAudio: {
+            ch: "请在全员准备后点击语音按钮,全员准备完毕后即可由房主开启游戏",
+            en: "Please click the voice button after all the members are ready. After all the members are ready, the owner can start the game"
+        },
+        someonekicked: {
+            ch: "{username}已被踢出",
+            en: "{username} have been kicked"
+        },
+        kicked: {
+            ch: "您已被踢出",
+            en: "You have been kicked"
+        },
+        playerKicked: {
+            ch: "玩家已踢出",
+            en: "Player kicked"
+        },
+        txtCanceled: {
+            ch: "临时取消的局数:{count}",
+            en: "temporary cancellations:{count}"
+        },
+        txtLose: {
+            ch: "输的局数:{count}",
+            en: "Lose:{count}"
+        },
+        txtNoShow: {
+            ch: "没有出现的局数:{count}",
+            en: "Not shown:{count}"
+        },
+        txtTotal: {
+            ch: "总局数:{count}",
+            en: "Total:{count}"
+        },
+        txtWin: {
+            ch: "赢的局数:{count}",
+            en: "Win:{count}"
+        },
+        requestSend: {
+            ch: "请求已发送",
+            en: "request send"
+        },
+        Note: {
+            ch: "笔记",
+            en: "Note"
+        },
+        Searching: {
+            ch: "搜证中",
+            en: "Searching"
+        },
+        Talking: {
+            ch: "发言",
+            en: "Talking"
+        },
+        Vote: {
+            ch: "投票",
+            en: "Vote"
+        },
+        NPC: {
+            ch: "证人",
+            en: "Witness"
+        },
+        Timeline: {
+            ch: "时间线",
+            en: "Time Line"
+        },
+        Scene: {
+            ch: "场景",
+            en: "Scene"
+        },
+        Book: {
+            ch: "剧本",
+            en: "Script"
+        },
+        talking: {
+            ch: "发言中",
+            en: "Talking"
+        },
+        freeTalking: {
+            ch: "自由发言中",
+            en: "Free Talking"
+        },
+        pressToSpeak: {
+            ch: "你的发言中...",
+            en: "Your time to speak..."
+        },
+        askChange: {
+            ch: "{username}请求交换",
+            en: "{username} ask change"
+        },
+        sex: {
+            ch: "性别",
+            en: "sex"
+        },
+        age: {
+            ch: "年龄",
+            en: "age"
+        },
+        job: {
+            ch: "职业",
+            en: "job"
+        },
+        bookName: {
+            ch: "剧本一",
+            en: "book1"
+        },
+        jump: {
+            ch: "是否跳过新手引导？",
+            en: "Skip novice guidance?"
+        },
+        CLUE_FIND: {
+            en: "Find",
+            ch: "搜证"
+        },
+        TALKING: {
+            en: "Talking",
+            ch: "发言"
+        },
+        PRE_TALKING: {
+            en: "PRE_TALKING",
+            ch: "自我介绍"
+        },
+        FREE_TALKING: {
+            en: "FREE_TALKING",
+            ch: "自由发言"
+        },
+        CONCLUSION: {
+            en: "Conclusion Talk",
+            ch: "总结发言"
+        },
+        VOTING: {
+            en: "Voting",
+            ch: "投票中"
+        },
+        VOTE: {
+            en: "VOTE",
+            ch: "投票"
+        },
+        ANALYSE: {
+            en: "ANALYSE",
+            ch: "复盘"
+        },
+        progress: {
+            en: "Game Progress",
+            ch: "破案进度"
+        },
+        power: {
+            en: "{num}",
+            ch: "{num}票"
+        },
+        murderWin: {
+            en: "The murderer escaped the law",
+            ch: "凶手逃脱了法律的制裁"
+        },
+        murderWinBut: {
+            en: "But,\nThe murderer escaped the law",
+            ch: "但是\n凶手逃脱了法律的制裁"
+        },
+        murderLoseBut: {
+            en: "But with the concerted efforts of all of us,\nThe murderer was punished",
+            ch: "但是在大家的齐心协力下\n凶手受到了制裁"
+        },
+        murderLose: {
+            en: "With the concerted efforts of all of us,\nThe murderer was punished",
+            ch: "在大家的齐心协力下\n凶手受到了制裁"
+        },
+        selfTrue: {
+            ch: "恭喜你选对了凶手",
+            en: "Voted correct!"
+        },
+        selfFalse: {
+            ch: "遗憾你选错了凶手",
+            en: "Voted wrong!"
+        },
+        txtResultMaxVoted: {
+            ch: "{username}得票最高",
+            en: "The most gamer voted {username}"
+        },
+        talkingPeople: {
+            ch: "{username}发言中...",
+            en: "{username} speaking..."
+        },
+        setting: {
+            ch: "设置",
+            en: "Setting"
+        },
+        role1: {
+            ch: "选择",
+            en: "Choose a"
+        },
+        role2: {
+            ch: "角色",
+            en: "Character"
+        },
+        notFullButStart: {
+            ch: "人数未满，房主发起提前开始游戏，\n是否同意？",
+            en: "Not full,But the host want to start,\nDo you agree?"
+        },
+        roomNumberHtml: {
+            ch: `<span>房间号:<span style="color:#ff6f48;">{roomNum}</span></span>`,
+            en: `<span>Room Number:<span style="color:#ff6f48;">{roomNum}</span></span>`
+        },
+        roomNumber1: {
+            ch: "房间号:{roomNum}",
+            en: "Room Number:{roomNum}"
+        },
+        roomNumber: {
+            ch: "房间号:",
+            en: "Room Number:"
+        },
+        readyedPeople: {
+            ch: "已准备玩家",
+            en: "Ready"
+        },
+        SSSC: {
+            ch: "属性/时长",
+            en: "Attrbute/Duration"
+        },
+        timeSZ: {
+            ch: "搜证时间",
+            en: "Time Find"
+        },
+        timeFY: {
+            ch: "发言时间",
+            en: "Time Chat"
+        },
+        timeTP: {
+            ch: "投票时间",
+            en: "Time Vote"
+        },
+        QJ: {
+            ch: "前进",
+            en: "Forward"
+        },
+        HT: {
+            ch: "后退",
+            en: "Back"
+        },
+        ZY: {
+            ch: "左移",
+            en: "Left"
+        },
+        YY: {
+            ch: "右移",
+            en: "Right"
+        },
+        XD: {
+            ch: "下蹲",
+            en: "Down"
         }
     };
 
@@ -10442,6 +10914,12 @@
             this.listTag.selectHandler = new Laya.Handler(this, this.changeSelectedTag);
             EventManager.sub("game/updateStepRender", this, e => {
                 this.changeStep();
+            });
+            EventManager.sub("game/showNPC", this, e => {
+                this.changeMainWrap("wrapNPC");
+            });
+            EventManager.sub("game/showBook", this, e => {
+                this.changeMainWrap("wrapBook");
             });
             this.smallModalCloser.on(Laya.Event.CLICK, this, this.closeAllSmallModal);
         }
