@@ -489,7 +489,7 @@
                                 "hintSetting"
                             ]);
                         });
-                        GameManager.timeTitle = DataLang.getTxtByType('selfIntro');
+                        GameManager.timeTitle = DataLang.getTxtByType("selfIntro");
                         Agora.joinRoom();
                         break;
                     }
@@ -625,7 +625,13 @@
                         break;
                     }
                     case "SIGNAL_VALID": {
-                        GameManager.audioChecked.push(data);
+                        let idx = GameManager.audioChecked.findIndex(e => e.userId == data.userId);
+                        if (idx > -1) {
+                            GameManager.audioChecked[idx] = data;
+                        }
+                        else {
+                            GameManager.audioChecked.push(data);
+                        }
                         EventManager.pub("room/updateRoomInfo");
                         break;
                     }
@@ -7152,6 +7158,7 @@
             en: "Down"
         }
     };
+    window["DataLang"] = DataLang;
 
     class Scene3dConfig {
         static getConfigByName(name) {
@@ -11938,7 +11945,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GamaCluDetail.scene";
+    GameConfig.startScene = "modal/ModalAudioTest.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
@@ -11974,6 +11981,7 @@
         }
         onConfigLoaded() {
             return __awaiter(this, void 0, void 0, function* () {
+                DataLang.lang = Utils.getQueryVariable("lang") || "zh-CN";
                 new window["ClipboardJS"](".btn-copy");
                 window["GameManager"] = GameManager;
                 window["UIManager"] = UIManager;
