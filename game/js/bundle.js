@@ -3319,7 +3319,7 @@
                     title: "强效迷药解毒剂",
                     content: "强效迷药解毒剂",
                     img: "book1/AR001.png",
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
                 }
             ]);
         }
@@ -4917,7 +4917,8 @@
                     id: DetailItemIdConfig$1.room2_HR001,
                     key: "room2_HR001",
                     img: `book2/${DataLang.lang}/Hanson/HR001.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR001")
                 }
             ]);
         }
@@ -4927,7 +4928,8 @@
                     id: DetailItemIdConfig$1.room2_HR002,
                     key: "room2_HR002",
                     img: `book2/${DataLang.lang}/Hanson/HR002.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR002")
                 }
             ]);
         }
@@ -4947,7 +4949,8 @@
                     id: DetailItemIdConfig$1.room2_HR004,
                     key: "room2_HR004",
                     img: `book2/${DataLang.lang}/Hanson/HR004.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR004")
                 }
             ]);
         }
@@ -4957,7 +4960,8 @@
                     id: DetailItemIdConfig$1.room2_HR005,
                     key: "room2_HR005",
                     img: `book2/${DataLang.lang}/Hanson/HR005.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR005")
                 }
             ]);
         }
@@ -4967,7 +4971,8 @@
                     id: DetailItemIdConfig$1.room2_HR006,
                     key: "room2_HR006",
                     img: `book2/${DataLang.lang}/Hanson/HR006.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR006")
                 }
             ]);
         }
@@ -4977,7 +4982,8 @@
                     id: DetailItemIdConfig$1.room2_HR007,
                     key: "room2_HR007",
                     img: `book2/${DataLang.lang}/Hanson/HR007.jpeg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR007")
                 }
             ]);
         }
@@ -4987,7 +4993,8 @@
                     id: DetailItemIdConfig$1.room2_HR008,
                     key: "room2_HR008",
                     img: `book2/${DataLang.lang}/Hanson/HR008.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR008")
                 }
             ]);
         }
@@ -4997,7 +5004,8 @@
                     id: DetailItemIdConfig$1.room2_HR016,
                     key: "room2_HR016",
                     img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR016")
                 }
             ]);
         }
@@ -5007,7 +5015,8 @@
                     id: DetailItemIdConfig$1.room2_HR015,
                     key: "room2_HR015",
                     img: `book2/${DataLang.lang}/Hanson/HR015.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR015")
                 }
             ]);
         }
@@ -5017,7 +5026,8 @@
                     id: DetailItemIdConfig$1.room2_HR014,
                     key: "room2_HR014",
                     img: `book2/${DataLang.lang}/Hanson/HR014.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR014")
                 }
             ]);
         }
@@ -5051,7 +5061,8 @@
                     id: DetailItemIdConfig$1.room2_CR001,
                     key: "room2_CR001",
                     img: `book2/${DataLang.lang}/Caroline/CR001.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR001")
                 }
             ]);
         }
@@ -5061,7 +5072,8 @@
                     id: DetailItemIdConfig$1.room2_CR002,
                     key: "room2_CR002",
                     img: `book2/${DataLang.lang}/Caroline/CR002.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR002")
                 }
             ]);
         }
@@ -5071,7 +5083,8 @@
                     id: DetailItemIdConfig$1.room2_CR003,
                     key: "room2_CR003",
                     img: `book2/${DataLang.lang}/Caroline/CR003.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR003")
                 }
             ]);
         }
@@ -5081,7 +5094,8 @@
                     id: DetailItemIdConfig$1.room2_CR004,
                     key: "room2_CR004",
                     img: `book2/${DataLang.lang}/Caroline/CR004.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR004")
                 }
             ]);
         }
@@ -5091,7 +5105,8 @@
                     id: DetailItemIdConfig$1.room2_CR005,
                     key: "room2_CR005",
                     img: `book2/${DataLang.lang}/Caroline/CR005.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR005")
                 }
             ]);
         }
@@ -5101,7 +5116,8 @@
                     id: DetailItemIdConfig$1.room2_CR006,
                     key: "room2_CR006",
                     img: `book2/${DataLang.lang}/Caroline/CR006.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR006")
                 }
             ]);
         }
@@ -5111,7 +5127,8 @@
                     id: DetailItemIdConfig$1.room2_CR007,
                     key: "room2_CR007",
                     img: `book2/${DataLang.lang}/Caroline/CR007.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR007")
                 }
             ]);
         }
@@ -5121,7 +5138,8 @@
                     id: DetailItemIdConfig$1.room2_CR008,
                     key: "room2_CR008",
                     img: `book2/${DataLang.lang}/Caroline/CR008.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("CR008")
                 }
             ]);
         }
@@ -5140,7 +5158,8 @@
                     id: DetailItemIdConfig$1.room2_JR001,
                     key: "room2_JR001",
                     img: `book2/${DataLang.lang}/Johnathan/JR001.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("JR001")
                 }
             ]);
         }
@@ -5160,7 +5179,8 @@
                     id: DetailItemIdConfig$1.room2_JR003,
                     key: "room2_JR003",
                     img: `book2/${DataLang.lang}/Johnathan/JR003.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("JR003")
                 }
             ]);
         }
@@ -5180,7 +5200,8 @@
                     id: DetailItemIdConfig$1.room2_JR005,
                     key: "room2_JR005",
                     img: `book2/${DataLang.lang}/Johnathan/JR005.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("JR005")
                 }
             ]);
         }
@@ -5335,7 +5356,8 @@
                     id: DetailItemIdConfig$1.room2_MR003,
                     key: "room2_MR003",
                     img: `book2/${DataLang.lang}/Margaret/MR003.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("MR003")
                 }
             ]);
         }
@@ -5375,7 +5397,8 @@
                     id: DetailItemIdConfig$1.room2_MR007,
                     key: "room2_MR007",
                     img: `book2/${DataLang.lang}/Margaret/MR007.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("MR007")
                 }
             ]);
         }
@@ -5385,7 +5408,8 @@
                     id: DetailItemIdConfig$1.room2_MR008,
                     key: "room2_MR008",
                     img: `book2/${DataLang.lang}/Margaret/MR008.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("MR008")
                 }
             ]);
         }
@@ -5395,7 +5419,8 @@
                     id: DetailItemIdConfig$1.room2_MR009,
                     key: "room2_MR009",
                     img: `book2/${DataLang.lang}/Margaret/MR009.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("MR009")
                 }
             ]);
         }
@@ -5432,7 +5457,8 @@
                     id: DetailItemIdConfig$1.room2_AR004,
                     key: "room2_AR004",
                     img: `book2/${DataLang.lang}/Abraham/AR004.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR004")
                 }
             ]);
         }
@@ -5452,7 +5478,8 @@
                     id: DetailItemIdConfig$1.room2_AR007,
                     key: "room2_AR007",
                     img: `book2/${DataLang.lang}/Abraham/AR007.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR007")
                 }
             ]);
         }
@@ -5462,7 +5489,8 @@
                     id: DetailItemIdConfig$1.room2_AR008,
                     key: "room2_AR008",
                     img: `book2/${DataLang.lang}/Abraham/AR008.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR008")
                 }
             ]);
         }
@@ -5482,7 +5510,8 @@
                     id: DetailItemIdConfig$1.room2_AR005,
                     key: "room2_AR005",
                     img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR005")
                 }
             ]);
         }
@@ -5492,7 +5521,8 @@
                     id: DetailItemIdConfig$1.room2_AR003,
                     key: "room2_AR003",
                     img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR003")
                 }
             ]);
         }
@@ -5512,7 +5542,8 @@
                     id: DetailItemIdConfig$1.room2_AR001,
                     key: "room2_AR001",
                     img: `book2/${DataLang.lang}/Abraham/AR001.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR001")
                 }
             ]);
         }
@@ -5527,7 +5558,8 @@
                     title: "床头柜上",
                     content: "教授写的信",
                     img: `book2/${DataLang.lang}/hall/PA004.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("PA004")
                 }
             ]);
         }
@@ -5539,7 +5571,8 @@
                     title: "床头柜上",
                     content: "教授写的信",
                     img: `book2/${DataLang.lang}/hall/PA003.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("PA003")
                 }
             ]);
         }
@@ -5551,7 +5584,8 @@
                     title: "床头柜上",
                     content: "教授写的信",
                     img: `book2/${DataLang.lang}/hall/PA002.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("PA002")
                 }
             ]);
         }
@@ -5563,14 +5597,160 @@
                     title: "床头柜上",
                     content: "教授写的信",
                     img: `book2/${DataLang.lang}/hall/PA001.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("PA001")
                 }
             ]);
         }
     }
 
     class BookConfig2 {
+        static getDetail(type) {
+            return this.detailList[type][DataLang.lang];
+        }
     }
+    BookConfig2.detailList = {
+        AR001: {
+            ch: "鱼竿上的没有鱼线，鱼线被分开放在旁边。",
+            en: "鱼竿上的没有鱼线，鱼线被分开放在旁边。"
+        },
+        AR003: {
+            ch: "一摞现金，有400美金",
+            en: "一摞现金，有400美金"
+        },
+        AR004: {
+            ch: "工资单，每月固定有20美金收入",
+            en: "工资单，每月固定有20美金收入"
+        },
+        AR005: {
+            ch: "银行存款收据，日期是2个月前，存入金额为500美金",
+            en: "银行存款收据，日期是2个月前，存入金额为500美金"
+        },
+        AR007: {
+            ch: "相框中有各种款式的浮标，做的像是收藏品",
+            en: "相框中有各种款式的浮标，做的像是收藏品"
+        },
+        AR008: {
+            ch: "烧过的灰烬，已经无法辨认",
+            en: "烧过的灰烬，已经无法辨认"
+        },
+        MR003: {
+            ch: "框里有各式各样的编制用毛线和透明丝线",
+            en: "框里有各式各样的编制用毛线和透明丝线"
+        },
+        MR007: {
+            ch: "1000多美元的现金，这可不是一笔小数目",
+            en: "1000多美元的现金，这可不是一笔小数目"
+        },
+        MR008: {
+            ch: "精致的盒子里收藏着一堆红酒塞，下面放着一小瓶杀虫药",
+            en: "精致的盒子里收藏着一堆红酒塞，下面放着一小瓶杀虫药"
+        },
+        MR009: {
+            ch: "这里的礼服每一件都不便宜",
+            en: "这里的礼服每一件都不便宜"
+        },
+        OR005: {
+            ch: "一条右半边的心形项链，看起来价格不菲",
+            en: "一条右半边的心形项链，看起来价格不菲"
+        },
+        JR001: {
+            ch: "盆栽，有花茎上的花已经被摘走",
+            en: "盆栽，有花茎上的花已经被摘走"
+        },
+        JR003: {
+            ch: "各种的水手结的装饰品",
+            en: "各种的水手结的装饰品"
+        },
+        JR005: {
+            ch: "一瓶名贵的威士忌，经检验，酒里没有发现任何可疑物质",
+            en: "一瓶名贵的威士忌，经检验，酒里没有发现任何可疑物质"
+        },
+        CR001: {
+            ch: "一朵摘下的鲜花，还没有枯萎",
+            en: "一朵摘下的鲜花，还没有枯萎"
+        },
+        CR002: {
+            ch: "一部关于读心术的书籍",
+            en: "一部关于读心术的书籍"
+        },
+        CR003: {
+            ch: "看起来像是某种酒的配方",
+            en: "看起来像是某种酒的配方"
+        },
+        CR004: {
+            ch: "水桶里有各种草药和粉末",
+            en: "水桶里有各种草药和粉末"
+        },
+        CR006: {
+            ch: "瓶子上的标签贴着杀虫剂",
+            en: "瓶子上的标签贴着杀虫剂"
+        },
+        CR007: {
+            ch: "用于算命的塔罗牌",
+            en: "用于算命的塔罗牌"
+        },
+        CR008: {
+            ch: "织了一半的渔网",
+            en: "织了一半的渔网"
+        },
+        HR001: {
+            ch: "一瓶自制的酒，经检验，酒里有大量迷药残留",
+            en: "一瓶自制的酒，经检验，酒里有大量迷药残留"
+        },
+        HR002: {
+            ch: "手枪上有一枚血指纹，属于死者，把手上没有其他可疑指纹",
+            en: "手枪上有一枚血指纹，属于死者，把手上没有其他可疑指纹"
+        },
+        HR004: {
+            ch: "办公室的钥匙",
+            en: "办公室的钥匙"
+        },
+        HR005: {
+            ch: "增加一个案件负责人：戈登警长",
+            en: "增加一个案件负责人：戈登警长"
+        },
+        HR006: {
+            ch: "门锁上夹着一根透明的丝线",
+            en: "门锁上夹着一根透明的丝线"
+        },
+        HR007: {
+            ch: "一瓶名贵的威士忌，经检验，酒里发现有未知的粉末残留",
+            en: "一瓶名贵的威士忌，经检验，酒里发现有未知的粉末残留"
+        },
+        HR008: {
+            ch: "一尊价格不菲的雕像。底座下发现少量血迹，经鉴定，属于死者",
+            en: "一尊价格不菲的雕像。底座下发现少量血迹，经鉴定，属于死者"
+        },
+        HR014: {
+            ch: "窗台上发的鞋印非常模糊，无法提供更有效的调查结果",
+            en: "窗台上发的鞋印非常模糊，无法提供更有效的调查结果"
+        },
+        HR015: {
+            ch: "风筝有被使用过的痕迹，想必主人应该曾经使用过",
+            en: "风筝有被使用过的痕迹，想必主人应该曾经使用过"
+        },
+        HR016: {
+            ch: "一盒透明丝线，可用作钓鱼或风筝",
+            en: "一盒透明丝线，可用作钓鱼或风筝"
+        },
+        PA001: {
+            ch: "一瓶名贵的威士忌，经检验，酒里没有发现任何可疑物质",
+            en: "一瓶名贵的威士忌，经检验，酒里没有发现任何可疑物质"
+        },
+        PA002: {
+            ch: "一个小空瓶，里面有一些研磨的颗粒",
+            en: "一个小空瓶，里面有一些研磨的颗粒"
+        },
+        PA003: {
+            ch: "一个公文包，是一堆奥利佛的竞选材料和公司文件",
+            en: "一个公文包，是一堆奥利佛的竞选材料和公司文件"
+        },
+        PA004: {
+            ch: "里面装满了男性衣物和日用品",
+            en: "里面装满了男性衣物和日用品"
+        }
+    };
     BookConfig2.roleList_en = [
         {
             roleName: "乔纳森",
@@ -11945,7 +12125,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "modal/ModalAudioTest.scene";
+    GameConfig.startScene = "scene/SceneBook.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
