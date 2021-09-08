@@ -385,6 +385,40 @@
     Agora.flagInRoom = false;
     window["Agora"] = Agora;
 
+    class SoundManager {
+        static playEffect(url) {
+            Laya.SoundManager.playSound(url);
+        }
+        static playBgm(url) {
+            Laya.SoundManager.playMusic(url);
+        }
+        static stopBgm() {
+            Laya.SoundManager.stopMusic();
+        }
+        static playPB(url) {
+            this.soundPB = Laya.SoundManager.playSound(url);
+            this.togglePB(this.flagPlayPB);
+        }
+        static togglePB(flag) {
+            if (flag == undefined) {
+                this.flagPlayPB = !this.flagPlayPB;
+            }
+            else {
+                this.flagPlayPB = flag;
+            }
+            if (!this.soundPB) {
+                return;
+            }
+            if (this.flagPlayPB) {
+                this.soundPB.resume();
+            }
+            else {
+                this.soundPB.pause();
+            }
+        }
+    }
+    SoundManager.flagPlayPB = true;
+
     class WSManager {
         static sendHeartBeat() {
             let data = {
@@ -676,6 +710,7 @@
                         break;
                     }
                     case "FIRST_REQUEST_ENTER_TALKING": {
+                        SoundManager.stopBgm();
                         GameManager.gameRound = 1;
                         GameManager.step = "TALKING";
                         Agora.joinRoom();
@@ -689,6 +724,7 @@
                         break;
                     }
                     case "SECOND_REQUEST_ENTER_TALKING": {
+                        SoundManager.stopBgm();
                         GameManager.gameRound = 2;
                         GameManager.step = "TALKING";
                         Agora.joinRoom();
@@ -1503,6 +1539,7 @@
         }
         static leaveScene() {
             return __awaiter(this, void 0, void 0, function* () {
+                SoundManager.stopBgm();
                 let data = yield Utils.doAjax({
                     url: `/api/game/flow/${GameManager.userInfo.userId}/${GameManager.roomInfo.roomId}/exit/scene`,
                     method: "post",
@@ -2626,40 +2663,6 @@
         DetailItemIdConfig[DetailItemIdConfig["room2_HR016"] = 147] = "room2_HR016";
     })(DetailItemIdConfig || (DetailItemIdConfig = {}));
     var DetailItemIdConfig$1 = DetailItemIdConfig;
-
-    class SoundManager {
-        static playEffect(url) {
-            Laya.SoundManager.playSound(url);
-        }
-        static playBgm(url) {
-            Laya.SoundManager.playMusic(url);
-        }
-        static stopBgm() {
-            Laya.SoundManager.stopMusic();
-        }
-        static playPB(url) {
-            this.soundPB = Laya.SoundManager.playSound(url);
-            this.togglePB(this.flagPlayPB);
-        }
-        static togglePB(flag) {
-            if (flag == undefined) {
-                this.flagPlayPB = !this.flagPlayPB;
-            }
-            else {
-                this.flagPlayPB = flag;
-            }
-            if (!this.soundPB) {
-                return;
-            }
-            if (this.flagPlayPB) {
-                this.soundPB.resume();
-            }
-            else {
-                this.soundPB.pause();
-            }
-        }
-    }
-    SoundManager.flagPlayPB = true;
 
     class Oprate3dTool {
         static get events() {
@@ -10946,7 +10949,9 @@
                     if (config.script) {
                         scene.addComponent(config.script);
                     }
-                    SoundManager.playBgm("sound/bgm.mp3");
+                    if (sceneName != "hall" && sceneName != "Hall") {
+                        SoundManager.playBgm("sound/bgm.mp3");
+                    }
                     UIManager.showHint(["hintSearch"]);
                 }));
             });
@@ -11090,7 +11095,6 @@
             this.btnExit.on(Laya.Event.CLICK, this, (e) => __awaiter(this, void 0, void 0, function* () {
                 yield NetController.leaveScene();
                 GameManager.currentScene = "";
-                SoundManager.stopBgm();
                 self.updateRender();
                 self.changeMainWrap("sceneChanger");
             }));
@@ -12125,7 +12129,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneBook.scene";
+    GameConfig.startScene = "scene/SceneGame.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
