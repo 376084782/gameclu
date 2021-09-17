@@ -932,6 +932,9 @@
         static get isTest() {
             return +Utils.getQueryVariable("test") == 1;
         }
+        static get murderRoleId() {
+            return GameManager.roomInfo.gsId == 1 ? 1 : 2;
+        }
         static getMurderUserId() {
             return GameManager.selectRoleMapRoleToUser[GameManager.murderRoleId];
         }
@@ -1092,7 +1095,7 @@
                         }
                         case "PRE_TALKING": {
                             Agora.joinRoom();
-                            GameManager.timeTitle = DataLang.getTxtByType('selfIntro');
+                            GameManager.timeTitle = DataLang.getTxtByType("selfIntro");
                             yield UIManager.goScene("scene/SceneTalking.scene");
                             EventManager.pub("talking/changeCurrent", {
                                 talkingUserId: dataGame.talkingUserId
@@ -1376,7 +1379,6 @@
     GameManager.ditectiveRoleId = 6;
     GameManager.iconChatNotRead = 0;
     GameManager.chatBoxOpened = true;
-    GameManager.murderRoleId = 1;
     GameManager.chatList = [];
     GameManager.sceneMap = {};
     GameManager.listAnswered = {};
@@ -1400,7 +1402,7 @@
         roomName: "",
         roomNum: 0,
         publicFlag: 1,
-        gsId: 2
+        gsId: 1
     };
     GameManager.voteMap = {};
     GameManager.userInfo = {
@@ -4746,6 +4748,8 @@
     ];
     BookConfig1.quesConfig_ch = [
         {
+            roleName: "保安",
+            img: "book1/img_role8.png",
             roleId: 6,
             quesList: [
                 {
@@ -4825,6 +4829,8 @@
     ];
     BookConfig1.quesConfig_en = [
         {
+            roleName: "保安",
+            img: "book1/img_role8.png",
             roleId: 6,
             quesList: [
                 {
@@ -5764,7 +5770,7 @@
             pangbaiUrl: "sound/Joe_ch.mp3",
             detail: "海军水手，身材健壮，皮肤黝黑。刚刚退伍，回到小镇。",
             id: 1,
-            img: "book1/img_role2.png",
+            img: "book2/role/img_role1.png",
             content: `你是<span style="color:#ff3232"><span style="color:#ff3232">汉森</span></span>镇长的弟弟。曾经的你，和哥哥关系亲密，互相扶持着在市井中一起长大。在贫苦的环境中，你们只能通过不法的手段赚钱养活自己。天性纯良的你，慢慢的开始厌恶打打杀杀的生活。离开了小镇，入伍成为一名海军。从海军退伍后，你又回到了小镇福克斯，探望自己的哥哥。<br/>
       15年前<br/>
       作为哥哥的左右手，你做了许多为人所不齿的事情，你对善恶的界限开始麻木。直到有一天，你的哥哥为了自己的利益，诬陷并烧死了一个外乡的女孩儿。终于在良知的责备下，你和哥哥大吵了一架，哥哥的冷漠让你感到绝望。你决定远离现在罪恶的生活和邪恶的哥哥。<br/>
@@ -5787,7 +5793,7 @@
             relation: "",
             detail: "美丽开朗。靠售卖吉普赛草药食品和算命生活。",
             id: 2,
-            img: "book1/img_role3.png",
+            img: "book2/role/img_role2.png",
             content: `你叫<span style="color:#ff3232">卡洛琳</span>，是一个吉普赛后裔，从小便跟着家人颠沛流离。长大后，你厌倦了这一切，于是离开了家人，开始一个人流浪。你来到小镇福克斯已经3个多月了，靠着算命和流传的吉普赛手艺，过起了稳定的生活。<br/>
       15年前<br/>
       就像所有涉世未深的小女孩，你和家人们一起生活，从一个小镇流浪到另一个小镇。慢慢的，你们发现这现在的小镇对外乡人越来越不友好。听说最近镇上烧死了一个吉普赛女巫，恐惧的氛围笼罩了整座小镇，你的家人和大多数族人一样，选择搬离这个是非之地。<br/>
@@ -5813,7 +5819,7 @@
             relation: "",
             detail: "高贵大方。每天过着锦衣玉食的阔太太生活。",
             id: 3,
-            img: "book1/img_role1.png",
+            img: "book2/role/img_role3.png",
             content: `你叫玛格丽特，是镇长<span style="color:#ff3232">汉森</span>的夫人。你很清楚丈夫的财富和权力来路不正，却贪恋于现在富足的生活，对他的犯罪行为选择了缄默。十年的婚姻里，你住的是小镇里最好的房子，穿的是最精致的衣服，喝着最贵的酒。但是这样的生活却始终无法满足你情感上的空虚，因为你的心，一直都属于那个在远方的初恋。<br/>
       10年前<br/>
       你在这个小镇上长大，父亲是个矿工，母亲在酒吧里调酒。你从小都没有体会过富人的生活，自视甚高的你一直在埋怨命运的不公。然而，不公的命运却赐予了你一份最美妙的爱情。你们如胶似漆，正准备谈婚论嫁的时候，你的初恋却因为强制兵役离开了你们居住的小镇，没过多久，你收到消息，服役中的他死于意外。就在你痛苦万分的时候，<span style="color:#ff3232">汉森</span>走进了你的生活，这个有权有势的男人对你展开追求，没多久，绝望中的你接受了他的求婚。<br/>
@@ -5834,7 +5840,7 @@
             relation: "",
             detail: "身材瘦削，眼神坚毅。小镇政坛冉冉升起的新星。",
             id: 4,
-            img: "book1/img_role4.png",
+            img: "book2/role/img_role4.png",
             content: `你的名字叫<span style="color:#ff3232">奥斯卡</span>。在几年的牢狱生活后，你回到了这座熟悉的小镇。这一切，始于你对现任镇长<span style="color:#ff3232">汉森</span>的仇恨。你要摧毁他那光鲜外表下，用罪恶支撑起的邪恶帝国。更要为当年，被他害死的爱人报仇。现在的你，早已将名字改为<span style="color:#ff3232">奥利佛</span>。经过了几年的努力，现在的你作为一名富商，正欲跻身政坛，与你的仇人<span style="color:#ff3232">汉森</span>一起，竞争下一届的镇长。<br/>
       15年前<br/>
       做为一个年轻的银行家，你凭借着对金融的天赋，很快便在同行中崭露头角。你不仅得到了可观的财富，同时还收获了一份宝贵的爱情。你于一位叫<span style="color:#ff3232">艾丝美拉达</span>的吉普赛女孩坠入爱河，虽然他们神秘的族人为小镇的人所忌惮，但这对你们的爱情没有丝毫影响。直到有一天，你发现镇上的人指责艾斯米拉达用巫术蛊惑了小镇的警长，并控制他自杀。排外的警长虽然和她有过节，但你确定，善良的<span style="color:#ff3232">艾丝美拉达</span>绝对不会做出这样的事情。在一个叫<span style="color:#ff3232">汉森</span>的流氓的怂恿下，愤怒的人群把艾斯米拉达当成女巫抓了起来，最终被烧死在十字架上。<br/>
@@ -5859,7 +5865,7 @@
             relation: "",
             detail: "身体强壮，精力充沛。操着一口外乡口音的年轻人。",
             id: 5,
-            img: "book1/img_role5.png",
+            img: "book2/role/img_role5.png",
             content: `你叫亚伯拉罕。不久前，你回到了这座叫福克斯的小镇，寻找关于你生母死亡的真相。为了生活，你成了<span style="color:#ff3232">汉森</span>镇长的保镖。这份工作给你提供了稳定的收入。慢慢的，镇长一些可疑的行为引起了你的注意。 后来，你发现<span style="color:#ff3232">汉森</span>是用违法手段，靠暴力和贿赂，维持自己在小镇的身份与地位。但是作为一个外乡人，迫于生计，你不得不向现实低头，成为<span style="color:#ff3232">汉森</span>的爪牙之一。<br/>
       15年前<br/>
       母亲在你三岁的时候就去世了，你辗转被另一座小镇上的一家好心人收养。直到你成年那天，你的养父母在无意间透露了你的亲生母亲是被福克斯小镇上的居民当成女巫烧死的。悲伤和震惊之余，你决定搬回福克斯，寻求事情的真相。你临走之前，你的养父母把你母亲的遗物，半颗心形的吊坠交还到你的手里。<br/>
@@ -5881,7 +5887,7 @@
             detail: "小镇的警长，不拘言笑。刚调任不久，因一丝不苟的态度很快让小镇的人们信服，相传他为人公正却保守。",
             relation: "",
             id: 6,
-            img: "book1/img_role7.png",
+            img: "book2/role/img_role6.png",
             content: `你数月前来到小镇福克斯，开始清理上一任警长留下的烂摊子。最近总有人匿名给你送来一些镇长汉森的黑料，经调查后，你发现这些竟然并非空穴来风。你获得了足够多的证据后，向检察官申请了搜查令，要求汉森镇长配合调查。<br/>
       今天晚上8：00的时候，镇长夫人玛格丽特来警局找到你，说她的丈夫在家自杀身亡。你检查了现场，并让警员带回了下午出现在镇长别墅的嫌疑人： “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”<br/>`
         }
@@ -5896,7 +5902,7 @@
             pangbaiUrl: "sound/Joe_ch.mp3",
             detail: "海军水手，身材健壮，皮肤黝黑。刚刚退伍，回到小镇。",
             id: 1,
-            img: "book1/img_role2.png",
+            img: "book2/role/img_role1.png",
             content: `你是<span style="color:#ff3232"><span style="color:#ff3232">汉森</span></span>镇长的弟弟。曾经的你，和哥哥关系亲密，互相扶持着在市井中一起长大。在贫苦的环境中，你们只能通过不法的手段赚钱养活自己。天性纯良的你，慢慢的开始厌恶打打杀杀的生活。离开了小镇，入伍成为一名海军。从海军退伍后，你又回到了小镇福克斯，探望自己的哥哥。<br/>
       15年前<br/>
       作为哥哥的左右手，你做了许多为人所不齿的事情，你对善恶的界限开始麻木。直到有一天，你的哥哥为了自己的利益，诬陷并烧死了一个外乡的女孩儿。终于在良知的责备下，你和哥哥大吵了一架，哥哥的冷漠让你感到绝望。你决定远离现在罪恶的生活和邪恶的哥哥。<br/>
@@ -5919,7 +5925,7 @@
             relation: "",
             detail: "美丽开朗。靠售卖吉普赛草药食品和算命生活。",
             id: 2,
-            img: "book1/img_role3.png",
+            img: "book2/role/img_role2.png",
             content: `你叫<span style="color:#ff3232">卡洛琳</span>，是一个吉普赛后裔，从小便跟着家人颠沛流离。长大后，你厌倦了这一切，于是离开了家人，开始一个人流浪。你来到小镇福克斯已经3个多月了，靠着算命和流传的吉普赛手艺，过起了稳定的生活。<br/>
       15年前<br/>
       就像所有涉世未深的小女孩，你和家人们一起生活，从一个小镇流浪到另一个小镇。慢慢的，你们发现这现在的小镇对外乡人越来越不友好。听说最近镇上烧死了一个吉普赛女巫，恐惧的氛围笼罩了整座小镇，你的家人和大多数族人一样，选择搬离这个是非之地。<br/>
@@ -5945,7 +5951,7 @@
             relation: "",
             detail: "高贵大方。每天过着锦衣玉食的阔太太生活。",
             id: 3,
-            img: "book1/img_role1.png",
+            img: "book2/role/img_role3.png",
             content: `你叫玛格丽特，是镇长<span style="color:#ff3232">汉森</span>的夫人。你很清楚丈夫的财富和权力来路不正，却贪恋于现在富足的生活，对他的犯罪行为选择了缄默。十年的婚姻里，你住的是小镇里最好的房子，穿的是最精致的衣服，喝着最贵的酒。但是这样的生活却始终无法满足你情感上的空虚，因为你的心，一直都属于那个在远方的初恋。<br/>
       10年前<br/>
       你在这个小镇上长大，父亲是个矿工，母亲在酒吧里调酒。你从小都没有体会过富人的生活，自视甚高的你一直在埋怨命运的不公。然而，不公的命运却赐予了你一份最美妙的爱情。你们如胶似漆，正准备谈婚论嫁的时候，你的初恋却因为强制兵役离开了你们居住的小镇，没过多久，你收到消息，服役中的他死于意外。就在你痛苦万分的时候，<span style="color:#ff3232">汉森</span>走进了你的生活，这个有权有势的男人对你展开追求，没多久，绝望中的你接受了他的求婚。<br/>
@@ -5966,7 +5972,7 @@
             relation: "",
             detail: "身材瘦削，眼神坚毅。小镇政坛冉冉升起的新星。",
             id: 4,
-            img: "book1/img_role4.png",
+            img: "book2/role/img_role4.png",
             content: `你的名字叫<span style="color:#ff3232">奥斯卡</span>。在几年的牢狱生活后，你回到了这座熟悉的小镇。这一切，始于你对现任镇长<span style="color:#ff3232">汉森</span>的仇恨。你要摧毁他那光鲜外表下，用罪恶支撑起的邪恶帝国。更要为当年，被他害死的爱人报仇。现在的你，早已将名字改为<span style="color:#ff3232">奥利佛</span>。经过了几年的努力，现在的你作为一名富商，正欲跻身政坛，与你的仇人<span style="color:#ff3232">汉森</span>一起，竞争下一届的镇长。<br/>
       15年前<br/>
       做为一个年轻的银行家，你凭借着对金融的天赋，很快便在同行中崭露头角。你不仅得到了可观的财富，同时还收获了一份宝贵的爱情。你于一位叫<span style="color:#ff3232">艾丝美拉达</span>的吉普赛女孩坠入爱河，虽然他们神秘的族人为小镇的人所忌惮，但这对你们的爱情没有丝毫影响。直到有一天，你发现镇上的人指责艾斯米拉达用巫术蛊惑了小镇的警长，并控制他自杀。排外的警长虽然和她有过节，但你确定，善良的<span style="color:#ff3232">艾丝美拉达</span>绝对不会做出这样的事情。在一个叫<span style="color:#ff3232">汉森</span>的流氓的怂恿下，愤怒的人群把艾斯米拉达当成女巫抓了起来，最终被烧死在十字架上。<br/>
@@ -5991,7 +5997,7 @@
             relation: "",
             detail: "身体强壮，精力充沛。操着一口外乡口音的年轻人。",
             id: 5,
-            img: "book1/img_role5.png",
+            img: "book2/role/img_role5.png",
             content: `你叫亚伯拉罕。不久前，你回到了这座叫福克斯的小镇，寻找关于你生母死亡的真相。为了生活，你成了<span style="color:#ff3232">汉森</span>镇长的保镖。这份工作给你提供了稳定的收入。慢慢的，镇长一些可疑的行为引起了你的注意。 后来，你发现<span style="color:#ff3232">汉森</span>是用违法手段，靠暴力和贿赂，维持自己在小镇的身份与地位。但是作为一个外乡人，迫于生计，你不得不向现实低头，成为<span style="color:#ff3232">汉森</span>的爪牙之一。<br/>
       15年前<br/>
       母亲在你三岁的时候就去世了，你辗转被另一座小镇上的一家好心人收养。直到你成年那天，你的养父母在无意间透露了你的亲生母亲是被福克斯小镇上的居民当成女巫烧死的。悲伤和震惊之余，你决定搬回福克斯，寻求事情的真相。你临走之前，你的养父母把你母亲的遗物，半颗心形的吊坠交还到你的手里。<br/>
@@ -6013,7 +6019,7 @@
             detail: "小镇的警长，不拘言笑。刚调任不久，因一丝不苟的态度很快让小镇的人们信服，相传他为人公正却保守。",
             relation: "",
             id: 6,
-            img: "book1/img_role7.png",
+            img: "book2/role/img_role6.png",
             content: `你数月前来到小镇福克斯，开始清理上一任警长留下的烂摊子。最近总有人匿名给你送来一些镇长汉森的黑料，经调查后，你发现这些竟然并非空穴来风。你获得了足够多的证据后，向检察官申请了搜查令，要求汉森镇长配合调查。<br/>
       今天晚上8：00的时候，镇长夫人玛格丽特来警局找到你，说她的丈夫在家自杀身亡。你检查了现场，并让警员带回了下午出现在镇长别墅的嫌疑人： “这到底是自杀还是他杀？你们几个今天下午在别墅周围出现过，把你们知道的都给我老实交代出来，镇长的死可是大事！你们要还原出今天下午这栋房子里到底发生了什么，给所有人一个交代。不然，你们都要吃不了兜着走！”<br/>`
         }
@@ -6024,7 +6030,9 @@
     };
     BookConfig2.quesConfig_ch = [
         {
-            roleId: 6,
+            roleId: 8,
+            roleName: "吧台女招待",
+            img: "book2/role/img_role11.png",
             quesList: [
                 {
                     id: 1,
@@ -6065,7 +6073,9 @@
             ]
         },
         {
-            roleId: 7,
+            roleId: 9,
+            roleName: "警员",
+            img: "book2/role/img_role12.png",
             quesList: [
                 {
                     id: 1,
@@ -6096,7 +6106,9 @@
     ];
     BookConfig2.quesConfig_en = [
         {
-            roleId: 6,
+            roleId: 8,
+            roleName: "吧台女招待",
+            img: "book2/role/img_role11.png",
             quesList: [
                 {
                     id: 1,
@@ -6137,7 +6149,9 @@
             ]
         },
         {
-            roleId: 7,
+            roleId: 9,
+            roleName: "警员",
+            img: "book2/role/img_role12.png",
             quesList: [
                 {
                     id: 1,
@@ -8030,6 +8044,7 @@
             });
             this.initWrapClu();
             this.initNote();
+            this.listTag.selectedIndex = 2;
         }
         initWrapClu() {
             let wrap = this.wrapDetailClu;
@@ -8890,12 +8905,13 @@
                             listAnswered = [];
                             GameManager.listAnswered[selNpcConfig.roleId] = listAnswered;
                         }
-                        if (listAnswered.indexOf(data.id) == -1) {
+                        if (listAnswered && listAnswered.indexOf(data.id) == -1) {
                             if (listAnswered.length >= Scene3dConfig.maxAnswerTime) {
                                 UIManager.showMessage("超出上限，无法询问。");
                                 return;
                             }
                             listAnswered.push(data.id);
+                            this.listNPC.refresh();
                         }
                         this.selectIdx = idx;
                         this.updateRender();
@@ -8914,7 +8930,7 @@
             let listAnswered = GameManager.listAnswered[selNpcConfig.roleId] || [];
             this.spList.forEach((cell, idx) => {
                 let data = this.listQues[idx];
-                let flagAnswered = listAnswered.indexOf(data.id) > -1;
+                let flagAnswered = data && listAnswered.indexOf(data.id) > -1;
                 let select = cell.getChildByName("select");
                 let num = cell.getChildByName("num");
                 let title = cell.getChildByName("title");
@@ -8929,18 +8945,21 @@
                 let username = cell.getChildByName("username");
                 let chance = cell.getChildByName("chance");
                 let avatar = cell.getChildByName("avatar");
-                let roleData = Scene3dConfig.getRoleInfoByRoleId(data.roleId);
-                username.text = roleData.roleName;
+                username.text = data.roleName;
                 let listAnswered = GameManager.listAnswered[data.roleId];
                 let answeredTime = listAnswered ? listAnswered.length : 0;
                 chance.text = `${answeredTime}/${Scene3dConfig.maxAnswerTime}`;
-                avatar.skin = roleData.img;
+                avatar.skin = data.img;
             });
             this.listNPC.array = Scene3dConfig.quesConfig;
+            this.listNPC.visible = this.listNPC.array.length > 1;
+            this.listNPC.selectHandler = new Laya.Handler(this, idx => {
+                let selNpcConfig = this.listNPC.array[this.listNPC.selectedIndex];
+                this.roleImg.skin = selNpcConfig.img;
+                this.initRender(selNpcConfig.quesList);
+                this.updateRender();
+            });
             this.listNPC.selectedIndex = 0;
-            let selNpcConfig = this.listNPC.array[this.listNPC.selectedIndex];
-            this.initRender(selNpcConfig.quesList);
-            this.updateRender();
         }
         updateRender() {
             let data = this.listQues[this.selectIdx];
@@ -9560,6 +9579,9 @@
                 this.btnClose.on(Laya.Event.CLICK, this, e => {
                     this.close();
                 });
+                this.btnPlay.on(Laya.Event.CLICK, this, e => {
+                    SoundManager.playBgm("sound/bgm.mp3");
+                });
                 this.checkLocal();
             });
         }
@@ -9574,6 +9596,7 @@
             });
         }
         onClosed() {
+            SoundManager.stopBgm();
             this.timer.clearAll(this);
             this.localTrack && this.localTrack.close();
         }
@@ -12129,7 +12152,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "scene/SceneGame.scene";
+    GameConfig.startScene = "component/GameNPC.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
