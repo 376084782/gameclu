@@ -736,8 +736,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-Line044.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											0.001871488,
+											0.01024479,
+											0.0005949516
+										],
+										"size":[
+											0.01762208,
+											0.02184774,
+											0.01042678
+										]
 									}
 								],
 								"isTrigger":false
@@ -1106,8 +1115,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-Obj3d66-405792-9-449.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											0.1418607,
+											-0.1154862,
+											0.05273509
+										],
+										"size":[
+											0.3286098,
+											0.2755759,
+											0.1053626
+										]
 									}
 								],
 								"isTrigger":false
@@ -1541,8 +1559,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-Obj3d66-711884-2-127.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											9.536743E-07,
+											4.786998E-07,
+											-2.046393E-16
+										],
+										"size":[
+											0.08612654,
+											0.07276574,
+											0.04604138
+										]
 									}
 								],
 								"isTrigger":false
@@ -2371,8 +2398,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-对象014.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											-5.704351E-09,
+											-7.450581E-09,
+											3.49246E-10
+										],
+										"size":[
+											0.003995224,
+											0.004918976,
+											0.00505123
+										]
 									}
 								],
 								"isTrigger":false
@@ -2422,8 +2458,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-对象217.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											-1.164144E-10,
+											2.255141E-16,
+											3.49246E-10
+										],
+										"size":[
+											0.003995223,
+											0.004918976,
+											0.00505123
+										]
 									}
 								],
 								"isTrigger":false
@@ -2473,8 +2518,17 @@
 								"rollingFriction":0,
 								"shapes":[
 									{
-										"type":"MeshColliderShape",
-										"mesh":"Assets/model/1-对象218.lm"
+										"type":"BoxColliderShape",
+										"center":[
+											-7.566996E-09,
+											7.450581E-09,
+											3.49246E-10
+										],
+										"size":[
+											0.003995224,
+											0.004918976,
+											0.00505123
+										]
 									}
 								],
 								"isTrigger":false

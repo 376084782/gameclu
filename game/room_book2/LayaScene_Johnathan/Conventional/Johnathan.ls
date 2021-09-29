@@ -1835,43 +1835,6 @@
 						"type":"MeshSprite3D",
 						"instanceID":42,
 						"props":{
-							"name":"r_22_023",
-							"active":true,
-							"isStatic":false,
-							"layer":0,
-							"position":[
-								-0.4198001,
-								2.831409,
-								4.531122
-							],
-							"rotation":[
-								-0.7071068,
-								-1.545431E-08,
-								1.545431E-08,
-								-0.7071067
-							],
-							"scale":[
-								0.098828,
-								0.100254,
-								0.069235
-							],
-							"meshPath":"Assets/model/model-r_22_023.lm",
-							"enableRender":true,
-							"receiveShadows":true,
-							"castShadow":true,
-							"materials":[
-								{
-									"path":"Assets/model/New Material 28.lmat"
-								}
-							]
-						},
-						"components":[],
-						"child":[]
-					},
-					{
-						"type":"MeshSprite3D",
-						"instanceID":43,
-						"props":{
 							"name":"Rectangle070",
 							"active":true,
 							"isStatic":false,
@@ -1907,7 +1870,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":44,
+						"instanceID":43,
 						"props":{
 							"name":"Rectangle072",
 							"active":true,
@@ -1944,7 +1907,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":45,
+						"instanceID":44,
 						"props":{
 							"name":"Rectangle073",
 							"active":true,
@@ -1980,7 +1943,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":46,
+								"instanceID":45,
 								"props":{
 									"name":"QuadPatch003",
 									"active":true,
@@ -2033,7 +1996,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":47,
+						"instanceID":46,
 						"props":{
 							"name":"Rectangle074",
 							"active":true,
@@ -2070,7 +2033,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":48,
+						"instanceID":47,
 						"props":{
 							"name":"VR-灯光010",
 							"active":true,
@@ -2098,7 +2061,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":49,
+						"instanceID":48,
 						"props":{
 							"name":"VR灯光004",
 							"active":true,
@@ -2126,7 +2089,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":50,
+						"instanceID":49,
 						"props":{
 							"name":"VR灯光005",
 							"active":true,
@@ -2154,7 +2117,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":51,
+						"instanceID":50,
 						"props":{
 							"name":"VR灯光006",
 							"active":true,
@@ -2182,7 +2145,7 @@
 					},
 					{
 						"type":"Sprite3D",
-						"instanceID":52,
+						"instanceID":51,
 						"props":{
 							"name":"VR灯光007",
 							"active":true,
@@ -2210,7 +2173,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":53,
+						"instanceID":52,
 						"props":{
 							"name":"对象001",
 							"active":true,
@@ -2261,7 +2224,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":54,
+						"instanceID":53,
 						"props":{
 							"name":"Rectangle017",
 							"active":true,
@@ -2297,7 +2260,7 @@
 						"child":[
 							{
 								"type":"MeshSprite3D",
-								"instanceID":55,
+								"instanceID":54,
 								"props":{
 									"name":"Obj3d66-1163439-4-215",
 									"active":true,
@@ -2352,7 +2315,7 @@
 			},
 			{
 				"type":"MeshSprite3D",
-				"instanceID":56,
+				"instanceID":55,
 				"props":{
 					"name":"taideng (1)",
 					"active":true,
@@ -2389,7 +2352,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":57,
+				"instanceID":56,
 				"props":{
 					"name":"people",
 					"active":true,
@@ -2416,7 +2379,7 @@
 				"child":[
 					{
 						"type":"Camera",
-						"instanceID":58,
+						"instanceID":57,
 						"props":{
 							"name":"Main Camera",
 							"active":true,
@@ -2465,7 +2428,7 @@
 			},
 			{
 				"type":"Sprite3D",
-				"instanceID":59,
+				"instanceID":58,
 				"props":{
 					"name":"canMove",
 					"active":true,
@@ -2492,7 +2455,7 @@
 				"child":[
 					{
 						"type":"MeshSprite3D",
-						"instanceID":60,
+						"instanceID":59,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2553,7 +2516,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":61,
+						"instanceID":60,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2614,7 +2577,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":62,
+						"instanceID":61,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2675,7 +2638,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":63,
+						"instanceID":62,
 						"props":{
 							"name":"Cube",
 							"active":true,
@@ -2736,7 +2699,7 @@
 					},
 					{
 						"type":"MeshSprite3D",
-						"instanceID":64,
+						"instanceID":63,
 						"props":{
 							"name":"Cube (1)",
 							"active":true,

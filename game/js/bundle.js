@@ -1402,7 +1402,7 @@
         roomName: "",
         roomNum: 0,
         publicFlag: 1,
-        gsId: 1
+        gsId: 2
     };
     GameManager.voteMap = {};
     GameManager.userInfo = {
@@ -2104,6 +2104,11 @@
                         rsv(e.data);
                     }
                     else if (!e.code || e.code == 1) {
+                        UIManager.showConfirm({
+                            content: DataLang.lang == "en" ? e.enMsg : e.msg,
+                            onSure() { },
+                            onCancel() { }
+                        });
                         rej(e);
                     }
                     else {
@@ -2663,6 +2668,7 @@
         DetailItemIdConfig[DetailItemIdConfig["room2_HR014"] = 145] = "room2_HR014";
         DetailItemIdConfig[DetailItemIdConfig["room2_HR015"] = 146] = "room2_HR015";
         DetailItemIdConfig[DetailItemIdConfig["room2_HR016"] = 147] = "room2_HR016";
+        DetailItemIdConfig[DetailItemIdConfig["room2_HR017"] = 148] = "room2_HR017";
     })(DetailItemIdConfig || (DetailItemIdConfig = {}));
     var DetailItemIdConfig$1 = DetailItemIdConfig;
 
@@ -4948,7 +4954,8 @@
                     id: DetailItemIdConfig$1.room2_HR003,
                     key: "room2_HR003",
                     img: `book2/${DataLang.lang}/Hanson/HR003.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR003")
                 }
             ]);
         }
@@ -4990,7 +4997,7 @@
                 {
                     id: DetailItemIdConfig$1.room2_HR007,
                     key: "room2_HR007",
-                    img: `book2/${DataLang.lang}/Hanson/HR007.jpeg`,
+                    img: `book2/${DataLang.lang}/Hanson/HR007.png`,
                     sceneFrom: GameManager.currentScene,
                     reportDetail: BookConfig2.getDetail("HR007")
                 }
@@ -5007,25 +5014,47 @@
                 }
             ]);
         }
-        static clickHR016() {
+        static clickHR012() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.room2_HR016,
-                    key: "room2_HR016",
-                    img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
+                    id: DetailItemIdConfig$1.room2_HR012,
+                    key: "room2_HR012",
+                    img: `book2/${DataLang.lang}/Hanson/HR012.png`,
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: BookConfig2.getDetail("HR016")
+                    reportDetail: BookConfig2.getDetail("HR012")
                 }
             ]);
         }
-        static clickHR015() {
+        static clickHR011() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.room2_HR015,
-                    key: "room2_HR015",
-                    img: `book2/${DataLang.lang}/Hanson/HR015.png`,
+                    id: DetailItemIdConfig$1.room2_HR011,
+                    key: "room2_HR011",
+                    img: `book2/${DataLang.lang}/Hanson/HR011.png`,
                     sceneFrom: GameManager.currentScene,
-                    reportDetail: BookConfig2.getDetail("HR015")
+                    reportDetail: BookConfig2.getDetail("HR011")
+                }
+            ]);
+        }
+        static clickHR010() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR010,
+                    key: "room2_HR010",
+                    img: `book2/${DataLang.lang}/Hanson/HR010.png`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR010")
+                }
+            ]);
+        }
+        static clickHR013() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR013,
+                    key: "room2_HR013",
+                    img: `book2/${DataLang.lang}/Hanson/HR013.png`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR013")
                 }
             ]);
         }
@@ -5040,19 +5069,48 @@
                 }
             ]);
         }
-        static clickHR013() {
+        static clickHR015() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.room2_HR013,
-                    key: "room2_HR013",
-                    img: `book2/${DataLang.lang}/Hanson/HR013.png`,
-                    sceneFrom: GameManager.currentScene
+                    id: DetailItemIdConfig$1.room2_HR015,
+                    key: "room2_HR015",
+                    img: `book2/${DataLang.lang}/Hanson/HR015.jpg`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR015")
                 }
             ]);
+        }
+        static clickHR016() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR016,
+                    key: "room2_HR016",
+                    img: `book2/${DataLang.lang}/Hanson/HR016.jpg`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR016")
+                }
+            ]);
+        }
+        static clickHR017() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_HR017,
+                    key: "room2_HR017",
+                    img: `book2/${DataLang.lang}/Hanson/HR017.png`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR017")
+                }
+            ]);
+        }
+        static openBXG() {
+            let tar = Utils.findChildByName(Oprate3dTool.scene3d, "baoxianxiang111.组2143178434");
+            Utils.toggle3dOpen(tar, 5, 90);
         }
         static openDoor() {
             let tar = Utils.findChildByName(Oprate3dTool.scene3d, "model.Box1748");
             Utils.toggle3dOpen(tar, 1, -1.5);
+            let tar2 = Utils.findChildByName(Oprate3dTool.scene3d, "mensuo");
+            Utils.toggle3dOpen(tar2, 4, -70);
         }
         static clickHR009() {
             UIManager.showDetail([
@@ -5060,7 +5118,8 @@
                     id: DetailItemIdConfig$1.room2_HR009,
                     key: "room2_HR009",
                     img: `book2/${DataLang.lang}/Hanson/HR009.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("HR009")
                 }
             ]);
         }
@@ -5114,8 +5173,7 @@
                     id: DetailItemIdConfig$1.room2_CR005,
                     key: "room2_CR005",
                     img: `book2/${DataLang.lang}/Caroline/CR005.jpg`,
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: BookConfig2.getDetail("CR005")
+                    sceneFrom: GameManager.currentScene
                 }
             ]);
         }
@@ -5214,16 +5272,6 @@
                 }
             ]);
         }
-        static clickJR006() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_JR006,
-                    key: "room2_JR006",
-                    img: `book2/${DataLang.lang}/Johnathan/JR006.png`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
         static clickDX(tar) {
             Utils.toggle3dOpen(tar, 1, 0.15);
         }
@@ -5279,7 +5327,8 @@
                     id: DetailItemIdConfig$1.room2_OR005,
                     key: "room2_OR005",
                     img: `book2/${DataLang.lang}/Oliver/OR005.png`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("OR005")
                 }
             ]);
         }
@@ -5319,16 +5368,6 @@
                     id: DetailItemIdConfig$1.room2_OR009,
                     key: "room2_OR009",
                     img: `book2/${DataLang.lang}/Oliver/OR009.jpg`,
-                    sceneFrom: GameManager.currentScene
-                }
-            ]);
-        }
-        static clickOR010() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_OR010,
-                    key: "room2_OR010",
-                    img: `book2/${DataLang.lang}/Oliver/OR010.png`,
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -5460,7 +5499,18 @@
         static clickBan2(target) {
             Utils.toggle3dOpen(target, 4, 70);
         }
-        static clickQian1() {
+        static clickAR003() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR003,
+                    key: "room2_AR003",
+                    img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR003")
+                }
+            ]);
+        }
+        static clickAR004() {
             UIManager.showDetail([
                 {
                     id: DetailItemIdConfig$1.room2_AR004,
@@ -5471,12 +5521,23 @@
                 }
             ]);
         }
-        static clickAR009() {
+        static clickAR005() {
             UIManager.showDetail([
                 {
-                    id: DetailItemIdConfig$1.room2_AR009,
-                    key: "room2_AR009",
-                    img: `book2/${DataLang.lang}/Abraham/AR009.png`,
+                    id: DetailItemIdConfig$1.room2_AR005,
+                    key: "room2_AR005",
+                    img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR005")
+                }
+            ]);
+        }
+        static clickAR006() {
+            UIManager.showDetail([
+                {
+                    id: DetailItemIdConfig$1.room2_AR006,
+                    key: "room2_AR006",
+                    img: `book2/${DataLang.lang}/Abraham/AR006.jpg`,
                     sceneFrom: GameManager.currentScene
                 }
             ]);
@@ -5513,35 +5574,14 @@
                 }
             ]);
         }
-        static clickQ2() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR005,
-                    key: "room2_AR005",
-                    img: `book2/${DataLang.lang}/Abraham/AR005.jpg`,
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: BookConfig2.getDetail("AR005")
-                }
-            ]);
-        }
-        static clickXinWu() {
-            UIManager.showDetail([
-                {
-                    id: DetailItemIdConfig$1.room2_AR003,
-                    key: "room2_AR003",
-                    img: `book2/${DataLang.lang}/Abraham/AR003.jpg`,
-                    sceneFrom: GameManager.currentScene,
-                    reportDetail: BookConfig2.getDetail("AR003")
-                }
-            ]);
-        }
         static clickXin() {
             UIManager.showDetail([
                 {
                     id: DetailItemIdConfig$1.room2_AR002,
                     key: "room2_AR002",
                     img: `book2/${DataLang.lang}/Abraham/AR002.jpg`,
-                    sceneFrom: GameManager.currentScene
+                    sceneFrom: GameManager.currentScene,
+                    reportDetail: BookConfig2.getDetail("AR002")
                 }
             ]);
         }
@@ -5622,6 +5662,10 @@
         AR001: {
             ch: "鱼竿上的没有鱼线，鱼线被分开放在旁边。",
             en: "鱼竿上的没有鱼线，鱼线被分开放在旁边。"
+        },
+        AR002: {
+            ch: "5:45pm在老地方等我。",
+            en: "5:45pm在老地方等我。"
         },
         AR003: {
             ch: "一摞现金，有400美金",
@@ -5711,6 +5755,10 @@
             ch: "手枪上有一枚血指纹，属于死者，把手上没有其他可疑指纹",
             en: "手枪上有一枚血指纹，属于死者，把手上没有其他可疑指纹"
         },
+        HR003: {
+            ch: "1:30 和coal Baron开会  6:00-会见乔纳森",
+            en: "1:30 和coal Baron开会  6:00-会见乔纳森"
+        },
         HR004: {
             ch: "办公室的钥匙",
             en: "办公室的钥匙"
@@ -5731,17 +5779,45 @@
             ch: "一尊价格不菲的雕像。底座下发现少量血迹，经鉴定，属于死者",
             en: "一尊价格不菲的雕像。底座下发现少量血迹，经鉴定，属于死者"
         },
-        HR014: {
+        HR009: {
+            ch: "一件价格不菲的手镯",
+            en: "一件价格不菲的手镯"
+        },
+        HR010: {
             ch: "窗台上发的鞋印非常模糊，无法提供更有效的调查结果",
             en: "窗台上发的鞋印非常模糊，无法提供更有效的调查结果"
         },
-        HR015: {
+        HR011: {
             ch: "风筝有被使用过的痕迹，想必主人应该曾经使用过",
             en: "风筝有被使用过的痕迹，想必主人应该曾经使用过"
         },
-        HR016: {
+        HR012: {
             ch: "一盒透明丝线，可用作钓鱼或风筝",
             en: "一盒透明丝线，可用作钓鱼或风筝"
+        },
+        HR013: {
+            ch: "同款怀表 (哥哥的)",
+            en: "同款怀表 (哥哥的)"
+        },
+        HR014: {
+            ch: "同款怀表（无法确认是谁的）",
+            en: "同款怀表（无法确认是谁的）"
+        },
+        HR015: {
+            ch: "一封信 关于情人的事情（我们用来威胁他的父母已死，需要小心他有行动）",
+            en: "一封信 关于情人的事情（我们用来威胁他的父母已死，需要小心他有行动）"
+        },
+        HR016: {
+            ch: "调查奥利弗身份的私家侦探信件（我们已经查到他的真实身份，可以选择揭露他，让他退出竞选）",
+            en: "调查奥利弗身份的私家侦探信件（我们已经查到他的真实身份，可以选择揭露他，让他退出竞选）"
+        },
+        HR017: {
+            ch: "女巫汤",
+            en: "女巫汤"
+        },
+        HR018: {
+            ch: "一杯有毒的酒",
+            en: "一杯有毒的酒"
         },
         PA001: {
             ch: "一瓶名贵的威士忌，经检验，酒里没有发现任何可疑物质",
@@ -6200,26 +6276,16 @@
                 gan: {
                     caller: Room2,
                     method: Room2.clickGan,
-                    nodeName: "1.Obj3d66-711479-25-338"
+                    nodeName: "edit.Obj3d66-711479-25-338"
                 },
                 xin: {
                     caller: Room2,
                     method: Room2.clickXin,
                     nodeName: "abraham.QuadPatch003"
                 },
-                xinwu1: {
-                    caller: Room2,
-                    method: Room2.clickXinWu,
-                    nodeName: "abraham.组112.model002"
-                },
-                xinwu: {
-                    caller: Room2,
-                    method: Room2.clickXinWu,
-                    nodeName: "abraham.组112.Loft001"
-                },
                 qian1: {
                     caller: Room2,
-                    method: Room2.clickQian1,
+                    method: Room2.clickAR003,
                     nodeName: "abraham.Box1578958531"
                 },
                 chouti1: {
@@ -6229,7 +6295,7 @@
                 },
                 qian2: {
                     caller: Room2,
-                    method: Room2.clickQ2,
+                    method: Room2.clickAR004,
                     nodeName: "abraham.model 2.QuadPatch001 (1)"
                 },
                 chouti2: {
@@ -6239,12 +6305,12 @@
                 },
                 qian3: {
                     caller: Room2,
-                    method: Room2.clickQ3,
+                    method: Room2.clickAR005,
                     nodeName: "abraham.model003.QuadPatch002"
                 },
                 shoucang: {
                     caller: Room2,
-                    method: Room2.clickAR008,
+                    method: Room2.clickAR007,
                     nodeName: "abraham.组107.Obj3d66-1282599-15-749"
                 },
                 gui1: {
@@ -6259,42 +6325,42 @@
                 },
                 xin2: {
                     caller: Room2,
-                    method: Room2.clickAR007,
+                    method: Room2.clickAR006,
                     nodeName: "abraham.QuadPatch001"
                 },
                 hui1: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-125"
                 },
                 hui2: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-126"
                 },
                 hui3: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-127"
                 },
                 hui4: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-128"
                 },
                 hui5: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-129"
                 },
                 hui6: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-130"
                 },
                 hui7: {
                     caller: Room2,
-                    method: Room2.clickAR009,
+                    method: Room2.clickAR008,
                     nodeName: "Obj3d66-711884-2-125 (1).Obj3d66-711884-2-131"
                 }
             }
@@ -6475,11 +6541,6 @@
                     caller: Room2,
                     method: Room2.clickOR009,
                     nodeName: "1.QuadPatch005 (1)"
-                },
-                item10: {
-                    caller: Room2,
-                    method: Room2.clickOR010,
-                    nodeName: "1.Box2131637143"
                 }
             }
         },
@@ -6519,14 +6580,9 @@
                     method: Room2.CT9,
                     nodeName: "model.Rectangle017"
                 },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickJR005,
-                    nodeName: "model.Rectangle017.Obj3d66-1163439-4-215"
-                },
                 item8: {
                     caller: Room2,
-                    method: Room2.clickJR006,
+                    method: Room2.clickJR005,
                     nodeName: "jiuoing.Obj3d66-402998-5-224"
                 }
             }
@@ -6650,44 +6706,39 @@
                     method: Room2.CT11,
                     nodeName: "desk.对象022"
                 },
-                item7: {
-                    caller: Room2,
-                    method: Room2.clickHR006,
-                    nodeName: "desk.对象022.Obj3d66-1163439-4-215"
-                },
                 item8: {
                     caller: Room2,
-                    method: Room2.clickHR007,
+                    method: Room2.clickHR006,
                     nodeName: "model.Loft007"
                 },
                 item9: {
                     caller: Room2,
-                    method: Room2.clickHR008,
+                    method: Room2.clickHR007,
                     nodeName: "model.Obj3d66-402998-5-224"
                 },
                 item10: {
                     caller: Room2,
-                    method: Room2.clickHR009,
+                    method: Room2.clickHR008,
                     nodeName: "model.Obj3d66-1017952-9-519"
                 },
                 door: {
                     caller: Room2,
                     method: Room2.openDoor,
-                    nodeName: "model.组2136555825.Box1752"
+                    nodeName: "mensuo"
                 },
                 shouzhuo: {
                     caller: Room2,
-                    method: Room2.clickHR013,
+                    method: Room2.clickHR009,
                     nodeName: "shouzhuo"
                 },
                 jiaoyin: {
                     caller: Room2,
-                    method: Room2.clickHR014,
+                    method: Room2.clickHR010,
                     nodeName: "1.物件_1"
                 },
                 fengzheng: {
                     caller: Room2,
-                    method: Room2.clickHR015,
+                    method: Room2.clickHR011,
                     nodeName: "fengzheng11.物件_5"
                 },
                 CT16: {
@@ -6697,8 +6748,38 @@
                 },
                 fengzhengxian: {
                     caller: Room2,
-                    method: Room2.clickHR016,
+                    method: Room2.clickHR012,
                     nodeName: "desk.对象025.fengzhengxian"
+                },
+                bxg: {
+                    caller: Room2,
+                    method: Room2.openBXG,
+                    nodeName: "baoxianxiang111.组2143178434.对象018"
+                },
+                huaibiao1: {
+                    caller: Room2,
+                    method: Room2.clickHR013,
+                    nodeName: "Obj3d66-1163439-4-215 (2)"
+                },
+                huaibiao2: {
+                    caller: Room2,
+                    method: Room2.clickHR014,
+                    nodeName: "Obj3d66-1163439-4-215 (1)"
+                },
+                zhengju: {
+                    caller: Room2,
+                    method: Room2.clickHR015,
+                    nodeName: "model.cgaxis_models_65_10_03_015"
+                },
+                xinjian: {
+                    caller: Room2,
+                    method: Room2.clickHR016,
+                    nodeName: "model.QuadPatch001 (1)"
+                },
+                tang: {
+                    caller: Room2,
+                    method: Room2.clickHR017,
+                    nodeName: "model.Obj3d66-402998-1-771"
                 }
             }
         }
@@ -12152,7 +12233,7 @@
     GameConfig.screenMode = "none";
     GameConfig.alignV = "top";
     GameConfig.alignH = "left";
-    GameConfig.startScene = "component/GameNPC.scene";
+    GameConfig.startScene = "component/GamaCluDetail.scene";
     GameConfig.sceneRoot = "";
     GameConfig.debug = false;
     GameConfig.stat = false;
